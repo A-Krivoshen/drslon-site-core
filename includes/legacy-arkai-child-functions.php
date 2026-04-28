@@ -64,37 +64,14 @@ add_action( 'wp_head', function () {
 	<?php
 }, 15 );
 
-/** =========================
+/**
  *  0) Dropcap
- *  ========================= */
-add_action( 'wp_head', function () {
-	if ( is_admin() ) {
-		return;
-	}
-	?>
-	<script>
-	document.addEventListener('DOMContentLoaded', function () {
-		const p = document.querySelector('.entry-content p:first-of-type, .post-single-content p:first-of-type');
-		if (!p) return;
-
-		const text = p.textContent || '';
-		if (!text.trim()) return;
-
-		const trimmed = text.replace(/^\s+/, '');
-		if (!trimmed) return;
-
-		const firstLetter = trimmed.charAt(0);
-		const rest = trimmed.slice(1);
-		const leadingSpaces = (text.match(/^\s+/) || [''])[0];
-
-		p.innerHTML =
-			leadingSpaces +
-			`<span style="font-size:3em;font-weight:700;float:left;margin-right:10px;line-height:1;color:#002b41;text-transform:uppercase;width:1.2em;height:1.2em;display:flex;align-items:center;justify-content:center;border:2px solid #002b41;padding:0;border-radius:4px;">${firstLetter}</span>` +
-			rest;
-	});
-	</script>
-	<?php
-}, 20 );
+ *
+ * Disabled during migration to drslon-blog-theme.
+ * The legacy script modified the first paragraph inside .entry-content.
+ * In the block theme it also affects shortcode landing sections, so pages get
+ * a wrong decorative first letter.
+ */
 
 /** =========================
  *  1) Yandex loader
