@@ -1460,7 +1460,7 @@ add_shortcode( 'krv_services_landing', function () {
 		<div class="krv-services-landing-section">
 			<div class="krv-landing-contact-card">
 				<div class="krv-landing-avatar-wrap">
-					<img class="krv-landing-avatar" src="https://krivoshein.site/wp-content/uploads/2025/09/20b24d82a128f6065685a27f843a684a9e7789ad.jpg" alt="Алексей Кривошеин">
+					<img class="krv-landing-avatar" src="https://krivoshein.site/wp-content/uploads/2026/06/drslon_avatar.png" alt="Алексей Кривошеин">
 				</div>
 
 				<h2 class="krv-landing-title">Алексей Кривошеин</h2>
