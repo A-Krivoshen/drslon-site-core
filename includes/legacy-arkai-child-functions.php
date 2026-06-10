@@ -1099,6 +1099,14 @@ add_shortcode( 'krv_services_landing', function () {
 				object-position: center;
 			}
 
+			.krv-services-landing .krv-landing-avatar-wrap > .krv-landing-avatar img {
+				display: block;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+
 			.krv-landing-title {
 				margin: 0 0 15px;
 				font-size: 1.8rem;
