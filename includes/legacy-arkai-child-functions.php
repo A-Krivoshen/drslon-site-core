@@ -1082,6 +1082,7 @@ add_shortcode( 'krv_services_landing', function () {
 			.krv-landing-avatar-wrap {
 				width: 126px;
 				height: 126px;
+				aspect-ratio: 1 / 1;
 				margin: 0 auto 20px;
 				border: 3px solid var(--accent);
 				border-radius: 50%;
@@ -1089,10 +1090,11 @@ add_shortcode( 'krv_services_landing', function () {
 				background: #fff;
 			}
 
-			.krv-landing-avatar {
+			.krv-services-landing .krv-landing-avatar-wrap > .krv-landing-avatar {
 				display: block;
 				width: 100%;
 				height: 100%;
+				aspect-ratio: 1 / 1;
 				object-fit: cover;
 				object-position: center;
 			}
