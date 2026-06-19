@@ -993,10 +993,11 @@ add_action( 'acf/init', function () {
 					'button_label' => 'Добавить секцию',
 					'sub_fields'   => [
 						[
-							'key'   => 'field_krv_services_section_title',
-							'label' => 'Заголовок секции',
-							'name'  => 'section_title',
-							'type'  => 'text',
+							'key'          => 'field_krv_services_section_title',
+							'label'        => 'Заголовок секции',
+							'name'         => 'section_title',
+							'type'         => 'text',
+							'instructions' => 'Необязательно. Нужен только если секций несколько. При одной секции заголовок не выводится.',
 						],
 						[
 							'key'           => 'field_krv_services_section_pages',
@@ -2398,6 +2399,52 @@ add_action( 'wp_head', function () {
 /** =========================
  *  12) Services pages showcase
  *  ========================= */
+function krv_services_showcase_normalize_sections( array $sections ): array {
+	$normalized = [];
+
+	foreach ( $sections as $section ) {
+		if ( ! is_array( $section ) ) {
+			continue;
+		}
+
+		$page_ids = isset( $section['section_pages'] ) && is_array( $section['section_pages'] )
+			? array_values( array_filter( array_map( 'intval', $section['section_pages'] ) ) )
+			: [];
+
+		if ( empty( $page_ids ) ) {
+			continue;
+		}
+
+		$normalized[] = [
+			'section_title' => isset( $section['section_title'] ) ? trim( (string) $section['section_title'] ) : '',
+			'section_pages' => $page_ids,
+		];
+	}
+
+	return $normalized;
+}
+
+/**
+ * Returns a section title only when it should be visible on the frontend.
+ */
+function krv_services_showcase_visible_section_title( string $title, int $section_count ): string {
+	if ( $title === '' ) {
+		return '';
+	}
+
+	// One section: page intro already acts as the heading.
+	if ( $section_count < 2 ) {
+		return '';
+	}
+
+	// Skip broken/partial titles like "кон".
+	if ( mb_strlen( $title, 'UTF-8' ) < 4 ) {
+		return '';
+	}
+
+	return $title;
+}
+
 add_shortcode( 'krv_services_pages_showcase', function () {
 	if ( ! function_exists( 'get_field' ) ) {
 		return '';
@@ -2409,17 +2456,23 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 		return '';
 	}
 
+	$sections       = krv_services_showcase_normalize_sections( $sections );
+	$section_count  = count( $sections );
+
+	if ( $section_count === 0 ) {
+		return '';
+	}
+
 	ob_start();
 	?>
 	<div class="krv-service-pages-wrap">
 		<?php foreach ( $sections as $section ) : ?>
 			<?php
-			$section_title = isset( $section['section_title'] ) ? trim( (string) $section['section_title'] ) : '';
-			$page_ids      = isset( $section['section_pages'] ) && is_array( $section['section_pages'] ) ? $section['section_pages'] : [];
-
-			if ( empty( $page_ids ) ) {
-				continue;
-			}
+			$section_title = krv_services_showcase_visible_section_title(
+				$section['section_title'],
+				$section_count
+			);
+			$page_ids = $section['section_pages'];
 			?>
 			<section class="krv-service-pages-group">
 				<?php if ( $section_title !== '' ) : ?>
