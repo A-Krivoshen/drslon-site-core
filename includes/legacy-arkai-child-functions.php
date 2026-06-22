@@ -1539,9 +1539,9 @@ add_shortcode( 'krv_services_landing', function () {
 					</div>
 
 					<div class="krv-landing-service-item">
-						<svg class="krv-landing-service-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="19" r="2"></circle><line x1="7" y1="12" x2="10" y2="12"></line><line x1="14" y1="12" x2="17" y2="12"></line><line x1="12" y1="7" x2="12" y2="10"></line><line x1="12" y1="14" x2="12" y2="17"></line></svg>
-						<h3>Настройка сетевых служб</h3>
-						<p>Профессиональная конфигурация сетевых сервисов DNS, DHCP, VPN и других. Обеспечение высокой доступности и надёжности инфраструктуры.</p>
+						<svg class="krv-landing-service-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"></path><circle cx="9" cy="10" r="0.8" style="fill:currentColor;stroke:none"></circle><circle cx="12" cy="10" r="0.8" style="fill:currentColor;stroke:none"></circle><circle cx="15" cy="10" r="0.8" style="fill:currentColor;stroke:none"></circle></svg>
+						<h3>Разработка ботов для MAX</h3>
+						<p>Создание чат-ботов для мессенджера MAX под задачи бизнеса и поддержки клиентов. Настройка сценариев, интеграций и автоматизации коммуникаций.</p>
 					</div>
 
 					<div class="krv-landing-service-item">
