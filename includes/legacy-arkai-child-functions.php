@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *  ========================= */
 define( 'KRV_TG_DISCUSSION', 'drslon_channel' );
 
-define( 'KRV_RSYA_RECO_BLOCK_ID', 'C-A-6903522-1' );
-define( 'KRV_RSYA_RECO_RENDER_TO', 'yandex_rtb_C-A-6903522-1' );
+define( 'KRV_RSYA_RECO_BLOCK_ID', 'C-A-9861013-1' );
+define( 'KRV_RSYA_RECO_RENDER_TO', 'yandex_rtb_C-A-9861013-1' );
 
 define( 'KRV_RSYA_INIMAGE_BLOCK_ID', 'R-A-6903522-2' );
 
