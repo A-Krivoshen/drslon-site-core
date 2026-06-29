@@ -433,6 +433,7 @@ function krv_render_post_extras(): void {
 			<script async
 				src="<?php echo esc_url( krv_tg_widget_script_url() ); ?>"
 				data-telegram-discussion="<?php echo esc_attr( KRV_TG_DISCUSSION ); ?>"
+				data-page-url="<?php echo esc_url( get_permalink() ); ?>"
 				data-comments-limit="30"
 				data-color="5282FF"
 				data-dark="0"></script>

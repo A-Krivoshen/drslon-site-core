@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'KRV_TG_PROXY_ORIGIN' ) ) {
-	define( 'KRV_TG_PROXY_ORIGIN', 'https://krivoshein.site' );
+	define( 'KRV_TG_PROXY_ORIGIN', 'https://tg.krivoshein.site' );
 }
 
 /**
