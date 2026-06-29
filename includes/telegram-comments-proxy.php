@@ -74,24 +74,43 @@ function krv_render_telegram_discussion_widget(): void {
 		</div>
 	</div>
 	<?php
+	krv_render_tg_discuss_links();
 }
 
 /**
- * Build fallback HTML for messenger links.
+ * Messenger links shown under the read-only embed (no on-site OAuth).
  */
-function krv_tg_fallback_html(): string {
+function krv_tg_discuss_links_html(): string {
 	return sprintf(
 		'<p style="margin:0 0 10px;font-weight:600;">%s</p>'
-		. '<p style="margin:0 0 8px;">%s <a href="%s" target="_blank" rel="noopener noreferrer">@%s</a></p>'
-		. '<p style="margin:0;">%s <a href="%s" target="_blank" rel="noopener noreferrer">%s</a></p>',
-		'Обсуждение также доступно в мессенджерах:',
-		'Telegram:',
+		. '<p style="margin:0 0 8px;"><a href="%s" target="_blank" rel="noopener noreferrer">Telegram — @%s</a></p>'
+		. '<p style="margin:0;"><a href="%s" target="_blank" rel="noopener noreferrer">MAX — группа обсуждения</a></p>',
+		'Обсудить в Telegram / MAX',
 		esc_url( 'https://t.me/' . KRV_TG_DISCUSSION ),
 		esc_html( KRV_TG_DISCUSSION ),
-		'MAX:',
-		esc_url( KRV_MAX_DISCUSSION_URL ),
-		'группа обсуждения'
+		esc_url( KRV_MAX_DISCUSSION_URL )
 	);
+}
+
+/**
+ * Persistent block under the Telegram embed.
+ */
+function krv_render_tg_discuss_links(): void {
+	?>
+	<div
+		class="krv-tg-discuss-links"
+		style="margin-top:12px;padding:16px 18px;border:1px solid #e5e7eb;border-radius:12px;background:#f9fafb;"
+	>
+		<?php echo krv_tg_discuss_links_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>
+	</div>
+	<?php
+}
+
+/**
+ * Short notice when the embed iframe fails to load.
+ */
+function krv_tg_embed_error_html(): string {
+	return '<p style="margin:0;color:#6b7280;font-size:14px;">Комментарии не загрузились. Обсудите статью в мессенджерах ниже.</p>';
 }
 
 /**
@@ -113,17 +132,22 @@ function krv_tg_comments_loader_script(): void {
 		var embedUrl = slot.getAttribute('data-embed-url');
 		var iframeId = slot.getAttribute('data-iframe-id');
 		var origin = <?php echo wp_json_encode( krv_tg_post_message_origin() ); ?>;
-		var fallbackHtml = <?php echo wp_json_encode( krv_tg_fallback_html() ); ?>;
+		var errorHtml = <?php echo wp_json_encode( krv_tg_embed_error_html() ); ?>;
 		var mounted = false;
 		var iframe = null;
 
-		function showFallback() {
-			if (wrap.querySelector('.krv-tg-fallback')) return;
+		function showEmbedError() {
+			if (wrap.querySelector('.krv-tg-embed-error')) return;
 			var el = document.createElement('div');
-			el.className = 'krv-tg-fallback';
-			el.style.cssText = 'margin-top:12px;padding:16px 18px;border:1px solid #e5e7eb;border-radius:12px;background:#f9fafb;';
-			el.innerHTML = fallbackHtml;
-			wrap.appendChild(el);
+			el.className = 'krv-tg-embed-error';
+			el.style.cssText = 'margin-top:8px;padding:12px 14px;border:1px solid #fde68a;border-radius:8px;background:#fffbeb;';
+			el.innerHTML = errorHtml;
+			var discuss = wrap.querySelector('.krv-tg-discuss-links');
+			if (discuss) {
+				wrap.insertBefore(el, discuss);
+			} else {
+				wrap.appendChild(el);
+			}
 		}
 
 		function mountIframe() {
@@ -146,7 +170,7 @@ function krv_tg_comments_loader_script(): void {
 			iframe.style.cssText = 'border:none;min-width:320px;width:100%;overflow:hidden;color-scheme:light dark;';
 
 			var failTimer = window.setTimeout(function () {
-				if (!iframe || iframe.offsetHeight <= 80) showFallback();
+				if (!iframe || iframe.offsetHeight <= 80) showEmbedError();
 			}, 20000);
 
 			iframe.addEventListener('load', function () {
@@ -155,7 +179,7 @@ function krv_tg_comments_loader_script(): void {
 
 			iframe.addEventListener('error', function () {
 				window.clearTimeout(failTimer);
-				showFallback();
+				showEmbedError();
 			});
 
 			slot.appendChild(iframe);
