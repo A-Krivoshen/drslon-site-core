@@ -1,18 +1,40 @@
 <?php
 /**
- * Telegram Discussion Widget via tg.krivoshein.site reverse proxy.
+ * Telegram Discussion Widget via /tg/ reverse proxy on krivoshein.site.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! defined( 'KRV_TG_PROXY_ORIGIN' ) ) {
-	define( 'KRV_TG_PROXY_ORIGIN', 'https://tg.krivoshein.site' );
-}
-
 if ( ! defined( 'KRV_MAX_DISCUSSION_URL' ) ) {
 	define( 'KRV_MAX_DISCUSSION_URL', 'https://max.ru/join/m0x_nGGpbnSFDPLvSXZWIksmgZaf13bzKvNIBaqkz78' );
+}
+
+/**
+ * Base URL for the on-domain Telegram proxy (no separate subdomain).
+ */
+function krv_tg_proxy_origin(): string {
+	return untrailingslashit( home_url( '/tg' ) );
+}
+
+/**
+ * postMessage origin for resize events (scheme + host only).
+ */
+function krv_tg_post_message_origin(): string {
+	$parts = wp_parse_url( home_url() );
+
+	if ( empty( $parts['scheme'] ) || empty( $parts['host'] ) ) {
+		return 'https://krivoshein.site';
+	}
+
+	$origin = $parts['scheme'] . '://' . $parts['host'];
+
+	if ( ! empty( $parts['port'] ) ) {
+		$origin .= ':' . $parts['port'];
+	}
+
+	return $origin;
 }
 
 /**
@@ -30,7 +52,7 @@ function krv_tg_discussion_embed_url( ?string $page_url = null ): string {
 		'dark'           => '0',
 	);
 
-	return trailingslashit( KRV_TG_PROXY_ORIGIN ) . KRV_TG_DISCUSSION . '?' . http_build_query( $query, '', '&', PHP_QUERY_RFC3986 );
+	return krv_tg_proxy_origin() . '/' . KRV_TG_DISCUSSION . '?' . http_build_query( $query, '', '&', PHP_QUERY_RFC3986 );
 }
 
 /**
@@ -90,7 +112,7 @@ function krv_tg_comments_loader_script(): void {
 
 		var embedUrl = slot.getAttribute('data-embed-url');
 		var iframeId = slot.getAttribute('data-iframe-id');
-		var origin = <?php echo wp_json_encode( KRV_TG_PROXY_ORIGIN ); ?>;
+		var origin = <?php echo wp_json_encode( krv_tg_post_message_origin() ); ?>;
 		var fallbackHtml = <?php echo wp_json_encode( krv_tg_fallback_html() ); ?>;
 		var mounted = false;
 		var iframe = null;
@@ -125,10 +147,15 @@ function krv_tg_comments_loader_script(): void {
 
 			var failTimer = window.setTimeout(function () {
 				if (!iframe || iframe.offsetHeight <= 80) showFallback();
-			}, 15000);
+			}, 20000);
 
 			iframe.addEventListener('load', function () {
 				window.clearTimeout(failTimer);
+			});
+
+			iframe.addEventListener('error', function () {
+				window.clearTimeout(failTimer);
+				showFallback();
 			});
 
 			slot.appendChild(iframe);
@@ -147,24 +174,25 @@ function krv_tg_comments_loader_script(): void {
 		});
 
 		function scheduleMount() {
+			var ioStarted = false;
+
 			if ('IntersectionObserver' in window) {
+				ioStarted = true;
 				var observer = new IntersectionObserver(function (entries) {
 					entries.forEach(function (entry) {
 						if (!entry.isIntersecting) return;
 						observer.disconnect();
 						mountIframe();
 					});
-				}, { rootMargin: '240px 0px' });
+				}, { rootMargin: '320px 0px' });
 				observer.observe(slot);
-				return;
 			}
-			if (document.readyState === 'complete') {
-				window.setTimeout(mountIframe, 400);
-			} else {
-				window.addEventListener('load', function () {
-					window.setTimeout(mountIframe, 400);
-				});
-			}
+
+			window.addEventListener('load', function () {
+				window.setTimeout(function () {
+					if (!mounted) mountIframe();
+				}, ioStarted ? 2500 : 600);
+			});
 		}
 
 		if (document.readyState === 'loading') {
