@@ -431,7 +431,7 @@ function krv_render_post_extras(): void {
 	<div class="krv-post-extras" style="clear:both;display:block;width:100%;margin-top:40px;">
 		<div id="telegram-comments" style="clear:both;display:block;width:100%;margin:0 0 20px;">
 			<script async
-				src="https://telegram.org/js/telegram-widget.js?21"
+				src="<?php echo esc_url( krv_tg_widget_script_url() ); ?>"
 				data-telegram-discussion="<?php echo esc_attr( KRV_TG_DISCUSSION ); ?>"
 				data-comments-limit="30"
 				data-color="5282FF"
