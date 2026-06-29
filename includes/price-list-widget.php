@@ -72,7 +72,7 @@ function krv_price_list_finalize_html( string $html, array $settings = array() )
 		'{{KRV_CONTACTS_CTA}}'        => esc_url( krv_price_list_contacts_url( 'cta-bottom' ) ),
 		'{{KRV_CONTACTS_LINK}}'       => esc_url( krv_price_list_contacts_url( 'link-block' ) ),
 		'{{KRV_MAX_CHAT}}'            => esc_url( home_url( '/max' ) ),
-		'{{KRV_MAX_ICON}}'            => function_exists( 'krv_max_messenger_icon_svg' ) ? krv_max_messenger_icon_svg( 'krv-max-icon' ) : '',
+		'{{KRV_MAX_ICON}}'            => function_exists( 'krv_max_messenger_icon_svg' ) ? krv_max_messenger_icon_svg( 'krv-landing-social-icon' ) : '',
 		'{{KRV_TG_CHAT}}'             => esc_url( krv_price_list_utm_url( 'https://t.me/DrSlon', 'telegram-chat' ) ),
 	);
 

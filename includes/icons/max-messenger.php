@@ -19,10 +19,53 @@ function krv_max_messenger_icon_path(): string {
  *
  * @param string $class CSS class on the root svg element.
  */
-function krv_max_messenger_icon_svg( string $class = 'krv-max-icon' ): string {
+function krv_max_messenger_icon_svg( string $class = 'krv-landing-social-icon' ): string {
 	return sprintf(
 		'<svg class="%s" viewBox="7 7 22 22" aria-hidden="true" focusable="false"><path d="%s"/></svg>',
 		esc_attr( $class ),
 		esc_attr( krv_max_messenger_icon_path() )
+	);
+}
+
+/**
+ * Circular MAX chip link — same markup as homepage contacts under avatar.
+ *
+ * @param array<string, string> $args url, aria_label, title, target, rel, extra_class.
+ */
+function krv_max_messenger_chip_link( array $args = array() ): string {
+	$args = wp_parse_args(
+		$args,
+		array(
+			'url'         => home_url( '/max' ),
+			'aria_label'  => 'MAX — написать в мессенджере',
+			'title'       => 'MAX',
+			'target'      => '',
+			'rel'         => '',
+			'extra_class' => '',
+		)
+	);
+
+	$classes = trim( 'krv-max-social-chip ' . (string) $args['extra_class'] );
+
+	$attrs = sprintf(
+		'class="%s" href="%s" aria-label="%s" title="%s"',
+		esc_attr( $classes ),
+		esc_url( (string) $args['url'] ),
+		esc_attr( (string) $args['aria_label'] ),
+		esc_attr( (string) $args['title'] )
+	);
+
+	if ( '' !== (string) $args['target'] ) {
+		$attrs .= sprintf( ' target="%s"', esc_attr( (string) $args['target'] ) );
+	}
+
+	if ( '' !== (string) $args['rel'] ) {
+		$attrs .= sprintf( ' rel="%s"', esc_attr( (string) $args['rel'] ) );
+	}
+
+	return sprintf(
+		'<a %s>%s</a>',
+		$attrs,
+		krv_max_messenger_icon_svg( 'krv-landing-social-icon' )
 	);
 }
