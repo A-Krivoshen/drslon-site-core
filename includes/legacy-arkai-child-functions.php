@@ -429,14 +429,8 @@ function krv_render_post_extras(): void {
 	}
 	?>
 	<div class="krv-post-extras" style="clear:both;display:block;width:100%;margin-top:40px;">
-		<div id="telegram-comments" style="clear:both;display:block;width:100%;min-height:200px;margin:0 0 20px;">
-			<script
-				src="<?php echo esc_url( krv_tg_widget_script_url() ); ?>"
-				data-telegram-discussion="<?php echo esc_attr( KRV_TG_DISCUSSION ); ?>"
-				data-page-url="<?php echo esc_url( get_permalink() ); ?>"
-				data-comments-limit="30"
-				data-color="5282FF"
-				data-dark="0"></script>
+		<div id="telegram-comments" style="clear:both;display:block;width:100%;min-height:120px;margin:0 0 20px;">
+			<?php krv_render_telegram_discussion_widget(); ?>
 		</div>
 
 		<div class="krv-rsya-reco" style="clear:both;display:block;width:100%;margin-top:24px;">
