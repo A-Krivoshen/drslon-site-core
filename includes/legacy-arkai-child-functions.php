@@ -26,18 +26,41 @@ function krv_is_single_content(): bool {
 }
 
 function krv_page_has_ui_shortcode( array $shortcodes ): bool {
-	if ( is_admin() || ! is_singular() ) {
+	if ( is_admin() || ( ! is_singular() && ! is_page() ) ) {
 		return false;
 	}
 
-	$post = get_post();
-	if ( ! $post || empty( $post->post_content ) ) {
+	global $post;
+
+	if ( ! $post instanceof WP_Post ) {
+		$queried_id = get_queried_object_id();
+		if ( $queried_id ) {
+			$post = get_post( $queried_id );
+		}
+	}
+
+	if ( ! $post instanceof WP_Post || $post->post_content === '' ) {
 		return false;
 	}
+
+	$content = $post->post_content;
+
+	// Parent shortcodes that render nested UI shortcodes via do_shortcode().
+	$nested_shortcode_hosts = [
+		'krv_clients_grid' => [ 'krv_services_landing' ],
+	];
 
 	foreach ( $shortcodes as $shortcode ) {
-		if ( has_shortcode( $post->post_content, $shortcode ) ) {
+		if ( has_shortcode( $content, $shortcode ) ) {
 			return true;
+		}
+
+		if ( isset( $nested_shortcode_hosts[ $shortcode ] ) ) {
+			foreach ( $nested_shortcode_hosts[ $shortcode ] as $host_shortcode ) {
+				if ( has_shortcode( $content, $host_shortcode ) ) {
+					return true;
+				}
+			}
 		}
 	}
 
@@ -969,7 +992,7 @@ add_action( 'acf/init', function () {
 			'page_title' => 'Витрина сервисов',
 			'menu_title' => 'Витрина сервисов',
 			'menu_slug'  => 'krv-services-showcase',
-			'capability' => 'edit_posts',
+			'capability' => 'edit_theme_options',
 			'redirect'   => false,
 			'position'   => 61,
 			'icon_url'   => 'dashicons-screenoptions',
@@ -1649,7 +1672,11 @@ add_shortcode( 'krv_services_landing', function () {
 /** =========================
  *  10) Clients grid shortcode + styles + random
  *  ========================= */
-add_shortcode( 'krv_clients_grid', function () {
+add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
+	$atts = shortcode_atts( [
+		'random' => '1',
+	], $atts, 'krv_clients_grid' );
+
 	$q = new WP_Query( [
 		'post_type'      => 'client',
 		'post_status'    => 'publish',
@@ -1665,6 +1692,11 @@ add_shortcode( 'krv_clients_grid', function () {
 		return '';
 	}
 
+	$post_count = (int) $q->post_count;
+	$grid_rows  = max( 1, (int) ceil( $post_count / 4 ) );
+	$grid_min_h = ( $grid_rows * 186 ) + ( max( 0, $grid_rows - 1 ) * 18 );
+	$randomize  = $atts['random'] !== '0';
+
 	ob_start();
 	?>
 	<div class="krv-clients-grid-wrap">
@@ -1673,7 +1705,7 @@ add_shortcode( 'krv_clients_grid', function () {
 			<p>Компании и проекты, с которыми я работал</p>
 		</div>
 
-		<div class="krv-clients-grid" data-random-grid="1">
+		<div class="krv-clients-grid"<?php echo $randomize ? ' data-random-grid="1"' : ''; ?> style="min-height: <?php echo esc_attr( (string) $grid_min_h ); ?>px;">
 			<?php
 			while ( $q->have_posts() ) :
 				$q->the_post();
@@ -1975,25 +2007,110 @@ add_action( 'wp_footer', function () {
 /** =========================
  *  11) Partners grid shortcode
  *  ========================= */
+/**
+ * Build partners grouped by category for the partners grid shortcode.
+ *
+ * @return array{terms: WP_Term[], partners_by_term: array<int, WP_Post[]>}|null
+ */
+function krv_partners_grid_get_grouped_data(): ?array {
+	$cache_key = 'krv_partners_grid_v1';
+	$cached    = get_transient( $cache_key );
+
+	if ( is_array( $cached ) && isset( $cached['terms'], $cached['partners_by_term'] ) ) {
+		return $cached;
+	}
+
+	$terms = get_terms( [
+		'taxonomy'   => 'partner_category',
+		'hide_empty' => true,
+		'orderby'    => 'name',
+		'order'      => 'ASC',
+	] );
+
+	if ( is_wp_error( $terms ) || empty( $terms ) ) {
+		return null;
+	}
+
+	$q = new WP_Query( [
+		'post_type'      => 'partner',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'orderby'        => [
+			'menu_order' => 'ASC',
+			'date'       => 'DESC',
+		],
+		'no_found_rows'  => true,
+	] );
+
+	if ( ! $q->have_posts() ) {
+		return null;
+	}
+
+	$partner_ids = wp_list_pluck( $q->posts, 'ID' );
+	update_postmeta_cache( $partner_ids );
+
+	$partners_by_term = [];
+
+	foreach ( $terms as $term ) {
+		$partners_by_term[ $term->term_id ] = [];
+	}
+
+	while ( $q->have_posts() ) {
+		$q->the_post();
+
+		$post_id = get_the_ID();
+		$terms_for_post = get_the_terms( $post_id, 'partner_category' );
+
+		if ( is_wp_error( $terms_for_post ) || empty( $terms_for_post ) ) {
+			continue;
+		}
+
+		foreach ( $terms_for_post as $term ) {
+			if ( ! isset( $partners_by_term[ $term->term_id ] ) ) {
+				continue;
+			}
+
+			$partners_by_term[ $term->term_id ][] = get_post( $post_id );
+		}
+	}
+
+	wp_reset_postdata();
+
+	$grouped = [
+		'terms'            => $terms,
+		'partners_by_term' => $partners_by_term,
+	];
+
+	set_transient( $cache_key, $grouped, HOUR_IN_SECONDS );
+
+	return $grouped;
+}
+
 add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 	$atts = shortcode_atts( [
 		'category' => '',
 	], $atts, 'krv_partners_grid' );
 
-	$terms_args = [
-		'taxonomy'   => 'partner_category',
-		'hide_empty' => true,
-		'orderby'    => 'name',
-		'order'      => 'ASC',
-	];
+	$grouped = krv_partners_grid_get_grouped_data();
 
-	if ( $atts['category'] !== '' ) {
-		$terms_args['slug'] = sanitize_title( $atts['category'] );
+	if ( $grouped === null ) {
+		return '';
 	}
 
-	$terms = get_terms( $terms_args );
+	$terms            = $grouped['terms'];
+	$partners_by_term = $grouped['partners_by_term'];
 
-	if ( is_wp_error( $terms ) || empty( $terms ) ) {
+	if ( $atts['category'] !== '' ) {
+		$category_slug = sanitize_title( $atts['category'] );
+		$terms         = array_values( array_filter(
+			$terms,
+			static function ( $term ) use ( $category_slug ) {
+				return $term->slug === $category_slug;
+			}
+		) );
+	}
+
+	if ( empty( $terms ) ) {
 		return '';
 	}
 
@@ -2007,25 +2124,9 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 
 		<?php foreach ( $terms as $term ) : ?>
 			<?php
-			$q = new WP_Query( [
-				'post_type'      => 'partner',
-				'post_status'    => 'publish',
-				'posts_per_page' => -1,
-				'orderby'        => [
-					'menu_order' => 'ASC',
-					'date'       => 'DESC',
-				],
-				'tax_query'      => [
-					[
-						'taxonomy' => 'partner_category',
-						'field'    => 'term_id',
-						'terms'    => $term->term_id,
-					],
-				],
-				'no_found_rows'  => true,
-			] );
+			$partners = $partners_by_term[ $term->term_id ] ?? [];
 
-			if ( ! $q->have_posts() ) {
+			if ( empty( $partners ) ) {
 				continue;
 			}
 			?>
@@ -2034,10 +2135,10 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 				<h3 class="krv-partners-group-title"><?php echo esc_html( $term->name ); ?></h3>
 
 				<div class="krv-partners-grid">
-					<?php while ( $q->have_posts() ) : $q->the_post(); ?>
+					<?php foreach ( $partners as $partner_post ) : ?>
 						<?php
-						$post_id      = get_the_ID();
-						$title        = get_the_title();
+						$post_id      = $partner_post->ID;
+						$title        = get_the_title( $partner_post );
 						$url          = trim( (string) get_post_meta( $post_id, 'partner_url', true ) );
 						$description  = trim( wp_strip_all_tags( (string) get_post_meta( $post_id, 'partner_description', true ) ) );
 						$badge        = trim( (string) get_post_meta( $post_id, 'partner_badge', true ) );
@@ -2093,17 +2194,23 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 								<?php endif; ?>
 							</div>
 						<?php echo $tag_close; ?>
-					<?php endwhile; ?>
+					<?php endforeach; ?>
 				</div>
 			</section>
-
-			<?php wp_reset_postdata(); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
 
 	return ob_get_clean();
 } );
+
+add_action( 'save_post_partner', function ( $post_id ) {
+	if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+		return;
+	}
+
+	delete_transient( 'krv_partners_grid_v1' );
+}, 10 );
 
 add_action( 'wp_head', function () {
 	if ( is_admin() || ! krv_page_has_ui_shortcode( [ 'krv_partners_grid' ] ) ) {
@@ -2420,6 +2527,36 @@ function krv_services_showcase_normalize_sections( array $sections ): array {
 }
 
 /**
+ * Cached normalized services showcase sections from ACF options.
+ *
+ * @return array<int, array{section_title: string, section_pages: int[]}>
+ */
+function krv_services_showcase_get_sections(): array {
+	$cache_key = 'krv_services_showcase_v1';
+	$cached    = get_transient( $cache_key );
+
+	if ( is_array( $cached ) ) {
+		return $cached;
+	}
+
+	if ( ! function_exists( 'get_field' ) ) {
+		return [];
+	}
+
+	$sections = get_field( 'krv_services_sections', 'option' );
+
+	if ( empty( $sections ) || ! is_array( $sections ) ) {
+		return [];
+	}
+
+	$normalized = krv_services_showcase_normalize_sections( $sections );
+
+	set_transient( $cache_key, $normalized, HOUR_IN_SECONDS );
+
+	return $normalized;
+}
+
+/**
  * Returns a section title only when it should be visible on the frontend.
  */
 function krv_services_showcase_visible_section_title( string $title, int $section_count ): string {
@@ -2441,21 +2578,40 @@ function krv_services_showcase_visible_section_title( string $title, int $sectio
 }
 
 add_shortcode( 'krv_services_pages_showcase', function () {
-	if ( ! function_exists( 'get_field' ) ) {
-		return '';
-	}
-
-	$sections = get_field( 'krv_services_sections', 'option' );
-
-	if ( empty( $sections ) || ! is_array( $sections ) ) {
-		return '';
-	}
-
-	$sections       = krv_services_showcase_normalize_sections( $sections );
-	$section_count  = count( $sections );
+	$sections      = krv_services_showcase_get_sections();
+	$section_count = count( $sections );
 
 	if ( $section_count === 0 ) {
 		return '';
+	}
+
+	$all_page_ids = [];
+
+	foreach ( $sections as $section ) {
+		foreach ( $section['section_pages'] as $page_id ) {
+			$all_page_ids[] = (int) $page_id;
+		}
+	}
+
+	$all_page_ids = array_values( array_unique( $all_page_ids ) );
+	$pages_by_id  = [];
+
+	if ( ! empty( $all_page_ids ) ) {
+		$page_query = new WP_Query( [
+			'post_type'      => 'page',
+			'post_status'    => 'publish',
+			'post__in'       => $all_page_ids,
+			'orderby'        => 'post__in',
+			'posts_per_page' => count( $all_page_ids ),
+			'no_found_rows'  => true,
+		] );
+
+		while ( $page_query->have_posts() ) {
+			$page_query->the_post();
+			$pages_by_id[ get_the_ID() ] = get_post();
+		}
+
+		wp_reset_postdata();
 	}
 
 	ob_start();
@@ -2477,16 +2633,16 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 				<div class="krv-service-pages-grid">
 					<?php foreach ( $page_ids as $page_id ) : ?>
 						<?php
-						$page = get_post( $page_id );
+						$page = $pages_by_id[ $page_id ] ?? null;
 
 						if ( ! $page || $page->post_status !== 'publish' ) {
 							continue;
 						}
 
-						$title = get_the_title( $page_id );
-						$url   = get_permalink( $page_id );
+						$title = get_the_title( $page );
+						$url   = get_permalink( $page );
 
-						$description = trim( wp_strip_all_tags( get_the_excerpt( $page_id ) ) );
+						$description = trim( wp_strip_all_tags( get_the_excerpt( $page ) ) );
 						if ( $description === '' ) {
 							$description = wp_trim_words(
 								wp_strip_all_tags( strip_shortcodes( (string) $page->post_content ) ),
@@ -2495,7 +2651,7 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 							);
 						}
 
-						$thumb = get_the_post_thumbnail( $page_id, 'medium_large', [
+						$thumb = get_the_post_thumbnail( $page, 'medium_large', [
 							'class'   => 'krv-service-page-image',
 							'loading' => 'lazy',
 							'alt'     => esc_attr( $title ),

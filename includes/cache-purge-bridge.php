@@ -11,6 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/** Page ID for /servisy/ — services showcase shortcode destination. */
+define( 'DRSLON_SERVICES_PAGE_ID', 6202 );
+
 /**
  * Sync WPFC cache invalidation with Nginx Helper Redis purge.
  */
@@ -28,6 +31,9 @@ final class DrSlon_Cache_Purge_Bridge {
 
 		// Logo / site icon live in every cached page; customizer does not hit post hooks.
 		add_action( 'customize_save_after', array( __CLASS__, 'purge_nginx_all' ), 20 );
+
+		// Services showcase ACF options affect cached /servisy/ HTML.
+		add_action( 'acf/save_post', array( __CLASS__, 'on_acf_save_post' ), 20 );
 	}
 
 	/**
@@ -39,6 +45,38 @@ final class DrSlon_Cache_Purge_Bridge {
 		}
 
 		do_action( 'rt_nginx_helper_purge_all' );
+	}
+
+	/**
+	 * Purge WP Fastest Cache and Nginx Redis for a single page/post.
+	 *
+	 * @param int $post_id Post or page ID.
+	 */
+	public static function purge_page_cache( int $post_id ): void {
+		$post_id = absint( $post_id );
+		if ( ! $post_id ) {
+			return;
+		}
+
+		if ( function_exists( 'wpfc_clear_post_cache_by_id' ) ) {
+			wpfc_clear_post_cache_by_id( $post_id );
+		}
+
+		self::purge_nginx_post( false, $post_id );
+	}
+
+	/**
+	 * Bust services showcase transient and purge /servisy/ when ACF options are saved.
+	 *
+	 * @param int|string $post_id ACF context ID (options page slug or "options").
+	 */
+	public static function on_acf_save_post( $post_id ): void {
+		if ( (string) $post_id !== 'krv-services-showcase' ) {
+			return;
+		}
+
+		delete_transient( 'krv_services_showcase_v1' );
+		self::purge_page_cache( DRSLON_SERVICES_PAGE_ID );
 	}
 
 	/**
