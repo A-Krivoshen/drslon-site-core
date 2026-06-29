@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Page ID for /servisy/ — services showcase shortcode destination. */
 define( 'DRSLON_SERVICES_PAGE_ID', 6202 );
 
+/** Page ID for home / «Обо мне» — [krv_services_landing] destination. */
+define( 'DRSLON_HOME_PAGE_ID', 17 );
+
 /**
  * Sync WPFC cache invalidation with Nginx Helper Redis purge.
  */
@@ -71,12 +74,17 @@ final class DrSlon_Cache_Purge_Bridge {
 	 * @param int|string $post_id ACF context ID (options page slug or "options").
 	 */
 	public static function on_acf_save_post( $post_id ): void {
-		if ( (string) $post_id !== 'krv-services-showcase' ) {
+		$post_id = (string) $post_id;
+
+		if ( $post_id === 'krv-services-showcase' ) {
+			delete_transient( 'krv_services_showcase_v1' );
+			self::purge_page_cache( DRSLON_SERVICES_PAGE_ID );
 			return;
 		}
 
-		delete_transient( 'krv_services_showcase_v1' );
-		self::purge_page_cache( DRSLON_SERVICES_PAGE_ID );
+		if ( $post_id === 'krv-services-landing' ) {
+			self::purge_page_cache( DRSLON_HOME_PAGE_ID );
+		}
 	}
 
 	/**

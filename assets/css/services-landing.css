@@ -1,0 +1,422 @@
+.krv-services-landing {
+	--accent: #5181fe;
+	--accent-hover: #4169d4;
+	--accent-bg: #eaf1ff;
+	--text-main: #333;
+	--text-soft: #666;
+	--card-bg: #fff;
+	--card-radius: 20px;
+	--card-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	--card-shadow-hover: 0 6px 15px rgba(0, 0, 0, 0.15);
+	--service-radius: 10px;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px 15px;
+	font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+	color: var(--text-main);
+}
+
+.krv-services-landing,
+.krv-services-landing * {
+	box-sizing: border-box;
+}
+
+.krv-services-landing-section + .krv-services-landing-section {
+	margin-top: 22px;
+}
+
+.krv-landing-contact-card {
+	width: 100%;
+	padding: 24px;
+	text-align: center;
+	background: var(--card-bg);
+	border-radius: var(--card-radius);
+	box-shadow: var(--card-shadow);
+}
+
+.krv-landing-avatar-wrap {
+	width: 126px;
+	height: 126px;
+	aspect-ratio: 1 / 1;
+	margin: 0 auto 20px;
+	border: 3px solid var(--accent);
+	border-radius: 50%;
+	overflow: hidden;
+	background: #fff;
+}
+
+.krv-services-landing .krv-landing-avatar-wrap > .krv-landing-avatar {
+	display: block;
+	width: 100%;
+	height: 100%;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	object-position: center;
+}
+
+.krv-services-landing .krv-landing-avatar-wrap > .krv-landing-avatar img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.krv-landing-title {
+	margin: 0 0 15px;
+	font-size: 1.8rem;
+	line-height: 1.2;
+	color: var(--text-main);
+}
+
+.krv-landing-lead,
+.krv-landing-meta {
+	margin: 0 0 14px;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: var(--text-soft);
+}
+
+.krv-landing-meta {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: center;
+}
+
+.krv-landing-meta-line {
+	display: block;
+}
+
+.krv-landing-contacts {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 15px;
+	margin-top: 10px;
+}
+
+.krv-landing-contacts a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	text-decoration: none;
+	color: var(--accent);
+	background: #f9f9f9;
+	border: 3px solid var(--accent);
+	border-radius: 50%;
+	transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.krv-landing-contacts a:hover {
+	border-color: var(--accent-hover);
+	background: var(--accent-bg);
+	box-shadow: var(--card-shadow);
+}
+
+.krv-landing-social-icon {
+	display: block;
+	width: 22px;
+	height: 22px;
+	color: currentColor;
+	flex-shrink: 0;
+}
+
+.krv-landing-social-icon path,
+.krv-landing-social-icon circle,
+.krv-landing-social-icon rect {
+	fill: currentColor;
+}
+
+.krv-landing-services {
+	padding: 15px 0 0;
+}
+
+.krv-landing-services-header {
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.krv-landing-services-header h2 {
+	margin: 0 0 10px;
+	font-size: 2rem;
+	color: var(--text-main);
+}
+
+.krv-landing-services-header p {
+	margin: 0;
+	font-size: 1rem;
+	color: var(--text-soft);
+}
+
+.krv-landing-services-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 20px;
+	width: 100%;
+}
+
+.krv-landing-service-item {
+	width: 100%;
+	padding: 15px;
+	text-align: center;
+	background: var(--card-bg);
+	border-radius: var(--service-radius);
+	box-shadow: var(--card-shadow);
+	transition: box-shadow 0.25s ease;
+}
+
+.krv-landing-service-item:hover {
+	box-shadow: var(--card-shadow-hover);
+}
+
+.krv-landing-service-icon {
+	display: inline-block;
+	width: 34px;
+	height: 34px;
+	margin-bottom: 15px;
+	color: var(--accent);
+}
+
+.krv-landing-service-icon path,
+.krv-landing-service-icon circle,
+.krv-landing-service-icon rect,
+.krv-landing-service-icon polyline,
+.krv-landing-service-icon line {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.8;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.krv-landing-service-item h3 {
+	margin: 0 0 10px;
+	font-size: 1.25rem;
+	color: var(--text-main);
+}
+
+.krv-landing-service-item p {
+	margin: 0;
+	font-size: 0.9rem;
+	line-height: 1.5;
+	color: var(--text-soft);
+}
+
+.krv-landing-pricing {
+	width: 100%;
+	padding: 20px;
+	text-align: center;
+	background: var(--card-bg);
+	border-radius: var(--card-radius);
+	box-shadow: var(--card-shadow);
+}
+
+.krv-landing-pricing-title {
+	margin: 0 0 15px;
+	font-size: 2rem;
+	line-height: 1.2;
+	color: var(--text-main);
+}
+
+.krv-landing-pricing-lead {
+	margin: 0 0 18px;
+	font-size: 1.1rem;
+	line-height: 1.6;
+	color: var(--text-soft);
+}
+
+.krv-landing-pricing-rate {
+	display: inline-block;
+	margin-top: 6px;
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1.2;
+	color: var(--accent);
+}
+
+.krv-landing-pricing-list {
+	list-style: none;
+	margin: 0 0 22px;
+	padding: 0;
+	display: grid;
+	gap: 12px;
+}
+
+.krv-landing-pricing-list li {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 10px;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: var(--text-soft);
+	text-align: left;
+}
+
+.krv-landing-pricing-icon {
+	flex: 0 0 20px;
+	width: 20px;
+	height: 20px;
+	margin-top: 2px;
+	color: var(--accent);
+}
+
+.krv-landing-pricing-icon path,
+.krv-landing-pricing-icon circle,
+.krv-landing-pricing-icon rect,
+.krv-landing-pricing-icon polyline,
+.krv-landing-pricing-icon line {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.8;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.krv-landing-pricing-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 46px;
+	padding: 12px 22px;
+	border-radius: 10px;
+	background: var(--accent);
+	color: #fff;
+	text-decoration: none;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1;
+	transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.krv-landing-pricing-button:hover {
+	background: var(--accent-hover);
+	box-shadow: var(--card-shadow-hover);
+}
+
+.krv-landing-pricing-button:active {
+	transform: translateY(1px);
+}
+
+@media (max-width: 890px) {
+	.krv-landing-services-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 768px) {
+	.krv-services-landing {
+		padding: 16px 10px;
+	}
+
+	.krv-landing-contact-card,
+	.krv-landing-pricing {
+		padding: 15px;
+	}
+
+	.krv-landing-avatar-wrap {
+		width: 112px;
+		height: 112px;
+	}
+
+	.krv-landing-title,
+	.krv-landing-services-header h2,
+	.krv-landing-pricing-title {
+		font-size: 1.5rem;
+	}
+
+	.krv-landing-lead,
+	.krv-landing-meta,
+	.krv-landing-services-header p,
+	.krv-landing-pricing-lead {
+		font-size: 0.95rem;
+	}
+
+	.krv-landing-contacts {
+		gap: 10px;
+	}
+
+	.krv-landing-contacts a {
+		width: 40px;
+		height: 40px;
+	}
+
+	.krv-landing-social-icon {
+		width: 20px;
+		height: 20px;
+	}
+
+	.krv-landing-service-icon {
+		width: 30px;
+		height: 30px;
+	}
+
+	.krv-landing-pricing-rate {
+		font-size: 1.8rem;
+	}
+
+	.krv-landing-pricing-list li {
+		font-size: 0.95rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.krv-services-landing {
+		padding: 12px 8px;
+	}
+
+	.krv-landing-contact-card,
+	.krv-landing-pricing {
+		padding: 10px;
+	}
+
+	.krv-landing-avatar-wrap {
+		width: 104px;
+		height: 104px;
+	}
+
+	.krv-landing-contacts {
+		gap: 8px;
+	}
+
+	.krv-landing-contacts a {
+		width: 36px;
+		height: 36px;
+	}
+
+	.krv-landing-social-icon {
+		width: 18px;
+		height: 18px;
+	}
+
+	.krv-landing-service-icon {
+		width: 28px;
+		height: 28px;
+	}
+
+	.krv-landing-title,
+	.krv-landing-services-header h2,
+	.krv-landing-pricing-title {
+		font-size: 1.5rem;
+	}
+
+	.krv-landing-pricing-rate {
+		font-size: 1.6rem;
+	}
+
+	.krv-landing-pricing-list li {
+		gap: 8px;
+		font-size: 0.9rem;
+	}
+
+	.krv-landing-pricing-button {
+		width: 100%;
+		max-width: 280px;
+		padding: 10px 16px;
+		font-size: 0.9rem;
+	}
+}
