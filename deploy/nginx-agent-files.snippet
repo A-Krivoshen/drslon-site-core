@@ -1,0 +1,37 @@
+# Fragment for /etc/nginx/sites-enabled/krivoshein.site (server block, before PHP includes)
+
+ add_header Link '</sitemap.xml>; rel="sitemap", </llms.txt>; rel="describedby"; type="text/markdown", </ai.txt>; rel="describedby"; type="text/plain", </.well-known/api-catalog>; rel="api-catalog", </feed/drslon-pulse-feed/>; rel="alternate"; type="application/rss+xml"' always;
+ add_header Vary Accept always;
+
+ if ($http_accept ~* "text/markdown") {
+     rewrite ^/$ /llms.txt last;
+ }
+
+ location = /llms.txt {
+     types { }
+     default_type text/markdown;
+     try_files /llms.txt =404;
+ }
+
+ location = /ai.txt {
+     types { }
+     default_type text/plain;
+     try_files /ai.txt =404;
+ }
+
+ location = /humans.txt {
+     types { }
+     default_type text/plain;
+     try_files /humans.txt =404;
+ }
+
+ location = /.well-known/api-catalog {
+     default_type application/linkset+json;
+     try_files $uri =404;
+ }
+
+ location = /.well-known/security.txt {
+     types { }
+     default_type text/plain;
+     try_files /.well-known/security.txt =404;
+ }

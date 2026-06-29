@@ -1,0 +1,4 @@
+Contact: mailto:aleksey@krivoshein.site
+Preferred-Languages: ru, en
+Canonical: https://krivoshein.site/.well-known/security.txt
+Policy: https://krivoshein.site/contacts/

@@ -1,0 +1,51 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://krivoshein.site/",
+      "item": [
+        {
+          "href": "https://krivoshein.site/wp-json/",
+          "type": "application/json",
+          "title": "WordPress REST API",
+          "description": "Public WordPress REST API for krivoshein.site"
+        },
+        {
+          "href": "https://krivoshein.site/sitemap.xml",
+          "type": "application/xml",
+          "title": "Sitemap",
+          "description": "XML sitemap with public pages and posts"
+        },
+        {
+          "href": "https://krivoshein.site/feed/drslon-pulse-feed/",
+          "type": "application/rss+xml",
+          "title": "Dr.Slon Pulse Feed",
+          "description": "RSS feed with recent publications from krivoshein.site"
+        },
+        {
+          "href": "https://krivoshein.site/llms.txt",
+          "type": "text/markdown",
+          "title": "llms.txt",
+          "description": "AI-readable summary of krivoshein.site"
+        },
+        {
+          "href": "https://krivoshein.site/ai.txt",
+          "type": "text/plain",
+          "title": "ai.txt",
+          "description": "Short AI agent index for krivoshein.site"
+        },
+        {
+          "href": "https://krivoshein.site/humans.txt",
+          "type": "text/plain",
+          "title": "humans.txt",
+          "description": "Site credits and team information"
+        },
+        {
+          "href": "https://krivoshein.site/.well-known/security.txt",
+          "type": "text/plain",
+          "title": "security.txt",
+          "description": "Security contact and policy references"
+        }
+      ]
+    }
+  ]
+}

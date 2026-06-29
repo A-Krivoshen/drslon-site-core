@@ -1,0 +1,75 @@
+# krivoshein.site
+
+Персональный сайт Алексея Кривошеина / Dr.Slon.
+
+Индивидуальный предприниматель. Разработка и поддержка сайтов на WordPress, техническое SEO, настройка Яндекс Директ, Linux/DevOps, Nginx, Docker, серверное администрирование. На сайте публикуются практические материалы по WordPress, Linux, DevOps, Python, ботам, веб-инфраструктуре, AI-инструментам и личному техническому опыту.
+
+## Основные разделы
+
+- [Главная](https://krivoshein.site/) - главная страница сайта, услуги, проекты и основные ссылки.
+- [Блог](https://krivoshein.site/blog/) - практические статьи, заметки, новости и технические разборы.
+- [Прайс-лист](https://krivoshein.site/prays-list/) - услуги по сайтам, WordPress, поддержке, рекламе и техническим задачам.
+- [Оферта](https://krivoshein.site/oferta/) - условия оказания услуг.
+- [Контакты](https://krivoshein.site/contacts/) - связь, заказ услуг и обратная связь.
+- [MAX](https://krivoshein.site/max/) - профиль в мессенджере MAX.
+- [Sitemap](https://krivoshein.site/sitemap.xml) - карта сайта со страницами и публикациями.
+- [Dr.Slon Pulse Feed](https://krivoshein.site/feed/drslon-pulse-feed/) - специальная RSS-лента свежих публикаций.
+- [WordPress REST API](https://krivoshein.site/wp-json/) - публичный REST API WordPress.
+
+## Темы сайта
+
+- WordPress
+- разработка сайтов
+- поддержка сайтов
+- Linux
+- DevOps
+- Nginx
+- Docker
+- PHP
+- Python
+- техническое SEO
+- Яндекс Директ
+- AI-инструменты
+- автоматизация
+- серверное администрирование
+- личный технический опыт
+
+## Как использовать материалы сайта
+
+Публичные статьи, страницы и заметки сайта можно читать, индексировать, анализировать, кратко пересказывать и использовать для ответов пользователям с указанием ссылки на исходную страницу.
+
+Административные разделы, закрытые данные, формы авторизации, приватные файлы и технические служебные адреса не предназначены для автоматического доступа.
+
+## Для AI-агентов
+
+Основной контент сайта доступен через публичные страницы WordPress, sitemap и RSS-ленту.
+
+Для поиска всех опубликованных материалов рекомендуется использовать sitemap:
+
+https://krivoshein.site/sitemap.xml
+
+Для свежих публикаций рекомендуется использовать Dr.Slon Pulse Feed:
+
+https://krivoshein.site/feed/drslon-pulse-feed/
+
+Публичные данные WordPress доступны через REST API:
+
+https://krivoshein.site/wp-json/
+
+## Связанные проекты
+
+- [domaintools.site](https://domaintools.site) — проверка доменов и DNS
+- [cybertools.cc](https://cybertools.cc) — бесплатные онлайн-утилиты для вебмастеров и разработчиков
+- [bots.krivoshein.site](https://bots.krivoshein.site) — боты для MAX
+- [vps.krivoshein.site](https://vps.krivoshein.site) — VPS и облако
+- [direct.krivoshein.site](https://direct.krivoshein.site) — Яндекс.Директ
+- [wordpress.krivoshein.site](https://wordpress.krivoshein.site) — поддержка WordPress
+- [fortesting.ru](https://fortesting.ru) — тестовый хаб
+- [meetup.fortesting.ru](https://meetup.fortesting.ru) — WordPress Meetup
+
+## AI-файлы
+
+- Краткий индекс: https://krivoshein.site/ai.txt
+- API-каталог: https://krivoshein.site/.well-known/api-catalog
+- humans.txt: https://krivoshein.site/humans.txt
+- security.txt: https://krivoshein.site/.well-known/security.txt

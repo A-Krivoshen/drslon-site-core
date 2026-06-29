@@ -1,0 +1,16 @@
+/* TEAM */
+Developer: ИП Кривошеин А.С. / Алексей Кривошеин (Dr.Slon)
+Site: https://krivoshein.site
+Contact: mailto:aleksey@krivoshein.site
+Location: Россия
+
+/* SITE */
+Standards: HTML5, Schema.org, WordPress, hreflang
+Languages: ru
+LLMs: https://krivoshein.site/llms.txt
+AI: https://krivoshein.site/ai.txt
+API: https://krivoshein.site/wp-json/
+API-Catalog: https://krivoshein.site/.well-known/api-catalog
+
+/* THANKS */
+WordPress, Nginx, Redis, PHP

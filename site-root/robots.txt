@@ -1,0 +1,17 @@
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Allow: /wp-content/uploads/
+Allow: /llms.txt
+Allow: /ai.txt
+Allow: /humans.txt
+Allow: /.well-known/security.txt
+Allow: /.well-known/api-catalog
+
+Sitemap: https://krivoshein.site/sitemap.xml
+
+# Для AI-агентов
+# Полное описание: https://krivoshein.site/llms.txt
+# Краткий индекс: https://krivoshein.site/ai.txt
+# API-каталог: https://krivoshein.site/.well-known/api-catalog

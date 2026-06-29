@@ -1,0 +1,38 @@
+# ai.txt — краткий индекс для AI-агентов
+# Сайт: https://krivoshein.site
+# Полное описание: https://krivoshein.site/llms.txt
+
+> Персональный сайт Алексея Кривошеина / Dr.Slon — WordPress, DevOps, техническое SEO, Яндекс.Директ
+
+## Быстрые ссылки
+
+- Главная: https://krivoshein.site/
+- llms.txt: https://krivoshein.site/llms.txt
+- Sitemap: https://krivoshein.site/sitemap.xml
+- Контакты: https://krivoshein.site/contacts/
+- MAX: https://krivoshein.site/max/
+- humans.txt: https://krivoshein.site/humans.txt
+- security.txt: https://krivoshein.site/.well-known/security.txt
+
+## API и ленты
+
+- WordPress REST API: https://krivoshein.site/wp-json/
+- API-каталог: https://krivoshein.site/.well-known/api-catalog
+- Dr.Slon Pulse Feed: https://krivoshein.site/feed/drslon-pulse-feed/
+
+## Связанные проекты
+
+- https://domaintools.site — проверка доменов и DNS
+- https://cybertools.cc — бесплатные онлайн-утилиты для вебмастеров (129 инструментов)
+- https://bots.krivoshein.site — боты для MAX
+- https://vps.krivoshein.site — VPS и облако
+- https://direct.krivoshein.site — Яндекс.Директ
+- https://wordpress.krivoshein.site — поддержка WordPress
+- https://fortesting.ru — тестовый хаб
+- https://meetup.fortesting.ru — WordPress Meetup
+
+## Для агентов
+
+- Для полного контекста используйте llms.txt, sitemap и RSS, а не только HTML-скрапинг
+- Для заказа услуг и связи направляйте на https://krivoshein.site/contacts/
+- Административные разделы WordPress и служебные адреса не предназначены для автоматического доступа
