@@ -19,7 +19,7 @@ function krv_services_landing_option_id(): string {
  */
 function krv_services_landing_get_defaults(): array {
 	return array(
-		'profile_avatar'         => 'https://krivoshein.site/wp-content/uploads/2026/06/drslon_avatar.png',
+		'profile_avatar'         => 10321,
 		'profile_name'           => 'Алексей Кривошеин',
 		'profile_lead'           => 'Специализируюсь на разработке и продвижении веб-сайтов, администрировании серверов и поддержке существующих проектов.',
 		'profile_meta_lines'       => array(
@@ -345,11 +345,14 @@ function krv_services_landing_register_acf(): void {
 			'title'  => 'Лендинг услуг',
 			'fields' => array(
 				array(
-					'key'          => 'field_krv_sl_profile_avatar',
-					'label'        => 'Аватар (URL)',
-					'name'         => 'profile_avatar',
-					'type'         => 'url',
-					'instructions' => 'Прямая ссылка на изображение, например из Медиатеки.',
+					'key'           => 'field_krv_sl_profile_avatar',
+					'label'         => 'Аватар',
+					'name'          => 'profile_avatar',
+					'type'          => 'image',
+					'return_format' => 'id',
+					'preview_size'  => 'thumbnail',
+					'library'       => 'all',
+					'instructions'  => 'Выберите фото из медиатеки или загрузите новое.',
 				),
 				array(
 					'key'   => 'field_krv_sl_profile_name',
@@ -571,6 +574,76 @@ add_action(
 );
 
 /**
+ * Resolve avatar field value to a public image URL.
+ *
+ * @param mixed $value Attachment ID, ACF image array, or legacy URL string.
+ * @return string
+ */
+function krv_services_landing_resolve_avatar_url( $value ): string {
+	$fallback = 'https://krivoshein.site/wp-content/uploads/2026/06/drslon_avatar.png';
+
+	if ( is_array( $value ) ) {
+		if ( ! empty( $value['url'] ) ) {
+			return (string) $value['url'];
+		}
+		if ( ! empty( $value['ID'] ) ) {
+			$value = (int) $value['ID'];
+		}
+	}
+
+	if ( is_numeric( $value ) ) {
+		$url = wp_get_attachment_image_url( (int) $value, 'full' );
+		return is_string( $url ) && $url !== '' ? $url : $fallback;
+	}
+
+	if ( is_string( $value ) && $value !== '' ) {
+		return $value;
+	}
+
+	return $fallback;
+}
+
+/**
+ * Convert legacy URL avatar value to attachment ID for the media picker.
+ */
+function krv_services_landing_migrate_avatar_attachment(): void {
+	if ( get_option( 'krv_services_landing_avatar_migrated_v1' ) ) {
+		return;
+	}
+
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+
+	$option_id = krv_services_landing_option_id();
+	$current   = get_field( 'profile_avatar', $option_id );
+
+	if ( is_numeric( $current ) && (int) $current > 0 ) {
+		update_option( 'krv_services_landing_avatar_migrated_v1', DRSLON_SITE_CORE_VERSION, false );
+		return;
+	}
+
+	$url = is_string( $current ) ? trim( $current ) : '';
+
+	if ( $url === '' ) {
+		update_field( 'profile_avatar', 10321, $option_id );
+		update_option( 'krv_services_landing_avatar_migrated_v1', DRSLON_SITE_CORE_VERSION, false );
+		return;
+	}
+
+	$attachment_id = attachment_url_to_postid( $url );
+
+	if ( ! $attachment_id ) {
+		$attachment_id = 10321;
+	}
+
+	update_field( 'profile_avatar', (int) $attachment_id, $option_id );
+	update_option( 'krv_services_landing_avatar_migrated_v1', DRSLON_SITE_CORE_VERSION, false );
+}
+
+add_action( 'acf/init', 'krv_services_landing_migrate_avatar_attachment', 28 );
+
+/**
  * Load landing data from ACF with hardcoded fallbacks.
  *
  * @return array<string, mixed>
@@ -670,7 +743,7 @@ function krv_services_landing_render(): string {
 		<div class="krv-services-landing-section">
 			<div class="krv-landing-contact-card">
 				<div class="krv-landing-avatar-wrap">
-					<img class="krv-landing-avatar" src="<?php echo esc_url( (string) $data['profile_avatar'] ); ?>" alt="<?php echo esc_attr( (string) $data['profile_name'] ); ?>">
+					<img class="krv-landing-avatar" src="<?php echo esc_url( krv_services_landing_resolve_avatar_url( $data['profile_avatar'] ?? '' ) ); ?>" alt="<?php echo esc_attr( (string) $data['profile_name'] ); ?>">
 				</div>
 
 				<h2 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h2>
