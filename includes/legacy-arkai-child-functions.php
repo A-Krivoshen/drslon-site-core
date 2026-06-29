@@ -30,6 +30,14 @@ function krv_page_has_ui_shortcode( array $shortcodes ): bool {
 		return false;
 	}
 
+	if ( function_exists( 'krv_page_resolves_shortcode' ) ) {
+		foreach ( $shortcodes as $shortcode ) {
+			if ( krv_page_resolves_shortcode( (string) $shortcode ) ) {
+				return true;
+			}
+		}
+	}
+
 	global $post;
 
 	if ( ! $post instanceof WP_Post ) {

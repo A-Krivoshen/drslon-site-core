@@ -36,6 +36,10 @@ add_action( 'wp_enqueue_scripts', function () {
 			'file'      => 'assets/css/price-list-widget.css',
 			'shortcode' => [ 'krv_price_list' ],
 		],
+		'drslon-service-page-shell' => [
+			'file'      => 'assets/css/service-page-shell.css',
+			'shortcode' => [ 'krv_service_page' ],
+		],
 	];
 
 	foreach ( $styles as $handle => $config ) {

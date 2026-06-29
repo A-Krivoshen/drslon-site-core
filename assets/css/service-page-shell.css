@@ -1,0 +1,166 @@
+.krv-service-page {
+	--krv-sp-accent: #5181fe;
+	--krv-sp-accent-soft: #eef4ff;
+	--krv-sp-text: #111827;
+	--krv-sp-muted: #5b6472;
+	--krv-sp-line: #e7ecf5;
+	--krv-sp-radius: 16px;
+	--krv-sp-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 24px 16px 40px;
+	font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+	color: var(--krv-sp-text);
+	line-height: 1.6;
+}
+
+.krv-service-page,
+.krv-service-page * {
+	box-sizing: border-box;
+}
+
+.krv-service-page--minimal {
+	max-width: 1100px;
+	padding-top: 12px;
+}
+
+.krv-service-page__heading {
+	margin: 0 0 20px;
+	font-size: clamp(1.5rem, 2.4vw, 2rem);
+	font-weight: 600;
+	line-height: 1.25;
+	text-align: center;
+	color: var(--krv-sp-text);
+}
+
+.krv-service-page--minimal .krv-service-page__heading {
+	text-align: left;
+	font-size: clamp(1.35rem, 2vw, 1.75rem);
+	margin-bottom: 16px;
+}
+
+.krv-service-page__intro {
+	margin: 0 0 24px;
+}
+
+.krv-service-page__intro p {
+	margin: 0 0 14px;
+	font-size: 1rem;
+	color: var(--krv-sp-muted);
+}
+
+.krv-service-page__intro p:last-child {
+	margin-bottom: 0;
+}
+
+.krv-service-page--tool .krv-service-page__intro {
+	text-align: center;
+}
+
+.krv-service-page__quote {
+	margin: 0 0 24px;
+	padding: 18px 22px;
+	border-left: 4px solid var(--krv-sp-accent);
+	border-radius: 0 var(--krv-sp-radius) var(--krv-sp-radius) 0;
+	background: var(--krv-sp-accent-soft);
+}
+
+.krv-service-page__quote p {
+	margin: 0;
+	font-size: 0.98rem;
+	color: var(--krv-sp-text);
+}
+
+.krv-service-page__tool {
+	margin: 0 0 28px;
+	padding: 24px;
+	background: #fff;
+	border: 1px solid var(--krv-sp-line);
+	border-radius: var(--krv-sp-radius);
+	box-shadow: var(--krv-sp-shadow);
+}
+
+.krv-service-page--minimal .krv-service-page__tool {
+	padding: 0;
+	border: 0;
+	box-shadow: none;
+	background: transparent;
+}
+
+.krv-service-page__dns-types {
+	margin: 0 0 28px;
+	padding: 20px 22px;
+	border: 1px solid var(--krv-sp-line);
+	border-radius: var(--krv-sp-radius);
+	background: #fff;
+}
+
+.krv-service-page__dns-types-title {
+	margin: 0 0 14px;
+	font-size: 1rem;
+	font-weight: 600;
+	text-align: center;
+	color: var(--krv-sp-text);
+}
+
+.krv-service-page__dns-types ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.krv-service-page__dns-types li {
+	position: relative;
+	margin: 0 0 10px;
+	padding-left: 0;
+	font-size: 0.95rem;
+	color: var(--krv-sp-muted);
+}
+
+.krv-service-page__dns-types li:last-child {
+	margin-bottom: 0;
+}
+
+.krv-service-page__dns-types strong {
+	color: var(--krv-sp-accent);
+	font-weight: 600;
+}
+
+.krv-service-page__after {
+	margin: 0 0 28px;
+}
+
+.krv-service-page__after p {
+	margin: 0 0 14px;
+	font-size: 1rem;
+	color: var(--krv-sp-muted);
+}
+
+.krv-service-page__after p:last-child {
+	margin-bottom: 0;
+}
+
+.krv-service-page__rsya {
+	clear: both;
+	display: block;
+	width: 100%;
+	margin-top: 32px;
+}
+
+.krv-service-page__rsya-slot {
+	min-height: 320px;
+}
+
+@media (max-width: 640px) {
+	.krv-service-page {
+		padding: 16px 12px 32px;
+	}
+
+	.krv-service-page__tool {
+		padding: 16px;
+	}
+
+	.krv-service-page--minimal .krv-service-page__tool {
+		padding: 0;
+	}
+}
