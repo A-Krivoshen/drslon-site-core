@@ -82,10 +82,11 @@ function krv_render_telegram_discussion_widget(): void {
  */
 function krv_tg_discuss_links_html(): string {
 	return sprintf(
-		'<p style="margin:0 0 10px;font-weight:600;">%s</p>'
-		. '<p style="margin:0 0 8px;"><a href="%s" target="_blank" rel="noopener noreferrer">Telegram — @%s</a></p>'
-		. '<p style="margin:0;"><a href="%s" target="_blank" rel="noopener noreferrer">MAX — группа обсуждения</a></p>',
-		'Обсудить в Telegram / MAX',
+		'<span class="krv-tg-discuss-links__label">%s</span>'
+		. '<a class="krv-tg-discuss-links__link" href="%s" target="_blank" rel="noopener noreferrer">Telegram — @%s</a>'
+		. '<span class="krv-tg-discuss-links__sep" aria-hidden="true">/</span>'
+		. '<a class="krv-tg-discuss-links__link" href="%s" target="_blank" rel="noopener noreferrer">MAX — группа обсуждения</a>',
+		'Обсудить в',
 		esc_url( 'https://t.me/' . KRV_TG_DISCUSSION ),
 		esc_html( KRV_TG_DISCUSSION ),
 		esc_url( KRV_MAX_DISCUSSION_URL )
@@ -97,14 +98,61 @@ function krv_tg_discuss_links_html(): string {
  */
 function krv_render_tg_discuss_links(): void {
 	?>
-	<div
-		class="krv-tg-discuss-links"
-		style="margin-top:12px;padding:16px 18px;border:1px solid #e5e7eb;border-radius:12px;background:#f9fafb;"
-	>
+	<div class="krv-tg-discuss-links">
 		<?php echo krv_tg_discuss_links_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>
 	</div>
 	<?php
 }
+
+/**
+ * Inline layout for messenger discuss links.
+ */
+function krv_tg_discuss_links_styles(): void {
+	if ( ! function_exists( 'krv_is_single_content' ) || ! krv_is_single_content() ) {
+		return;
+	}
+	?>
+	<style>
+		.krv-tg-discuss-links {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 6px 10px;
+			margin-top: 12px;
+			padding: 11px 16px;
+			border: 1px solid #e5e7eb;
+			border-radius: 10px;
+			background: #f9fafb;
+			font-size: 14px;
+			line-height: 1.45;
+			color: #374151;
+		}
+		.krv-tg-discuss-links__label {
+			font-weight: 600;
+			white-space: nowrap;
+		}
+		.krv-tg-discuss-links__sep {
+			color: #9ca3af;
+			user-select: none;
+		}
+		.krv-tg-discuss-links__link {
+			color: #2563eb;
+			text-decoration: none;
+			white-space: nowrap;
+		}
+		.krv-tg-discuss-links__link:hover {
+			text-decoration: underline;
+		}
+		@media (max-width: 640px) {
+			.krv-tg-discuss-links__link {
+				white-space: normal;
+			}
+		}
+	</style>
+	<?php
+}
+
+add_action( 'wp_head', 'krv_tg_discuss_links_styles', 16 );
 
 /**
  * Short notice when the embed iframe fails to load.
