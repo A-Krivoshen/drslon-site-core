@@ -1,7 +1,7 @@
 # krivoshein.site — шпаргалка по устройству сайта
 
 > Для себя: «где что лежит, как править, что не ломать».  
-> Актуально на **июнь 2026**, плагин **drslon-site-core v0.3.2**, тема **v0.3.3**.
+> Актуально на **июнь 2026**, плагин **drslon-site-core v0.3.2**, тема **v0.4.0**.
 
 ---
 
@@ -39,14 +39,14 @@
 
 | | |
 |--|--|
-| **Активная тема** | `drslon-blog-theme` (v0.3.3) |
+| **Активная тема** | `drslon-blog-theme` (v0.4.0) |
 | **Путь на сервере** | `/wp-content/themes/drslon-blog-theme/` |
 | **Git** | `git@github.com:A-Krivoshen/drslon-blog-theme.git` → `main` |
 | **UX-аудит темы** | `docs/UX-THEME-AUDIT.md` в репо темы |
-| **CSS** | `assets/css/components/01–07-*.css` (не один монолит) |
+| **CSS** | `assets/css/components/01–08-*.css`, conditional enqueue (`inc/enqueue-assets.php`) |
 | **Шорткоды блога** | в плагине: `includes/shortcodes/blog-shortcodes.php` (v0.3.1+) |
-| **Контакты в футере** | icon chips: Telegram DM, email, MAX (`parts/footer.html`) |
-| **Контакты в шапке** | Telegram-канал + MAX icon chip (`parts/header.html`) |
+| **Контакты** | shortcodes `[drslon_footer_connect]`, `[drslon_header_max]` (`inc/contact-blocks.php`) |
+| **Поиск** | header (desktop ≥1100px) + sidebar |
 
 Статус: см. `git status` в репо темы/плагина перед деплоем.
 
