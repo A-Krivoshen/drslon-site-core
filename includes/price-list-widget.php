@@ -59,7 +59,7 @@ function krv_price_list_finalize_html( string $html ): string {
 		'{{KRV_CONTACTS_DIAGNOSTIC}}' => esc_url( krv_price_list_contacts_url( 'diagnostic', 'diagnostic' ) ),
 		'{{KRV_CONTACTS_CTA}}'        => esc_url( krv_price_list_contacts_url( 'cta-bottom' ) ),
 		'{{KRV_CONTACTS_LINK}}'       => esc_url( krv_price_list_contacts_url( 'link-block' ) ),
-		'{{KRV_MAX_CHAT}}'            => esc_url( krv_price_list_utm_url( 'https://krivoshein.site/max/', 'max-chat' ) ),
+		'{{KRV_MAX_CHAT}}'            => esc_url( home_url( '/max' ) ),
 		'{{KRV_TG_CHAT}}'             => esc_url( krv_price_list_utm_url( 'https://t.me/DrSlon', 'telegram-chat' ) ),
 	);
 
