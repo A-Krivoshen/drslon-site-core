@@ -8,24 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'wp_enqueue_scripts', function () {
-	if ( is_admin() ) {
-		return;
-	}
-
-	$plugin_file = DRSLON_SITE_CORE_DIR . 'drslon-site-core.php';
-	$chip_path   = DRSLON_SITE_CORE_DIR . 'assets/css/max-social-chip.css';
-
-	if ( file_exists( $chip_path ) ) {
-		wp_enqueue_style(
-			'drslon-max-social-chip',
-			plugins_url( 'assets/css/max-social-chip.css', $plugin_file ),
-			array(),
-			(string) filemtime( $chip_path )
-		);
-	}
-}, 15 );
-
-add_action( 'wp_enqueue_scripts', function () {
 	if ( is_admin() || ! function_exists( 'krv_page_has_ui_shortcode' ) ) {
 		return;
 	}

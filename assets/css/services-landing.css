@@ -97,6 +97,40 @@
 	margin-top: 10px;
 }
 
+.krv-landing-contacts a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	text-decoration: none;
+	color: var(--accent);
+	background: #f9f9f9;
+	border: 3px solid var(--accent);
+	border-radius: 50%;
+	transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.krv-landing-contacts a:hover {
+	border-color: var(--accent-hover);
+	background: var(--accent-bg);
+	box-shadow: var(--card-shadow);
+}
+
+.krv-landing-social-icon {
+	display: block;
+	width: 22px;
+	height: 22px;
+	color: currentColor;
+	flex-shrink: 0;
+}
+
+.krv-landing-social-icon path,
+.krv-landing-social-icon circle,
+.krv-landing-social-icon rect {
+	fill: currentColor;
+}
+
 .krv-landing-services {
 	padding: 15px 0 0;
 }
@@ -306,6 +340,16 @@
 		gap: 10px;
 	}
 
+	.krv-landing-contacts a {
+		width: 40px;
+		height: 40px;
+	}
+
+	.krv-landing-social-icon {
+		width: 20px;
+		height: 20px;
+	}
+
 	.krv-landing-service-icon {
 		width: 30px;
 		height: 30px;
@@ -337,6 +381,11 @@
 
 	.krv-landing-contacts {
 		gap: 8px;
+	}
+
+	.krv-landing-contacts a {
+		width: 36px;
+		height: 36px;
 	}
 
 	.krv-landing-social-icon {

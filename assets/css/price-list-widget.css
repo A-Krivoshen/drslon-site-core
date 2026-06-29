@@ -245,9 +245,12 @@
   gap: 6px;
 }
 
-.krv-btn-max .krv-landing-social-icon {
+.krv-max-icon {
+  display: block;
   width: 16px;
   height: 16px;
+  flex-shrink: 0;
+  fill: currentColor;
 }
 
 .krv-btn-block {
