@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DrSlon Site Core
  * Description: Compatibility layer for krivoshein.site legacy CPT, ACF fields and shortcodes moved out of the old Arkai child theme.
- * Version: 0.1.10
+ * Version: 0.1.11
  * Author: Алексей Кривошеин
  * Text Domain: drslon-site-core
  */
@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'DRSLON_SITE_CORE_VERSION', '0.1.10' );
+define( 'DRSLON_SITE_CORE_VERSION', '0.1.11' );
 define( 'DRSLON_SITE_CORE_DIR', plugin_dir_path( __FILE__ ) );
 
 require_once DRSLON_SITE_CORE_DIR . 'includes/cache-purge-bridge.php';

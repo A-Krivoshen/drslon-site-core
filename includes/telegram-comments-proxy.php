@@ -221,8 +221,40 @@ function krv_tg_comments_loader_script(): void {
 				if (!iframe || iframe.offsetHeight <= 80) showEmbedError();
 			}, 20000);
 
+			function hideEmbedLogin(doc) {
+				if (!doc) return;
+
+				var css = '.tgme_post_discussion_login,.tgme_post_discussion_login_btn,.js-login_btn{display:none!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;visibility:hidden!important;pointer-events:none!important}';
+
+				if (!doc.getElementById('krv-hide-tg-login')) {
+					var style = doc.createElement('style');
+					style.id = 'krv-hide-tg-login';
+					style.textContent = css;
+					(doc.head || doc.documentElement).appendChild(style);
+				}
+
+				doc.querySelectorAll('.tgme_post_discussion_login,.js-login_btn').forEach(function (el) {
+					el.remove();
+				});
+			}
+
 			iframe.addEventListener('load', function () {
 				window.clearTimeout(failTimer);
+
+				try {
+					var doc = iframe.contentDocument;
+					if (!doc) return;
+
+					hideEmbedLogin(doc);
+
+					var loginObserver = new MutationObserver(function () {
+						hideEmbedLogin(doc);
+					});
+
+					if (doc.body) {
+						loginObserver.observe(doc.body, { childList: true, subtree: true });
+					}
+				} catch (e) {}
 			});
 
 			iframe.addEventListener('error', function () {
