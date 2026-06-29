@@ -207,6 +207,13 @@ add_action( 'acf/init', function () {
 			'title'  => 'Витрина сервисных страниц',
 			'fields' => [
 				[
+					'key'           => 'field_krv_showcase_intro_heading',
+					'label'         => 'Вводный заголовок',
+					'name'          => 'showcase_intro_heading',
+					'type'          => 'text',
+					'default_value' => 'На странице «Сервисы» представлены все услуги, которые мы предоставляем онлайн:',
+				],
+				[
 					'key'          => 'field_krv_services_sections',
 					'label'        => 'Секции',
 					'name'         => 'krv_services_sections',
@@ -244,7 +251,77 @@ add_action( 'acf/init', function () {
 				],
 			],
 		] );
+
+		acf_add_options_page( [
+			'page_title' => 'Партнёры — настройки',
+			'menu_title' => 'Партнёры',
+			'menu_slug'  => 'krv-partners',
+			'capability' => 'edit_theme_options',
+			'redirect'   => false,
+			'position'   => 62,
+			'icon_url'   => 'dashicons-groups',
+		] );
+
+		acf_add_local_field_group( [
+			'key'    => 'group_krv_partners_options',
+			'title'  => 'Вводный блок партнёров',
+			'fields' => [
+				[
+					'key'   => 'field_krv_partners_intro_heading',
+					'label' => 'Заголовок',
+					'name'  => 'partners_intro_heading',
+					'type'  => 'text',
+				],
+				[
+					'key'   => 'field_krv_partners_intro_text',
+					'label' => 'Текст',
+					'name'  => 'partners_intro_text',
+					'type'  => 'textarea',
+					'rows'  => 3,
+				],
+			],
+			'location' => [
+				[
+					[
+						'param'    => 'options_page',
+						'operator' => '==',
+						'value'    => 'krv-partners',
+					],
+				],
+			],
+		] );
 	}
 } );
+
+/**
+ * Seed showcase intro heading on first run when ACF option is empty.
+ */
+function krv_services_showcase_seed_intro_heading(): void {
+	if ( get_option( 'krv_services_showcase_intro_seeded_v1' ) ) {
+		return;
+	}
+
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+
+	$option_id = 'krv-services-showcase';
+	$current   = get_field( 'showcase_intro_heading', $option_id );
+
+	if ( is_string( $current ) && trim( $current ) !== '' ) {
+		update_option( 'krv_services_showcase_intro_seeded_v1', DRSLON_SITE_CORE_VERSION, false );
+		return;
+	}
+
+	update_field(
+		'showcase_intro_heading',
+		'На странице «Сервисы» представлены все услуги, которые мы предоставляем онлайн:',
+		$option_id
+	);
+
+	update_option( 'krv_services_showcase_intro_seeded_v1', DRSLON_SITE_CORE_VERSION, false );
+}
+
+add_action( 'acf/init', 'krv_services_showcase_seed_intro_heading', 25 );
 
 add_filter( 'acf/settings/show_admin', '__return_false' );

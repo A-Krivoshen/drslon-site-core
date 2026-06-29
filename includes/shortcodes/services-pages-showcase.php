@@ -124,9 +124,18 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 		wp_reset_postdata();
 	}
 
+	$intro_heading = '';
+	if ( function_exists( 'get_field' ) ) {
+		$intro_heading = trim( (string) get_field( 'showcase_intro_heading', 'krv-services-showcase' ) );
+	}
+
 	ob_start();
 	?>
 	<div class="krv-service-pages-wrap">
+		<?php if ( $intro_heading !== '' ) : ?>
+			<h2 class="krv-showcase-intro"><?php echo esc_html( $intro_heading ); ?></h2>
+		<?php endif; ?>
+
 		<?php foreach ( $sections as $section ) : ?>
 			<?php
 			$section_title = krv_services_showcase_visible_section_title(

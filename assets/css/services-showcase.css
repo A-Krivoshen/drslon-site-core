@@ -18,6 +18,14 @@
 		box-sizing: border-box;
 	}
 
+	.krv-showcase-intro {
+		margin: 0 0 24px;
+		font-size: 1.55rem;
+		color: var(--krv-text-main);
+		text-align: center;
+		line-height: 1.35;
+	}
+
 	.krv-service-pages-group + .krv-service-pages-group {
 		margin-top: 34px;
 	}

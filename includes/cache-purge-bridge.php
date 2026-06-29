@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Page ID for /servisy/ — services showcase shortcode destination. */
 define( 'DRSLON_SERVICES_PAGE_ID', 6202 );
 
+/** Page ID for /partnery/ — partners grid shortcode destination. */
+define( 'DRSLON_PARTNERS_PAGE_ID', 9584 );
+
 /** Page ID for home / «Обо мне» — [krv_services_landing] destination. */
 define( 'DRSLON_HOME_PAGE_ID', 17 );
 
@@ -79,6 +82,12 @@ final class DrSlon_Cache_Purge_Bridge {
 		if ( $post_id === 'krv-services-showcase' ) {
 			delete_transient( 'krv_services_showcase_v1' );
 			self::purge_page_cache( DRSLON_SERVICES_PAGE_ID );
+			return;
+		}
+
+		if ( $post_id === 'krv-partners' ) {
+			delete_transient( 'krv_partners_grid_v1' );
+			self::purge_page_cache( DRSLON_PARTNERS_PAGE_ID );
 			return;
 		}
 

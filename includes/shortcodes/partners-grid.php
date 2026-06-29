@@ -118,13 +118,27 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 		return '';
 	}
 
+	$intro_heading = '';
+	$intro_text    = '';
+
+	if ( function_exists( 'get_field' ) ) {
+		$intro_heading = trim( (string) get_field( 'partners_intro_heading', 'krv-partners' ) );
+		$intro_text    = trim( (string) get_field( 'partners_intro_text', 'krv-partners' ) );
+	}
+
 	ob_start();
 	?>
 	<div class="krv-partners-wrap">
-		<div class="krv-partners-header">
-			<h2>Партнёры</h2>
-			<p>Полезные сервисы, хостинги, инструменты и платформы, которые я использую или могу рекомендовать.</p>
-		</div>
+		<?php if ( $intro_heading !== '' || $intro_text !== '' ) : ?>
+			<div class="krv-partners-header">
+				<?php if ( $intro_heading !== '' ) : ?>
+					<h2><?php echo esc_html( $intro_heading ); ?></h2>
+				<?php endif; ?>
+				<?php if ( $intro_text !== '' ) : ?>
+					<p><?php echo esc_html( $intro_text ); ?></p>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
 
 		<?php foreach ( $terms as $term ) : ?>
 			<?php
