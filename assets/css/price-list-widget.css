@@ -179,6 +179,75 @@
   box-shadow: var(--krv-shadow-soft);
 }
 
+.krv-hero-panel-accent {
+  background: var(--krv-accent-soft);
+  border-color: #c7daff;
+}
+
+.krv-hero-panel-note {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.krv-hero-panel-quick {
+  margin-bottom: 14px;
+}
+
+.krv-hero-panel-quick-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--krv-muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.krv-hero-messengers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.krv-btn-messenger {
+  flex: 1 1 120px;
+  min-width: 0;
+}
+
+.krv-btn-block {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.krv-hero-panel-meta {
+  margin: 10px 0 0;
+  color: var(--krv-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.krv-hero-panel-link {
+  display: inline-flex;
+  margin-top: 12px;
+  color: var(--krv-accent-dark);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.krv-hero-panel-link:hover {
+  text-decoration: underline;
+}
+
+.krv-package-cta {
+  width: 100%;
+  margin-top: 16px;
+}
+
 .krv-hero-panel h2 {
   margin: 0 0 10px;
   color: var(--krv-text);

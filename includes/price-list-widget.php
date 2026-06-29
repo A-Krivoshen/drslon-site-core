@@ -25,6 +25,50 @@ function krv_price_list_utm_url( string $base_url, string $campaign ): string {
 }
 
 /**
+ * Build contacts page URL with UTM and optional topic prefill.
+ *
+ * @param string $campaign utm_campaign value.
+ * @param string $topic    Optional ?topic= query for the form context.
+ * @return string
+ */
+function krv_price_list_contacts_url( string $campaign, string $topic = '' ): string {
+	$params = array(
+		'utm_source'   => 'krivoshein.site',
+		'utm_medium'   => 'prays-list',
+		'utm_campaign' => $campaign,
+	);
+
+	if ( $topic !== '' ) {
+		$params['topic'] = $topic;
+	}
+
+	$url = add_query_arg( $params, home_url( '/contacts/' ) );
+
+	return $url . '#krv-contact-block';
+}
+
+/**
+ * Replace placeholders and UTM-tagged links in widget HTML.
+ *
+ * @param string $html Widget HTML.
+ * @return string
+ */
+function krv_price_list_finalize_html( string $html ): string {
+	$replacements = array(
+		'{{KRV_CONTACTS_GENERAL}}'    => esc_url( krv_price_list_contacts_url( 'general' ) ),
+		'{{KRV_CONTACTS_DIAGNOSTIC}}' => esc_url( krv_price_list_contacts_url( 'diagnostic', 'diagnostic' ) ),
+		'{{KRV_CONTACTS_CTA}}'        => esc_url( krv_price_list_contacts_url( 'cta-bottom' ) ),
+		'{{KRV_CONTACTS_LINK}}'       => esc_url( krv_price_list_contacts_url( 'link-block' ) ),
+		'{{KRV_MAX_CHAT}}'            => esc_url( krv_price_list_utm_url( 'https://krivoshein.site/max/', 'max-chat' ) ),
+		'{{KRV_TG_CHAT}}'             => esc_url( krv_price_list_utm_url( 'https://t.me/DrSlon', 'telegram-chat' ) ),
+	);
+
+	$html = str_replace( array_keys( $replacements ), array_values( $replacements ), $html );
+
+	return krv_price_list_apply_utm_links( $html );
+}
+
+/**
  * Replace landing subdomain links with UTM-tagged URLs.
  *
  * @param string $html Widget HTML.
@@ -65,8 +109,9 @@ function krv_price_list_render(): string {
           <p class="krv-lead">Делаю сайты на WordPress, дорабатываю существующие проекты, настраиваю серверы, рекламу, аналитику, формы, cookie-уведомления и простых ботов для заявок. Ниже базовые ориентиры по цене. Это антикризисный прайс без агентской наценки, но не демпинг: финальная стоимость зависит от задачи, состояния проекта и объема работ.</p>
 
           <div class="krv-actions">
-            <a class="krv-btn krv-btn-primary" href="https://krivoshein.site/contacts/" target="_blank" rel="noopener noreferrer">Обсудить задачу</a>
-            <a class="krv-btn" href="https://t.me/DrSlon" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+            <a class="krv-btn krv-btn-primary" href="{{KRV_CONTACTS_GENERAL}}">Обсудить задачу</a>
+            <a class="krv-btn" href="{{KRV_TG_CHAT}}" target="_blank" rel="noopener noreferrer">Telegram</a>
+            <a class="krv-btn" href="{{KRV_MAX_CHAT}}">MAX</a>
           </div>
 
           <div class="krv-contacts">
@@ -76,11 +121,22 @@ function krv_price_list_render(): string {
           </div>
         </div>
 
-        <div class="krv-hero-panel">
+        <div class="krv-hero-panel krv-hero-panel-accent">
           <h2>Не знаете, что именно нужно?</h2>
           <p>Это нормально. Иногда нужен новый сайт, а иногда достаточно починить формы, цели в Метрике, скорость, рекламу или сервер.</p>
-          <p>Самый разумный старт — короткая диагностика. Смотрим, где ломается связка: сайт, WordPress, хостинг, аналитика, реклама или заявки.</p>
-          <a class="krv-btn krv-btn-primary" href="https://krivoshein.site/contacts/" target="_blank" rel="noopener noreferrer">Начать с диагностики</a>
+          <p class="krv-hero-panel-note">Коротко в <strong>Telegram</strong> или <strong>MAX</strong> — бесплатно. Полный технический разбор сайта — <strong>от 5 000 ₽</strong>.</p>
+
+          <div class="krv-hero-panel-quick">
+            <span class="krv-hero-panel-quick-label">Бесплатно уточнить задачу</span>
+            <div class="krv-hero-messengers">
+              <a class="krv-btn krv-btn-messenger" href="{{KRV_TG_CHAT}}" target="_blank" rel="noopener noreferrer">Telegram</a>
+              <a class="krv-btn krv-btn-messenger" href="{{KRV_MAX_CHAT}}">MAX</a>
+            </div>
+          </div>
+
+          <a class="krv-btn krv-btn-primary krv-btn-block" href="{{KRV_CONTACTS_DIAGNOSTIC}}">Заказать диагностику</a>
+          <p class="krv-hero-panel-meta">от 5 000 ₽ · WordPress, формы, Метрика, скорость, рекомендации</p>
+          <a class="krv-hero-panel-link" href="#krv-package-diagnostic">Что входит в диагностику ↓</a>
         </div>
       </div>
 
@@ -181,14 +237,14 @@ function krv_price_list_render(): string {
       </div>
     </section>
 
-    <section class="krv-section">
+    <section class="krv-section" id="krv-prices">
       <div class="krv-section-head">
         <h2>Популярные форматы</h2>
         <p>Это ориентиры, чтобы сразу понимать порядок бюджета. Финальная смета зависит от реальной задачи.</p>
       </div>
 
       <div class="krv-package-grid">
-        <div class="krv-package">
+        <div class="krv-package" id="krv-package-diagnostic">
           <div class="krv-kicker">Быстрый старт</div>
           <h3 class="krv-card-title">Диагностика сайта</h3>
           <div class="krv-price">от 5 000 ₽</div>
@@ -200,6 +256,7 @@ function krv_price_list_render(): string {
             <li>скорость и базовые ошибки</li>
             <li>список рекомендаций</li>
           </ul>
+          <a class="krv-btn krv-btn-primary krv-package-cta" href="{{KRV_CONTACTS_DIAGNOSTIC}}">Заказать диагностику</a>
         </div>
 
         <div class="krv-package krv-package-accent">
@@ -468,7 +525,7 @@ function krv_price_list_render(): string {
               <span class="krv-link-meta">MAX-боты, сценарии заявок и интеграции. ↗</span>
             </a>
 
-            <a class="krv-link-card" href="https://krivoshein.site/contacts/" target="_blank" rel="noopener noreferrer">
+            <a class="krv-link-card" href="{{KRV_CONTACTS_LINK}}">
               <span class="krv-link-title">Сразу обсудить задачу</span>
               <span class="krv-link-meta">Контакты, короткий бриф и первый шаг по смете.</span>
             </a>
@@ -544,7 +601,7 @@ function krv_price_list_render(): string {
           <h2>Есть сайт, реклама или идея бота, но непонятно, с чего начать?</h2>
           <p>Напишите коротко, что есть сейчас и что хотите получить. Я посмотрю задачу и предложу нормальный первый шаг: консультацию, диагностику, доработку, поддержку или отдельную смету.</p>
         </div>
-        <a class="krv-btn" href="https://krivoshein.site/contacts/" target="_blank" rel="noopener noreferrer">Написать по задаче</a>
+        <a class="krv-btn krv-btn-primary" href="{{KRV_CONTACTS_CTA}}">Написать по задаче</a>
       </div>
     </section>
 
@@ -555,7 +612,7 @@ function krv_price_list_render(): string {
 </div>
 KRV_PRICE_LIST_HTML;
 
-	return krv_price_list_apply_utm_links( $html );
+	return krv_price_list_finalize_html( $html );
 }
 
 add_shortcode( 'krv_price_list', function () {
