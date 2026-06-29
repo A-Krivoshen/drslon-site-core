@@ -12,20 +12,16 @@ This plugin stores functionality that should not live inside the WordPress theme
 
 ## Current status
 
-Version 0.1.0 is a temporary compatibility bridge.
+Version 0.2.2 — legacy monolith split into modules.
 
-At this stage the plugin loads legacy logic from:
+`includes/legacy-arkai-child-functions.php` is now a slim bootstrap (helpers, TSF SEO, RSYA/Telegram hooks) that loads:
 
-includes/legacy-arkai-child-functions.php
-
-Later this file should be split into normal modules:
-
-- includes/cpt.php
-- includes/acf-fields.php
-- includes/shortcodes/partners-grid.php
-- includes/shortcodes/services-pages-showcase.php
-- includes/shortcodes/services-landing.php
-- includes/shortcodes/clients-grid.php
+- `includes/cpt.php` — CPT registrations (client, project, usluga, price, partner)
+- `includes/acf-fields.php` — ACF options pages and local field groups
+- `includes/shortcodes/clients-grid.php` — `[krv_clients_grid]`
+- `includes/shortcodes/partners-grid.php` — `[krv_partners_grid]`
+- `includes/shortcodes/services-pages-showcase.php` — `[krv_services_pages_showcase]`
+- `includes/shortcodes/services-landing.php` — `[krv_services_landing]`
 
 ## Related project
 

@@ -1,0 +1,503 @@
+<?php
+/**
+ * Partners grid shortcode [krv_partners_grid]
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+
+/** =========================
+ *  11) Partners grid shortcode
+ *  ========================= */
+/**
+ * Build partners grouped by category for the partners grid shortcode.
+ *
+ * @return array{terms: WP_Term[], partners_by_term: array<int, WP_Post[]>}|null
+ */
+function krv_partners_grid_get_grouped_data(): ?array {
+	$cache_key = 'krv_partners_grid_v1';
+	$cached    = get_transient( $cache_key );
+
+	if ( is_array( $cached ) && isset( $cached['terms'], $cached['partners_by_term'] ) ) {
+		return $cached;
+	}
+
+	$terms = get_terms( [
+		'taxonomy'   => 'partner_category',
+		'hide_empty' => true,
+		'orderby'    => 'name',
+		'order'      => 'ASC',
+	] );
+
+	if ( is_wp_error( $terms ) || empty( $terms ) ) {
+		return null;
+	}
+
+	$q = new WP_Query( [
+		'post_type'      => 'partner',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'orderby'        => [
+			'menu_order' => 'ASC',
+			'date'       => 'DESC',
+		],
+		'no_found_rows'  => true,
+	] );
+
+	if ( ! $q->have_posts() ) {
+		return null;
+	}
+
+	$partner_ids = wp_list_pluck( $q->posts, 'ID' );
+	update_postmeta_cache( $partner_ids );
+
+	$partners_by_term = [];
+
+	foreach ( $terms as $term ) {
+		$partners_by_term[ $term->term_id ] = [];
+	}
+
+	while ( $q->have_posts() ) {
+		$q->the_post();
+
+		$post_id = get_the_ID();
+		$terms_for_post = get_the_terms( $post_id, 'partner_category' );
+
+		if ( is_wp_error( $terms_for_post ) || empty( $terms_for_post ) ) {
+			continue;
+		}
+
+		foreach ( $terms_for_post as $term ) {
+			if ( ! isset( $partners_by_term[ $term->term_id ] ) ) {
+				continue;
+			}
+
+			$partners_by_term[ $term->term_id ][] = get_post( $post_id );
+		}
+	}
+
+	wp_reset_postdata();
+
+	$grouped = [
+		'terms'            => $terms,
+		'partners_by_term' => $partners_by_term,
+	];
+
+	set_transient( $cache_key, $grouped, HOUR_IN_SECONDS );
+
+	return $grouped;
+}
+
+add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
+	$atts = shortcode_atts( [
+		'category' => '',
+	], $atts, 'krv_partners_grid' );
+
+	$grouped = krv_partners_grid_get_grouped_data();
+
+	if ( $grouped === null ) {
+		return '';
+	}
+
+	$terms            = $grouped['terms'];
+	$partners_by_term = $grouped['partners_by_term'];
+
+	if ( $atts['category'] !== '' ) {
+		$category_slug = sanitize_title( $atts['category'] );
+		$terms         = array_values( array_filter(
+			$terms,
+			static function ( $term ) use ( $category_slug ) {
+				return $term->slug === $category_slug;
+			}
+		) );
+	}
+
+	if ( empty( $terms ) ) {
+		return '';
+	}
+
+	ob_start();
+	?>
+	<div class="krv-partners-wrap">
+		<div class="krv-partners-header">
+			<h2>Партнёры</h2>
+			<p>Полезные сервисы, хостинги, инструменты и платформы, которые я использую или могу рекомендовать.</p>
+		</div>
+
+		<?php foreach ( $terms as $term ) : ?>
+			<?php
+			$partners = $partners_by_term[ $term->term_id ] ?? [];
+
+			if ( empty( $partners ) ) {
+				continue;
+			}
+			?>
+
+			<section class="krv-partners-group">
+				<h3 class="krv-partners-group-title"><?php echo esc_html( $term->name ); ?></h3>
+
+				<div class="krv-partners-grid">
+					<?php foreach ( $partners as $partner_post ) : ?>
+						<?php
+						$post_id      = $partner_post->ID;
+						$title        = get_the_title( $partner_post );
+						$url          = trim( (string) get_post_meta( $post_id, 'partner_url', true ) );
+						$description  = trim( wp_strip_all_tags( (string) get_post_meta( $post_id, 'partner_description', true ) ) );
+						$badge        = trim( (string) get_post_meta( $post_id, 'partner_badge', true ) );
+						$is_featured  = (bool) get_post_meta( $post_id, 'partner_is_featured', true );
+						$is_nofollow  = (bool) get_post_meta( $post_id, 'partner_nofollow', true );
+						$is_sponsored = (bool) get_post_meta( $post_id, 'partner_sponsored', true );
+
+						$rel = [ 'noopener', 'noreferrer' ];
+
+						if ( $is_nofollow ) {
+							$rel[] = 'nofollow';
+						}
+
+						if ( $is_sponsored ) {
+							$rel[] = 'sponsored';
+						}
+
+						$thumb = get_the_post_thumbnail( $post_id, 'medium', [
+							'class'   => 'krv-partner-logo',
+							'loading' => 'lazy',
+							'alt'     => esc_attr( $title ),
+						] );
+
+						$card_classes = 'krv-partner-card';
+						if ( $is_featured ) {
+							$card_classes .= ' krv-partner-card--featured';
+						}
+
+						$tag_open = $url
+							? '<a class="' . esc_attr( $card_classes ) . '" href="' . esc_url( $url ) . '" target="_blank" rel="' . esc_attr( implode( ' ', array_unique( $rel ) ) ) . '">'
+							: '<div class="' . esc_attr( $card_classes ) . ' krv-partner-card--static">';
+
+						$tag_close = $url ? '</a>' : '</div>';
+						?>
+						<?php echo $tag_open; ?>
+							<div class="krv-partner-card-inner">
+								<div class="krv-partner-logo-wrap">
+									<?php if ( $thumb ) : ?>
+										<?php echo $thumb; ?>
+									<?php else : ?>
+										<div class="krv-partner-no-logo"><?php echo esc_html( mb_substr( $title, 0, 1, 'UTF-8' ) ); ?></div>
+									<?php endif; ?>
+								</div>
+
+								<?php if ( $badge !== '' ) : ?>
+									<div class="krv-partner-badge"><?php echo esc_html( $badge ); ?></div>
+								<?php endif; ?>
+
+								<h4 class="krv-partner-title"><?php echo esc_html( $title ); ?></h4>
+
+								<?php if ( $description !== '' ) : ?>
+									<p class="krv-partner-description"><?php echo esc_html( $description ); ?></p>
+								<?php endif; ?>
+							</div>
+						<?php echo $tag_close; ?>
+					<?php endforeach; ?>
+				</div>
+			</section>
+		<?php endforeach; ?>
+	</div>
+	<?php
+
+	return ob_get_clean();
+} );
+
+add_action( 'save_post_partner', function ( $post_id ) {
+	if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+		return;
+	}
+
+	delete_transient( 'krv_partners_grid_v1' );
+}, 10 );
+
+add_action( 'wp_head', function () {
+	if ( is_admin() || ! krv_page_has_ui_shortcode( [ 'krv_partners_grid' ] ) ) {
+		return;
+	}
+	?>
+<style>
+	.krv-partners-wrap {
+		--krv-accent: #5181fe;
+		--krv-accent-hover: #4169d4;
+		--krv-card-bg: #fff;
+		--krv-text-main: #333;
+		--krv-text-soft: #666;
+		--krv-card-radius: 10px;
+		--krv-card-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+		--krv-card-shadow-hover: 0 6px 15px rgba(0, 0, 0, 0.15);
+		max-width: 1320px;
+		margin: 0 auto;
+		padding: 20px 15px;
+		font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+	}
+
+	.krv-partners-wrap,
+	.krv-partners-wrap * {
+		box-sizing: border-box;
+	}
+
+	.krv-partners-header {
+		text-align: center;
+		margin-bottom: 30px;
+	}
+
+	.krv-partners-header h2 {
+		margin: 0 0 12px;
+		font-size: 2.2rem;
+		line-height: 1.2;
+		color: var(--krv-text-main);
+	}
+
+	.krv-partners-header p {
+		margin: 0 auto;
+		max-width: 760px;
+		font-size: 1.02rem;
+		line-height: 1.7;
+		color: var(--krv-text-soft);
+	}
+
+	.krv-partners-group + .krv-partners-group {
+		margin-top: 36px;
+	}
+
+	.krv-partners-group-title {
+		margin: 0 0 18px;
+		font-size: 1.6rem;
+		line-height: 1.3;
+		color: var(--krv-text-main);
+		text-align: center;
+	}
+
+	.krv-partners-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 20px;
+		width: 100%;
+	}
+
+	.krv-partner-card {
+		display: block;
+		width: 100%;
+		height: 100%;
+		text-decoration: none;
+		color: inherit;
+		background: var(--krv-card-bg);
+		border: 1px solid var(--krv-accent);
+		border-radius: var(--krv-card-radius);
+		box-shadow: var(--krv-card-shadow);
+		transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+		overflow: hidden;
+	}
+
+	.krv-partner-card:hover {
+		transform: translateY(-2px);
+		border-color: var(--krv-accent-hover);
+		box-shadow: var(--krv-card-shadow-hover);
+		background: #fcfdff;
+	}
+
+	.krv-partner-card--featured {
+		border-color: var(--krv-accent);
+		box-shadow: 0 6px 18px rgba(81, 129, 254, 0.14);
+	}
+
+	.krv-partner-card--static:hover {
+		transform: none;
+		border-color: var(--krv-accent);
+		box-shadow: var(--krv-card-shadow);
+		background: var(--krv-card-bg);
+	}
+
+	.krv-partner-card-inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		min-height: 228px;
+		padding: 16px 14px;
+		text-align: center;
+	}
+
+	.krv-partner-logo-wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 82px;
+		margin-bottom: 14px;
+		padding: 8px;
+		overflow: hidden;
+	}
+
+	.krv-partner-logo {
+		display: block !important;
+		width: auto !important;
+		height: auto !important;
+		max-width: 100% !important;
+		max-height: 66px !important;
+		margin: 0 auto !important;
+		object-fit: contain;
+		object-position: center;
+		border: 0 !important;
+		box-shadow: none !important;
+	}
+
+	.krv-partner-no-logo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 58px;
+		height: 58px;
+		border-radius: 50%;
+		background: #eaf1ff;
+		color: var(--krv-accent);
+		font-size: 1.4rem;
+		font-weight: 700;
+	}
+
+	.krv-partner-badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 0 10px;
+		padding: 4px 10px;
+		border-radius: 999px;
+		background: #eef4ff;
+		color: var(--krv-accent-hover);
+		font-size: 0.76rem;
+		font-weight: 600;
+		line-height: 1.2;
+	}
+
+	.krv-partner-title {
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.35;
+		color: var(--krv-text-main);
+		word-break: break-word;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		min-height: 2.7em;
+	}
+
+	.krv-partner-description {
+		margin: 10px 0 0;
+		font-size: 0.86rem;
+		line-height: 1.45;
+		color: var(--krv-text-soft);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		min-height: 4.1em;
+	}
+
+	@media (max-width: 1180px) {
+		.krv-partners-wrap {
+			max-width: 1180px;
+		}
+
+		.krv-partners-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 768px) {
+		.krv-partners-wrap {
+			padding: 14px 8px;
+		}
+
+		.krv-partners-header {
+			margin-bottom: 24px;
+		}
+
+		.krv-partners-header h2 {
+			font-size: 1.9rem;
+		}
+
+		.krv-partners-header p {
+			font-size: 0.95rem;
+		}
+
+		.krv-partners-group-title {
+			font-size: 1.3rem;
+			margin-bottom: 14px;
+			text-align: center;
+		}
+
+		.krv-partners-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.krv-partner-card-inner {
+			min-height: 182px;
+			padding: 10px 8px;
+		}
+
+		.krv-partner-logo-wrap {
+			height: 58px;
+			margin-bottom: 10px;
+			padding: 4px;
+		}
+
+		.krv-partner-logo {
+			max-height: 44px !important;
+		}
+
+		.krv-partner-title {
+			font-size: 0.88rem;
+			min-height: 2.5em;
+		}
+
+		.krv-partner-description {
+			display: none;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.krv-partners-wrap {
+			padding: 10px 5px;
+		}
+
+		.krv-partners-header h2 {
+			font-size: 1.55rem;
+		}
+
+		.krv-partners-header p {
+			font-size: 0.9rem;
+		}
+
+		.krv-partners-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 10px;
+		}
+
+		.krv-partner-card-inner {
+			min-height: 168px;
+			padding: 9px 7px;
+		}
+
+		.krv-partner-logo-wrap {
+			height: 52px;
+		}
+
+		.krv-partner-logo {
+			max-height: 40px !important;
+		}
+
+		.krv-partner-title {
+			font-size: 0.82rem;
+		}
+	}
+</style>
+	<?php
+}, 101 );
