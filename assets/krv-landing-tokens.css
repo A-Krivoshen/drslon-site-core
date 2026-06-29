@@ -1,0 +1,46 @@
+/**
+ * KRV landing design tokens — shared with price-list-widget.php
+ * Used by wordpress / vps / direct / bots subdomains.
+ */
+:root {
+  --krv-bg: #ffffff;
+  --krv-card: #ffffff;
+  --krv-soft: #f8fafc;
+  --krv-soft-2: #f8fafc;
+  --krv-line: #e7ecf5;
+  --krv-line-strong: #d7e0ee;
+  --krv-text: #111827;
+  --krv-muted: #5b6472;
+  --krv-accent: #5181fe;
+  --krv-accent-dark: #315fe8;
+  --krv-accent-soft: #eef4ff;
+  --krv-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
+  --krv-shadow-soft: 0 8px 22px rgba(15, 23, 42, 0.05);
+  --krv-shadow-cta: 0 20px 48px rgba(49, 95, 232, 0.26);
+}
+
+/* Base hooks for static landings (Tailwind handles most styling) */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--krv-text);
+}
+
+.font-display {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 600;
+}
+
+/* Optional utility classes for non-Tailwind elements */
+.krv-accent { color: var(--krv-accent); }
+.krv-accent-bg { background-color: var(--krv-accent); }
+.krv-accent-soft-bg { background-color: var(--krv-accent-soft); }
+.krv-line { border-color: var(--krv-line); }
+.krv-muted { color: var(--krv-muted); }
+.krv-shadow { box-shadow: var(--krv-shadow); }
+.krv-shadow-soft { box-shadow: var(--krv-shadow-soft); }
+.krv-shadow-cta { box-shadow: var(--krv-shadow-cta); }
