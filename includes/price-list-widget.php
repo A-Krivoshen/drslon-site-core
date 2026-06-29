@@ -111,7 +111,7 @@ function krv_price_list_render(): string {
           <div class="krv-actions">
             <a class="krv-btn krv-btn-primary" href="{{KRV_CONTACTS_GENERAL}}">Обсудить задачу</a>
             <a class="krv-btn" href="{{KRV_TG_CHAT}}" target="_blank" rel="noopener noreferrer">Telegram</a>
-            <a class="krv-btn" href="{{KRV_MAX_CHAT}}">MAX</a>
+            <a class="krv-btn" href="{{KRV_MAX_CHAT}}" target="_blank" rel="noopener noreferrer">MAX</a>
           </div>
 
           <div class="krv-contacts">
@@ -130,7 +130,7 @@ function krv_price_list_render(): string {
             <span class="krv-hero-panel-quick-label">Бесплатно уточнить задачу</span>
             <div class="krv-hero-messengers">
               <a class="krv-btn krv-btn-messenger" href="{{KRV_TG_CHAT}}" target="_blank" rel="noopener noreferrer">Telegram</a>
-              <a class="krv-btn krv-btn-messenger" href="{{KRV_MAX_CHAT}}">MAX</a>
+              <a class="krv-btn krv-btn-messenger" href="{{KRV_MAX_CHAT}}" target="_blank" rel="noopener noreferrer">MAX</a>
             </div>
           </div>
 
