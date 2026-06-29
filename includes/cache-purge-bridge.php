@@ -20,6 +20,9 @@ define( 'DRSLON_PARTNERS_PAGE_ID', 9584 );
 /** Page ID for home / «Обо мне» — [krv_services_landing] destination. */
 define( 'DRSLON_HOME_PAGE_ID', 17 );
 
+/** Page ID for /prays-list/ — [krv_price_list] destination. */
+define( 'DRSLON_PRICE_LIST_PAGE_ID', 9772 );
+
 /**
  * Sync WPFC cache invalidation with Nginx Helper Redis purge.
  */
@@ -93,6 +96,11 @@ final class DrSlon_Cache_Purge_Bridge {
 
 		if ( $post_id === 'krv-services-landing' ) {
 			self::purge_page_cache( DRSLON_HOME_PAGE_ID );
+			return;
+		}
+
+		if ( $post_id === 'krv-price-list' ) {
+			self::purge_page_cache( DRSLON_PRICE_LIST_PAGE_ID );
 		}
 	}
 

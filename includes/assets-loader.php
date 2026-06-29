@@ -36,22 +36,45 @@ add_action( 'wp_enqueue_scripts', function () {
 			'file'      => 'assets/css/price-list-widget.css',
 			'shortcode' => [ 'krv_price_list' ],
 		],
+		'drslon-price-list-widget-js' => [
+			'file'      => 'assets/js/price-list-widget.js',
+			'shortcode' => [ 'krv_price_list' ],
+			'type'      => 'script',
+		],
 		'drslon-service-page-shell' => [
 			'file'      => 'assets/css/service-page-shell.css',
 			'shortcode' => [ 'krv_service_page' ],
 		],
 	];
 
-	foreach ( $styles as $handle => $config ) {
+	$assets = [
+		'drslon-services-landing'     => [ 'type' => 'style' ],
+		'drslon-clients-grid'         => [ 'type' => 'style' ],
+		'drslon-partners-grid'        => [ 'type' => 'style' ],
+		'drslon-services-showcase'    => [ 'type' => 'style' ],
+		'drslon-price-list-widget'    => [ 'type' => 'style' ],
+		'drslon-price-list-widget-js' => [ 'type' => 'script' ],
+		'drslon-service-page-shell'   => [ 'type' => 'style' ],
+	];
+
+	foreach ( $assets as $handle => $meta ) {
+		if ( ! isset( $styles[ $handle ] ) ) {
+			continue;
+		}
+
+		$config = $styles[ $handle ];
+
 		if ( ! krv_page_has_ui_shortcode( $config['shortcode'] ) ) {
 			continue;
 		}
 
-		wp_enqueue_style(
-			$handle,
-			plugins_url( $config['file'], $plugin_file ),
-			[],
-			$version
-		);
+		$url = plugins_url( $config['file'], $plugin_file );
+
+		if ( $meta['type'] === 'script' ) {
+			wp_enqueue_script( $handle, $url, [], $version, true );
+			continue;
+		}
+
+		wp_enqueue_style( $handle, $url, [], $version );
 	}
 }, 20 );

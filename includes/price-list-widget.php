@@ -53,10 +53,22 @@ function krv_price_list_contacts_url( string $campaign, string $topic = '' ): st
  * @param string $html Widget HTML.
  * @return string
  */
-function krv_price_list_finalize_html( string $html ): string {
+function krv_price_list_finalize_html( string $html, array $settings = array() ): string {
+	if ( empty( $settings ) && function_exists( 'krv_price_list_get_settings' ) ) {
+		$settings = krv_price_list_get_settings();
+	}
+
 	$replacements = array(
+		'{{KRV_HERO_BADGE}}'          => esc_html( (string) ( $settings['hero_badge'] ?? '' ) ),
+		'{{KRV_HERO_TITLE}}'          => esc_html( (string) ( $settings['hero_title'] ?? '' ) ),
+		'{{KRV_HERO_SUBTITLE}}'       => esc_html( (string) ( $settings['hero_subtitle'] ?? '' ) ),
+		'{{KRV_HERO_LEAD}}'           => esc_html( (string) ( $settings['hero_lead'] ?? '' ) ),
+		'{{KRV_TRUST_STRIP}}'         => function_exists( 'krv_price_list_render_trust_strip' ) ? krv_price_list_render_trust_strip( $settings ) : '',
+		'{{KRV_DISCLAIMER}}'          => esc_html( (string) ( $settings['disclaimer'] ?? '' ) ),
 		'{{KRV_CONTACTS_GENERAL}}'    => esc_url( krv_price_list_contacts_url( 'general' ) ),
 		'{{KRV_CONTACTS_DIAGNOSTIC}}' => esc_url( krv_price_list_contacts_url( 'diagnostic', 'diagnostic' ) ),
+		'{{KRV_CONTACTS_REPAIR}}'     => esc_url( krv_price_list_contacts_url( 'repair', 'repair' ) ),
+		'{{KRV_CONTACTS_SUPPORT}}'    => esc_url( krv_price_list_contacts_url( 'support', 'support' ) ),
 		'{{KRV_CONTACTS_CTA}}'        => esc_url( krv_price_list_contacts_url( 'cta-bottom' ) ),
 		'{{KRV_CONTACTS_LINK}}'       => esc_url( krv_price_list_contacts_url( 'link-block' ) ),
 		'{{KRV_MAX_CHAT}}'            => esc_url( home_url( '/max' ) ),
@@ -96,17 +108,19 @@ function krv_price_list_apply_utm_links( string $html ): string {
  * @return string
  */
 function krv_price_list_render(): string {
+	$settings = function_exists( 'krv_price_list_get_settings' ) ? krv_price_list_get_settings() : array();
+
 	$html = <<<'KRV_PRICE_LIST_HTML'
 <div class="krv-price-widget">
 
   <div class="krv-price-shell">
     <section class="krv-hero">
       <div class="krv-hero-grid">
-        <div>
-          <div class="krv-badge">Антикризисный прайс • WordPress / Linux / DevOps / реклама / боты</div>
-          <h1 class="krv-title">Стоимость сайтов, поддержки, рекламы и технических работ</h1>
-          <p class="krv-subtitle">Разработка сайтов • Поддержка • Linux / DevOps • Яндекс Директ • Автоматизация заявок</p>
-          <p class="krv-lead">Делаю сайты на WordPress, дорабатываю существующие проекты, настраиваю серверы, рекламу, аналитику, формы, cookie-уведомления и простых ботов для заявок. Ниже базовые ориентиры по цене. Это антикризисный прайс без агентской наценки, но не демпинг: финальная стоимость зависит от задачи, состояния проекта и объема работ.</p>
+        <div class="krv-hero-main">
+          <div class="krv-badge">{{KRV_HERO_BADGE}}</div>
+          <h1 class="krv-title">{{KRV_HERO_TITLE}}</h1>
+          <p class="krv-subtitle">{{KRV_HERO_SUBTITLE}}</p>
+          <p class="krv-lead">{{KRV_HERO_LEAD}}</p>
 
           <div class="krv-actions">
             <a class="krv-btn krv-btn-primary" href="{{KRV_CONTACTS_GENERAL}}">Обсудить задачу</a>
@@ -115,9 +129,8 @@ function krv_price_list_render(): string {
           </div>
 
           <div class="krv-contacts">
-            <a href="tel:+79636641615" target="_blank" rel="noopener noreferrer">+7 (963) 664-16-15</a>
-            <a href="mailto:aleksey@krivoshein.site" target="_blank" rel="noopener noreferrer">aleksey@krivoshein.site</a>
-            <a href="https://krivoshein.site/max" target="_blank" rel="noopener noreferrer">MAX</a>
+            <a href="tel:+79636641615">+7 (963) 664-16-15</a>
+            <a href="mailto:aleksey@krivoshein.site">aleksey@krivoshein.site</a>
           </div>
         </div>
 
@@ -139,27 +152,13 @@ function krv_price_list_render(): string {
           <a class="krv-hero-panel-link" href="#krv-package-diagnostic">Что входит в диагностику ↓</a>
         </div>
       </div>
-
-      <div class="krv-tags">
-        <span>WordPress</span>
-        <span>Linux</span>
-        <span>Nginx</span>
-        <span>Docker</span>
-        <span>Redis</span>
-        <span>VPS</span>
-        <span>Яндекс Директ</span>
-        <span>Метрика</span>
-        <span>SEO</span>
-        <span>MAX-боты</span>
-        <span>Telegram-боты</span>
-        <span>Cookies</span>
-        <span>Персональные данные</span>
-      </div>
     </section>
 
-    <nav class="krv-anchor-nav" aria-label="Навигация по разделам прайса">
-      <a href="#krv-scenarios">С чего начать</a>
-      <a href="#krv-landings">Лендинги</a>
+    {{KRV_TRUST_STRIP}}
+
+    <nav class="krv-anchor-nav krv-anchor-nav-sticky" aria-label="Навигация по разделам прайса">
+      <a href="#krv-scenarios">Сценарии</a>
+      <a href="#krv-packages">Пакеты</a>
       <a href="#krv-prices">Цены</a>
       <a href="#krv-faq">FAQ</a>
     </nav>
@@ -178,11 +177,11 @@ function krv_price_list_render(): string {
           <span class="krv-route-go">Лендинг WordPress ↗</span>
         </a>
 
-        <a class="krv-route-card" href="https://wordpress.krivoshein.site/" target="_blank" rel="noopener noreferrer">
+        <a class="krv-route-card" href="{{KRV_CONTACTS_REPAIR}}">
           <span class="krv-kicker">Ремонт</span>
           <span class="krv-route-title">Есть сайт, но он чудит</span>
           <span class="krv-route-text">Тормозит, ломается, не отправляет формы, плохо выглядит на телефоне или давно не обновлялся.</span>
-          <span class="krv-route-go">Доработка и поддержка ↗</span>
+          <span class="krv-route-go">Диагностика или ремонт →</span>
         </a>
 
         <a class="krv-route-card" href="https://direct.krivoshein.site/" target="_blank" rel="noopener noreferrer">
@@ -199,52 +198,24 @@ function krv_price_list_render(): string {
           <span class="krv-route-go">Лендинг ботов MAX ↗</span>
         </a>
       </div>
-    </section>
-    <section class="krv-section" id="krv-landings">
-      <div class="krv-section-head">
-        <h2>Лендинги по направлениям</h2>
-        <p>Отдельные страницы с подробностями, примерами и форматом работы. Открываются в новой вкладке — прайс остаётся здесь.</p>
-      </div>
 
-      <div class="krv-landing-grid">
-        <a class="krv-landing-card" href="https://wordpress.krivoshein.site/" target="_blank" rel="noopener noreferrer">
-          <span class="krv-landing-domain">wordpress.krivoshein.site</span>
-          <span class="krv-route-title">WordPress: сайты и поддержка</span>
-          <span class="krv-route-text">Новые проекты, доработки, ускорение, формы, плагины и техническое сопровождение.</span>
-          <span class="krv-landing-open">Открыть лендинг ↗</span>
-        </a>
-
-        <a class="krv-landing-card" href="https://vps.krivoshein.site/" target="_blank" rel="noopener noreferrer">
-          <span class="krv-landing-domain">vps.krivoshein.site</span>
-          <span class="krv-route-title">VPS и серверы под ключ</span>
-          <span class="krv-route-text">Nginx, SSL, Docker, Redis, перенос WordPress и базовая безопасность.</span>
-          <span class="krv-landing-open">Открыть лендинг ↗</span>
-        </a>
-
-        <a class="krv-landing-card" href="https://direct.krivoshein.site/" target="_blank" rel="noopener noreferrer">
-          <span class="krv-landing-domain">direct.krivoshein.site</span>
-          <span class="krv-route-title">Яндекс Директ</span>
-          <span class="krv-route-text">Аудит, запуск, ведение и связка рекламы с сайтом, Метрикой и заявками.</span>
-          <span class="krv-landing-open">Открыть лендинг ↗</span>
-        </a>
-
-        <a class="krv-landing-card" href="https://bots.krivoshein.site/" target="_blank" rel="noopener noreferrer">
-          <span class="krv-landing-domain">bots.krivoshein.site</span>
-          <span class="krv-route-title">Боты MAX и автоматизация</span>
-          <span class="krv-route-text">Сценарии заявок, уведомления, интеграции с сайтом и таблицами.</span>
-          <span class="krv-landing-open">Открыть лендинг ↗</span>
-        </a>
+      <div class="krv-landings-strip">
+        <span class="krv-landings-strip-label">Подробнее по направлениям:</span>
+        <a href="https://wordpress.krivoshein.site/" target="_blank" rel="noopener noreferrer">wordpress</a>
+        <a href="https://vps.krivoshein.site/" target="_blank" rel="noopener noreferrer">vps</a>
+        <a href="https://direct.krivoshein.site/" target="_blank" rel="noopener noreferrer">direct</a>
+        <a href="https://bots.krivoshein.site/" target="_blank" rel="noopener noreferrer">bots</a>
       </div>
     </section>
 
-    <section class="krv-section" id="krv-prices">
+    <section class="krv-section" id="krv-packages">
       <div class="krv-section-head">
         <h2>Популярные форматы</h2>
         <p>Это ориентиры, чтобы сразу понимать порядок бюджета. Финальная смета зависит от реальной задачи.</p>
       </div>
 
       <div class="krv-package-grid">
-        <div class="krv-package" id="krv-package-diagnostic">
+        <div class="krv-package krv-package-accent" id="krv-package-diagnostic">
           <div class="krv-kicker">Быстрый старт</div>
           <h3 class="krv-card-title">Диагностика сайта</h3>
           <div class="krv-price">от 5 000 ₽</div>
@@ -259,7 +230,7 @@ function krv_price_list_render(): string {
           <a class="krv-btn krv-btn-primary krv-package-cta" href="{{KRV_CONTACTS_DIAGNOSTIC}}">Заказать диагностику</a>
         </div>
 
-        <div class="krv-package krv-package-accent">
+        <div class="krv-package">
           <div class="krv-kicker">Самый частый вариант</div>
           <h3 class="krv-card-title">Ремонт и доработка сайта</h3>
           <div class="krv-price">от 10 000 ₽</div>
@@ -271,9 +242,10 @@ function krv_price_list_render(): string {
             <li>ускорение WordPress</li>
             <li>настройка форм и аналитики</li>
           </ul>
+          <a class="krv-btn krv-btn-secondary krv-package-cta" href="{{KRV_CONTACTS_REPAIR}}">Обсудить ремонт</a>
         </div>
 
-        <div class="krv-package">
+        <div class="krv-package" id="krv-package-support">
           <div class="krv-kicker">Регулярно</div>
           <h3 class="krv-card-title">Техническая поддержка</h3>
           <div class="krv-price">от 20 000 ₽ / мес</div>
@@ -285,6 +257,7 @@ function krv_price_list_render(): string {
             <li>контроль ошибок</li>
             <li>консультации по развитию</li>
           </ul>
+          <a class="krv-btn krv-btn-secondary krv-package-cta" href="{{KRV_CONTACTS_SUPPORT}}">Запросить поддержку</a>
         </div>
       </div>
     </section>
@@ -292,10 +265,20 @@ function krv_price_list_render(): string {
     <section class="krv-section" id="krv-prices">
       <div class="krv-section-head">
         <h2>Услуги и цены</h2>
-        <p>Основные направления разложены в две ровные колонки, чтобы страница не превращалась в лестницу из блоков разной длины.</p>
+        <p>Выберите направление — так проще смотреть детали без бесконечного скролла.</p>
       </div>
 
-      <div class="krv-service-grid">
+      <div class="krv-prices-tabs" role="tablist" aria-label="Категории услуг">
+        <button type="button" class="krv-prices-tab is-active" role="tab" id="krv-tab-sites" aria-selected="true" aria-controls="krv-panel-sites" tabindex="0">Сайты</button>
+        <button type="button" class="krv-prices-tab" role="tab" id="krv-tab-bots" aria-selected="false" aria-controls="krv-panel-bots" tabindex="-1">Боты</button>
+        <button type="button" class="krv-prices-tab" role="tab" id="krv-tab-tech" aria-selected="false" aria-controls="krv-panel-tech" tabindex="-1">Техника</button>
+        <button type="button" class="krv-prices-tab" role="tab" id="krv-tab-ads" aria-selected="false" aria-controls="krv-panel-ads" tabindex="-1">Реклама</button>
+        <button type="button" class="krv-prices-tab" role="tab" id="krv-tab-support" aria-selected="false" aria-controls="krv-panel-support" tabindex="-1">Поддержка</button>
+        <button type="button" class="krv-prices-tab" role="tab" id="krv-tab-legal" aria-selected="false" aria-controls="krv-panel-legal" tabindex="-1">Формы</button>
+      </div>
+
+      <div class="krv-prices-panels">
+        <div class="krv-prices-panel is-active" role="tabpanel" id="krv-panel-sites" aria-labelledby="krv-tab-sites">
         <div class="krv-service-card">
           <h2>Разработка сайтов</h2>
           <a class="krv-service-cta" href="https://wordpress.krivoshein.site/" target="_blank" rel="noopener noreferrer">Лендинг wordpress.krivoshein.site ↗</a>
@@ -329,7 +312,9 @@ function krv_price_list_render(): string {
             </div>
           </div>
         </div>
+        </div>
 
+        <div class="krv-prices-panel" role="tabpanel" id="krv-panel-bots" aria-labelledby="krv-tab-bots" hidden>
         <div class="krv-service-card">
           <h2>Боты и автоматизация заявок</h2>
           <p class="krv-text">Бот не заменяет сайт, но хорошо закрывает рутину: принять обращение, спросить имя, телефон, услугу, город и передать данные владельцу.</p>
@@ -362,7 +347,9 @@ function krv_price_list_render(): string {
             <a class="krv-service-cta" href="https://bots.krivoshein.site/" target="_blank" rel="noopener noreferrer">Лендинг ботов MAX ↗</a>
           </div>
         </div>
+        </div>
 
+        <div class="krv-prices-panel" role="tabpanel" id="krv-panel-tech" aria-labelledby="krv-tab-tech" hidden>
         <div class="krv-service-card">
           <h2>Отдельные технические услуги</h2>
           <div class="krv-service-list">
@@ -398,7 +385,9 @@ function krv_price_list_render(): string {
             </div>
           </div>
         </div>
+        </div>
 
+        <div class="krv-prices-panel" role="tabpanel" id="krv-panel-ads" aria-labelledby="krv-tab-ads" hidden>
         <div class="krv-service-card">
           <h2>Яндекс Директ и реклама</h2>
           <a class="krv-service-cta" href="https://direct.krivoshein.site/" target="_blank" rel="noopener noreferrer">Лендинг direct.krivoshein.site ↗</a>
@@ -432,8 +421,10 @@ function krv_price_list_render(): string {
             </div>
           </div>
         </div>
+        </div>
 
-        <div class="krv-service-card">
+        <div class="krv-prices-panel" role="tabpanel" id="krv-panel-support" aria-labelledby="krv-tab-support" hidden>
+        <div class="krv-service-card" id="krv-support-detail">
           <h2>Консультации и поддержка</h2>
           <div class="krv-mini-list">
             <div class="krv-mini">
@@ -450,10 +441,12 @@ function krv_price_list_render(): string {
           </div>
 
           <div class="krv-note">
-            Поддержка подходит проектам, которым нужен регулярный контроль. Крупные отдельные задачи считаются отдельно.
+            Тот же формат, что в пакете <a href="#krv-package-support">техподдержки от 20 000 ₽/мес</a>. Крупные отдельные задачи считаются отдельно.
           </div>
         </div>
+        </div>
 
+        <div class="krv-prices-panel" role="tabpanel" id="krv-panel-legal" aria-labelledby="krv-tab-legal" hidden>
         <div class="krv-service-card">
           <h2>Формы, персональные данные и cookies</h2>
           <div class="krv-mini">
@@ -474,62 +467,29 @@ function krv_price_list_render(): string {
             Это техническая и документная подготовка сайта. Отдельная юридическая экспертиза под конкретный бизнес при необходимости считается отдельно.
           </div>
         </div>
+        </div>
       </div>
     </section>
 
     <section class="krv-section">
-      <div class="krv-info-grid">
-        <div class="krv-info-card">
-          <h2>Что обычно входит в работу</h2>
-          <div class="krv-stack">
-            <span>WordPress</span>
-            <span>Адаптивность</span>
-            <span>Формы</span>
-            <span>SSL</span>
-            <span>Метрика</span>
-            <span>Цели</span>
-            <span>Настройка плагинов</span>
-            <span>Базовая SEO</span>
-            <span>Технический запуск</span>
-            <span>Базовая безопасность</span>
-            <span>Резервные копии</span>
-            <span>Техподдержка</span>
-          </div>
-        </div>
-
-        <div class="krv-info-card">
-          <h2>Как удобнее начать</h2>
-          <div class="krv-links">
-            <a class="krv-link-card" href="https://wordpress.krivoshein.site/" target="_blank" rel="noopener noreferrer">
-              <span class="krv-link-title">Нужен новый сайт</span>
-              <span class="krv-link-meta">Лендинг WordPress: форматы, сроки и что входит в работу. ↗</span>
-            </a>
-
-            <a class="krv-link-card" href="https://wordpress.krivoshein.site/" target="_blank" rel="noopener noreferrer">
-              <span class="krv-link-title">Есть текущий сайт</span>
-              <span class="krv-link-meta">Доработка, диагностика, ускорение и поддержка WordPress. ↗</span>
-            </a>
-
-            <a class="krv-link-card" href="https://vps.krivoshein.site/" target="_blank" rel="noopener noreferrer">
-              <span class="krv-link-title">Нужен сервер или перенос</span>
-              <span class="krv-link-meta">VPS, Nginx, SSL, Docker, Redis и настройка под WordPress. ↗</span>
-            </a>
-
-            <a class="krv-link-card" href="https://direct.krivoshein.site/" target="_blank" rel="noopener noreferrer">
-              <span class="krv-link-title">Нужна реклама</span>
-              <span class="krv-link-meta">Яндекс Директ: аудит, запуск и связка с сайтом. ↗</span>
-            </a>
-
-            <a class="krv-link-card" href="https://bots.krivoshein.site/" target="_blank" rel="noopener noreferrer">
-              <span class="krv-link-title">Нужен бот или автоматизация</span>
-              <span class="krv-link-meta">MAX-боты, сценарии заявок и интеграции. ↗</span>
-            </a>
-
-            <a class="krv-link-card" href="{{KRV_CONTACTS_LINK}}">
-              <span class="krv-link-title">Сразу обсудить задачу</span>
-              <span class="krv-link-meta">Контакты, короткий бриф и первый шаг по смете.</span>
-            </a>
-          </div>
+      <div class="krv-info-card krv-info-card-wide">
+        <h2>Что обычно входит в работу</h2>
+        <div class="krv-stack">
+          <span>WordPress</span>
+          <span>Linux</span>
+          <span>Nginx</span>
+          <span>Docker</span>
+          <span>Redis</span>
+          <span>VPS</span>
+          <span>Адаптивность</span>
+          <span>Формы</span>
+          <span>SSL</span>
+          <span>Метрика</span>
+          <span>Яндекс Директ</span>
+          <span>SEO</span>
+          <span>MAX-боты</span>
+          <span>Cookies</span>
+          <span>Техподдержка</span>
         </div>
       </div>
     </section>
@@ -573,25 +533,25 @@ function krv_price_list_render(): string {
       </div>
 
       <div class="krv-faq">
-        <div class="krv-faq-item">
-          <h3>Можно ли просто посмотреть сайт и сказать, что с ним не так?</h3>
+        <details class="krv-faq-item">
+          <summary>Можно ли просто посмотреть сайт и сказать, что с ним не так?</summary>
           <p>Да. Для этого подходит диагностика или консультация. Часто после нее становится понятно, нужен ли новый сайт или достаточно привести в порядок текущий.</p>
-        </div>
+        </details>
 
-        <div class="krv-faq-item">
-          <h3>Вы берете маленькие задачи?</h3>
+        <details class="krv-faq-item">
+          <summary>Вы берете маленькие задачи?</summary>
           <p>Да, если задача понятная и ее можно нормально оценить. Например, исправить форму, настроить SSL, поправить блок, проверить Метрику или починить ошибку WordPress.</p>
-        </div>
+        </details>
 
-        <div class="krv-faq-item">
-          <h3>Можно ли заказать только рекламу?</h3>
+        <details class="krv-faq-item">
+          <summary>Можно ли заказать только рекламу?</summary>
           <p>Можно. Но если сайт технически слабый, реклама может просто сжигать бюджет. Поэтому перед запуском лучше проверить сайт, формы и цели.</p>
-        </div>
+        </details>
 
-        <div class="krv-faq-item">
-          <h3>Бот для MAX или Telegram можно связать с сайтом?</h3>
+        <details class="krv-faq-item">
+          <summary>Бот для MAX или Telegram можно связать с сайтом?</summary>
           <p>Да. Можно сделать сбор заявок, уведомления владельцу, запись данных в таблицу, базу или передачу в другую систему.</p>
-        </div>
+        </details>
       </div>
     </section>
 
@@ -606,13 +566,19 @@ function krv_price_list_render(): string {
     </section>
 
     <div class="krv-small">
-      Цены на странице указаны как стартовый антикризисный ориентир. Простые задачи с понятным объемом считаются от указанной суммы. Если проект требует сложной логики, интеграций, срочности, длительной отладки или большого количества правок, стоимость считается отдельно.
+      {{KRV_DISCLAIMER}}
+    </div>
+
+    <div class="krv-mobile-cta" aria-label="Быстрые действия">
+      <a class="krv-btn krv-btn-primary" href="{{KRV_CONTACTS_DIAGNOSTIC}}">Диагностика</a>
+      <a class="krv-btn" href="{{KRV_TG_CHAT}}" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <a class="krv-btn" href="{{KRV_MAX_CHAT}}" target="_blank" rel="noopener noreferrer">MAX</a>
     </div>
   </div>
 </div>
 KRV_PRICE_LIST_HTML;
 
-	return krv_price_list_finalize_html( $html );
+	return krv_price_list_finalize_html( $html, $settings );
 }
 
 add_shortcode( 'krv_price_list', function () {

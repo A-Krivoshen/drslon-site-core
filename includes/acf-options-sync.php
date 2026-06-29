@@ -78,8 +78,8 @@ function krv_acf_page_editor_hints(): array {
 			'slug'  => 'krv-partners',
 		),
 		9772 => array(
-			'label' => 'Прайс-лист (файл плагина)',
-			'slug'  => '',
+			'label' => 'Прайс-лист',
+			'slug'  => 'krv-price-list',
 		),
 	);
 
@@ -181,6 +181,7 @@ add_action(
 			'krv-services-showcase' => 'страница Сервисы',
 			'krv-service-pages'     => 'инструменты (DNS, speed test и др.)',
 			'krv-partners'          => 'страница Партнёры',
+			'krv-price-list'        => 'страница Прайс-лист',
 		);
 
 		if ( ! isset( $labels[ $plugin_page ] ) ) {
