@@ -134,14 +134,16 @@ function krv_service_page_register_acf(): void {
 	}
 
 	acf_add_options_page(
-		array(
-			'page_title' => 'Сервисные страницы',
-			'menu_title' => 'Сервисные страницы',
-			'menu_slug'  => krv_service_page_option_id(),
-			'capability' => 'edit_theme_options',
-			'redirect'   => false,
-			'position'   => 63,
-			'icon_url'   => 'dashicons-admin-tools',
+		krv_acf_options_page_args(
+			krv_service_page_option_id(),
+			array(
+				'page_title' => 'Сервисные страницы',
+				'menu_title' => 'Сервисные страницы',
+				'capability' => 'edit_theme_options',
+				'redirect'   => false,
+				'position'   => 63,
+				'icon_url'   => 'dashicons-admin-tools',
+			)
 		)
 	);
 

@@ -53,7 +53,11 @@ function krv_services_showcase_get_sections(): array {
 		return [];
 	}
 
-	$sections = get_field( 'krv_services_sections', 'option' );
+	$sections = get_field( 'krv_services_sections', 'krv-services-showcase' );
+
+	if ( empty( $sections ) || ! is_array( $sections ) ) {
+		$sections = get_field( 'krv_services_sections', 'option' );
+	}
 
 	if ( empty( $sections ) || ! is_array( $sections ) ) {
 		return [];

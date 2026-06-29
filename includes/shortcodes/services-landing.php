@@ -296,14 +296,16 @@ function krv_services_landing_register_acf(): void {
 	}
 
 	acf_add_options_page(
-		array(
-			'page_title' => 'Лендинг услуг',
-			'menu_title' => 'Лендинг услуг',
-			'menu_slug'  => krv_services_landing_option_id(),
-			'capability' => 'edit_theme_options',
-			'redirect'   => false,
-			'position'   => 62,
-			'icon_url'   => 'dashicons-id-alt',
+		krv_acf_options_page_args(
+			krv_services_landing_option_id(),
+			array(
+				'page_title' => 'Лендинг услуг',
+				'menu_title' => 'Лендинг услуг',
+				'capability' => 'edit_theme_options',
+				'redirect'   => false,
+				'position'   => 62,
+				'icon_url'   => 'dashicons-id-alt',
+			)
 		)
 	);
 
@@ -343,12 +345,11 @@ function krv_services_landing_register_acf(): void {
 			'title'  => 'Лендинг услуг',
 			'fields' => array(
 				array(
-					'key'           => 'field_krv_sl_profile_avatar',
-					'label'         => 'Аватар',
-					'name'          => 'profile_avatar',
-					'type'          => 'image',
-					'return_format' => 'url',
-					'preview_size'  => 'thumbnail',
+					'key'          => 'field_krv_sl_profile_avatar',
+					'label'        => 'Аватар (URL)',
+					'name'         => 'profile_avatar',
+					'type'         => 'url',
+					'instructions' => 'Прямая ссылка на изображение, например из Медиатеки.',
 				),
 				array(
 					'key'   => 'field_krv_sl_profile_name',

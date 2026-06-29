@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DrSlon Site Core
  * Description: Compatibility layer for krivoshein.site legacy CPT, ACF fields and shortcodes moved out of the old Arkai child theme.
- * Version: 0.2.4
+ * Version: 0.2.5
  * Author: Алексей Кривошеин
  * Text Domain: drslon-site-core
  */
@@ -11,10 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'DRSLON_SITE_CORE_VERSION', '0.2.4' );
+define( 'DRSLON_SITE_CORE_VERSION', '0.2.5' );
 define( 'DRSLON_SITE_CORE_DIR', plugin_dir_path( __FILE__ ) );
 
+require_once DRSLON_SITE_CORE_DIR . 'includes/acf-options-sync.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/service-page-registry.php';
+require_once DRSLON_SITE_CORE_DIR . 'includes/helpers/shortcode-resolve.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/assets-loader.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/cache-purge-bridge.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/telegram-comments-proxy.php';

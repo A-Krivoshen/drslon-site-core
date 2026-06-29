@@ -192,15 +192,19 @@ add_action( 'acf/init', function () {
 	] );
 
 	if ( function_exists( 'acf_add_options_page' ) ) {
-		acf_add_options_page( [
-			'page_title' => 'Витрина сервисов',
-			'menu_title' => 'Витрина сервисов',
-			'menu_slug'  => 'krv-services-showcase',
-			'capability' => 'edit_theme_options',
-			'redirect'   => false,
-			'position'   => 61,
-			'icon_url'   => 'dashicons-screenoptions',
-		] );
+		acf_add_options_page(
+			krv_acf_options_page_args(
+				'krv-services-showcase',
+				[
+					'page_title' => 'Витрина сервисов',
+					'menu_title' => 'Витрина сервисов',
+					'capability' => 'edit_theme_options',
+					'redirect'   => false,
+					'position'   => 61,
+					'icon_url'   => 'dashicons-screenoptions',
+				]
+			)
+		);
 
 		acf_add_local_field_group( [
 			'key'    => 'group_krv_services_pages_showcase',
@@ -252,15 +256,19 @@ add_action( 'acf/init', function () {
 			],
 		] );
 
-		acf_add_options_page( [
-			'page_title' => 'Партнёры — настройки',
-			'menu_title' => 'Партнёры',
-			'menu_slug'  => 'krv-partners',
-			'capability' => 'edit_theme_options',
-			'redirect'   => false,
-			'position'   => 62,
-			'icon_url'   => 'dashicons-groups',
-		] );
+		acf_add_options_page(
+			krv_acf_options_page_args(
+				'krv-partners',
+				[
+					'page_title' => 'Партнёры — настройки',
+					'menu_title' => 'Партнёры',
+					'capability' => 'edit_theme_options',
+					'redirect'   => false,
+					'position'   => 64,
+					'icon_url'   => 'dashicons-groups',
+				]
+			)
+		);
 
 		acf_add_local_field_group( [
 			'key'    => 'group_krv_partners_options',
@@ -324,4 +332,5 @@ function krv_services_showcase_seed_intro_heading(): void {
 
 add_action( 'acf/init', 'krv_services_showcase_seed_intro_heading', 25 );
 
+// ACF field groups are registered in PHP; hide the Field Groups UI to reduce clutter.
 add_filter( 'acf/settings/show_admin', '__return_false' );
