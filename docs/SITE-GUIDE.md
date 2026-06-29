@@ -1,7 +1,7 @@
 # krivoshein.site — шпаргалка по устройству сайта
 
 > Для себя: «где что лежит, как править, что не ломать».  
-> Актуально на **июнь 2026**, плагин **drslon-site-core v0.3.0**.
+> Актуально на **июнь 2026**, плагин **drslon-site-core v0.3.1**, тема **v0.3.0**.
 
 ---
 
@@ -39,10 +39,12 @@
 
 | | |
 |--|--|
-| **Активная тема** | `drslon-blog-theme` (v0.2.0) |
+| **Активная тема** | `drslon-blog-theme` (v0.3.0) |
 | **Путь на сервере** | `/wp-content/themes/drslon-blog-theme/` |
 | **Git** | `git@github.com:A-Krivoshen/drslon-blog-theme.git` → `main` |
-| **Последний коммит** | `85600ab` — sticky header, логотип sign.png |
+| **UX-аудит темы** | `docs/UX-THEME-AUDIT.md` в репо темы |
+| **CSS** | `assets/css/components/01–07-*.css` (не один монолит) |
+| **Шорткоды блога** | в плагине: `includes/shortcodes/blog-shortcodes.php` (v0.3.1) |
 
 Статус: **всё уже запушено**, незакоммиченных изменений нет.
 
@@ -52,7 +54,7 @@
 |--------|----------------|
 | Шапка сайта | `parts/header.html` |
 | Подвал | `parts/footer.html` |
-| Стили блога, карточек, архива | `style.css` (карта: `docs/style-css-map.md`) |
+| Стили блога, карточек, архива | `assets/css/components/*.css` (карта: `docs/style-css-map.md`) |
 | Sticky header | `assets/js/sticky-header.js`, `functions.php` |
 | Шаблон записи / главной | `templates/single.html`, `templates/home.html` |
 | Паттерн контактов | `patterns/page-contacts-section.php` |
@@ -70,7 +72,7 @@ git add -A && git commit -m "описание" && git push origin main
 ### Что НЕ в теме
 
 - Прайс, лендинг услуг, инструменты — это **плагин** (см. разделы ниже).
-- В `inc/legacy-shortcodes.php` — старые шорткоды; новые живут в плагине.
+- `inc/legacy-shortcodes.php` — bridge к `blog-shortcodes.php` в плагине.
 
 ---
 
