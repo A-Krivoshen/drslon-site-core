@@ -13,7 +13,6 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 
 	$plugin_file = DRSLON_SITE_CORE_DIR . 'drslon-site-core.php';
-	$version     = DRSLON_SITE_CORE_VERSION;
 
 	$styles = [
 		'drslon-services-landing' => [
@@ -68,7 +67,14 @@ add_action( 'wp_enqueue_scripts', function () {
 			continue;
 		}
 
-		$url = plugins_url( $config['file'], $plugin_file );
+		$path = DRSLON_SITE_CORE_DIR . $config['file'];
+
+		if ( ! file_exists( $path ) ) {
+			continue;
+		}
+
+		$url     = plugins_url( $config['file'], $plugin_file );
+		$version = (string) filemtime( $path );
 
 		if ( $meta['type'] === 'script' ) {
 			wp_enqueue_script( $handle, $url, [], $version, true );
