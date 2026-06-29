@@ -72,6 +72,7 @@ function krv_price_list_finalize_html( string $html, array $settings = array() )
 		'{{KRV_CONTACTS_CTA}}'        => esc_url( krv_price_list_contacts_url( 'cta-bottom' ) ),
 		'{{KRV_CONTACTS_LINK}}'       => esc_url( krv_price_list_contacts_url( 'link-block' ) ),
 		'{{KRV_MAX_CHAT}}'            => esc_url( home_url( '/max' ) ),
+		'{{KRV_MAX_ICON}}'            => function_exists( 'krv_max_messenger_icon_svg' ) ? krv_max_messenger_icon_svg( 'krv-max-icon' ) : '',
 		'{{KRV_TG_CHAT}}'             => esc_url( krv_price_list_utm_url( 'https://t.me/DrSlon', 'telegram-chat' ) ),
 	);
 
@@ -125,7 +126,7 @@ function krv_price_list_render(): string {
           <div class="krv-actions">
             <a class="krv-btn krv-btn-primary" href="{{KRV_CONTACTS_GENERAL}}">Обсудить задачу</a>
             <a class="krv-btn" href="{{KRV_TG_CHAT}}" target="_blank" rel="noopener noreferrer">Telegram</a>
-            <a class="krv-btn" href="{{KRV_MAX_CHAT}}" target="_blank" rel="noopener noreferrer">MAX</a>
+            <a class="krv-btn krv-btn-max" href="{{KRV_MAX_CHAT}}" target="_blank" rel="noopener noreferrer">{{KRV_MAX_ICON}}<span>MAX</span></a>
           </div>
 
           <div class="krv-contacts">
@@ -143,7 +144,7 @@ function krv_price_list_render(): string {
             <span class="krv-hero-panel-quick-label">Бесплатно уточнить задачу</span>
             <div class="krv-hero-messengers">
               <a class="krv-btn krv-btn-messenger" href="{{KRV_TG_CHAT}}" target="_blank" rel="noopener noreferrer">Telegram</a>
-              <a class="krv-btn krv-btn-messenger" href="{{KRV_MAX_CHAT}}" target="_blank" rel="noopener noreferrer">MAX</a>
+              <a class="krv-btn krv-btn-messenger krv-btn-max" href="{{KRV_MAX_CHAT}}" target="_blank" rel="noopener noreferrer">{{KRV_MAX_ICON}}<span>MAX</span></a>
             </div>
           </div>
 
@@ -572,7 +573,7 @@ function krv_price_list_render(): string {
     <div class="krv-mobile-cta" aria-label="Быстрые действия">
       <a class="krv-btn krv-btn-primary" href="{{KRV_CONTACTS_DIAGNOSTIC}}">Диагностика</a>
       <a class="krv-btn" href="{{KRV_TG_CHAT}}" target="_blank" rel="noopener noreferrer">Telegram</a>
-      <a class="krv-btn" href="{{KRV_MAX_CHAT}}" target="_blank" rel="noopener noreferrer">MAX</a>
+      <a class="krv-btn krv-btn-max" href="{{KRV_MAX_CHAT}}" target="_blank" rel="noopener noreferrer">{{KRV_MAX_ICON}}<span>MAX</span></a>
     </div>
   </div>
 </div>
