@@ -744,11 +744,25 @@
   line-height: 1.7;
 }
 
-.krv-cta .krv-btn {
+.krv-cta .krv-btn,
+.krv-cta .krv-btn:visited {
   background: #fff;
   border-color: #fff;
-  color: var(--krv-accent-dark);
+  color: var(--krv-accent-dark) !important;
   white-space: nowrap;
+}
+
+.krv-cta .krv-btn:hover,
+.krv-cta .krv-btn:focus-visible {
+  background: var(--krv-accent-soft);
+  border-color: var(--krv-accent-soft);
+  color: var(--krv-accent-dark) !important;
+}
+
+.krv-cta .krv-btn:active {
+  background: var(--krv-accent-soft);
+  border-color: var(--krv-accent-soft);
+  color: var(--krv-accent-dark) !important;
 }
 
 .krv-small {

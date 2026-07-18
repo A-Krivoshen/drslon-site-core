@@ -12,7 +12,7 @@ This plugin stores functionality that should not live inside the WordPress theme
 
 ## Current status
 
-Version 0.3.6 — modular site-core with ACF-managed service and price pages.
+Version 0.3.7 — modular site-core with ACF-managed service and price pages.
 
 `includes/legacy-arkai-child-functions.php` is now a slim bootstrap (helpers, TSF SEO, RSYA/Telegram hooks) that loads:
 
