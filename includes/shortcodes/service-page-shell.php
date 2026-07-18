@@ -390,12 +390,12 @@ function krv_service_page_build_inner_shortcode( array $data ): string {
  * Render Yandex RSYA recommendation block markup.
  */
 function krv_service_page_render_rsya_block(): void {
-	if ( ! defined( 'KRV_RSYA_RECO_RENDER_TO' ) || ! defined( 'KRV_RSYA_RECO_BLOCK_ID' ) ) {
+	if ( ! function_exists( 'krv_rsya_reco_enabled' ) || ! krv_rsya_reco_enabled() ) {
 		return;
 	}
 
-	$render_to = KRV_RSYA_RECO_RENDER_TO;
-	$block_id  = KRV_RSYA_RECO_BLOCK_ID;
+	$render_to = krv_rsya_reco_render_to();
+	$block_id  = krv_rsya_reco_block_id();
 	?>
 	<div class="krv-service-page__rsya">
 		<div id="<?php echo esc_attr( $render_to ); ?>" class="krv-service-page__rsya-slot"></div>
