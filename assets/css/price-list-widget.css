@@ -338,7 +338,7 @@
 
 .krv-route-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -406,6 +406,15 @@
 .krv-package {
   min-height: 100%;
   padding: 22px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.krv-package:hover,
+.krv-service-item:hover,
+.krv-mini:hover {
+  transform: translateY(-1px);
+  border-color: #c7d7ff;
+  box-shadow: var(--krv-shadow-soft);
 }
 
 .krv-package-accent {
@@ -499,6 +508,7 @@
   border: 1px solid var(--krv-line);
   border-radius: 16px;
   background: var(--krv-soft);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .krv-service-item-clean {
@@ -534,6 +544,10 @@
   border-radius: 16px;
   background: #f8fafc;
   border: 1px solid var(--krv-line);
+}
+
+.krv-mini {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .krv-link-card {
@@ -844,9 +858,18 @@
 .krv-route-card:focus-visible,
 .krv-link-card:focus-visible,
 .krv-landing-card:focus-visible,
-.krv-btn:focus-visible {
+.krv-btn:focus-visible,
+.krv-prices-tab:focus-visible,
+.krv-service-cta:focus-visible {
   outline: 3px solid rgba(81, 129, 254, 0.38);
   outline-offset: 2px;
+}
+
+.krv-btn:active,
+.krv-route-card:active,
+.krv-prices-tab:active,
+.krv-service-cta:active {
+  transform: translateY(1px);
 }
 
 .krv-route-go,
@@ -912,6 +935,10 @@
 
 .krv-service-cta:hover {
   text-decoration: underline;
+}
+
+.krv-tab-intro {
+  margin: 0 0 14px;
 }
 
 .krv-trust-strip {
@@ -1124,6 +1151,9 @@
   .krv-route-card:hover,
   .krv-landing-card:hover,
   .krv-link-card:hover,
+  .krv-package:hover,
+  .krv-service-item:hover,
+  .krv-mini:hover,
   .krv-btn:hover,
   .krv-contacts a:hover,
   .krv-anchor-nav a:hover {
