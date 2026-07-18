@@ -13,10 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  *  ========================= */
 define( 'KRV_TG_DISCUSSION', 'drslon_channel' );
 
-define( 'KRV_RSYA_RECO_BLOCK_ID', 'C-A-9861013-1' );
-define( 'KRV_RSYA_RECO_RENDER_TO', 'yandex_rtb_C-A-9861013-1' );
-
-define( 'KRV_RSYA_INIMAGE_BLOCK_ID', 'R-A-6903522-2' );
+/*
+ * RSYA constants and on/off options live in includes/ads-settings.php
+ * (Настройки → Реклама РСЯ). Use the krv_rsya_*() getters below.
+ */
 
 /** =========================
  *  HELPERS
@@ -126,7 +126,7 @@ add_action( 'wp_head', function () {
  *  2) RSYA metatags
  *  ========================= */
 add_action( 'wp_head', function () {
-	if ( ! krv_is_single_content() ) {
+	if ( ! krv_rsya_reco_enabled() || ! krv_is_single_content() ) {
 		return;
 	}
 
@@ -431,7 +431,7 @@ if ( function_exists( 'tsf' ) ) {
 		return $new !== '' ? $new : $description;
 	}, 10, 2 );
 
-	add_filter( 'the_seo_framework_robots_meta_array', function( $meta, $args, $options ) {
+	add_filter( 'the_seo_framework_robots_meta_array', function( $meta, $args, $options = null ) {
 		$taxonomy = null === $args ? tsf()->query()->get_current_taxonomy() : ( $args['taxonomy'] ?? null );
 
 		if ( 'post_tag' === $taxonomy ) {
@@ -464,9 +464,11 @@ function krv_render_post_extras(): void {
 			<?php krv_render_telegram_discussion_widget(); ?>
 		</div>
 
-		<div class="krv-rsya-reco" style="clear:both;display:block;width:100%;margin-top:24px;">
-			<div id="<?php echo esc_attr( KRV_RSYA_RECO_RENDER_TO ); ?>"></div>
-		</div>
+		<?php if ( krv_rsya_reco_enabled() ) : ?>
+			<div class="krv-rsya-reco" style="clear:both;display:block;width:100%;margin-top:24px;">
+				<div id="<?php echo esc_attr( krv_rsya_reco_render_to() ); ?>"></div>
+			</div>
+		<?php endif; ?>
 	</div>
 	<?php
 }
@@ -475,19 +477,19 @@ function krv_render_post_extras(): void {
  *  4) Render RSYA recommendations
  *  ========================= */
 add_action( 'wp_footer', function () {
-	if ( ! krv_is_single_content() ) {
+	if ( ! krv_rsya_reco_enabled() || ! krv_is_single_content() ) {
 		return;
 	}
 	?>
 	<style>
-		#<?php echo esc_html( KRV_RSYA_RECO_RENDER_TO ); ?> {
+		#<?php echo esc_html( krv_rsya_reco_render_to() ); ?> {
 			min-height: 320px;
 		}
 	</style>
 	<script>
 	(function () {
-		var renderTo = <?php echo wp_json_encode( KRV_RSYA_RECO_RENDER_TO ); ?>;
-		var blockId  = <?php echo wp_json_encode( KRV_RSYA_RECO_BLOCK_ID ); ?>;
+		var renderTo = <?php echo wp_json_encode( krv_rsya_reco_render_to() ); ?>;
+		var blockId  = <?php echo wp_json_encode( krv_rsya_reco_block_id() ); ?>;
 
 		var el = document.getElementById(renderTo);
 		if (!el) return;
@@ -531,14 +533,14 @@ add_action( 'wp_footer', function () {
  *  5) RSYA InImage
  *  ========================= */
 add_action( 'wp_footer', function () {
-	if ( ! krv_is_single_content() ) {
+	if ( ! krv_rsya_inimage_enabled() || ! krv_is_single_content() ) {
 		return;
 	}
 	?>
 	<script>
 	(function () {
 		window.yaContextCb = window.yaContextCb || [];
-		var blockId = <?php echo wp_json_encode( KRV_RSYA_INIMAGE_BLOCK_ID ); ?>;
+		var blockId = <?php echo wp_json_encode( krv_rsya_inimage_block_id() ); ?>;
 
 		function waitYa(maxMs, cb) {
 			var t0 = Date.now();
@@ -622,7 +624,13 @@ add_action( 'wp_footer', function () {
 add_filter( 'unzip_file_use_ziparchive', '__return_false' );
 add_filter( 'auto_update_theme', '__return_false' );
 
-/** Views counter */
+/**
+ * Views counter.
+ *
+ * Old stack: arkaiSetPostViews() from the Arkai parent theme did the counting.
+ * New stack: we count here into the same 'arkai_post_views' meta key,
+ * which the drslon_post_views shortcode reads.
+ */
 add_action( 'wp_head', function () {
 	if ( ! ( is_singular( 'post' ) || is_singular( 'project' ) ) ) {
 		return;
@@ -631,35 +639,51 @@ add_action( 'wp_head', function () {
 	global $post;
 	$post_id = $post ? (int) $post->ID : 0;
 
-	if ( $post_id && function_exists( 'arkaiSetPostViews' ) ) {
-		arkaiSetPostViews( $post_id );
+	if ( ! $post_id ) {
+		return;
 	}
+
+	if ( function_exists( 'arkaiSetPostViews' ) ) {
+		arkaiSetPostViews( $post_id );
+		return;
+	}
+
+	$count = (int) get_post_meta( $post_id, 'arkai_post_views', true );
+	update_post_meta( $post_id, 'arkai_post_views', $count + 1 );
 } );
 
-/** Reading time */
-function arkaiReadingTime() {
-	global $post;
+/**
+ * Reading time (legacy name kept for template compatibility).
+ * Word count is Cyrillic-safe: str_word_count() does not count Russian words.
+ */
+if ( ! function_exists( 'arkaiReadingTime' ) ) {
+	function arkaiReadingTime() {
+		global $post;
 
-	if ( ! $post ) {
-		return '—';
+		if ( ! $post ) {
+			return '—';
+		}
+
+		$content = wp_strip_all_tags( (string) $post->post_content );
+		preg_match_all( '/[\p{L}\p{N}_-]+/u', $content, $matches );
+
+		$words   = ! empty( $matches[0] ) ? count( $matches[0] ) : 0;
+		$minutes = (int) floor( $words / 120 );
+
+		if ( $minutes < 1 ) {
+			$minutes = 1;
+		}
+
+		if ( $minutes === 1 ) {
+			return $minutes . ' минута чтения';
+		}
+
+		if ( $minutes >= 2 && $minutes <= 4 ) {
+			return $minutes . ' минуты чтения';
+		}
+
+		return $minutes . ' минут чтения';
 	}
-
-	$words   = str_word_count( strip_tags( $post->post_content ) );
-	$minutes = (int) floor( $words / 120 );
-
-	if ( $minutes < 1 ) {
-		$minutes = 1;
-	}
-
-	if ( $minutes === 1 ) {
-		return $minutes . ' минута чтения';
-	}
-
-	if ( $minutes >= 2 && $minutes <= 4 ) {
-		return $minutes . ' минуты чтения';
-	}
-
-	return $minutes . ' минут чтения';
 }
 
 /** Clean author slug "-2" */
@@ -683,7 +707,7 @@ add_action( 'profile_update', function ( $user_id ) {
 /** Telegram meta */
 add_action( 'wp_head', function () {
 	if ( is_singular( 'post' ) || is_singular( 'project' ) ) {
-		echo '<meta property="telegram:channel" content="@drslon_channel">' . "\n";
+		echo '<meta property="telegram:channel" content="@' . esc_attr( KRV_TG_DISCUSSION ) . '">' . "\n";
 	}
 }, 50 );
 
@@ -724,7 +748,11 @@ add_action( 'template_redirect', function () {
 		return;
 	}
 
-	$req = trim( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
+	$request_uri = isset( $_SERVER['REQUEST_URI'] )
+		? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) )
+		: '';
+
+	$req = trim( (string) parse_url( $request_uri, PHP_URL_PATH ), '/' );
 
 	if ( $req === 'kalkulyator-setevyh-masok-ip' ) {
 		wp_redirect( home_url( '/kalkulyator-setevyh-masok/' ), 301 );
@@ -734,9 +762,16 @@ add_action( 'template_redirect', function () {
 
 /** Translator in menu */
 add_filter( 'wp_nav_menu_items', function ( $items, $args ) {
-	if ( isset( $args->theme_location ) && $args->theme_location === 'headermenu' ) {
-		$items .= '<li class="menu-item">' . do_shortcode( '[translator-revolution]' ) . '</li>';
+	if ( ! isset( $args->theme_location ) || $args->theme_location !== 'headermenu' ) {
+		return $items;
 	}
+
+	if ( ! shortcode_exists( 'translator-revolution' ) ) {
+		return $items;
+	}
+
+	$items .= '<li class="menu-item">' . do_shortcode( '[translator-revolution]' ) . '</li>';
+
 	return $items;
 }, 10, 2 );
 
