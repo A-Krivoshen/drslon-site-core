@@ -103,7 +103,7 @@ add_action( 'save_post_project', function ( $post_id, $post = null, $update = fa
 add_action( 'wp_ajax_krv_search_posts', function () {
 	check_ajax_referer( 'krv_search_posts' );
 
-	$q = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
+	$q = isset( $_REQUEST['q'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['q'] ) ) : '';
 	if ( mb_strlen( $q ) < 2 ) {
 		wp_send_json_success( [] );
 	}
