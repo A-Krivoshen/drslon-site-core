@@ -23,7 +23,7 @@ add_action( 'init', function () {
 			'name'          => 'Проекты',
 			'singular_name' => 'Проект',
 			'menu_name'     => 'Проекты',
-			'supports'      => [ 'title', 'editor', 'thumbnail' ],
+			'supports'      => [ 'title', 'thumbnail' ],
 			'has_archive'   => 'project',
 		],
 		'usluga'  => [
@@ -60,7 +60,7 @@ add_action( 'init', function () {
 				'not_found'     => "Не найдено {$args['name']}",
 			],
 			'public'       => true,
-			'show_in_rest' => true,
+			'show_in_rest' => 'project' !== $slug,
 			'menu_icon'    => 'dashicons-admin-post',
 			'supports'     => $args['supports'],
 			'has_archive'  => $args['has_archive'] ?? false,
