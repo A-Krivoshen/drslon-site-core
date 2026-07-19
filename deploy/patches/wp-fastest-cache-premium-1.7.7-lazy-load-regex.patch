@@ -1,0 +1,14 @@
+diff --git a/pro/library/lazy-load.php b/pro/library/lazy-load.php
+--- a/pro/library/lazy-load.php
++++ b/pro/library/lazy-load.php
+@@ -351,8 +351,8 @@
+ 						continue;
+ 					}
+ 
+-					// don't to the replacement if the image appear in js
+-					if(!preg_match("/".preg_quote($img, "/")."/i", $inline_scripts)){
++					// Don't replace an image duplicated inside inline JavaScript.
++					if(false === stripos($inline_scripts, $img)){
+ 
+ 						// don't to the replacement if quote of src does not exist
+ 						if(!preg_match("/\ssrc\s*\=[\"\']/i", $img) && preg_match("/<img/i", $img)){

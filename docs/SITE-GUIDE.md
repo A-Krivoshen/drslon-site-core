@@ -1,7 +1,7 @@
 # krivoshein.site — шпаргалка по устройству сайта
 
 > Для себя: «где что лежит, как править, что не ломать».  
-> Актуально на **июль 2026**, плагин **drslon-site-core v0.4.1**, тема **v0.6.0**.
+> Актуально на **июль 2026**, плагин **drslon-site-core v0.4.2**, тема **v0.6.0**.
 
 ---
 
@@ -258,6 +258,27 @@ git push origin main
 
 Версия плагина: `drslon-site-core.php` → `Version:` и `DRSLON_SITE_CORE_VERSION`.
 
+### Проверка сторонних hotfix после обновлений
+
+Локальные исправления Zen Feed и WP Fastest Cache Premium хранятся в
+`deploy/patches/`. После обновления любого из этих плагинов сначала выполнить:
+
+```bash
+sudo -u www-data ./deploy/apply-third-party-hotfixes.sh --check \
+  --wordpress-root /var/www/krivoshein.site/htdocs
+```
+
+Если версии совпадают и скрипт сообщает, что патч отсутствует, применить его:
+
+```bash
+sudo -u www-data ./deploy/apply-third-party-hotfixes.sh --apply \
+  --wordpress-root /var/www/krivoshein.site/htdocs
+```
+
+При несовпадении версии ничего автоматически не менять: проверить новый код,
+обновить ожидаемую версию/патч в Git, затем снова выполнить `--check` и `--apply`.
+После применения очистить page cache и проверить feed, большую статью и PHP-лог.
+
 ---
 
 ## 11. История версий плагина (кратко)
@@ -276,6 +297,7 @@ git push origin main
 | 0.3.8 | Изолированный Telegram comments/media proxy |
 | **0.4.0** | Аудит SEO, кешей, ACF, доступности и cache-independent счётчик просмотров |
 | **0.4.1** | `/max` и `/max_drslon` ведут на единый канал MAX |
+| **0.4.2** | Версионированные и проверяемые патчи сторонних плагинов |
 
 ---
 
@@ -286,6 +308,9 @@ drslon-site-core-main/
 ├── drslon-site-core.php          # точка входа, версия
 ├── docs/
 │   └── SITE-GUIDE.md             # этот файл
+├── deploy/
+│   ├── apply-third-party-hotfixes.sh
+│   └── patches/                   # контролируемые патчи сторонних плагинов
 ├── includes/
 │   ├── price-list-widget.php     # прайс HTML
 │   ├── price-list-acf.php        # ACF прайса

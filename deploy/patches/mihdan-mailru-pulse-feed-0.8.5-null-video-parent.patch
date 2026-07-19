@@ -1,0 +1,12 @@
+diff --git a/src/class-main.php b/src/class-main.php
+--- a/src/class-main.php
++++ b/src/class-main.php
+@@ -783,7 +783,7 @@ class Main {
+ 					$parent = $video->parentNode;
+ 
+ 					// Пропустить видео, если оно уже обернуто в <figure>.
+-					if ( 'figure' === $parent->tagName ) {
++					if ( ! $parent || 'figure' === $parent->tagName ) {
+ 						continue;
+ 					}
+ 

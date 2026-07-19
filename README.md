@@ -12,9 +12,30 @@ This plugin stores functionality that should not live inside the WordPress theme
 
 ## Current status
 
-Version 0.4.1 — modular site-core with ACF-managed pages, cache-independent
+Version 0.4.2 — modular site-core with ACF-managed pages, cache-independent
 view counting, and an isolated, cookie-free Telegram comments/media proxy on
 `tg.krivoshein.site`.
+
+## Third-party hotfixes
+
+Tracked patches for Zen Feed and WP Fastest Cache Premium live in
+`deploy/patches/`. Check them after plugin updates without changing files:
+
+```bash
+sudo -u www-data ./deploy/apply-third-party-hotfixes.sh --check \
+  --wordpress-root /var/www/krivoshein.site/htdocs
+```
+
+Apply compatible missing patches explicitly:
+
+```bash
+sudo -u www-data ./deploy/apply-third-party-hotfixes.sh --apply \
+  --wordpress-root /var/www/krivoshein.site/htdocs
+```
+
+The script stops on an unexpected plugin version or source layout. Review the
+new upstream code before updating the expected version or patch; never force an
+old patch onto an unknown release.
 
 `includes/legacy-arkai-child-functions.php` is now a slim bootstrap (helpers, TSF SEO, RSYA/Telegram hooks) that loads:
 
