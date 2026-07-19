@@ -12,8 +12,9 @@ This plugin stores functionality that should not live inside the WordPress theme
 
 ## Current status
 
-Version 0.3.8 — modular site-core with ACF-managed pages and an isolated,
-cookie-free Telegram comments/media proxy on `tg.krivoshein.site`.
+Version 0.4.0 — modular site-core with ACF-managed pages, cache-independent
+view counting, and an isolated, cookie-free Telegram comments/media proxy on
+`tg.krivoshein.site`.
 
 `includes/legacy-arkai-child-functions.php` is now a slim bootstrap (helpers, TSF SEO, RSYA/Telegram hooks) that loads:
 
@@ -25,6 +26,7 @@ cookie-free Telegram comments/media proxy on `tg.krivoshein.site`.
 - `includes/shortcodes/services-landing.php` — `[krv_services_landing]`
 - `includes/price-list-acf.php` — ACF options, canonical defaults and safe v2 migration for `/prays-list/`
 - `includes/price-list-widget.php` — ACF-driven `[krv_price_list]` renderer
+- `includes/views-counter.php` — throttled post/project view beacon compatible with full-page caching
 
 ## Price List
 

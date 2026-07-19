@@ -661,7 +661,7 @@ function krv_services_landing_get_data(): array {
 	foreach ( $defaults as $field_name => $default_value ) {
 		$value = get_field( $field_name, $option_id );
 
-		if ( $value === null || $value === false || $value === '' || $value === array() ) {
+		if ( null === get_option( $option_id . '_' . $field_name, null ) ) {
 			$data[ $field_name ] = $default_value;
 			continue;
 		}
@@ -746,7 +746,11 @@ function krv_services_landing_render(): string {
 					<img class="krv-landing-avatar" src="<?php echo esc_url( krv_services_landing_resolve_avatar_url( $data['profile_avatar'] ?? '' ) ); ?>" alt="<?php echo esc_attr( (string) $data['profile_name'] ); ?>">
 				</div>
 
-				<h2 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h2>
+				<?php if ( is_front_page() ) : ?>
+					<h1 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h1>
+				<?php else : ?>
+					<h2 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h2>
+				<?php endif; ?>
 
 				<p class="krv-landing-lead"><?php echo esc_html( (string) $data['profile_lead'] ); ?></p>
 

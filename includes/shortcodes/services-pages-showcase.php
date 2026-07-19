@@ -177,7 +177,7 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 						$thumb = get_the_post_thumbnail( $page, 'medium_large', [
 							'class'   => 'krv-service-page-image',
 							'loading' => 'lazy',
-							'alt'     => esc_attr( $title ),
+							'alt'     => $title,
 						] );
 						?>
 						<a class="krv-service-page-card" href="<?php echo esc_url( $url ); ?>">
@@ -206,3 +206,27 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 	return ob_get_clean();
 } );
 
+function krv_services_showcase_purge_for_page( int $post_id ): void {
+	foreach ( krv_services_showcase_get_sections() as $section ) {
+		if ( in_array( $post_id, $section['section_pages'], true ) ) {
+			if ( class_exists( 'DrSlon_Cache_Purge_Bridge' ) ) {
+				DrSlon_Cache_Purge_Bridge::purge_page_cache( DRSLON_SERVICES_PAGE_ID );
+			}
+			break;
+		}
+	}
+}
+
+add_action( 'save_post_page', function ( $post_id ) {
+	if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+		return;
+	}
+
+	krv_services_showcase_purge_for_page( (int) $post_id );
+}, 20 );
+
+add_action( 'deleted_post', function ( $post_id, $post ) {
+	if ( $post instanceof WP_Post && 'page' === $post->post_type ) {
+		krv_services_showcase_purge_for_page( (int) $post_id );
+	}
+}, 20, 2 );

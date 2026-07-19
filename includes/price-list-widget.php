@@ -314,7 +314,7 @@ function krv_price_list_render(): string {
 							<div class="krv-badge"><?php echo esc_html( $settings['hero_badge'] ); ?></div>
 						<?php endif; ?>
 
-						<h1 class="krv-title"><?php echo esc_html( (string) ( $settings['hero_title'] ?? '' ) ); ?></h1>
+						<h2 class="krv-title"><?php echo esc_html( (string) ( $settings['hero_title'] ?? '' ) ); ?></h2>
 						<p class="krv-subtitle"><?php echo esc_html( (string) ( $settings['hero_subtitle'] ?? '' ) ); ?></p>
 						<p class="krv-lead"><?php echo esc_html( (string) ( $settings['hero_lead'] ?? '' ) ); ?></p>
 

@@ -30,7 +30,7 @@ function krv_acf_options_page_args( string $slug, array $args ): array {
  * One-time migration: copy fields saved under legacy keys into slug post_id.
  */
 function krv_acf_migrate_options_storage(): void {
-	if ( get_option( 'krv_acf_options_storage_migrated_v1' ) === DRSLON_SITE_CORE_VERSION ) {
+	if ( get_option( 'krv_acf_options_storage_migrated_v1' ) ) {
 		return;
 	}
 
@@ -53,10 +53,106 @@ function krv_acf_migrate_options_storage(): void {
 		update_field( 'showcase_intro_heading', $intro_on_option, $showcase_id );
 	}
 
-	update_option( 'krv_acf_options_storage_migrated_v1', DRSLON_SITE_CORE_VERSION, false );
+	update_option( 'krv_acf_options_storage_migrated_v1', 1, false );
 }
 
 add_action( 'acf/init', 'krv_acf_migrate_options_storage', 15 );
+
+/**
+ * Copy legacy Cyrillic post meta into the registered ACF fields once.
+ * Existing canonical values, including intentional empty values, win.
+ */
+function krv_acf_migrate_legacy_post_meta(): void {
+	if ( get_option( 'krv_acf_post_meta_migrated_v1' ) ) {
+		return;
+	}
+
+	if ( ! function_exists( 'update_field' ) ) {
+		return;
+	}
+
+	global $wpdb;
+
+	$lock_name = 'drslon_acf_meta_migration_v1';
+	$has_lock  = (int) $wpdb->get_var( $wpdb->prepare( 'SELECT GET_LOCK(%s, 1)', $lock_name ) );
+
+	if ( 1 !== $has_lock ) {
+		return;
+	}
+
+	try {
+		if ( get_option( 'krv_acf_post_meta_migrated_v1' ) ) {
+			return;
+		}
+
+		$mappings = array(
+			'price'  => array(
+				'legacy'    => 'стоимость',
+				'canonical' => 'price_value',
+				'field_key' => 'field_price_value',
+			),
+			'client' => array(
+				'legacy'    => 'ссылка_на_клиента',
+				'canonical' => 'client_url',
+				'field_key' => 'field_client_url',
+			),
+			'usluga' => array(
+				'legacy'    => 'иконка_поля',
+				'canonical' => 'service_icon',
+				'field_key' => 'field_service_icon',
+			),
+		);
+		$migration_complete = true;
+
+		foreach ( $mappings as $post_type => $mapping ) {
+			$post_ids = get_posts(
+				array(
+					'post_type'      => $post_type,
+					'post_status'    => array_keys( get_post_stati() ),
+					'posts_per_page' => -1,
+					'fields'         => 'ids',
+					'no_found_rows'  => true,
+				)
+			);
+
+			if ( $wpdb->last_error !== '' ) {
+				$migration_complete = false;
+				break;
+			}
+
+			foreach ( $post_ids as $post_id ) {
+				$post_id = (int) $post_id;
+
+				if (
+					metadata_exists( 'post', $post_id, $mapping['canonical'] ) ||
+					! metadata_exists( 'post', $post_id, $mapping['legacy'] )
+				) {
+					continue;
+				}
+
+				$value = get_post_meta( $post_id, $mapping['legacy'], true );
+
+				if ( '' === $value ) {
+					continue;
+				}
+
+				update_field( $mapping['field_key'], $value, $post_id );
+
+				if ( ! metadata_exists( 'post', $post_id, $mapping['canonical'] ) ) {
+					$migration_complete = false;
+				}
+			}
+		}
+
+		if ( $migration_complete ) {
+			update_option( 'krv_acf_post_meta_migrated_v1', 1, false );
+		}
+	} finally {
+		$wpdb->get_var( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );
+	}
+}
+
+add_action( 'init', 'krv_acf_migrate_legacy_post_meta', 30 );
 
 /**
  * Map page IDs to ACF options screens for editor hints.
@@ -118,10 +214,10 @@ function krv_acf_repair_landing_seed(): void {
 		return;
 	}
 
-	$option_id = 'krv-services-landing';
-	$name      = get_field( 'profile_name', $option_id );
+	$option_id   = 'krv-services-landing';
+	$stored_name = get_option( $option_id . '_profile_name', null );
 
-	if ( is_string( $name ) && trim( $name ) !== '' ) {
+	if ( null !== $stored_name ) {
 		update_option( 'krv_acf_landing_repair_v1', DRSLON_SITE_CORE_VERSION, false );
 		return;
 	}

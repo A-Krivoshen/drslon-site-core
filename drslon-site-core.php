@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DrSlon Site Core
  * Description: Compatibility layer for krivoshein.site legacy CPT, ACF fields and shortcodes moved out of the old Arkai child theme.
- * Version: 0.3.8
+ * Version: 0.4.0
  * Author: Алексей Кривошеин
  * Text Domain: drslon-site-core
  * Requires at least: 6.0
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'DRSLON_SITE_CORE_VERSION', '0.3.8' );
+define( 'DRSLON_SITE_CORE_VERSION', '0.4.0' );
 define( 'DRSLON_SITE_CORE_DIR', plugin_dir_path( __FILE__ ) );
 
 /**
@@ -27,6 +27,18 @@ register_activation_hook( __FILE__, function () {
 } );
 
 register_deactivation_hook( __FILE__, function () {
+	if ( get_stylesheet() !== 'arkai-child' ) {
+		if ( taxonomy_exists( 'partner_category' ) ) {
+			unregister_taxonomy( 'partner_category' );
+		}
+
+		foreach ( array( 'client', 'project', 'usluga', 'price', 'partner' ) as $post_type ) {
+			if ( post_type_exists( $post_type ) ) {
+				unregister_post_type( $post_type );
+			}
+		}
+	}
+
 	flush_rewrite_rules();
 } );
 
@@ -45,6 +57,7 @@ require_once DRSLON_SITE_CORE_DIR . 'includes/icons/max-messenger.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/helpers/shortcode-resolve.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/assets-loader.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/cache-purge-bridge.php';
+require_once DRSLON_SITE_CORE_DIR . 'includes/views-counter.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/telegram-comments-proxy.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/price-list-acf.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/price-list-widget.php';

@@ -69,6 +69,7 @@ final class DrSlon_Cache_Purge_Bridge {
 
 		if ( function_exists( 'wpfc_clear_post_cache_by_id' ) ) {
 			wpfc_clear_post_cache_by_id( $post_id );
+			return;
 		}
 
 		self::purge_nginx_post( false, $post_id );

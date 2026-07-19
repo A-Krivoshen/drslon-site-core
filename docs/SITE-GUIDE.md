@@ -1,7 +1,7 @@
 # krivoshein.site — шпаргалка по устройству сайта
 
 > Для себя: «где что лежит, как править, что не ломать».  
-> Актуально на **июнь 2026**, плагин **drslon-site-core v0.3.2**, тема **v0.4.0**.
+> Актуально на **июль 2026**, плагин **drslon-site-core v0.4.0**, тема **v0.6.0**.
 
 ---
 
@@ -29,7 +29,7 @@
 | Паттерны страниц (контакты, about) | ✅ | — |
 | Шорткоды услуг, прайс, партнёры | — | ✅ |
 | ACF-экраны контента | — | ✅ |
-| `/max` редирект, кеш-bridge | — | ✅ |
+| `/max` редирект, кеш-bridge, счётчик просмотров | — | ✅ |
 
 **Старая тема `arkai-child`** — legacy, логика перенесена в плагин. Не активна.
 
@@ -39,7 +39,7 @@
 
 | | |
 |--|--|
-| **Активная тема** | `drslon-blog-theme` (v0.4.0) |
+| **Активная тема** | `drslon-blog-theme` (v0.6.0) |
 | **Путь на сервере** | `/wp-content/themes/drslon-blog-theme/` |
 | **Git** | `git@github.com:A-Krivoshen/drslon-blog-theme.git` → `main` |
 | **UX-аудит темы** | `docs/UX-THEME-AUDIT.md` в репо темы |
@@ -273,6 +273,8 @@ git push origin main
 | 0.2.8 | Bridge для `/max` |
 | 0.2.9 | MAX в новой вкладке |
 | **0.3.0** | UX-аудит прайса: sticky nav, табы, ACF, mobile CTA, trust, FAQ accordion |
+| 0.3.8 | Изолированный Telegram comments/media proxy |
+| **0.4.0** | Аудит SEO, кешей, ACF, доступности и cache-independent счётчик просмотров |
 
 ---
 
@@ -291,12 +293,14 @@ drslon-site-core-main/
 │   ├── acf-options-sync.php      # подсказки в редакторе + миграции ACF
 │   ├── assets-loader.php         # CSS/JS по шорткодам
 │   ├── cache-purge-bridge.php    # WPFC + Nginx purge
+│   ├── views-counter.php         # AJAX-счётчик просмотров вне page cache
 │   ├── service-page-registry.php
 │   ├── legacy-arkai-child-functions.php  # старый код из темы
 │   └── shortcodes/
 │       ├── services-landing.php
 │       ├── service-page-shell.php
 │       ├── services-pages-showcase.php
+│       ├── blog-shortcodes.php
 │       ├── clients-grid.php
 │       └── partners-grid.php
 └── assets/
@@ -306,7 +310,8 @@ drslon-site-core-main/
     │   ├── services-landing.css
     │   └── ...
     └── js/
-        └── price-list-widget.js
+        ├── price-list-widget.js
+        └── view-counter.js
 ```
 
 ---

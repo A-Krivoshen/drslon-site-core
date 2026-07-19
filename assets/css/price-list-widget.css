@@ -167,15 +167,15 @@
 }
 
 .krv-btn-primary {
-  border-color: var(--krv-accent);
-  background: var(--krv-accent);
+  border-color: var(--krv-accent-dark);
+  background: var(--krv-accent-dark);
   color: #ffffff !important;
   box-shadow: 0 10px 22px rgba(81, 129, 254, 0.24);
 }
 
 .krv-btn-primary:hover {
-  border-color: var(--krv-accent-dark);
-  background: var(--krv-accent-dark);
+  border-color: #2448b8;
+  background: #2448b8;
   color: #ffffff !important;
 }
 
@@ -643,7 +643,7 @@
   justify-content: center;
   margin-bottom: 12px;
   border-radius: 50%;
-  background: var(--krv-accent);
+  background: var(--krv-accent-dark);
   color: #fff;
   font-size: 14px;
   font-weight: 900;
@@ -716,7 +716,7 @@
   overflow: hidden;
   padding: 28px;
   border-radius: 24px;
-  background: #5181fe;
+  background: var(--krv-accent-dark);
   color: #ffffff;
   box-shadow: 0 20px 48px rgba(49, 95, 232, 0.26);
 }

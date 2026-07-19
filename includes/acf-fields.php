@@ -331,6 +331,3 @@ function krv_services_showcase_seed_intro_heading(): void {
 }
 
 add_action( 'acf/init', 'krv_services_showcase_seed_intro_heading', 25 );
-
-// ACF field groups are registered in PHP; hide the Field Groups UI to reduce clutter.
-add_filter( 'acf/settings/show_admin', '__return_false' );

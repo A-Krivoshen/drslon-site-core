@@ -57,7 +57,7 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 				$thumb = get_the_post_thumbnail( $post_id, 'medium', [
 					'class'   => 'krv-client-logo',
 					'loading' => 'lazy',
-					'alt'     => esc_attr( $title ),
+					'alt'     => $title,
 				] );
 
 				$tag_open = $url
@@ -91,6 +91,22 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 
 	return ob_get_clean();
 } );
+
+add_action( 'save_post_client', function ( $post_id ) {
+	if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+		return;
+	}
+
+	if ( class_exists( 'DrSlon_Cache_Purge_Bridge' ) ) {
+		DrSlon_Cache_Purge_Bridge::purge_page_cache( DRSLON_HOME_PAGE_ID );
+	}
+}, 20 );
+
+add_action( 'deleted_post', function ( $post_id, $post ) {
+	if ( $post instanceof WP_Post && 'client' === $post->post_type && class_exists( 'DrSlon_Cache_Purge_Bridge' ) ) {
+		DrSlon_Cache_Purge_Bridge::purge_page_cache( DRSLON_HOME_PAGE_ID );
+	}
+}, 20, 2 );
 
 
 add_action( 'wp_footer', function () {

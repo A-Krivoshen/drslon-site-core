@@ -475,7 +475,7 @@ function krv_service_page_render( $atts = array() ): string {
 	?>
 	<div class="krv-service-page <?php echo esc_attr( $shell_class ); ?>" data-page-id="<?php echo esc_attr( (string) $data['page_id'] ); ?>">
 		<?php if ( $data['heading'] !== '' ) : ?>
-			<h1 class="krv-service-page__heading"><?php echo esc_html( $data['heading'] ); ?></h1>
+			<h2 class="krv-service-page__heading"><?php echo esc_html( $data['heading'] ); ?></h2>
 		<?php endif; ?>
 
 		<?php if ( ! empty( $data['intro_paragraphs'] ) ) : ?>
@@ -531,6 +531,10 @@ add_action(
 	'wp_head',
 	function () {
 		if ( is_admin() || ! is_singular() ) {
+			return;
+		}
+
+		if ( ! function_exists( 'krv_rsya_reco_enabled' ) || ! krv_rsya_reco_enabled() ) {
 			return;
 		}
 

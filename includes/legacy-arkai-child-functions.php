@@ -108,7 +108,11 @@ add_action( 'wp_head', function () {
  *  1) Yandex loader
  *  ========================= */
 add_action( 'wp_head', function () {
-	if ( is_admin() || ! krv_is_single_content() ) {
+	if (
+		is_admin() ||
+		! krv_is_single_content() ||
+		( ! krv_rsya_reco_enabled() && ! krv_rsya_inimage_enabled() )
+	) {
 		return;
 	}
 
@@ -404,15 +408,6 @@ if ( function_exists( 'tsf' ) ) {
 		return $new !== '' ? $new : $title;
 	}, 10, 2 );
 
-	add_filter( 'the_seo_framework_title_from_custom_field', function( $title, $args ) {
-		if ( null !== $args ) {
-			return $title;
-		}
-
-		$new = krv_build_meta_title();
-		return $new !== '' ? $new : $title;
-	}, 10, 2 );
-
 	add_filter( 'the_seo_framework_generated_description', function( $description, $args, $type = null ) {
 		if ( null !== $args ) {
 			return $description;
@@ -422,21 +417,16 @@ if ( function_exists( 'tsf' ) ) {
 		return $new !== '' ? $new : $description;
 	}, 10, 3 );
 
-	add_filter( 'the_seo_framework_custom_field_description', function( $description, $args ) {
-		if ( null !== $args ) {
-			return $description;
+	add_filter( 'the_seo_framework_robots_meta_array', function( $meta, $args, $options = null ) {
+		if ( null === $args ) {
+			$queried_object = get_queried_object();
+			$taxonomy       = $queried_object instanceof WP_Term ? $queried_object->taxonomy : null;
+		} else {
+			$taxonomy = is_array( $args ) ? ( $args['tax'] ?? null ) : null;
 		}
 
-		$new = krv_build_meta_description();
-		return $new !== '' ? $new : $description;
-	}, 10, 2 );
-
-	add_filter( 'the_seo_framework_robots_meta_array', function( $meta, $args, $options = null ) {
-		$taxonomy = null === $args ? tsf()->query()->get_current_taxonomy() : ( $args['taxonomy'] ?? null );
-
 		if ( 'post_tag' === $taxonomy ) {
-			$meta['noindex']  = 'noindex';
-			$meta['nofollow'] = 'nofollow';
+			$meta['noindex'] = 'noindex';
 		}
 
 		if ( null === $args && is_paged() && ! is_singular() ) {
@@ -447,9 +437,6 @@ if ( function_exists( 'tsf' ) ) {
 	}, 10, 3 );
 }
 
-/** Disable WP core sitemap */
-add_filter( 'wp_sitemaps_enabled', '__return_false' );
-
 /** =========================
  *  Telegram comments + RSYA block renderer
  *  IMPORTANT: called manually from single.php
@@ -458,8 +445,16 @@ function krv_render_post_extras(): void {
 	if ( is_admin() || ! krv_is_single_content() ) {
 		return;
 	}
+
+	$project_url = is_singular( 'project' )
+		? trim( (string) get_post_meta( get_queried_object_id(), 'project_url', true ) )
+		: '';
 	?>
 	<div class="krv-post-extras" style="clear:both;display:block;width:100%;margin-top:40px;">
+		<?php if ( $project_url !== '' ) : ?>
+			<p class="krv-project-link"><a href="<?php echo esc_url( $project_url ); ?>" target="_blank" rel="noopener noreferrer">Открыть сайт проекта</a></p>
+		<?php endif; ?>
+
 		<div id="telegram-comments" style="clear:both;display:block;width:100%;min-height:120px;margin:0 0 20px;">
 			<?php krv_render_telegram_discussion_widget(); ?>
 		</div>
@@ -621,36 +616,6 @@ add_action( 'wp_footer', function () {
 /** =========================
  *  6) Other site tweaks
  *  ========================= */
-add_filter( 'unzip_file_use_ziparchive', '__return_false' );
-add_filter( 'auto_update_theme', '__return_false' );
-
-/**
- * Views counter.
- *
- * Old stack: arkaiSetPostViews() from the Arkai parent theme did the counting.
- * New stack: we count here into the same 'arkai_post_views' meta key,
- * which the drslon_post_views shortcode reads.
- */
-add_action( 'wp_head', function () {
-	if ( ! ( is_singular( 'post' ) || is_singular( 'project' ) ) ) {
-		return;
-	}
-
-	global $post;
-	$post_id = $post ? (int) $post->ID : 0;
-
-	if ( ! $post_id ) {
-		return;
-	}
-
-	if ( function_exists( 'arkaiSetPostViews' ) ) {
-		arkaiSetPostViews( $post_id );
-		return;
-	}
-
-	$count = (int) get_post_meta( $post_id, 'arkai_post_views', true );
-	update_post_meta( $post_id, 'arkai_post_views', $count + 1 );
-} );
 
 /**
  * Reading time (legacy name kept for template compatibility).
@@ -711,10 +676,24 @@ add_action( 'wp_head', function () {
 	}
 }, 50 );
 
-/** Disable built-in comments */
-add_filter( 'comments_open', '__return_false', 20, 2 );
-add_filter( 'pings_open', '__return_false', 20, 2 );
-add_filter( 'get_comments_number', '__return_zero' );
+/** Disable built-in comments only where Telegram comments replace them. */
+function krv_uses_telegram_comments( int $post_id = 0 ): bool {
+	$post_type = get_post_type( $post_id ?: get_queried_object_id() );
+
+	return in_array( $post_type, array( 'post', 'project' ), true );
+}
+
+add_filter( 'comments_open', function ( $open, $post_id ) {
+	return krv_uses_telegram_comments( (int) $post_id ) ? false : $open;
+}, 20, 2 );
+
+add_filter( 'pings_open', function ( $open, $post_id ) {
+	return krv_uses_telegram_comments( (int) $post_id ) ? false : $open;
+}, 20, 2 );
+
+add_filter( 'get_comments_number', function ( $count, $post_id ) {
+	return krv_uses_telegram_comments( (int) $post_id ) ? 0 : $count;
+}, 20, 2 );
 
 /** Code blocks: set default language + hljs */
 add_action( 'wp_enqueue_scripts', function () {

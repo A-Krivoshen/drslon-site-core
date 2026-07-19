@@ -177,7 +177,7 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 						$thumb = get_the_post_thumbnail( $post_id, 'medium', [
 							'class'   => 'krv-partner-logo',
 							'loading' => 'lazy',
-							'alt'     => esc_attr( $title ),
+							'alt'     => $title,
 						] );
 
 						$card_classes = 'krv-partner-card';
@@ -222,11 +222,38 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 	return ob_get_clean();
 } );
 
+function krv_partners_grid_invalidate_cache(): void {
+	delete_transient( 'krv_partners_grid_v1' );
+
+	if ( class_exists( 'DrSlon_Cache_Purge_Bridge' ) ) {
+		DrSlon_Cache_Purge_Bridge::purge_page_cache( DRSLON_PARTNERS_PAGE_ID );
+	}
+}
+
 add_action( 'save_post_partner', function ( $post_id ) {
 	if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
 		return;
 	}
 
-	delete_transient( 'krv_partners_grid_v1' );
-}, 10 );
+	krv_partners_grid_invalidate_cache();
+}, 20 );
 
+add_action( 'deleted_post', function ( $post_id, $post ) {
+	unset( $post_id );
+
+	if ( $post instanceof WP_Post && 'partner' === $post->post_type ) {
+		krv_partners_grid_invalidate_cache();
+	}
+}, 20, 2 );
+
+add_action( 'set_object_terms', function ( $object_id, $terms, $tt_ids, $taxonomy ) {
+	unset( $terms, $tt_ids );
+
+	if ( 'partner_category' === $taxonomy && 'partner' === get_post_type( $object_id ) ) {
+		krv_partners_grid_invalidate_cache();
+	}
+}, 20, 4 );
+
+add_action( 'created_partner_category', 'krv_partners_grid_invalidate_cache', 20, 0 );
+add_action( 'edited_partner_category', 'krv_partners_grid_invalidate_cache', 20, 0 );
+add_action( 'delete_partner_category', 'krv_partners_grid_invalidate_cache', 20, 0 );
