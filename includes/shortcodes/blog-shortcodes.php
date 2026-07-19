@@ -650,8 +650,9 @@ add_shortcode( 'krv_project_posts', function ( $atts = [] ): string {
 		'posts_per_page' => $posts_per_page,
 		'meta_query'     => [
 			[
-				'key'   => 'related_project',
-				'value' => (string) $project_id,
+				'key'     => 'related_posts',
+				'value'   => sprintf( 'i:%d;', $project_id ),
+				'compare' => 'LIKE',
 			],
 		],
 		'no_found_rows'  => true,

@@ -54,6 +54,16 @@ add_action( 'acf/init', function () {
 				'name'  => 'project_url',
 				'type'  => 'url',
 			],
+			[
+				'key'          => 'field_related_posts',
+				'label'        => 'Связанные статьи',
+				'name'         => 'related_posts',
+				'type'         => 'relationship',
+				'post_types'   => [ 'post' ],
+				'return_format' => 'id',
+				'min'          => 0,
+				'max'          => 20,
+			],
 		],
 		'location' => [
 			[
@@ -61,32 +71,6 @@ add_action( 'acf/init', function () {
 					'param'    => 'post_type',
 					'operator' => '==',
 					'value'    => 'project',
-				],
-			],
-		],
-	] );
-
-	acf_add_local_field_group( [
-		'key'      => 'group_blog_post',
-		'title'    => 'Запись блога',
-		'fields'   => [
-			[
-				'key'          => 'field_related_project',
-				'label'        => 'Связанный проект',
-				'name'         => 'related_project',
-				'type'         => 'post_object',
-				'post_types'   => [ 'project' ],
-				'return_format' => 'id',
-				'multiple'     => false,
-				'allow_null'   => true,
-			],
-		],
-		'location' => [
-			[
-				[
-					'param'    => 'post_type',
-					'operator' => '==',
-					'value'    => 'post',
 				],
 			],
 		],
