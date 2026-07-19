@@ -1,7 +1,7 @@
 # krivoshein.site — шпаргалка по устройству сайта
 
 > Для себя: «где что лежит, как править, что не ломать».  
-> Актуально на **июль 2026**, плагин **drslon-site-core v0.4.0**, тема **v0.6.0**.
+> Актуально на **июль 2026**, плагин **drslon-site-core v0.4.1**, тема **v0.6.0**.
 
 ---
 
@@ -275,6 +275,7 @@ git push origin main
 | **0.3.0** | UX-аудит прайса: sticky nav, табы, ACF, mobile CTA, trust, FAQ accordion |
 | 0.3.8 | Изолированный Telegram comments/media proxy |
 | **0.4.0** | Аудит SEO, кешей, ACF, доступности и cache-independent счётчик просмотров |
+| **0.4.1** | `/max` и `/max_drslon` ведут на единый канал MAX |
 
 ---
 

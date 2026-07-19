@@ -12,7 +12,7 @@ This plugin stores functionality that should not live inside the WordPress theme
 
 ## Current status
 
-Version 0.4.0 — modular site-core with ACF-managed pages, cache-independent
+Version 0.4.1 — modular site-core with ACF-managed pages, cache-independent
 view counting, and an isolated, cookie-free Telegram comments/media proxy on
 `tg.krivoshein.site`.
 
