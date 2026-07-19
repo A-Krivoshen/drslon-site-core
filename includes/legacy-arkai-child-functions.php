@@ -690,6 +690,7 @@ $krv_core_dir = dirname( __FILE__ );
 
 require_once $krv_core_dir . '/cpt.php';
 require_once $krv_core_dir . '/acf-fields.php';
+require_once $krv_core_dir . '/related-posts-metabox.php';
 // [krv_services_landing] — includes/shortcodes/services-landing.php (loaded from drslon-site-core.php).
 require_once $krv_core_dir . '/shortcodes/clients-grid.php';
 require_once $krv_core_dir . '/shortcodes/partners-grid.php';

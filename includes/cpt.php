@@ -87,11 +87,3 @@ add_action( 'init', function () {
 		'rewrite'           => [ 'slug' => 'partner-category' ],
 	] );
 } );
-
-/**
- * Disable block editor for project CPT — ACF relationship fields
- * don't save via Gutenberg REST API (ACF doesn't register them for REST).
- */
-add_filter( 'use_block_editor_for_post_type', function ( $enabled, $post_type ) {
-	return 'project' === $post_type ? false : $enabled;
-}, 10, 2 );

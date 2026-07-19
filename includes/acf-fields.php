@@ -55,17 +55,6 @@ add_action( 'acf/init', function () {
 				'name'  => 'project_url',
 				'type'  => 'url',
 			],
-			[
-				'key'          => 'field_related_posts',
-				'label'        => 'Связанные статьи',
-				'name'         => 'related_posts',
-				'type'         => 'relationship',
-				'post_types'   => [ 'post' ],
-				'return_format' => 'id',
-				'min'          => 0,
-				'max'          => 20,
-				'show_in_rest' => true,
-			],
 		],
 		'location' => [
 			[
@@ -344,44 +333,4 @@ function krv_services_showcase_seed_intro_heading(): void {
 
 add_action( 'acf/init', 'krv_services_showcase_seed_intro_heading', 25 );
 
-/**
- * Fallback: save related_posts when ACF doesn't handle it (classic editor sends $_POST['acf'] as JSON).
- */
-add_action( 'save_post_project', function ( $post_id, $post = null, $update = false ) {
-	if ( ! $update ) {
-		return;
-	}
 
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return;
-	}
-
-	if ( ! current_user_can( 'edit_post', $post_id ) ) {
-		return;
-	}
-
-	// Classic editor: $_POST['acf'] contains JSON-encoded field data.
-	$raw = filter_input( INPUT_POST, 'acf', FILTER_UNSAFE_RAW );
-	if ( ! is_string( $raw ) || empty( $raw ) ) {
-		return;
-	}
-
-	$acf_data = json_decode( $raw, true );
-	if ( ! is_array( $acf_data ) ) {
-		return;
-	}
-
-	$value = [];
-
-	if ( isset( $acf_data['field_related_posts'] ) ) {
-		$value = (array) $acf_data['field_related_posts'];
-	} elseif ( isset( $acf_data['related_posts'] ) ) {
-		$value = (array) $acf_data['related_posts'];
-	}
-
-	$value = array_map( 'intval', $value );
-	$value = array_filter( $value );
-
-	update_post_meta( $post_id, 'related_posts', $value );
-	update_post_meta( $post_id, '_related_posts', 'field_related_posts' );
-}, 20, 3 );
