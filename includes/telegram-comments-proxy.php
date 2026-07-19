@@ -1,6 +1,6 @@
 <?php
 /**
- * Telegram Discussion Widget via /tg/ reverse proxy on krivoshein.site.
+ * Telegram Discussion Widget via the isolated tg.krivoshein.site proxy.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -8,21 +8,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'KRV_MAX_DISCUSSION_URL' ) ) {
-	define( 'KRV_MAX_DISCUSSION_URL', 'https://max.ru/join/m0x_nGGpbnSFDPLvSXZWIksmgZaf13bzKvNIBaqkz78' );
+	define( 'KRV_MAX_DISCUSSION_URL', 'https://max.ru/join/aa3v8rWdS_5M0156Q3ulFCsfJGeCMThryOOY2SrlyJM' );
 }
 
 /**
- * Base URL for the on-domain Telegram proxy (no separate subdomain).
+ * Base URL for the isolated Telegram proxy.
  */
 function krv_tg_proxy_origin(): string {
-	return untrailingslashit( home_url( '/tg' ) );
+	return 'https://tg.krivoshein.site';
 }
 
 /**
  * postMessage origin for resize events (scheme + host only).
  */
 function krv_tg_post_message_origin(): string {
-	$parts = wp_parse_url( home_url() );
+	$parts = wp_parse_url( krv_tg_proxy_origin() );
 
 	if ( empty( $parts['scheme'] ) || empty( $parts['host'] ) ) {
 		return 'https://krivoshein.site';
@@ -85,7 +85,7 @@ function krv_tg_discuss_links_html(): string {
 		'<span class="krv-tg-discuss-links__label">%s</span>'
 		. '<a class="krv-tg-discuss-links__link" href="%s" target="_blank" rel="noopener noreferrer">Telegram — @%s</a>'
 		. '<span class="krv-tg-discuss-links__sep" aria-hidden="true">/</span>'
-		. '<a class="krv-tg-discuss-links__link" href="%s" target="_blank" rel="noopener noreferrer">MAX — группа обсуждения</a>',
+		. '<a class="krv-tg-discuss-links__link" href="%s" target="_blank" rel="noopener noreferrer">MAX — канал</a>',
 		'Обсудить в',
 		esc_url( 'https://t.me/' . KRV_TG_DISCUSSION ),
 		esc_html( KRV_TG_DISCUSSION ),
@@ -183,6 +183,7 @@ function krv_tg_comments_loader_script(): void {
 		var errorHtml = <?php echo wp_json_encode( krv_tg_embed_error_html() ); ?>;
 		var mounted = false;
 		var iframe = null;
+		var loaded = false;
 
 		function showEmbedError() {
 			if (wrap.querySelector('.krv-tg-embed-error')) return;
@@ -213,48 +214,19 @@ function krv_tg_comments_loader_script(): void {
 			iframe.height = '120';
 			iframe.setAttribute('frameborder', '0');
 			iframe.setAttribute('scrolling', 'no');
+			iframe.setAttribute('loading', 'lazy');
 			iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+			iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');
 			iframe.setAttribute('title', 'Комментарии Telegram');
 			iframe.style.cssText = 'border:none;min-width:320px;width:100%;overflow:hidden;color-scheme:light dark;';
 
 			var failTimer = window.setTimeout(function () {
-				if (!iframe || iframe.offsetHeight <= 80) showEmbedError();
+				if (!loaded) showEmbedError();
 			}, 20000);
 
-			function hideEmbedLogin(doc) {
-				if (!doc) return;
-
-				var css = '.tgme_post_discussion_login,.tgme_post_discussion_login_btn,.js-login_btn{display:none!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;visibility:hidden!important;pointer-events:none!important}';
-
-				if (!doc.getElementById('krv-hide-tg-login')) {
-					var style = doc.createElement('style');
-					style.id = 'krv-hide-tg-login';
-					style.textContent = css;
-					(doc.head || doc.documentElement).appendChild(style);
-				}
-
-				doc.querySelectorAll('.tgme_post_discussion_login,.js-login_btn').forEach(function (el) {
-					el.remove();
-				});
-			}
-
 			iframe.addEventListener('load', function () {
+				loaded = true;
 				window.clearTimeout(failTimer);
-
-				try {
-					var doc = iframe.contentDocument;
-					if (!doc) return;
-
-					hideEmbedLogin(doc);
-
-					var loginObserver = new MutationObserver(function () {
-						hideEmbedLogin(doc);
-					});
-
-					if (doc.body) {
-						loginObserver.observe(doc.body, { childList: true, subtree: true });
-					}
-				} catch (e) {}
 			});
 
 			iframe.addEventListener('error', function () {
@@ -271,8 +243,10 @@ function krv_tg_comments_loader_script(): void {
 			try {
 				var data = JSON.parse(event.data);
 				if (data.event === 'resize') {
-					if (data.height) iframe.style.height = data.height + 'px';
-					if (data.width) iframe.style.width = data.width + 'px';
+					var height = Number(data.height);
+					if (Number.isFinite(height)) {
+						iframe.style.height = Math.min(2400, Math.max(120, height)) + 'px';
+					}
 				}
 			} catch (e) {}
 		});
