@@ -646,17 +646,18 @@ add_shortcode( 'krv_project_posts', function ( $atts = [] ): string {
 
 	$related_ids = [];
 
-	if ( function_exists( 'get_field' ) ) {
-		$field_value = get_field( 'related_posts', $project_id );
-		if ( is_array( $field_value ) ) {
-			$related_ids = array_map( 'intval', $field_value );
+	$raw = get_post_meta( $project_id, 'related_posts', true );
+	if ( is_string( $raw ) && ! empty( $raw ) ) {
+		$unserialized = maybe_unserialize( $raw );
+		if ( is_array( $unserialized ) ) {
+			$related_ids = array_map( 'intval', $unserialized );
 		}
 	}
 
-	if ( empty( $related_ids ) ) {
-		$raw = get_post_meta( $project_id, 'related_posts', true );
-		if ( is_array( $raw ) ) {
-			$related_ids = array_map( 'intval', $raw );
+	if ( empty( $related_ids ) && function_exists( 'get_field' ) ) {
+		$field_value = get_field( 'related_posts', $project_id );
+		if ( is_array( $field_value ) ) {
+			$related_ids = array_map( 'intval', $field_value );
 		}
 	}
 
