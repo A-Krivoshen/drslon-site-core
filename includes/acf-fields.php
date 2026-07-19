@@ -45,9 +45,10 @@ add_action( 'acf/init', function () {
 	] );
 
 	acf_add_local_field_group( [
-		'key'      => 'group_projects',
-		'title'    => 'Проекты',
-		'fields'   => [
+		'key'           => 'group_projects',
+		'title'         => 'Проекты',
+		'show_in_rest'  => true,
+		'fields'        => [
 			[
 				'key'   => 'field_project_url',
 				'label' => 'URL проекта',
