@@ -396,49 +396,54 @@ function krv_service_page_render_rsya_block(): void {
 
 	$render_to = krv_rsya_reco_render_to();
 	$block_id  = krv_rsya_reco_block_id();
+	$reco_code = krv_rsya_reco_code();
 	?>
 	<div class="krv-service-page__rsya">
-		<div id="<?php echo esc_attr( $render_to ); ?>" class="krv-service-page__rsya-slot"></div>
-	</div>
-	<script>
-	(function () {
-		var renderTo = <?php echo wp_json_encode( $render_to ); ?>;
-		var blockId  = <?php echo wp_json_encode( $block_id ); ?>;
-		var el = document.getElementById(renderTo);
-		if (!el) return;
+		<?php if ( $reco_code !== '' ) : ?>
+			<?php echo $reco_code; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- raw Yandex RTB code from manage_options. ?>
+		<?php else : ?>
+			<div id="<?php echo esc_attr( $render_to ); ?>" class="krv-service-page__rsya-slot"></div>
+			<script>
+			(function () {
+				var renderTo = <?php echo wp_json_encode( $render_to ); ?>;
+				var blockId  = <?php echo wp_json_encode( $block_id ); ?>;
+				var el = document.getElementById(renderTo);
+				if (!el) return;
 
-		function hasFill() {
-			return !!el.querySelector('iframe');
-		}
+				function hasFill() {
+					return !!el.querySelector('iframe');
+				}
 
-		function renderOnce() {
-			if (el.dataset.krvRecoInit === '1') return;
-			el.dataset.krvRecoInit = '1';
+				function renderOnce() {
+					if (el.dataset.krvRecoInit === '1') return;
+					el.dataset.krvRecoInit = '1';
 
-			window.yaContextCb = window.yaContextCb || [];
-			window.yaContextCb.push(function () {
-				try {
-					if (!window.Ya || !Ya.Context || !Ya.Context.AdvManager) return;
-					if (hasFill()) return;
+					window.yaContextCb = window.yaContextCb || [];
+					window.yaContextCb.push(function () {
+						try {
+							if (!window.Ya || !Ya.Context || !Ya.Context.AdvManager) return;
+							if (hasFill()) return;
 
-					Ya.Context.AdvManager.renderWidget({
-						renderTo: renderTo,
-						blockId: blockId
+							Ya.Context.AdvManager.renderWidget({
+								renderTo: renderTo,
+								blockId: blockId
+							});
+						} catch (e) {}
 					});
-				} catch (e) {}
-			});
-		}
+				}
 
-		renderOnce();
+				renderOnce();
 
-		setTimeout(function () {
-			if (hasFill()) return;
-			el.innerHTML = '';
-			el.dataset.krvRecoInit = '0';
-			renderOnce();
-		}, 9000);
-	})();
-	</script>
+				setTimeout(function () {
+					if (hasFill()) return;
+					el.innerHTML = '';
+					el.dataset.krvRecoInit = '0';
+					renderOnce();
+				}, 9000);
+			})();
+			</script>
+		<?php endif; ?>
+	</div>
 	<?php
 }
 

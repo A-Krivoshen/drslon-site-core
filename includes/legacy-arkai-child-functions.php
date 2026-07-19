@@ -111,7 +111,7 @@ add_action( 'wp_head', function () {
 	if (
 		is_admin() ||
 		! krv_is_single_content() ||
-		( ! krv_rsya_reco_enabled() && ! krv_rsya_inimage_enabled() )
+		! krv_rsya_reco_enabled()
 	) {
 		return;
 	}
@@ -459,9 +459,15 @@ function krv_render_post_extras(): void {
 			<?php krv_render_telegram_discussion_widget(); ?>
 		</div>
 
-		<?php if ( krv_rsya_reco_enabled() ) : ?>
+		<?php if ( krv_rsya_reco_enabled() ) :
+			$reco_code = krv_rsya_reco_code();
+		?>
 			<div class="krv-rsya-reco" style="clear:both;display:block;width:100%;margin-top:24px;">
-				<div id="<?php echo esc_attr( krv_rsya_reco_render_to() ); ?>"></div>
+				<?php if ( $reco_code !== '' ) : ?>
+					<?php echo $reco_code; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- raw Yandex RTB code from manage_options. ?>
+				<?php else : ?>
+					<div id="<?php echo esc_attr( krv_rsya_reco_render_to() ); ?>"></div>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
 	</div>
@@ -473,6 +479,10 @@ function krv_render_post_extras(): void {
  *  ========================= */
 add_action( 'wp_footer', function () {
 	if ( ! krv_rsya_reco_enabled() || ! krv_is_single_content() ) {
+		return;
+	}
+
+	if ( krv_rsya_reco_code() !== '' ) {
 		return;
 	}
 	?>
@@ -525,96 +535,7 @@ add_action( 'wp_footer', function () {
 }, 200 );
 
 /** =========================
- *  5) RSYA InImage
- *  ========================= */
-add_action( 'wp_footer', function () {
-	if ( ! krv_rsya_inimage_enabled() || ! krv_is_single_content() ) {
-		return;
-	}
-	?>
-	<script>
-	(function () {
-		window.yaContextCb = window.yaContextCb || [];
-		var blockId = <?php echo wp_json_encode( krv_rsya_inimage_block_id() ); ?>;
-
-		function waitYa(maxMs, cb) {
-			var t0 = Date.now();
-			(function tick() {
-				if (window.Ya && Ya.Context && Ya.Context.AdvManager) return cb();
-				if (Date.now() - t0 > maxMs) return;
-				setTimeout(tick, 150);
-			})();
-		}
-
-		function isLightboxCandidate(img) {
-			return !!img.closest('a, figure, .wp-block-gallery, .gallery, .kadence-gallery, .kt-blocks-gallery, [data-fancybox], [data-lightbox], [data-lg], .lg-item, .lightbox, .pswp');
-		}
-
-		function renderTo(slotId) {
-			window.yaContextCb.push(function () {
-				try {
-					if (!window.Ya || !Ya.Context || !Ya.Context.AdvManager) return;
-					Ya.Context.AdvManager.render({
-						renderTo: slotId,
-						blockId: blockId,
-						type: 'inImage'
-					});
-				} catch (e) {}
-			});
-		}
-
-		function start() {
-			waitYa(7000, function () {
-				var root =
-					document.querySelector('.entry-content') ||
-					document.querySelector('.post-single-content') ||
-					document.querySelector('article') ||
-					document;
-
-				var images = Array.from(root.querySelectorAll('img'));
-				if (!images.length) return;
-
-				images.forEach(function (img) {
-					if (!img || img.dataset.krvInimageDone === '1') return;
-
-					var w = img.naturalWidth || img.width || 0;
-					var h = img.naturalHeight || img.height || 0;
-
-					if (w < 320 || h < 200) return;
-					if (isLightboxCandidate(img)) return;
-
-					img.dataset.krvInimageDone = '1';
-
-					var slot = document.createElement('div');
-					slot.id = 'yandex_rtb_' + blockId + '-' + Math.random().toString(16).slice(2);
-					slot.className = 'krv-rsya-inimage-slot';
-					slot.style.cssText = 'display:block;margin:8px 0 16px;';
-
-					img.insertAdjacentElement('afterend', slot);
-
-					if (!img.complete) {
-						img.addEventListener('load', function () {
-							renderTo(slot.id);
-						}, { once: true });
-					} else {
-						renderTo(slot.id);
-					}
-				});
-			});
-		}
-
-		if (document.readyState === 'complete') {
-			start();
-		} else {
-			window.addEventListener('load', start, { once: true });
-		}
-	})();
-	</script>
-	<?php
-}, 220 );
-
-/** =========================
- *  6) Other site tweaks
+ *  5) Other site tweaks
  *  ========================= */
 
 /**

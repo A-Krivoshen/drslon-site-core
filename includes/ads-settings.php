@@ -11,14 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'KRV_RSYA_RECO_BLOCK_ID', 'C-A-9861013-1' );
-define( 'KRV_RSYA_RECO_RENDER_TO', 'yandex_rtb_C-A-9861013-1' );
-
-define( 'KRV_RSYA_INIMAGE_BLOCK_ID', 'R-A-6903522-2' );
+define( 'KRV_RSYA_RECO_BLOCK_ID', 'C-A-19616264-12' );
+define( 'KRV_RSYA_RECO_RENDER_TO', 'yandex_rtb_C-A-19616264-12' );
 
 /**
  * Option getters (Настройки → Реклама РСЯ).
- * InImage is disabled by default.
  */
 function krv_rsya_reco_enabled(): bool {
 	return (bool) get_option( 'krv_rsya_reco_enabled', 1 );
@@ -33,13 +30,23 @@ function krv_rsya_reco_render_to(): string {
 	return 'yandex_rtb_' . krv_rsya_reco_block_id();
 }
 
-function krv_rsya_inimage_enabled(): bool {
-	return (bool) get_option( 'krv_rsya_inimage_enabled', 0 );
+/**
+ * Optional raw Yandex code that overrides the generated render script.
+ * Only manage_options users can set it; stored as-is (no KSES stripping).
+ */
+function krv_rsya_reco_code(): string {
+	$code = trim( (string) get_option( 'krv_rsya_reco_code', '' ) );
+	return $code;
 }
 
-function krv_rsya_inimage_block_id(): string {
-	$id = trim( (string) get_option( 'krv_rsya_inimage_block_id', '' ) );
-	return $id !== '' ? $id : KRV_RSYA_INIMAGE_BLOCK_ID;
+/**
+ * Sanitize the raw ad code: trim only, preserve HTML and <script> tags.
+ * Access is restricted to manage_options via the settings page capability.
+ *
+ * @param string $value Raw user input.
+ */
+function krv_sanitize_rsya_code( $value ): string {
+	return trim( (string) $value );
 }
 
 add_action( 'admin_init', function () {
@@ -55,16 +62,10 @@ add_action( 'admin_init', function () {
 		'sanitize_callback' => 'sanitize_text_field',
 	] );
 
-	register_setting( 'krv_ads', 'krv_rsya_inimage_enabled', [
-		'type'              => 'integer',
-		'default'           => 0,
-		'sanitize_callback' => 'absint',
-	] );
-
-	register_setting( 'krv_ads', 'krv_rsya_inimage_block_id', [
+	register_setting( 'krv_ads', 'krv_rsya_reco_code', [
 		'type'              => 'string',
 		'default'           => '',
-		'sanitize_callback' => 'sanitize_text_field',
+		'sanitize_callback' => 'krv_sanitize_rsya_code',
 	] );
 } );
 
@@ -109,32 +110,21 @@ function krv_ads_settings_page(): void {
 							value="<?php echo esc_attr( get_option( 'krv_rsya_reco_block_id', '' ) ); ?>"
 							placeholder="<?php echo esc_attr( KRV_RSYA_RECO_BLOCK_ID ); ?>"
 							class="regular-text">
-						<p class="description">Например, C-A-9861013-1. Пусто = значение по умолчанию из кода.</p>
-					</td>
-				</tr>
-			</table>
-
-			<h2>InImage (реклама поверх изображений)</h2>
-			<table class="form-table" role="presentation">
-				<tr>
-					<th scope="row">Включён</th>
-					<td>
-						<label>
-							<input type="checkbox" name="krv_rsya_inimage_enabled" value="1" <?php checked( krv_rsya_inimage_enabled() ); ?>>
-							Показывать InImage-рекламу на картинках в постах
-						</label>
+						<p class="description">Например, <?php echo esc_html( KRV_RSYA_RECO_BLOCK_ID ); ?>. Пусто = значение по умолчанию.</p>
 					</td>
 				</tr>
 				<tr>
 					<th scope="row">
-						<label for="krv_rsya_inimage_block_id">ID блока</label>
+						<label for="krv_rsya_reco_code">Код виджета (опционально)</label>
 					</th>
 					<td>
-						<input type="text" id="krv_rsya_inimage_block_id" name="krv_rsya_inimage_block_id"
-							value="<?php echo esc_attr( get_option( 'krv_rsya_inimage_block_id', '' ) ); ?>"
-							placeholder="<?php echo esc_attr( KRV_RSYA_INIMAGE_BLOCK_ID ); ?>"
-							class="regular-text">
-						<p class="description">Например, R-A-6903522-2. Пусто = значение по умолчанию из кода.</p>
+						<textarea id="krv_rsya_reco_code" name="krv_rsya_reco_code"
+							rows="10" cols="80" class="large-text code"
+							placeholder="<!-- Yandex.RTB ... -->&#10;&lt;div id=&quot;yandex_rtb_...&quot;&gt;&lt;/div&gt;&#10;&lt;script&gt;window.yaContextCb.push(()=&gt;{&#10;  Ya.Context.AdvManager.renderWidget({&#10;    renderTo: '...',&#10;    blockId: '...'&#10;  })&#10;})&lt;/script&gt;"><?php echo esc_textarea( krv_rsya_reco_code() ); ?></textarea>
+						<p class="description">
+							Вставьте полный код виджета из кабинета РСЯ — он выведется как есть.<br>
+							Пусто = код генерируется автоматически из ID блока выше.
+						</p>
 					</td>
 				</tr>
 			</table>
