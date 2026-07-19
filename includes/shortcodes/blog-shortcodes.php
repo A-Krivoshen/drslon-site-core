@@ -644,17 +644,34 @@ add_shortcode( 'krv_project_posts', function ( $atts = [] ): string {
 
 	$posts_per_page = max( 1, min( 20, (int) $atts['posts_per_page'] ) );
 
+	$related_ids = [];
+
+	if ( function_exists( 'get_field' ) ) {
+		$field_value = get_field( 'related_posts', $project_id );
+		if ( is_array( $field_value ) ) {
+			$related_ids = array_map( 'intval', $field_value );
+		}
+	}
+
+	if ( empty( $related_ids ) ) {
+		$raw = get_post_meta( $project_id, 'related_posts', true );
+		if ( is_array( $raw ) ) {
+			$related_ids = array_map( 'intval', $raw );
+		}
+	}
+
+	$related_ids = array_filter( $related_ids );
+
+	if ( empty( $related_ids ) ) {
+		return '';
+	}
+
 	$args = [
 		'post_type'      => 'post',
 		'post_status'    => 'publish',
 		'posts_per_page' => $posts_per_page,
-		'meta_query'     => [
-			[
-				'key'     => 'related_posts',
-				'value'   => sprintf( 'i:%d;', $project_id ),
-				'compare' => 'LIKE',
-			],
-		],
+		'post__in'       => $related_ids,
+		'orderby'        => 'post__in',
 		'no_found_rows'  => true,
 	];
 
