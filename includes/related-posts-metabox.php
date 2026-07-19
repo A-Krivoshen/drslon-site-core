@@ -54,7 +54,7 @@ function krv_related_posts_metabox_render( $post ) {
 		.krv-rp-selected li .krv-rp-remove:hover { color: #a00; }
 		.krv-rp-loading { color: #666; font-size: 12px; font-style: italic; }
 	</style>
-	<div class="krv-rp-wrap">
+	<div class="krv-rp-wrap" id="krv-rp-wrap-<?php echo esc_attr( $post->ID ); ?>">
 		<input type="text" class="krv-rp-search" placeholder="Поиск статей..." />
 		<div class="krv-rp-results"></div>
 		<ul class="krv-rp-selected">
@@ -72,11 +72,7 @@ function krv_related_posts_metabox_render( $post ) {
 	</div>
 	<script>
 	(function(){
-		var wrap = document.currentScript.closest('.krv-rp-wrap') || document.querySelector('.krv-rp-wrap');
-		if (!wrap) return;
-		document.addEventListener('DOMContentLoaded', function(){
-			var wrap = document.querySelector('.krv-rp-wrap');
-			if (!wrap) return;
+		function initKRVRP(wrap) {
 			var searchInput = wrap.querySelector('.krv-rp-search');
 			var resultsDiv = wrap.querySelector('.krv-rp-results');
 			var selectedUl = wrap.querySelector('.krv-rp-selected');
@@ -150,7 +146,20 @@ function krv_related_posts_metabox_render( $post ) {
 				item.style.opacity = '0.5';
 				item.textContent = item.getAttribute('data-title') + ' ✓';
 			});
-		});
+		}
+
+		var script = document.currentScript;
+		var postId = <?php echo json_encode( $post->ID ); ?>;
+		function tryInitKRVRP() {
+			var w = document.getElementById('krv-rp-wrap-' + postId);
+			if (w && !w._krvInit) { w._krvInit = true; initKRVRP(w); return true; }
+			return false;
+		}
+		if (!tryInitKRVRP()) {
+			var obs = new MutationObserver(function() { tryInitKRVRP(); });
+			obs.observe(document.body, {childList: true, subtree: true});
+			setTimeout(function() { obs.disconnect(); }, 10000);
+		}
 	})();
 	</script>
 	<?php
