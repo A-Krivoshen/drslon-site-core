@@ -626,3 +626,89 @@ add_action( 'deleted_user', function () {
     delete_transient( 'drslon_blog_sections_v1' );
     drslon_purge_blog_page_cache();
 }, 20, 0 );
+
+add_shortcode( 'krv_project_posts', function ( $atts = [] ): string {
+	if ( ! is_singular( 'project' ) ) {
+		return '';
+	}
+
+	$project_id = (int) get_queried_object_id();
+
+	if ( ! $project_id ) {
+		return '';
+	}
+
+	$atts = shortcode_atts( [
+		'posts_per_page' => 6,
+	], $atts, 'krv_project_posts' );
+
+	$posts_per_page = max( 1, min( 20, (int) $atts['posts_per_page'] ) );
+
+	$args = [
+		'post_type'      => 'post',
+		'post_status'    => 'publish',
+		'posts_per_page' => $posts_per_page,
+		'meta_query'     => [
+			[
+				'key'   => 'related_project',
+				'value' => (string) $project_id,
+			],
+		],
+		'no_found_rows'  => true,
+	];
+
+	$query = new WP_Query( $args );
+
+	if ( ! $query->have_posts() ) {
+		return '';
+	}
+
+	$project_title = get_the_title( $project_id );
+	$html  = '<section class="krv-project-posts">';
+	$html .= '<h2 class="krv-project-posts__heading">Статьи по проекту «' . esc_html( $project_title ) . '»</h2>';
+	$html .= '<div class="krv-project-posts__grid">';
+
+	while ( $query->have_posts() ) {
+		$query->the_post();
+
+		$post_id   = get_the_ID();
+		$terms     = get_the_category( $post_id );
+		$term      = ! empty( $terms ) && $terms[0] instanceof WP_Term ? $terms[0]->name : '';
+		$excerpt   = wp_trim_words( wp_strip_all_tags( get_the_excerpt( $post_id ) ), 18, '…' );
+		$permalink = get_permalink( $post_id );
+		$title     = get_the_title( $post_id );
+		$date      = get_the_date( '', $post_id );
+
+		if ( has_post_thumbnail( $post_id ) ) {
+			$media = get_the_post_thumbnail( $post_id, 'medium_large', [
+				'class' => 'krv-project-posts__image',
+			] );
+		} else {
+			$media = '<span class="krv-project-posts__placeholder" aria-hidden="true"></span>';
+		}
+
+		$meta = esc_html( $date );
+		if ( '' !== $term ) {
+			$meta .= '<span class="krv-project-posts__dot">·</span>' . esc_html( $term );
+		}
+
+		$html .= '<article class="krv-project-posts__item">';
+		$html .= '<a class="krv-project-posts__media" href="' . esc_url( $permalink ) . '" aria-label="' . esc_attr( $title ) . '">' . $media . '</a>';
+		$html .= '<div class="krv-project-posts__content">';
+		$html .= '<p class="krv-project-posts__meta">' . $meta . '</p>';
+		$html .= '<h3 class="krv-project-posts__title"><a href="' . esc_url( $permalink ) . '">' . esc_html( $title ) . '</a></h3>';
+
+		if ( '' !== $excerpt ) {
+			$html .= '<p class="krv-project-posts__excerpt">' . esc_html( $excerpt ) . '</p>';
+		}
+
+		$html .= '</div>';
+		$html .= '</article>';
+	}
+
+	wp_reset_postdata();
+
+	$html .= '</div></section>';
+
+	return $html;
+} );

@@ -455,6 +455,13 @@ function krv_render_post_extras(): void {
 			<p class="krv-project-link"><a href="<?php echo esc_url( $project_url ); ?>" target="_blank" rel="noopener noreferrer">Открыть сайт проекта</a></p>
 		<?php endif; ?>
 
+		<?php if ( is_singular( 'project' ) && function_exists( 'do_shortcode' ) ) :
+			$project_posts_html = do_shortcode( '[krv_project_posts]' );
+			if ( '' !== $project_posts_html ) :
+				echo $project_posts_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- shortcode output.
+			endif;
+		endif; ?>
+
 		<div id="telegram-comments" style="clear:both;display:block;width:100%;min-height:120px;margin:0 0 20px;">
 			<?php krv_render_telegram_discussion_widget(); ?>
 		</div>

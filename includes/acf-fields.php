@@ -67,6 +67,32 @@ add_action( 'acf/init', function () {
 	] );
 
 	acf_add_local_field_group( [
+		'key'      => 'group_blog_post',
+		'title'    => 'Запись блога',
+		'fields'   => [
+			[
+				'key'          => 'field_related_project',
+				'label'        => 'Связанный проект',
+				'name'         => 'related_project',
+				'type'         => 'post_object',
+				'post_types'   => [ 'project' ],
+				'return_format' => 'id',
+				'multiple'     => false,
+				'allow_null'   => true,
+			],
+		],
+		'location' => [
+			[
+				[
+					'param'    => 'post_type',
+					'operator' => '==',
+					'value'    => 'post',
+				],
+			],
+		],
+	] );
+
+	acf_add_local_field_group( [
 		'key'      => 'group_services',
 		'title'    => 'Услуги',
 		'fields'   => [
