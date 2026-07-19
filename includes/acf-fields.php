@@ -345,8 +345,7 @@ function krv_services_showcase_seed_intro_heading(): void {
 add_action( 'acf/init', 'krv_services_showcase_seed_intro_heading', 25 );
 
 /**
- * Fallback: save related_posts from REST API body when ACF doesn't handle it.
- * Gutenberg sends ACF data as JSON in the request body, not as $_POST.
+ * Fallback: save related_posts when ACF doesn't handle it (classic editor sends $_POST['acf'] as JSON).
  */
 add_action( 'save_post_project', function ( $post_id, $post = null, $update = false ) {
 	if ( ! $update ) {
@@ -361,46 +360,23 @@ add_action( 'save_post_project', function ( $post_id, $post = null, $update = fa
 		return;
 	}
 
+	// Classic editor: $_POST['acf'] contains JSON-encoded field data.
+	$raw = filter_input( INPUT_POST, 'acf', FILTER_UNSAFE_RAW );
+	if ( ! is_string( $raw ) || empty( $raw ) ) {
+		return;
+	}
+
+	$acf_data = json_decode( $raw, true );
+	if ( ! is_array( $acf_data ) ) {
+		return;
+	}
+
 	$value = [];
 
-	// Classic editor: $_POST['acf'].
-	$raw_post = filter_input( INPUT_POST, 'acf', FILTER_UNSAFE_RAW );
-	if ( is_string( $raw_post ) && ! empty( $raw_post ) ) {
-		$acf_data = json_decode( $raw_post, true );
-		if ( is_array( $acf_data ) && isset( $acf_data['field_related_posts'] ) ) {
-			$value = (array) $acf_data['field_related_posts'];
-		}
-	}
-
-	// Gutenberg REST API: JSON body.
-	if ( empty( $value ) ) {
-	$body = file_get_contents( 'php://input' );
-	if ( is_string( $body ) && ! empty( $body ) ) {
-		$json = json_decode( $body, true );
-		if ( is_array( $json ) ) {
-			error_log( 'krv_save project=' . $post_id . ' keys=' . implode( ',', array_keys( $json ) ) );
-			if ( isset( $json['acf'] ) ) {
-				error_log( 'krv_save acf_keys=' . implode( ',', array_keys( (array) $json['acf'] ) ) );
-			}
-			if ( isset( $json['meta'] ) ) {
-				error_log( 'krv_save meta_keys=' . implode( ',', array_keys( (array) $json['meta'] ) ) );
-			}
-				// Gutenberg sends as {"acf":{"field_related_posts":[...]}} or flat {"related_posts":[...]}.
-				if ( isset( $json['acf']['field_related_posts'] ) ) {
-					$value = (array) $json['acf']['field_related_posts'];
-				} elseif ( isset( $json['acf']['related_posts'] ) ) {
-					$value = (array) $json['acf']['related_posts'];
-				} elseif ( isset( $json['meta']['related_posts'] ) ) {
-					$value = (array) $json['meta']['related_posts'];
-				} elseif ( isset( $json['related_posts'] ) ) {
-					$value = (array) $json['related_posts'];
-				}
-			}
-		}
-	}
-
-	if ( empty( $value ) ) {
-		return;
+	if ( isset( $acf_data['field_related_posts'] ) ) {
+		$value = (array) $acf_data['field_related_posts'];
+	} elseif ( isset( $acf_data['related_posts'] ) ) {
+		$value = (array) $acf_data['related_posts'];
 	}
 
 	$value = array_map( 'intval', $value );
