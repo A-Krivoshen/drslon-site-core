@@ -14,8 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function krv_service_page_registry(): array {
 	return array(
+		// wpdomainwhois only renders a result with ?domain=+nonce (no form).
+		// Use interactive whois_lookup form so /whois/ is usable.
 		6186 => array(
-			'shortcode' => 'wpdomainwhois',
+			'shortcode' => 'whois_lookup',
 			'shell'     => 'tool',
 		),
 		6204 => array(

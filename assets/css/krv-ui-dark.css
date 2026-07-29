@@ -267,6 +267,9 @@ html[data-theme="dark"] .krv-service-page__dns-types strong {
 
 /* Tool plugins: white inline cards → dark surfaces */
 html[data-theme="dark"] .dns-lookup-container,
+html[data-theme="dark"] .whois-lookup-container,
+html[data-theme="dark"] .punycode-converter-container,
+html[data-theme="dark"] .nm-calculator-container,
 html[data-theme="dark"] .crontab-generator-container,
 html[data-theme="dark"] .firewall-configurator-container,
 html[data-theme="dark"] .speed-test-container,
@@ -278,7 +281,9 @@ html[data-theme="dark"] .krv-service-page__tool > div[style*="background"],
 html[data-theme="dark"] .krv-service-page [style*="background: #fff"],
 html[data-theme="dark"] .krv-service-page [style*="background:#fff"],
 html[data-theme="dark"] .krv-service-page [style*="background: #ffffff"],
-html[data-theme="dark"] .krv-service-page [style*="background:#ffffff"] {
+html[data-theme="dark"] .krv-service-page [style*="background:#ffffff"],
+html[data-theme="dark"] .krv-service-page [style*="background:#fff"],
+html[data-theme="dark"] .wpsc-shortcode-form [style*="background"] {
   background: #121a2b !important;
   background-color: #121a2b !important;
   color: #e8eefc !important;
@@ -298,6 +303,9 @@ html[data-theme="dark"] .krv-service-page [style*="background:#f9f9f9"] {
 /* Tables inside tools (crontab / subnet etc.) */
 html[data-theme="dark"] .krv-service-page table,
 html[data-theme="dark"] .crontab-generator-container table,
+html[data-theme="dark"] .nm-calculator-container table,
+html[data-theme="dark"] .whois-lookup-container table,
+html[data-theme="dark"] .punycode-converter-container table,
 html[data-theme="dark"] .firewall-configurator-container table,
 html[data-theme="dark"] .dns-lookup-container table {
   background: #0b1220 !important;
@@ -323,6 +331,15 @@ html[data-theme="dark"] .krv-service-page textarea,
 html[data-theme="dark"] .dns-lookup-container input,
 html[data-theme="dark"] .dns-lookup-container select,
 html[data-theme="dark"] .dns-lookup-container textarea,
+html[data-theme="dark"] .whois-lookup-container input,
+html[data-theme="dark"] .whois-lookup-container select,
+html[data-theme="dark"] .whois-lookup-container textarea,
+html[data-theme="dark"] .punycode-converter-container input,
+html[data-theme="dark"] .punycode-converter-container select,
+html[data-theme="dark"] .punycode-converter-container textarea,
+html[data-theme="dark"] .nm-calculator-container input,
+html[data-theme="dark"] .nm-calculator-container select,
+html[data-theme="dark"] .nm-calculator-container textarea,
 html[data-theme="dark"] .crontab-generator-container input,
 html[data-theme="dark"] .crontab-generator-container select,
 html[data-theme="dark"] .crontab-generator-container textarea,
@@ -367,6 +384,9 @@ html[data-theme="dark"] .krv-service-page p,
 html[data-theme="dark"] .krv-service-page li,
 html[data-theme="dark"] .krv-service-page legend,
 html[data-theme="dark"] .dns-lookup-container,
+html[data-theme="dark"] .whois-lookup-container,
+html[data-theme="dark"] .punycode-converter-container,
+html[data-theme="dark"] .nm-calculator-container,
 html[data-theme="dark"] .crontab-generator-container,
 html[data-theme="dark"] .firewall-configurator-container,
 html[data-theme="dark"] .speed-test-container,
@@ -375,10 +395,38 @@ html[data-theme="dark"] .wdc-form {
   color: #e8eefc !important;
 }
 
+/* Headings/paragraphs hard-coded dark in WP Site Checker markup */
+html[data-theme="dark"] .wpsc-shortcode-form div,
+html[data-theme="dark"] .wpsc-shortcode-form p,
+html[data-theme="dark"] .wpsc-shortcode-form span,
+html[data-theme="dark"] .wpsc-shortcode-form label,
+html[data-theme="dark"] .whois-lookup-container p,
+html[data-theme="dark"] .whois-lookup-container label,
+html[data-theme="dark"] .whois-lookup-container h1,
+html[data-theme="dark"] .whois-lookup-container h2,
+html[data-theme="dark"] .whois-lookup-container h3,
+html[data-theme="dark"] .punycode-converter-container p,
+html[data-theme="dark"] .punycode-converter-container label,
+html[data-theme="dark"] .punycode-converter-container h1,
+html[data-theme="dark"] .punycode-converter-container h2,
+html[data-theme="dark"] .punycode-converter-container h3,
+html[data-theme="dark"] .nm-calculator-container p,
+html[data-theme="dark"] .nm-calculator-container label,
+html[data-theme="dark"] .nm-calculator-container h1,
+html[data-theme="dark"] .nm-calculator-container h2,
+html[data-theme="dark"] .nm-calculator-container h3 {
+  color: #e8eefc !important;
+  -webkit-text-fill-color: #e8eefc !important;
+  opacity: 1 !important;
+}
+
 html[data-theme="dark"] .krv-service-page button,
 html[data-theme="dark"] .krv-service-page input[type="submit"],
 html[data-theme="dark"] .krv-service-page input[type="button"],
 html[data-theme="dark"] .dns-lookup-container button,
+html[data-theme="dark"] .whois-lookup-container button,
+html[data-theme="dark"] .punycode-converter-container button,
+html[data-theme="dark"] .nm-calculator-container button,
 html[data-theme="dark"] .crontab-generator-container button,
 html[data-theme="dark"] .firewall-configurator-container button,
 html[data-theme="dark"] .speed-test-button,
@@ -394,6 +442,9 @@ html[data-theme="dark"] .wdc-form button {
 html[data-theme="dark"] .krv-service-page button:hover,
 html[data-theme="dark"] .krv-service-page input[type="submit"]:hover,
 html[data-theme="dark"] .dns-lookup-container button:hover,
+html[data-theme="dark"] .whois-lookup-container button:hover,
+html[data-theme="dark"] .punycode-converter-container button:hover,
+html[data-theme="dark"] .nm-calculator-container button:hover,
 html[data-theme="dark"] .crontab-generator-container button:hover,
 html[data-theme="dark"] .firewall-configurator-container button:hover,
 html[data-theme="dark"] .speed-test-button:hover,
