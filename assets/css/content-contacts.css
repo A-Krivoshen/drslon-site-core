@@ -1,0 +1,235 @@
+/* content-contacts.css — light UI for content shortcodes (dark: theme 10-theme-dark.css) */
+.krv-contact-block {
+  --accent: #5181fe;
+  --accent-hover: #4169d4;
+  --accent-bg: #eaf1ff;
+  --border-soft: #d9e6ff;
+  --text-main: #333;
+  --text-soft: #666;
+  --card-bg: #fff;
+  --card-radius: 20px;
+  --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
+  --card-shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 12px;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.krv-contact-block,
+.krv-contact-block * {
+  box-sizing: border-box;
+}
+
+.krv-contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 340px);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.krv-contact-card,
+.krv-contact-image-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+}
+
+/* Левая карточка */
+.krv-contact-card {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.krv-contact-title {
+  margin: 0 0 12px;
+  font-size: 1.95rem;
+  line-height: 1.2;
+  color: var(--text-main);
+  text-align: center;
+}
+
+.krv-contact-lead {
+  margin: 0 0 24px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.krv-contact-list {
+  display: grid;
+  gap: 12px;
+}
+
+.krv-contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 12px 16px;
+  background: #f7faff;
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.krv-contact-item:hover {
+  background: var(--accent-bg);
+  border-color: #c7daff;
+  transform: translateY(-1px);
+}
+
+.krv-contact-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--accent);
+  flex: 0 0 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.krv-contact-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+.krv-contact-item a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 500;
+  line-height: 1.35;
+  word-break: break-word;
+  transition: color 0.25s ease;
+}
+
+.krv-contact-item a:hover {
+  color: var(--accent);
+}
+
+/* Правая карточка */
+.krv-contact-image-card {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.krv-contact-image-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.krv-contact-home-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.krv-contact-image-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.krv-contact-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 440px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 16px;
+}
+
+.krv-contact-caption {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  max-width: calc(100% - 24px);
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--text-main);
+  font-size: 0.86rem;
+  line-height: 1.35;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Планшеты */
+@media (max-width: 900px) {
+  .krv-contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .krv-contact-image-card {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* Мобильные */
+@media (max-width: 600px) {
+  .krv-contact-block {
+    margin: 20px auto;
+    padding: 0 8px;
+  }
+
+  .krv-contact-grid {
+    gap: 16px;
+  }
+
+  .krv-contact-card {
+    padding: 18px 14px;
+  }
+
+  .krv-contact-title {
+    font-size: 1.55rem;
+  }
+
+  .krv-contact-lead {
+    font-size: 0.94rem;
+    margin-bottom: 18px;
+  }
+
+  .krv-contact-item {
+    min-height: 52px;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .krv-contact-icon {
+    width: 20px;
+    height: 20px;
+    flex-basis: 20px;
+  }
+
+  .krv-contact-item a {
+    font-size: 0.95rem;
+  }
+
+  .krv-contact-image-card {
+    padding: 8px;
+  }
+
+  .krv-contact-caption {
+    font-size: 0.76rem;
+    bottom: 8px;
+    padding: 6px 10px;
+  }
+}

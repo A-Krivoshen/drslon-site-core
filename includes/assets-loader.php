@@ -44,6 +44,19 @@ add_action( 'wp_enqueue_scripts', function () {
 			'file'      => 'assets/css/service-page-shell.css',
 			'shortcode' => [ 'krv_service_page' ],
 		],
+		// Content widgets (ex-inline post HTML); dark lives in theme 10-theme-dark.css.
+		'drslon-content-contacts' => [
+			'file'      => 'assets/css/content-contacts.css',
+			'shortcode' => [ 'krv_contact_block' ],
+		],
+		'drslon-content-resume' => [
+			'file'      => 'assets/css/content-resume.css',
+			'shortcode' => [ 'krv_resume' ],
+		],
+		'drslon-content-consult' => [
+			'file'      => 'assets/css/content-consult.css',
+			'shortcode' => [ 'krv_consult', 'krv_consultations' ],
+		],
 	];
 
 	$assets = [
@@ -54,6 +67,9 @@ add_action( 'wp_enqueue_scripts', function () {
 		'drslon-price-list-widget'    => [ 'type' => 'style' ],
 		'drslon-price-list-widget-js' => [ 'type' => 'script' ],
 		'drslon-service-page-shell'   => [ 'type' => 'style' ],
+		'drslon-content-contacts'     => [ 'type' => 'style' ],
+		'drslon-content-resume'       => [ 'type' => 'style' ],
+		'drslon-content-consult'      => [ 'type' => 'style' ],
 	];
 
 	$any_ui = false;
