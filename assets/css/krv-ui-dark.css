@@ -179,11 +179,12 @@ html[data-theme="dark"] .krv-price-widget {
   --krv-soft: #1a2744;
   --krv-soft-2: #152238;
   --krv-line: #243049;
-  --krv-line-strong: #2e3c58;
+  --krv-line-strong: #3d5a9a;
   --krv-text: #e8eefc;
   --krv-muted: #a8b6d4;
   --krv-accent: #315fe8;
-  --krv-accent-dark: #244ac2;
+  /* accent-dark used as accent TEXT on dark surfaces — keep light enough */
+  --krv-accent-dark: #8aacff;
   --krv-accent-soft: #1a2744;
   --krv-shadow: 0 12px 34px rgba(0, 0, 0, 0.4);
   --krv-shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.3);
@@ -195,11 +196,303 @@ html[data-theme="dark"] .krv-price-widget a:not([class*="btn"]):not(.krv-btn) {
   color: #8aacff;
 }
 
+/* Primary buttons: hover needs real dark blue, not light accent text token */
+html[data-theme="dark"] .krv-price-widget .krv-btn-primary {
+  border-color: #315fe8 !important;
+  background: #315fe8 !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-btn-primary:hover {
+  border-color: #244ac2 !important;
+  background: #244ac2 !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-btn-secondary {
+  background: #121a2b !important;
+  border-color: #3d5a9a !important;
+  color: #8aacff !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-btn-secondary:hover {
+  background: #1a2744 !important;
+  border-color: #315fe8 !important;
+  color: #a8c0ff !important;
+}
+
+/* Structural cards / chips that may still hardcode light fills */
+html[data-theme="dark"] .krv-price-widget .krv-hero,
+html[data-theme="dark"] .krv-price-widget .krv-hero-panel,
+html[data-theme="dark"] .krv-price-widget .krv-route-card,
+html[data-theme="dark"] .krv-price-widget .krv-package,
+html[data-theme="dark"] .krv-price-widget .krv-service-card,
+html[data-theme="dark"] .krv-price-widget .krv-info-card,
+html[data-theme="dark"] .krv-price-widget .krv-step,
+html[data-theme="dark"] .krv-price-widget .krv-faq-item,
+html[data-theme="dark"] .krv-price-widget .krv-landing-card {
+  background: #121a2b !important;
+  border-color: #243049 !important;
+  color: #e8eefc !important;
+}
+
+html[data-theme="dark"] .krv-price-widget .krv-title,
+html[data-theme="dark"] .krv-price-widget .krv-section-head h2,
+html[data-theme="dark"] .krv-price-widget .krv-card-title,
+html[data-theme="dark"] .krv-price-widget .krv-route-title,
+html[data-theme="dark"] .krv-price-widget .krv-hero-panel h2,
+html[data-theme="dark"] .krv-price-widget .krv-mini-title,
+html[data-theme="dark"] .krv-price-widget .krv-link-title,
+html[data-theme="dark"] .krv-price-widget h2,
+html[data-theme="dark"] .krv-price-widget h3 {
+  color: #f4f7ff !important;
+}
+
+html[data-theme="dark"] .krv-price-widget .krv-lead,
+html[data-theme="dark"] .krv-price-widget .krv-subtitle,
+html[data-theme="dark"] .krv-price-widget .krv-section-head p,
+html[data-theme="dark"] .krv-price-widget .krv-route-text,
+html[data-theme="dark"] .krv-price-widget .krv-text,
+html[data-theme="dark"] .krv-price-widget .krv-small,
+html[data-theme="dark"] .krv-price-widget .krv-note,
+html[data-theme="dark"] .krv-price-widget .krv-mini-text,
+html[data-theme="dark"] .krv-price-widget .krv-price,
+html[data-theme="dark"] .krv-price-widget .krv-tab-intro {
+  color: #a8b6d4 !important;
+}
+
+html[data-theme="dark"] .krv-price-widget .krv-subtitle {
+  color: #8aacff !important;
+}
+
+html[data-theme="dark"] .krv-price-widget .krv-badge,
+html[data-theme="dark"] .krv-price-widget .krv-kicker {
+  background: #1a2744 !important;
+  color: #8aacff !important;
+}
+
+html[data-theme="dark"] .krv-price-widget .krv-service-item,
+html[data-theme="dark"] .krv-price-widget .krv-mini,
+html[data-theme="dark"] .krv-price-widget .krv-link-card,
+html[data-theme="dark"] .krv-price-widget .krv-note,
+html[data-theme="dark"] .krv-price-widget .krv-stack span,
+html[data-theme="dark"] .krv-price-widget .krv-tags span,
+html[data-theme="dark"] .krv-price-widget .krv-trust-item {
+  background: #1a2744 !important;
+  border-color: #243049 !important;
+  color: #e8eefc !important;
+}
+
+html[data-theme="dark"] .krv-price-widget .krv-anchor-nav {
+  background: #121a2b !important;
+  border-color: #243049 !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-anchor-nav a,
+html[data-theme="dark"] .krv-price-widget .krv-prices-tab,
+html[data-theme="dark"] .krv-price-widget .krv-landings-strip a {
+  background: #0f172a !important;
+  border-color: #243049 !important;
+  color: #8aacff !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-anchor-nav a:hover,
+html[data-theme="dark"] .krv-price-widget .krv-anchor-nav a.is-active,
+html[data-theme="dark"] .krv-price-widget .krv-prices-tab:hover,
+html[data-theme="dark"] .krv-price-widget .krv-prices-tab.is-active,
+html[data-theme="dark"] .krv-price-widget .krv-landings-strip a:hover {
+  background: #1a2744 !important;
+  border-color: #3d5a9a !important;
+  color: #a8c0ff !important;
+}
+
+html[data-theme="dark"] .krv-price-widget .krv-package-accent {
+  background: #1a2744 !important;
+  border-color: #3d5a9a !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-hero-panel-accent {
+  background: #1a2744 !important;
+  border-color: #3d5a9a !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-hero-panel-note {
+  background: #0f172a !important;
+  color: #c2cde6 !important;
+}
+
+/* CTA block stays accent; invert secondary white buttons carefully */
+html[data-theme="dark"] .krv-price-widget .krv-cta {
+  background: #244ac2 !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-cta h2,
+html[data-theme="dark"] .krv-price-widget .krv-cta p {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-cta .krv-btn {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #1a2744 !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-cta .krv-btn:hover {
+  background: #e8eefc !important;
+  border-color: #e8eefc !important;
+  color: #0b1220 !important;
+}
+
+html[data-theme="dark"] .krv-price-widget .krv-mobile-cta {
+  background: #121a2b !important;
+  border-color: #243049 !important;
+}
+
+/* FAQ summary */
+html[data-theme="dark"] .krv-price-widget .krv-faq-item summary {
+  color: #f4f7ff !important;
+}
+html[data-theme="dark"] .krv-price-widget .krv-faq-item p {
+  color: #a8b6d4 !important;
+}
+
+/* Price amounts stay strong */
+html[data-theme="dark"] .krv-price-widget .krv-price,
+html[data-theme="dark"] .krv-price-widget .krv-price-small-inline {
+  color: #f4f7ff !important;
+}
+
 /* ── Contacts topic banner ── */
 html[data-theme="dark"] .krv-contacts-topic-banner {
   background: #121a2b;
   border-color: #243049;
   color: #e8eefc;
+}
+
+/* ── Consultations page widget (/konsultatsii/) ──
+   Inline <style> in post content hardcodes light palette — force dark. */
+html[data-theme="dark"] .consult-widget {
+  color: #e8eefc !important;
+}
+html[data-theme="dark"] .consult-widget a:not(.consult-widget__button) {
+  color: #8aacff !important;
+}
+html[data-theme="dark"] .consult-widget__intro {
+  background:
+    radial-gradient(circle at top left, rgba(49, 95, 232, 0.22), transparent 40%),
+    linear-gradient(135deg, #121a2b 0%, #0f172a 100%) !important;
+  border-color: #243049 !important;
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.35) !important;
+}
+html[data-theme="dark"] .consult-widget__badge,
+html[data-theme="dark"] .consult-widget__eyebrow {
+  background: #1a2744 !important;
+  color: #8aacff !important;
+}
+html[data-theme="dark"] .consult-widget__intro h2,
+html[data-theme="dark"] .consult-widget__main h2,
+html[data-theme="dark"] .consult-widget__faq h3 {
+  color: #f4f7ff !important;
+}
+html[data-theme="dark"] .consult-widget__intro p,
+html[data-theme="dark"] .consult-widget__note,
+html[data-theme="dark"] .consult-widget__price small,
+html[data-theme="dark"] .consult-widget__faq details p,
+html[data-theme="dark"] .consult-widget__features em {
+  color: #a8b6d4 !important;
+}
+html[data-theme="dark"] .consult-widget__price-line,
+html[data-theme="dark"] .consult-widget__faq summary,
+html[data-theme="dark"] .consult-widget__faq summary::marker {
+  color: #8aacff !important;
+}
+html[data-theme="dark"] .consult-widget__card,
+html[data-theme="dark"] .consult-widget__faq {
+  background: #121a2b !important;
+  border-color: #243049 !important;
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.35) !important;
+}
+html[data-theme="dark"] .consult-widget__price span,
+html[data-theme="dark"] .consult-widget__features span {
+  color: #f4f7ff !important;
+}
+html[data-theme="dark"] .consult-widget__features li {
+  background: #0f172a !important;
+  border-color: #243049 !important;
+}
+html[data-theme="dark"] .consult-widget__features i {
+  background: #1a2744 !important;
+  color: #8aacff !important;
+}
+html[data-theme="dark"] .consult-widget__button {
+  background: #315fe8 !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .consult-widget__button:hover {
+  background: #244ac2 !important;
+}
+html[data-theme="dark"] .consult-widget__visual {
+  background: linear-gradient(180deg, #1a2744 0%, #0f172a 100%) !important;
+}
+html[data-theme="dark"] .consult-widget__caption {
+  background: #121a2b !important;
+  color: #c2cde6 !important;
+}
+html[data-theme="dark"] .consult-widget__faq details {
+  border-bottom-color: #243049 !important;
+}
+
+/* ── Resume page widget (/resume/) ── */
+html[data-theme="dark"] .krv-resume-widget {
+  --bg: #0b1220 !important;
+  --card: #121a2b !important;
+  --line: #243049 !important;
+  --text: #e8eefc !important;
+  --muted: #a8b6d4 !important;
+  --accent: #315fe8 !important;
+  --accent-dark: #8aacff !important;
+  --tag-bg: #1a2744 !important;
+  --soft: #1a2744 !important;
+  --shadow: 0 12px 34px rgba(0, 0, 0, 0.4) !important;
+  background: #0b1220 !important;
+  color: #e8eefc !important;
+}
+html[data-theme="dark"] .krv-resume-hero,
+html[data-theme="dark"] .krv-resume-card {
+  background: #121a2b !important;
+  border-color: #243049 !important;
+}
+html[data-theme="dark"] .krv-resume-name,
+html[data-theme="dark"] .krv-resume-card h2,
+html[data-theme="dark"] .krv-resume-card h3 {
+  color: #f4f7ff !important;
+}
+html[data-theme="dark"] .krv-resume-role,
+html[data-theme="dark"] .krv-resume-badge,
+html[data-theme="dark"] .krv-resume-period {
+  color: #8aacff !important;
+}
+html[data-theme="dark"] .krv-resume-badge,
+html[data-theme="dark"] .krv-resume-period {
+  background: #1a2744 !important;
+}
+html[data-theme="dark"] .krv-resume-summary,
+html[data-theme="dark"] .krv-resume-card p,
+html[data-theme="dark"] .krv-resume-ul,
+html[data-theme="dark"] .krv-resume-company {
+  color: #a8b6d4 !important;
+}
+html[data-theme="dark"] .krv-resume-contacts a,
+html[data-theme="dark"] .krv-resume-contacts span,
+html[data-theme="dark"] .krv-resume-tags span,
+html[data-theme="dark"] .krv-resume-stack span {
+  background: #1a2744 !important;
+  border-color: #243049 !important;
+  color: #e8eefc !important;
+}
+html[data-theme="dark"] .krv-resume-note,
+html[data-theme="dark"] .krv-resume-mini,
+html[data-theme="dark"] .krv-resume-link {
+  background: #0f172a !important;
+  border-color: #243049 !important;
+  color: #c2cde6 !important;
+}
+html[data-theme="dark"] .krv-resume-lang-bar {
+  background: #243049 !important;
+}
+html[data-theme="dark"] .krv-resume-lang-top {
+  color: #e8eefc !important;
 }
 
 /* Social icons SVG paths often use currentColor or fill */
