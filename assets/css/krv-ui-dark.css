@@ -1,0 +1,201 @@
+/**
+ * Dark mode for drslon-site-core shortcode UIs.
+ * Depends on html[data-theme="dark"] from theme krv-theme.js
+ * Palette aligned with static landings / DrSlon.
+ */
+
+/* ── Services landing ── */
+html[data-theme="dark"] .krv-services-landing {
+  --accent: #315fe8;
+  --accent-hover: #244ac2;
+  --accent-bg: #1a2744;
+  --text-main: #e8eefc;
+  --text-soft: #a8b6d4;
+  --card-bg: #121a2b;
+  --card-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  --card-shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.45);
+  color: var(--text-main);
+}
+
+html[data-theme="dark"] .krv-landing-contact-card,
+html[data-theme="dark"] .krv-landing-service-item,
+html[data-theme="dark"] .krv-landing-pricing {
+  background: var(--card-bg);
+  border: 1px solid #243049;
+  box-shadow: var(--card-shadow);
+  color: var(--text-main);
+}
+
+html[data-theme="dark"] .krv-landing-avatar-wrap {
+  background: #0f172a;
+  border-color: #315fe8;
+}
+
+html[data-theme="dark"] .krv-landing-title,
+html[data-theme="dark"] .krv-landing-services-header h2,
+html[data-theme="dark"] .krv-landing-pricing-title {
+  color: #e8eefc;
+}
+
+html[data-theme="dark"] .krv-landing-lead,
+html[data-theme="dark"] .krv-landing-meta,
+html[data-theme="dark"] .krv-landing-services-header p,
+html[data-theme="dark"] .krv-landing-pricing-lead,
+html[data-theme="dark"] .krv-landing-pricing-rate {
+  color: #a8b6d4;
+}
+
+html[data-theme="dark"] .krv-landing-service-icon {
+  background: #1a2744;
+  color: #8aacff;
+}
+
+html[data-theme="dark"] .krv-landing-contacts a {
+  color: #8aacff;
+}
+
+html[data-theme="dark"] .krv-landing-contacts a:hover {
+  color: #a8c4ff;
+}
+
+html[data-theme="dark"] .krv-landing-social-icon {
+  fill: #e8eefc;
+  color: #e8eefc;
+}
+
+html[data-theme="dark"] .krv-landing-contacts a:hover .krv-landing-social-icon {
+  fill: #8aacff;
+  color: #8aacff;
+}
+
+html[data-theme="dark"] .krv-landing-pricing-button,
+html[data-theme="dark"] .krv-landing-pricing a.krv-landing-pricing-button {
+  background: #315fe8 !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+html[data-theme="dark"] .krv-landing-pricing-button:hover {
+  background: #244ac2 !important;
+}
+
+/* ── Clients grid ── */
+html[data-theme="dark"] .krv-clients-grid-wrap {
+  --krv-accent: #315fe8;
+  --krv-accent-hover: #244ac2;
+  --krv-card-bg: #121a2b;
+  --krv-text-main: #e8eefc;
+  --krv-text-soft: #a8b6d4;
+  --krv-card-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  --krv-card-shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.45);
+  color: var(--krv-text-main);
+}
+
+html[data-theme="dark"] .krv-clients-grid-header h2 {
+  color: #e8eefc;
+}
+
+html[data-theme="dark"] .krv-clients-grid-header p {
+  color: #a8b6d4;
+}
+
+html[data-theme="dark"] .krv-client-card {
+  background: #121a2b;
+  border: 1px solid #243049;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .krv-client-card:hover {
+  border-color: #3d5a9a;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .krv-client-title {
+  color: #e8eefc;
+}
+
+html[data-theme="dark"] .krv-client-description {
+  color: #a8b6d4;
+}
+
+html[data-theme="dark"] .krv-client-logo-wrap {
+  background: #0f172a;
+}
+
+/* ── Partners ── */
+html[data-theme="dark"] .krv-partners-grid,
+html[data-theme="dark"] .krv-partners-wrap {
+  color: #e8eefc;
+}
+
+html[data-theme="dark"] .krv-partners-grid a,
+html[data-theme="dark"] .krv-partner-card {
+  background: #121a2b;
+  border-color: #243049;
+  color: #e8eefc;
+}
+
+html[data-theme="dark"] .krv-partner-card:hover {
+  border-color: #3d5a9a;
+}
+
+/* ── Services showcase ── */
+html[data-theme="dark"] .krv-services-showcase,
+html[data-theme="dark"] .krv-services-showcase__item {
+  color: #e8eefc;
+}
+
+html[data-theme="dark"] .krv-services-showcase__item {
+  background: #121a2b;
+  border-color: #243049;
+}
+
+/* ── Service page shell ── */
+html[data-theme="dark"] .krv-service-page {
+  --krv-sp-accent: #315fe8;
+  --krv-sp-accent-soft: #1a2744;
+  --krv-sp-text: #e8eefc;
+  --krv-sp-muted: #a8b6d4;
+  --krv-sp-line: #243049;
+  --krv-sp-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
+  color: var(--krv-sp-text);
+}
+
+html[data-theme="dark"] .krv-service-page__heading {
+  color: #e8eefc;
+}
+
+/* ── Price list widget ── */
+html[data-theme="dark"] .krv-price-widget {
+  --krv-bg: #0b1220;
+  --krv-card: #121a2b;
+  --krv-soft: #1a2744;
+  --krv-soft-2: #152238;
+  --krv-line: #243049;
+  --krv-line-strong: #2e3c58;
+  --krv-text: #e8eefc;
+  --krv-muted: #a8b6d4;
+  --krv-accent: #315fe8;
+  --krv-accent-dark: #244ac2;
+  --krv-accent-soft: #1a2744;
+  --krv-shadow: 0 12px 34px rgba(0, 0, 0, 0.4);
+  --krv-shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.3);
+  background: var(--krv-bg);
+  color: var(--krv-text);
+}
+
+html[data-theme="dark"] .krv-price-widget a:not([class*="btn"]):not(.krv-btn) {
+  color: #8aacff;
+}
+
+/* ── Contacts topic banner ── */
+html[data-theme="dark"] .krv-contacts-topic-banner {
+  background: #121a2b;
+  border-color: #243049;
+  color: #e8eefc;
+}
+
+/* Social icons SVG paths often use currentColor or fill */
+html[data-theme="dark"] .krv-landing-social-icon path {
+  fill: currentColor;
+}

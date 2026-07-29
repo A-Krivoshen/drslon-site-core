@@ -56,6 +56,8 @@ add_action( 'wp_enqueue_scripts', function () {
 		'drslon-service-page-shell'   => [ 'type' => 'style' ],
 	];
 
+	$any_ui = false;
+
 	foreach ( $assets as $handle => $meta ) {
 		if ( ! isset( $styles[ $handle ] ) ) {
 			continue;
@@ -78,9 +80,25 @@ add_action( 'wp_enqueue_scripts', function () {
 
 		if ( $meta['type'] === 'script' ) {
 			wp_enqueue_script( $handle, $url, [], $version, true );
+			$any_ui = true;
 			continue;
 		}
 
 		wp_enqueue_style( $handle, $url, [], $version );
+		$any_ui = true;
+	}
+
+	// Dark overrides for shortcode UIs (html[data-theme=dark] from theme).
+	if ( $any_ui ) {
+		$dark_rel  = 'assets/css/krv-ui-dark.css';
+		$dark_path = DRSLON_SITE_CORE_DIR . $dark_rel;
+		if ( file_exists( $dark_path ) ) {
+			wp_enqueue_style(
+				'drslon-krv-ui-dark',
+				plugins_url( $dark_rel, $plugin_file ),
+				array(),
+				(string) filemtime( $dark_path )
+			);
+		}
 	}
 }, 20 );
