@@ -242,6 +242,57 @@ html[data-theme="dark"] .krv-service-page {
   color: var(--krv-sp-text);
 }
 
+/* ── Public offer (oferta) ── */
+html[data-theme="dark"] .krv-oferta .krv-service-page__heading,
+html[data-theme="dark"] .krv-oferta h2,
+html[data-theme="dark"] .krv-oferta h3 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-bottom-color: #243049 !important;
+}
+
+html[data-theme="dark"] .krv-oferta__info {
+  background: #1a2744 !important;
+  border-left-color: #5b8cff !important;
+  color: #e8eefc !important;
+}
+
+html[data-theme="dark"] .krv-oferta__info b,
+html[data-theme="dark"] .krv-oferta__info strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .krv-oferta p,
+html[data-theme="dark"] .krv-oferta li {
+  color: #d5def0 !important;
+}
+
+html[data-theme="dark"] .krv-oferta p b,
+html[data-theme="dark"] .krv-oferta p strong,
+html[data-theme="dark"] .krv-oferta li b,
+html[data-theme="dark"] .krv-oferta li strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .krv-oferta a {
+  color: #8aacff !important;
+}
+
+html[data-theme="dark"] .krv-oferta__rekvizity {
+  background: #152238 !important;
+  border-color: #3d5a9a !important;
+  color: #e8eefc !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme="dark"] .krv-oferta__rekvizity b {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .krv-oferta__note {
+  color: #a8b6d4 !important;
+}
+
 html[data-theme="dark"] .krv-service-page__heading {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;

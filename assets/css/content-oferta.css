@@ -1,0 +1,123 @@
+/**
+ * Public offer page — uses krv-service-page tokens (light defaults).
+ * Dark overrides live in krv-ui-dark.css.
+ */
+
+.krv-service-page.krv-oferta {
+	max-width: 900px;
+}
+
+.krv-oferta__info {
+	margin: 0 0 28px;
+	padding: 18px 20px;
+	border-radius: 12px;
+	border-left: 5px solid var(--krv-sp-accent, #5181fe);
+	background: var(--krv-sp-accent-soft, #eef4ff);
+	color: var(--krv-sp-text, #111827);
+	line-height: 1.55;
+}
+
+.krv-oferta__info b,
+.krv-oferta__info strong {
+	color: var(--krv-sp-text, #111827);
+}
+
+.krv-oferta h2 {
+	margin: 2rem 0 0.85rem;
+	padding-bottom: 0.35rem;
+	border-bottom: 1px solid var(--krv-sp-line, #e7ecf5);
+	font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+	font-weight: 700;
+	color: var(--krv-sp-text, #111827);
+	text-align: left;
+}
+
+.krv-oferta h3 {
+	margin: 1.35rem 0 0.6rem;
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: var(--krv-sp-text, #111827);
+	text-align: left;
+}
+
+.krv-oferta p,
+.krv-oferta li {
+	font-size: 1rem;
+	line-height: 1.7;
+	color: var(--krv-sp-muted, #5b6472);
+	margin: 0 0 0.85em;
+}
+
+.krv-oferta p b,
+.krv-oferta p strong,
+.krv-oferta li b,
+.krv-oferta li strong {
+	color: var(--krv-sp-text, #111827);
+	font-weight: 600;
+}
+
+.krv-oferta a {
+	color: var(--krv-sp-accent, #5181fe);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.krv-oferta a:hover {
+	color: var(--krv-sp-accent, #244ac2);
+}
+
+.krv-oferta ul,
+.krv-oferta ol {
+	padding-left: 1.35em;
+	margin: 0 0 1.2em;
+}
+
+.krv-oferta li {
+	margin-bottom: 0.55em;
+}
+
+.krv-oferta li ul {
+	margin-top: 0.45em;
+	margin-bottom: 0.45em;
+}
+
+.krv-oferta__rekvizity {
+	margin-top: 2rem;
+	padding: 18px 20px;
+	border-radius: 12px;
+	border: 1px solid var(--krv-sp-line, #e7ecf5);
+	background: var(--krv-sp-surface, #ffffff);
+	color: var(--krv-sp-text, #111827);
+	line-height: 1.7;
+	word-break: break-word;
+	box-shadow: var(--krv-sp-shadow, 0 8px 24px rgba(15, 23, 42, 0.06));
+}
+
+.krv-oferta__rekvizity b {
+	color: var(--krv-sp-text, #111827);
+}
+
+.krv-oferta__email {
+	direction: ltr;
+	unicode-bidi: embed;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.krv-oferta__note {
+	margin-top: 1.5rem;
+	font-size: 0.92rem;
+	color: var(--krv-sp-muted, #5b6472);
+	text-align: right;
+	line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+	.krv-oferta__info,
+	.krv-oferta__rekvizity {
+		padding: 14px 14px;
+	}
+
+	.krv-oferta__note {
+		text-align: left;
+	}
+}
