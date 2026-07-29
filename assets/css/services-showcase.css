@@ -61,7 +61,7 @@
 		transform: translateY(-2px);
 		border-color: var(--krv-accent-hover);
 		box-shadow: var(--krv-card-shadow-hover);
-		background: #fcfdff;
+		background: var(--krv-card-bg-hover, #fcfdff);
 	}
 
 	.krv-service-page-card-inner {
@@ -81,7 +81,7 @@
 		margin-bottom: 12px;
 		border-radius: 8px;
 		overflow: hidden;
-		background: #f7faff;
+		background: var(--krv-image-bg, #f7faff);
 	}
 
 	.krv-service-page-image {
@@ -101,7 +101,7 @@
 		width: 58px;
 		height: 58px;
 		border-radius: 50%;
-		background: #eaf1ff;
+		background: var(--krv-no-image-bg, #eaf1ff);
 		color: var(--krv-accent);
 		font-size: 1.4rem;
 		font-weight: 700;

@@ -4,6 +4,7 @@
 	--krv-sp-text: #111827;
 	--krv-sp-muted: #5b6472;
 	--krv-sp-line: #e7ecf5;
+	--krv-sp-surface: #ffffff;
 	--krv-sp-radius: 16px;
 	--krv-sp-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
 	max-width: 960px;
@@ -74,10 +75,11 @@
 .krv-service-page__tool {
 	margin: 0 0 28px;
 	padding: 24px;
-	background: #fff;
+	background: var(--krv-sp-surface);
 	border: 1px solid var(--krv-sp-line);
 	border-radius: var(--krv-sp-radius);
 	box-shadow: var(--krv-sp-shadow);
+	color: var(--krv-sp-text);
 }
 
 .krv-service-page--minimal .krv-service-page__tool {
@@ -92,7 +94,8 @@
 	padding: 20px 22px;
 	border: 1px solid var(--krv-sp-line);
 	border-radius: var(--krv-sp-radius);
-	background: #fff;
+	background: var(--krv-sp-surface);
+	color: var(--krv-sp-text);
 }
 
 .krv-service-page__dns-types-title {

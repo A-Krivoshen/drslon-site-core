@@ -146,7 +146,7 @@ html[data-theme="dark"] .krv-partner-card:hover {
   border-color: #3d5a9a;
 }
 
-/* ── Services showcase ── */
+/* ── Services showcase (/servisy/ grid) ── */
 html[data-theme="dark"] .krv-services-showcase,
 html[data-theme="dark"] .krv-services-showcase__item {
   color: #e8eefc;
@@ -157,19 +157,284 @@ html[data-theme="dark"] .krv-services-showcase__item {
   border-color: #243049;
 }
 
-/* ── Service page shell ── */
+/* Real showcase shortcode classes (krv_services_pages_showcase) */
+html[data-theme="dark"] .krv-service-pages-wrap {
+  --krv-accent: #315fe8;
+  --krv-accent-hover: #6b93ff;
+  --krv-card-bg: #121a2b;
+  --krv-card-bg-hover: #152238;
+  --krv-text-main: #ffffff;
+  --krv-text-soft: #d5def0;
+  --krv-image-bg: #0b1220;
+  --krv-no-image-bg: #1a2744;
+  --krv-card-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --krv-card-shadow-hover: 0 14px 32px rgba(0, 0, 0, 0.5);
+  color: #e8eefc;
+}
+
+html[data-theme="dark"] .krv-showcase-intro,
+html[data-theme="dark"] .krv-service-pages-group-title {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="dark"] .krv-service-page-card {
+  background: #121a2b !important;
+  border-color: #3d5a9a !important;
+  color: #e8eefc !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme="dark"] .krv-service-page-card:hover {
+  background: #152238 !important;
+  border-color: #6b93ff !important;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+html[data-theme="dark"] .krv-service-page-image-wrap {
+  background: #0b1220 !important;
+}
+
+html[data-theme="dark"] .krv-service-page-no-image {
+  background: #1a2744 !important;
+  color: #8aacff !important;
+}
+
+html[data-theme="dark"] .krv-service-page-title {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="dark"] .krv-service-page-description {
+  color: #d5def0 !important;
+  -webkit-text-fill-color: #d5def0 !important;
+  opacity: 1 !important;
+}
+
+/* ── Service page shell (tool pages) ── */
 html[data-theme="dark"] .krv-service-page {
   --krv-sp-accent: #315fe8;
   --krv-sp-accent-soft: #1a2744;
   --krv-sp-text: #e8eefc;
-  --krv-sp-muted: #a8b6d4;
+  --krv-sp-muted: #d5def0;
   --krv-sp-line: #243049;
+  --krv-sp-surface: #121a2b;
   --krv-sp-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
   color: var(--krv-sp-text);
 }
 
 html[data-theme="dark"] .krv-service-page__heading {
-  color: #e8eefc;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="dark"] .krv-service-page__intro p,
+html[data-theme="dark"] .krv-service-page__after p {
+  color: #d5def0 !important;
+}
+
+html[data-theme="dark"] .krv-service-page__quote {
+  background: #1a2744 !important;
+  border-left-color: #315fe8 !important;
+}
+
+html[data-theme="dark"] .krv-service-page__quote p {
+  color: #e8eefc !important;
+}
+
+html[data-theme="dark"] .krv-service-page__tool,
+html[data-theme="dark"] .krv-service-page__dns-types {
+  background: #121a2b !important;
+  border-color: #243049 !important;
+  color: #e8eefc !important;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-theme="dark"] .krv-service-page__dns-types-title {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .krv-service-page__dns-types li {
+  color: #d5def0 !important;
+}
+
+html[data-theme="dark"] .krv-service-page__dns-types strong {
+  color: #8aacff !important;
+}
+
+/* Tool plugins: white inline cards → dark surfaces */
+html[data-theme="dark"] .dns-lookup-container,
+html[data-theme="dark"] .crontab-generator-container,
+html[data-theme="dark"] .firewall-configurator-container,
+html[data-theme="dark"] .speed-test-container,
+html[data-theme="dark"] .user-info-container,
+html[data-theme="dark"] .wpsc-shortcode-form,
+html[data-theme="dark"] .wpsc-shortcode-form > div,
+html[data-theme="dark"] .wdc-form,
+html[data-theme="dark"] .krv-service-page__tool > div[style*="background"],
+html[data-theme="dark"] .krv-service-page [style*="background: #fff"],
+html[data-theme="dark"] .krv-service-page [style*="background:#fff"],
+html[data-theme="dark"] .krv-service-page [style*="background: #ffffff"],
+html[data-theme="dark"] .krv-service-page [style*="background:#ffffff"] {
+  background: #121a2b !important;
+  background-color: #121a2b !important;
+  color: #e8eefc !important;
+  border-color: #243049 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-theme="dark"] .krv-service-page [style*="background: #f5f5f5"],
+html[data-theme="dark"] .krv-service-page [style*="background:#f5f5f5"],
+html[data-theme="dark"] .krv-service-page [style*="background: #f9f9f9"],
+html[data-theme="dark"] .krv-service-page [style*="background:#f9f9f9"] {
+  background: #1a2744 !important;
+  background-color: #1a2744 !important;
+  color: #e8eefc !important;
+}
+
+/* Tables inside tools (crontab / subnet etc.) */
+html[data-theme="dark"] .krv-service-page table,
+html[data-theme="dark"] .crontab-generator-container table,
+html[data-theme="dark"] .firewall-configurator-container table,
+html[data-theme="dark"] .dns-lookup-container table {
+  background: #0b1220 !important;
+  color: #e8eefc !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] .krv-service-page th,
+html[data-theme="dark"] .krv-service-page td,
+html[data-theme="dark"] .crontab-generator-container th,
+html[data-theme="dark"] .crontab-generator-container td,
+html[data-theme="dark"] .firewall-configurator-container th,
+html[data-theme="dark"] .firewall-configurator-container td {
+  background: transparent !important;
+  color: #e8eefc !important;
+  border-color: #243049 !important;
+}
+
+/* Forms / inputs / selects inside service tools */
+html[data-theme="dark"] .krv-service-page input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="image"]),
+html[data-theme="dark"] .krv-service-page select,
+html[data-theme="dark"] .krv-service-page textarea,
+html[data-theme="dark"] .dns-lookup-container input,
+html[data-theme="dark"] .dns-lookup-container select,
+html[data-theme="dark"] .dns-lookup-container textarea,
+html[data-theme="dark"] .crontab-generator-container input,
+html[data-theme="dark"] .crontab-generator-container select,
+html[data-theme="dark"] .crontab-generator-container textarea,
+html[data-theme="dark"] .firewall-configurator-container input,
+html[data-theme="dark"] .firewall-configurator-container select,
+html[data-theme="dark"] .firewall-configurator-container textarea,
+html[data-theme="dark"] .speed-test-container input,
+html[data-theme="dark"] .wpsc-shortcode-form input,
+html[data-theme="dark"] .wpsc-shortcode-form select,
+html[data-theme="dark"] .wpsc-shortcode-form textarea,
+html[data-theme="dark"] .wdc-form input,
+html[data-theme="dark"] .wdc-form select,
+html[data-theme="dark"] .wdc-form textarea,
+html[data-theme="dark"] .wdc-form .form-control {
+  background: #0b1220 !important;
+  background-color: #0b1220 !important;
+  color: #ffffff !important;
+  border: 1px solid #3d5a9a !important;
+  box-shadow: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="dark"] .krv-service-page input::placeholder,
+html[data-theme="dark"] .krv-service-page textarea::placeholder,
+html[data-theme="dark"] .dns-lookup-container input::placeholder,
+html[data-theme="dark"] .crontab-generator-container input::placeholder,
+html[data-theme="dark"] .firewall-configurator-container input::placeholder,
+html[data-theme="dark"] .wpsc-shortcode-form input::placeholder,
+html[data-theme="dark"] .wdc-form input::placeholder {
+  color: #8b9bb8 !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #8b9bb8 !important;
+}
+
+html[data-theme="dark"] .krv-service-page label,
+html[data-theme="dark"] .krv-service-page h1,
+html[data-theme="dark"] .krv-service-page h2,
+html[data-theme="dark"] .krv-service-page h3,
+html[data-theme="dark"] .krv-service-page h4,
+html[data-theme="dark"] .krv-service-page p,
+html[data-theme="dark"] .krv-service-page li,
+html[data-theme="dark"] .krv-service-page legend,
+html[data-theme="dark"] .dns-lookup-container,
+html[data-theme="dark"] .crontab-generator-container,
+html[data-theme="dark"] .firewall-configurator-container,
+html[data-theme="dark"] .speed-test-container,
+html[data-theme="dark"] .wpsc-shortcode-form,
+html[data-theme="dark"] .wdc-form {
+  color: #e8eefc !important;
+}
+
+html[data-theme="dark"] .krv-service-page button,
+html[data-theme="dark"] .krv-service-page input[type="submit"],
+html[data-theme="dark"] .krv-service-page input[type="button"],
+html[data-theme="dark"] .dns-lookup-container button,
+html[data-theme="dark"] .crontab-generator-container button,
+html[data-theme="dark"] .firewall-configurator-container button,
+html[data-theme="dark"] .speed-test-button,
+html[data-theme="dark"] .wpsc-shortcode-form button,
+html[data-theme="dark"] .wdc-form .btn,
+html[data-theme="dark"] .wdc-form button {
+  background: #315fe8 !important;
+  border-color: #315fe8 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+html[data-theme="dark"] .krv-service-page button:hover,
+html[data-theme="dark"] .krv-service-page input[type="submit"]:hover,
+html[data-theme="dark"] .dns-lookup-container button:hover,
+html[data-theme="dark"] .crontab-generator-container button:hover,
+html[data-theme="dark"] .firewall-configurator-container button:hover,
+html[data-theme="dark"] .speed-test-button:hover,
+html[data-theme="dark"] .wpsc-shortcode-form button:hover,
+html[data-theme="dark"] .wdc-form .btn:hover {
+  background: #244ac2 !important;
+  border-color: #244ac2 !important;
+  color: #ffffff !important;
+}
+
+/* Speed test / firewall leftover light panels */
+html[data-theme="dark"] .speed-test-result,
+html[data-theme="dark"] .custom-captcha,
+html[data-theme="dark"] .firewall-configurator-container .section {
+  background: #1a2744 !important;
+  color: #e8eefc !important;
+  border-color: #243049 !important;
+}
+
+/* Domain checker alerts / results */
+html[data-theme="dark"] .wdc-form .callout,
+html[data-theme="dark"] .wdc-form .alert,
+html[data-theme="dark"] .wdc-form .result,
+html[data-theme="dark"] .wdc-form .domain-result,
+html[data-theme="dark"] .result.large {
+  background: #1a2744 !important;
+  color: #e8eefc !important;
+  border-color: #3d5a9a !important;
+}
+
+html[data-theme="dark"] .wdc-form .callout-warning,
+html[data-theme="dark"] .wdc-form .alert-warning {
+  background: #2a2210 !important;
+  color: #fde68a !important;
+  border-color: #854d0e !important;
+}
+
+html[data-theme="dark"] .wdc-form .input-group,
+html[data-theme="dark"] .wdc-form .input-group-btn {
+  background: transparent !important;
+  border-color: #3d5a9a !important;
 }
 
 /* ── Price list widget ── */
