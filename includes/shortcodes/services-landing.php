@@ -124,10 +124,11 @@ function krv_services_landing_get_defaults(): array {
 			),
 			array(
 				'title'       => 'Техподдержка',
-				'description' => 'Обновления, бэкапы, мониторинг и реакция на сбои. Чтобы сайт не падал по ночам.',
+				'description' => 'Обновления, бэкапы, мониторинг и реакция на сбои. Пакеты и условия в прайсе.',
 				'icon_key'    => 'support',
 				'icon_svg'    => '',
-				'url'         => 'https://krivoshein.site/prays-list/',
+				// Same-site anchor on price list (honest: no fake landing).
+				'url'         => 'https://krivoshein.site/prays-list/#krv-package-support',
 				'price_label' => 'от 20 000 ₽/мес',
 			),
 		),
@@ -816,6 +817,34 @@ function krv_services_landing_render(): string {
 				<?php endif; ?>
 
 				<?php
+				// Honest social proof: only facts already on the page (clients count, OGRN year, offers).
+				$proof_clients = 0;
+				if ( post_type_exists( 'client' ) ) {
+					$proof_clients = (int) wp_count_posts( 'client' )->publish;
+				}
+				?>
+				<ul class="krv-landing-proof" aria-label="Коротко о работе">
+					<?php if ( $proof_clients > 0 ) : ?>
+						<li class="krv-landing-proof-item">
+							<strong class="krv-landing-proof-value"><?php echo esc_html( (string) $proof_clients ); ?></strong>
+							<span class="krv-landing-proof-label">клиентов в витрине</span>
+						</li>
+					<?php endif; ?>
+					<li class="krv-landing-proof-item">
+						<strong class="krv-landing-proof-value">с 2021</strong>
+						<span class="krv-landing-proof-label">ИП в реестре</span>
+					</li>
+					<li class="krv-landing-proof-item">
+						<strong class="krv-landing-proof-value">8</strong>
+						<span class="krv-landing-proof-label">флагманских услуг</span>
+					</li>
+					<li class="krv-landing-proof-item">
+						<strong class="krv-landing-proof-value">договор</strong>
+						<span class="krv-landing-proof-label">и безнал</span>
+					</li>
+				</ul>
+
+				<?php
 				$cta1_text = trim( (string) ( $data['hero_cta_primary_text'] ?? '' ) );
 				$cta1_url  = trim( (string) ( $data['hero_cta_primary_url'] ?? '' ) );
 				$cta2_text = trim( (string) ( $data['hero_cta_secondary_text'] ?? '' ) );
@@ -895,13 +924,27 @@ function krv_services_landing_render(): string {
 							$price_label = trim( (string) ( $service_item['price_label'] ?? '' ) );
 							$is_demo     = ( false !== stripos( $title, 'RAG' ) || false !== stripos( $title, 'демо' ) );
 							$tag         = $url !== '' ? 'a' : 'div';
-							// Always open service landings/demos in a new tab; keep hub page in place.
-							$href_attr   = $url !== ''
-								? ' href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer" title="' . esc_attr( $title . ' (откроется в новой вкладке)' ) . '"'
-								: '';
+
+							// External flagship landings open in a new tab; same-site (prays-list, rag-demo) stay here.
+							$home_host   = (string) wp_parse_url( home_url( '/' ), PHP_URL_HOST );
+							$link_host   = (string) wp_parse_url( $url, PHP_URL_HOST );
+							$is_external = $url !== '' && $link_host !== '' && strcasecmp( $link_host, $home_host ) !== 0;
+
+							$href_attr = '';
+							if ( $url !== '' ) {
+								if ( $is_external ) {
+									$href_attr = ' href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer" title="' . esc_attr( $title . ' (откроется в новой вкладке)' ) . '"';
+								} else {
+									$href_attr = ' href="' . esc_url( $url ) . '" title="' . esc_attr( $title ) . '"';
+								}
+							}
+
 							$extra_class = $url !== '' ? ' krv-landing-service-item--link' : '';
 							if ( $is_demo ) {
 								$extra_class .= ' krv-landing-service-item--demo';
+							}
+							if ( $url !== '' && ! $is_external ) {
+								$extra_class .= ' krv-landing-service-item--onsite';
 							}
 							$badge_text  = $is_demo ? ( $price_label !== '' ? $price_label : 'демо' ) : $price_label;
 							$badge_class = $is_demo ? 'krv-landing-service-price krv-landing-service-badge' : 'krv-landing-service-price';
@@ -913,11 +956,18 @@ function krv_services_landing_render(): string {
 									<?php endif; ?>
 									<?php if ( $url !== '' ) : ?>
 										<span class="krv-landing-service-ext" aria-hidden="true">
-											<svg width="14" height="14" viewBox="0 0 24 24" fill="none" focusable="false">
-												<path d="M14 5h5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-												<path d="M10 14L19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-												<path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
+											<?php if ( $is_external ) : ?>
+												<svg width="14" height="14" viewBox="0 0 24 24" fill="none" focusable="false">
+													<path d="M14 5h5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+													<path d="M10 14L19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+													<path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+												</svg>
+											<?php else : ?>
+												<svg width="14" height="14" viewBox="0 0 24 24" fill="none" focusable="false">
+													<path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+													<path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+												</svg>
+											<?php endif; ?>
 										</span>
 									<?php endif; ?>
 									<?php echo krv_services_landing_render_service_icon( $service_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

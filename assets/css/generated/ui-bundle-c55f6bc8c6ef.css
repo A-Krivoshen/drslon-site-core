@@ -744,6 +744,74 @@ html[data-theme="dark"] .krv-landing-service-price {
 	letter-spacing: 0.01em;
 }
 
+/* Social proof strip under hero meta */
+.krv-landing-proof {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	gap: 10px 12px;
+	list-style: none;
+	margin: 4px auto 14px;
+	padding: 0;
+	width: 100%;
+	max-width: 44rem;
+}
+
+.krv-landing-proof-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-width: 6.5rem;
+	flex: 1 1 6.5rem;
+	max-width: 9.5rem;
+	padding: 10px 12px;
+	border-radius: 12px;
+	background: linear-gradient(180deg, #f5f7ff 0%, #eef2fb 100%);
+	border: 1px solid rgba(81, 129, 254, 0.14);
+	text-align: center;
+}
+
+.krv-landing-proof-value {
+	display: block;
+	font-size: 1.05rem;
+	font-weight: 700;
+	line-height: 1.2;
+	color: #2346b0;
+	letter-spacing: -0.01em;
+}
+
+.krv-landing-proof-label {
+	display: block;
+	margin-top: 4px;
+	font-size: 0.75rem;
+	line-height: 1.3;
+	color: var(--text-soft);
+}
+
+html[data-theme="dark"] .krv-landing-proof-item {
+	background: linear-gradient(180deg, #222a3d 0%, #1c2333 100%);
+	border-color: rgba(120, 160, 255, 0.16);
+}
+
+html[data-theme="dark"] .krv-landing-proof-value {
+	color: #9db7ff;
+}
+
+@media (max-width: 520px) {
+	.krv-landing-proof {
+		gap: 8px;
+	}
+
+	.krv-landing-proof-item {
+		min-width: calc(50% - 8px);
+		max-width: none;
+		flex: 1 1 calc(50% - 8px);
+		padding: 9px 8px;
+	}
+}
+
 /* Demo badge on RAG card */
 .krv-landing-service-badge {
 	background: rgba(16, 185, 129, 0.14) !important;
