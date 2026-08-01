@@ -421,11 +421,26 @@ if ( function_exists( 'tsf' ) ) {
 		if ( null === $args ) {
 			$queried_object = get_queried_object();
 			$taxonomy       = $queried_object instanceof WP_Term ? $queried_object->taxonomy : null;
+			$post_type      = is_singular() ? get_post_type() : null;
 		} else {
-			$taxonomy = is_array( $args ) ? ( $args['tax'] ?? null ) : null;
+			$taxonomy  = is_array( $args ) ? ( $args['tax'] ?? null ) : null;
+			$post_type = is_array( $args ) ? ( $args['pt'] ?? null ) : null;
+			if ( ! $post_type && is_array( $args ) && ! empty( $args['id'] ) ) {
+				$post_type = get_post_type( (int) $args['id'] );
+			}
 		}
 
 		if ( 'post_tag' === $taxonomy ) {
+			$meta['noindex'] = 'noindex';
+		}
+
+		// Thin affiliate cards: index only the hub page /partnery/, not each partner CPT URL.
+		if ( 'partner' === $post_type ) {
+			$meta['noindex'] = 'noindex';
+		}
+
+		// Empty/utility tax archives for partners - avoid thin category pages in SERP.
+		if ( 'partner_category' === $taxonomy ) {
 			$meta['noindex'] = 'noindex';
 		}
 

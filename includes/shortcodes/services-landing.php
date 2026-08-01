@@ -66,100 +66,86 @@ function krv_services_landing_get_defaults(): array {
 			),
 		),
 		'services_header_title'    => 'Услуги',
-		'services_header_subtitle' => 'Индивидуальный подход и профессиональная реализация для вашего бизнеса',
+		'services_header_subtitle' => 'Флагманские направления: от WordPress и VPS до ботов, Директа и AI-ready. Цены - ориентир «от», детали в прайсе.',
 		'services_items'           => array(
 			array(
-				'title'       => 'Веб-разработка',
-				'description' => 'Создание и доработка сайтов на современных технологиях. Индивидуальные решения для любых задач.',
+				'title'       => 'WordPress',
+				'description' => 'Сайты, доработки, ACF-блоки, безопасность и скорость. Корпоративный сайт - от 90 000 ₽, точечные правки - от 5 000 ₽.',
 				'icon_key'    => 'web-dev',
 				'icon_svg'    => '',
+				'url'         => 'https://wordpress.krivoshein.site/',
+				'price_label' => 'от 5 000 ₽',
 			),
 			array(
-				'title'       => 'Интеграция сервисов в Docker',
-				'description' => 'Создание и оптимизация контейнеров, упрощающих развертывание и масштабирование. Минимизация конфликтов окружения и ускорение разработки.',
-				'icon_key'    => 'docker',
-				'icon_svg'    => '',
-			),
-			array(
-				'title'       => 'Настройка VPS',
-				'description' => 'Установка и оптимизация виртуальных серверов под конкретные задачи. Гарантия стабильной и безопасной работы вашего проекта.',
+				'title'       => 'VPS и DevOps',
+				'description' => 'Linux, Nginx, Docker, SSL, firewall, бэкапы, перенос в облако. Сервер под задачу, без лишней магии.',
 				'icon_key'    => 'vps',
 				'icon_svg'    => '',
+				'url'         => 'https://vps.krivoshein.site/',
+				'price_label' => 'от 10 000 ₽',
 			),
 			array(
-				'title'       => 'Разработка ботов для MAX',
-				'description' => 'Создание чат-ботов для мессенджера MAX под задачи бизнеса и поддержки клиентов. Настройка сценариев, интеграций и автоматизации коммуникаций.',
+				'title'       => 'Боты для MAX',
+				'description' => 'Заявки, CRM, уведомления, сценарии поддержки. Простой бот - от 40 000 ₽, с интеграциями - от 70 000 ₽.',
 				'icon_key'    => 'max-bot',
 				'icon_svg'    => '',
+				'url'         => 'https://bots.krivoshein.site/',
+				'price_label' => 'от 40 000 ₽',
 			),
 			array(
-				'title'       => 'Услуги по регистрации домена',
-				'description' => 'Подбор оптимального доменного имени и помощь в регистрации. Сопровождение и поддержка DNS-записей для корректной работы вашего сайта.',
-				'icon_key'    => 'domain',
-				'icon_svg'    => '',
-			),
-			array(
-				'title'       => 'Настройки и миграция в облако',
-				'description' => 'Анализ текущей инфраструктуры и безопасный перенос в облачные сервисы. Оптимизация ресурсов и снижение расходов на ИТ.',
-				'icon_key'    => 'cloud',
-				'icon_svg'    => '',
-			),
-			array(
-				'title'       => 'Безопасность сайта',
-				'description' => 'Комплексные меры защиты: от регулярных аудитов и установки SSL до нейтрализации вредоносного кода и настройки систем обнаружения вторжений.',
-				'icon_key'    => 'security',
-				'icon_svg'    => '',
-			),
-			array(
-				'title'       => 'Оптимизация скорости сайта',
-				'description' => 'Ускорение загрузки за счёт оптимизации кода, баз данных и изображений. Повышение показателей производительности и удобства для пользователей.',
-				'icon_key'    => 'speed',
-				'icon_svg'    => '',
-			),
-			array(
-				'title'       => 'Подключение к CDN',
-				'description' => 'Интеграция с сетью доставки контента для быстрой загрузки и надёжности при высоких нагрузках. Настройка кэширования и балансировки.',
-				'icon_key'    => 'cdn',
-				'icon_svg'    => '',
-			),
-			array(
-				'title'       => 'Контекстная реклама',
-				'description' => 'Создание и управление кампаниями в поисковых системах и соцсетях. Анализ эффективности и оптимизация бюджета для увеличения конверсий.',
+				'title'       => 'Яндекс.Директ',
+				'description' => 'Аудит, запуск и ведение. Разбор кампаний без воды - что жрёт бюджет и куда крутить.',
 				'icon_key'    => 'ads',
 				'icon_svg'    => '',
+				'url'         => 'https://direct.krivoshein.site/',
+				'price_label' => 'аудит от 10 000 ₽',
 			),
 			array(
-				'title'       => 'Техническая поддержка сайта',
-				'description' => 'Оперативное реагирование на любые сбои, плановые обновления и контроль стабильности. Гарантия бесперебойной работы вашего ресурса.',
-				'icon_key'    => 'support',
+				'title'       => 'Лендинги',
+				'description' => 'Визитка, SEO-лендинг или WordPress. Быстрый запуск под заявку, без конструкторной каши.',
+				'icon_key'    => 'web-dev',
 				'icon_svg'    => '',
+				'url'         => 'https://landing.krivoshein.site/',
+				'price_label' => 'от 25 000 ₽',
 			),
 			array(
-				'title'       => 'SEO аудит сайта',
-				'description' => 'Детальный анализ структуры, контента и технических параметров. Рекомендации по улучшению позиций сайта в поисковой выдаче.',
+				'title'       => 'AI-ready',
+				'description' => 'Сайт, понятный нейропоиску и агентам: мета, schema, FAQ, структура. Без обещаний «топ-1».',
 				'icon_key'    => 'seo',
 				'icon_svg'    => '',
+				'url'         => 'https://ai-ready.krivoshein.site/',
+				'price_label' => 'от 10 000 ₽',
+			),
+			array(
+				'title'       => 'Техподдержка',
+				'description' => 'Обновления, бэкапы, мониторинг, реакция на сбои. Спокойный режим «сайт не падает по ночам».',
+				'icon_key'    => 'support',
+				'icon_svg'    => '',
+				'url'         => 'https://krivoshein.site/prays-list/',
+				'price_label' => 'от 20 000 ₽/мес',
 			),
 		),
 		'pricing_title'       => 'Стоимость услуг',
-		'pricing_lead'        => "Индивидуальный подход к каждой задаче.\nМоя базовая ставка:",
+		'pricing_lead'        => "Ориентиры «от» - в карточках выше и в прайс-листе.\nБазовая ставка:",
 		'pricing_rate'        => '2000 ₽/час',
 		'pricing_bullets'     => array(
 			array(
-				'text'     => 'Чем точнее описана задача, тем быстрее она будет выполнена.',
+				'text'     => 'Чем точнее описана задача, тем быстрее и дешевле оценка.',
 				'icon_key' => 'focus',
 			),
 			array(
-				'text'     => 'Финальная стоимость зависит от сложности проекта и ваших ожиданий.',
+				'text'     => 'Финальная сумма зависит от объёма, интеграций и сроков.',
 				'icon_key' => 'scope',
 			),
 			array(
-				'text'     => 'Первичная консультация — бесплатно.',
+				'text'     => 'Первичная консультация - бесплатно.',
 				'icon_key' => 'chat',
 			),
 		),
-		'pricing_button_text' => 'Обсудить проект',
-		'pricing_button_url'  => 'https://krivoshein.site/contacts/',
+		'pricing_button_text' => 'Смотреть прайс',
+		'pricing_button_url'  => 'https://krivoshein.site/prays-list/',
+		'pricing_secondary_text' => 'Обсудить проект',
+		'pricing_secondary_url'  => 'https://krivoshein.site/contacts/',
 	);
 }
 
@@ -456,6 +442,20 @@ function krv_services_landing_register_acf(): void {
 							'rows'  => 3,
 						),
 						array(
+							'key'   => 'field_krv_sl_service_url',
+							'label' => 'Ссылка карточки',
+							'name'  => 'url',
+							'type'  => 'url',
+							'instructions' => 'Лендинг услуги, прайс или демо. Пусто = карточка некликабельна.',
+						),
+						array(
+							'key'   => 'field_krv_sl_service_price_label',
+							'label' => 'Цена (бейдж)',
+							'name'  => 'price_label',
+							'type'  => 'text',
+							'instructions' => 'Коротко, например: от 10 000 ₽',
+						),
+						array(
 							'key'     => 'field_krv_sl_service_icon_key',
 							'label'   => 'Иконка (пресет)',
 							'name'    => 'icon_key',
@@ -469,7 +469,7 @@ function krv_services_landing_register_acf(): void {
 							'name'         => 'icon_svg',
 							'type'         => 'textarea',
 							'rows'         => 3,
-							'instructions' => 'Внутреннее содержимое SVG. Если заполнено — перекрывает пресет.',
+							'instructions' => 'Внутреннее содержимое SVG. Если заполнено - перекрывает пресет.',
 						),
 					),
 				),
@@ -800,8 +800,19 @@ function krv_services_landing_render(): string {
 				</div>
 
 				<?php if ( ! empty( $data['services_items'] ) && is_array( $data['services_items'] ) ) : ?>
+					<?php
+					/**
+					 * Allow injecting/altering homepage service tiles.
+					 *
+					 * @param array<int, array<string, mixed>> $items Service items.
+					 */
+					$services_items = apply_filters( 'krv_services_landing_items', $data['services_items'] );
+					if ( ! is_array( $services_items ) ) {
+						$services_items = $data['services_items'];
+					}
+					?>
 					<div class="krv-landing-services-grid">
-						<?php foreach ( $data['services_items'] as $service_item ) : ?>
+						<?php foreach ( $services_items as $service_item ) : ?>
 							<?php
 							if ( ! is_array( $service_item ) ) {
 								continue;
@@ -811,14 +822,35 @@ function krv_services_landing_render(): string {
 							if ( $title === '' ) {
 								continue;
 							}
+							$url         = trim( (string) ( $service_item['url'] ?? '' ) );
+							$price_label = trim( (string) ( $service_item['price_label'] ?? '' ) );
+							$tag         = $url !== '' ? 'a' : 'div';
+							$href_attr   = $url !== '' ? ' href="' . esc_url( $url ) . '"' : '';
+							// External landings open in same tab for hub conversion; keep noopener only if offsite.
+							$rel_attr = '';
+							if ( $url !== '' && preg_match( '#^https?://#i', $url ) && strpos( $url, home_url() ) !== 0 ) {
+								// Same ecosystem *.krivoshein.site - same tab, no nofollow.
+								$host = wp_parse_url( $url, PHP_URL_HOST );
+								if ( is_string( $host ) && ! preg_match( '/(^|\.)krivoshein\.site$/i', $host ) ) {
+									$rel_attr = ' rel="noopener noreferrer" target="_blank"';
+								}
+							}
+							$extra_class = $url !== '' ? ' krv-landing-service-item--link' : '';
 							?>
-							<div class="krv-landing-service-item">
+							<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> class="krv-landing-service-item<?php echo esc_attr( $extra_class ); ?>"<?php echo $href_attr . $rel_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+								<?php if ( $price_label !== '' ) : ?>
+									<span class="krv-landing-service-price"><?php echo esc_html( $price_label ); ?></span>
+								<?php endif; ?>
 								<?php echo krv_services_landing_render_service_icon( $service_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								<h3><?php echo esc_html( $title ); ?></h3>
 								<p><?php echo esc_html( (string) ( $service_item['description'] ?? '' ) ); ?></p>
-							</div>
+							</<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<?php endforeach; ?>
 					</div>
+					<p class="krv-landing-services-note">
+						Также: домены, CDN, SSL, Docker, миграции и точечный SEO - обычно внутри WordPress / VPS-проекта.
+						Полный список цен - в <a href="<?php echo esc_url( home_url( '/prays-list/' ) ); ?>">прайс-листе</a>.
+					</p>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -857,9 +889,20 @@ function krv_services_landing_render(): string {
 					</ul>
 				<?php endif; ?>
 
-				<a class="krv-landing-pricing-button" href="<?php echo esc_url( (string) $data['pricing_button_url'] ); ?>" rel="noopener">
-					<?php echo esc_html( (string) $data['pricing_button_text'] ); ?>
-				</a>
+				<div class="krv-landing-pricing-actions">
+					<a class="krv-landing-pricing-button" href="<?php echo esc_url( (string) $data['pricing_button_url'] ); ?>">
+						<?php echo esc_html( (string) $data['pricing_button_text'] ); ?>
+					</a>
+					<?php
+					$sec_url  = trim( (string) ( $data['pricing_secondary_url'] ?? '' ) );
+					$sec_text = trim( (string) ( $data['pricing_secondary_text'] ?? '' ) );
+					if ( $sec_url !== '' && $sec_text !== '' ) :
+						?>
+						<a class="krv-landing-pricing-secondary" href="<?php echo esc_url( $sec_url ); ?>">
+							<?php echo esc_html( $sec_text ); ?>
+						</a>
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 	</div>
