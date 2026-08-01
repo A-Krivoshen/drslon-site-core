@@ -28,6 +28,11 @@ function krv_client_display_title( int $post_id, string $title ): string {
 		5702 => 'Fornovo Gas',
 		5701 => 'АЦ ЦНИИТМАШ',
 		6151 => 'Метком-Калуга',
+		6147 => 'GroupST',
+		9184 => 'Softcomlan',
+		9244 => 'LUMISTEK',
+		7693 => 'Cambobiz',
+		6112 => 'Designers from Russia',
 	);
 
 	if ( isset( $map[ $post_id ] ) ) {
@@ -51,6 +56,50 @@ function krv_client_display_title( int $post_id, string $title ): string {
 }
 
 /**
+ * Two-letter monogram for cards without a usable logo.
+ */
+function krv_client_monogram( string $title ): string {
+	$title = trim( preg_replace( '/\s+/u', ' ', $title ) ?? '' );
+	if ( $title === '' ) {
+		return '?';
+	}
+
+	// Prefer Latin/Cyrillic word initials (skip ООО, ИП, etc.).
+	$skip = array( 'ООО', 'ИП', 'АО', 'ЗАО', 'ОАО', 'LLC', 'LTD', 'S.P.A.', 'SPA', 'THE', 'FROM' );
+	$parts = preg_split( '/[\s«»"“”\'\.\,\/\-–—]+/u', $title, -1, PREG_SPLIT_NO_EMPTY );
+	$letters = array();
+	if ( is_array( $parts ) ) {
+		foreach ( $parts as $part ) {
+			$up = mb_strtoupper( $part, 'UTF-8' );
+			if ( in_array( $up, $skip, true ) ) {
+				continue;
+			}
+			if ( ! preg_match( '/[\p{L}\p{N}]/u', $part ) ) {
+				continue;
+			}
+			$letters[] = mb_strtoupper( mb_substr( $part, 0, 1, 'UTF-8' ), 'UTF-8' );
+			if ( count( $letters ) >= 2 ) {
+				break;
+			}
+		}
+	}
+
+	if ( count( $letters ) >= 2 ) {
+		return $letters[0] . $letters[1];
+	}
+
+	if ( count( $letters ) === 1 ) {
+		$rest = mb_substr( $title, 1, 1, 'UTF-8' );
+		if ( preg_match( '/[\p{L}\p{N}]/u', (string) $rest ) ) {
+			return $letters[0] . mb_strtoupper( $rest, 'UTF-8' );
+		}
+		return $letters[0];
+	}
+
+	return mb_strtoupper( mb_substr( $title, 0, 1, 'UTF-8' ), 'UTF-8' );
+}
+
+/**
  * Whether client thumbnail is usable as a logo (skip screenshots / 1×1 / favicons).
  */
 function krv_client_logo_is_usable( int $post_id ): bool {
@@ -71,7 +120,12 @@ function krv_client_logo_is_usable( int $post_id ): bool {
 	}
 
 	$file = strtolower( basename( (string) $src[0] ) );
-	if ( preg_match( '/screenshot|favicon|sign\.png|dummy|placeholder/i', $file ) ) {
+	if ( preg_match( '/screenshot|favicon|sign\.png|dummy|placeholder|kandinsky/i', $file ) ) {
+		return false;
+	}
+
+	// 1×1 / broken SVG placeholders.
+	if ( $w === 1 && $h === 1 ) {
 		return false;
 	}
 
@@ -100,7 +154,7 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 
 	$post_count = (int) $q->post_count;
 	$grid_rows  = max( 1, (int) ceil( $post_count / 4 ) );
-	$grid_min_h = ( $grid_rows * 186 ) + ( max( 0, $grid_rows - 1 ) * 18 );
+	$grid_min_h = ( $grid_rows * 210 ) + ( max( 0, $grid_rows - 1 ) * 18 );
 	$randomize  = $atts['random'] !== '0';
 
 	ob_start();
@@ -121,6 +175,7 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 				$title_display = krv_client_display_title( $post_id, $title_raw );
 				$url           = trim( (string) get_post_meta( $post_id, 'client_url', true ) );
 				$description   = trim( wp_strip_all_tags( (string) get_post_meta( $post_id, 'client_description', true ) ) );
+				$monogram      = krv_client_monogram( $title_display );
 
 				$show_logo = krv_client_logo_is_usable( $post_id );
 				// data-no-lazy: keep real logos (avoid WPFC sign.png placeholder flash).
@@ -139,9 +194,11 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 					)
 					: '';
 
+				$card_class = 'krv-client-card' . ( $url ? ' krv-client-card--link' : ' krv-client-card--static' );
+
 				$tag_open = $url
-					? '<a class="krv-client-card" href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer">'
-					: '<div class="krv-client-card krv-client-card--static">';
+					? '<a class="' . esc_attr( $card_class ) . '" href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr( $title_display . ' — сайт клиента' ) . '">'
+					: '<div class="' . esc_attr( $card_class ) . '" role="group" aria-label="' . esc_attr( $title_display ) . '">';
 
 				$tag_close = $url ? '</a>' : '</div>';
 				?>
@@ -151,7 +208,7 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 							<?php if ( $thumb ) : ?>
 								<?php echo $thumb; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							<?php else : ?>
-								<div class="krv-client-no-logo" aria-hidden="true"><?php echo esc_html( mb_substr( $title_display, 0, 1, 'UTF-8' ) ); ?></div>
+								<div class="krv-client-no-logo" aria-hidden="true"><?php echo esc_html( $monogram ); ?></div>
 							<?php endif; ?>
 						</div>
 
@@ -159,6 +216,10 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 
 						<?php if ( $description !== '' ) : ?>
 							<p class="krv-client-description"><?php echo esc_html( $description ); ?></p>
+						<?php endif; ?>
+
+						<?php if ( $url ) : ?>
+							<span class="krv-client-go" aria-hidden="true">Сайт →</span>
 						<?php endif; ?>
 					</div>
 				<?php echo $tag_close; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
