@@ -970,9 +970,8 @@ html[data-theme="dark"] .krv-landing-next {
 }
 
 /*
- * Logos in theme mono (not brand-rainbow).
- * Grayscale + soft blue plate = one visual system with services.
- * Hover stays mono, slightly clearer (no full multicolor).
+ * Logos: calm grayscale at rest → full brand color on hover/focus.
+ * Touch: @media (hover: none) keeps logos readable in color.
  */
 .krv-client-logo {
 	display: block !important;
@@ -986,15 +985,23 @@ html[data-theme="dark"] .krv-landing-next {
 	border: 0 !important;
 	box-shadow: none !important;
 	background: transparent !important;
-	filter: grayscale(1) contrast(1.08) brightness(0.96);
-	opacity: 0.78;
-	transition: filter 0.25s ease, opacity 0.25s ease;
+	filter: grayscale(1) contrast(1.06) brightness(0.97);
+	opacity: 0.82;
+	transition: filter 0.28s ease, opacity 0.28s ease;
 }
 
 .krv-client-card--link:hover .krv-client-logo,
 .krv-client-card--link:focus-visible .krv-client-logo {
-	filter: grayscale(1) contrast(1.14) brightness(0.9);
-	opacity: 0.95;
+	filter: none;
+	opacity: 1;
+}
+
+/* Phones / no-hover: full color (no hover state to reveal) */
+@media (hover: none) {
+	.krv-client-logo {
+		filter: none;
+		opacity: 0.95;
+	}
 }
 
 .krv-client-no-logo {
@@ -1189,14 +1196,21 @@ html[data-theme="dark"] .krv-client-card--link:focus-visible .krv-client-logo-wr
 }
 
 html[data-theme="dark"] .krv-client-logo {
-	filter: grayscale(1) contrast(1.05) brightness(1.15);
-	opacity: 0.82;
+	filter: grayscale(1) contrast(1.05) brightness(1.12);
+	opacity: 0.85;
 }
 
 html[data-theme="dark"] .krv-client-card--link:hover .krv-client-logo,
 html[data-theme="dark"] .krv-client-card--link:focus-visible .krv-client-logo {
-	filter: grayscale(1) contrast(1.12) brightness(1.22);
-	opacity: 0.96;
+	filter: none;
+	opacity: 1;
+}
+
+@media (hover: none) {
+	html[data-theme="dark"] .krv-client-logo {
+		filter: none;
+		opacity: 0.96;
+	}
 }
 
 html[data-theme="dark"] .krv-client-no-logo {
