@@ -108,7 +108,7 @@ function krv_services_landing_get_defaults(): array {
 			array(
 				'title'       => 'Лендинги',
 				'description' => 'Визитка, SEO-лендинг или WordPress. Быстрый запуск под заявку, без конструкторной каши.',
-				'icon_key'    => 'web-dev',
+				'icon_key'    => 'landing',
 				'icon_svg'    => '',
 				'url'         => 'https://landing.krivoshein.site/',
 				'price_label' => 'от 25 000 ₽',
@@ -116,7 +116,7 @@ function krv_services_landing_get_defaults(): array {
 			array(
 				'title'       => 'AI-ready',
 				'description' => 'Сайт, понятный нейропоиску и агентам: мета, schema, FAQ, структура. Без обещаний «топ-1».',
-				'icon_key'    => 'seo',
+				'icon_key'    => 'ai',
 				'icon_svg'    => '',
 				'url'         => 'https://ai-ready.krivoshein.site/',
 				'price_label' => 'от 10 000 ₽',
@@ -245,21 +245,31 @@ function krv_services_landing_social_icon_preset( string $key ): array {
  */
 function krv_services_landing_service_icon_preset( string $key ): string {
 	$icons = array(
+		// Code brackets — WordPress / dev.
 		'web-dev'  => '<polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline><line x1="14" y1="4" x2="10" y2="20"></line>',
+		// Stacked servers.
+		'vps'      => '<rect x="3" y="4" width="18" height="6" rx="1.2"></rect><rect x="3" y="14" width="18" height="6" rx="1.2"></rect><circle cx="7" cy="7" r="0.9" fill="currentColor" stroke="none"></circle><circle cx="7" cy="17" r="0.9" fill="currentColor" stroke="none"></circle><line x1="11" y1="7" x2="17" y2="7"></line><line x1="11" y1="17" x2="17" y2="17"></line>',
+		// Chat bot.
+		'max-bot'  => '<path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"></path><circle cx="9" cy="10" r="0.9" fill="currentColor" stroke="none"></circle><circle cx="12.5" cy="10" r="0.9" fill="currentColor" stroke="none"></circle><circle cx="16" cy="10" r="0.9" fill="currentColor" stroke="none"></circle>',
+		// Ads / megaphone-ish board.
+		'ads'      => '<path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z"></path><path d="M14.5 8.5a4.5 4.5 0 0 1 0 7"></path><path d="M16.8 6a7.5 7.5 0 0 1 0 12"></path>',
+		// Landing page layout.
+		'landing'  => '<rect x="4" y="3" width="16" height="18" rx="2"></rect><line x1="4" y1="8" x2="20" y2="8"></line><rect x="7" y="11" width="10" height="3" rx="0.6"></rect><line x1="7" y1="17" x2="14" y2="17"></line>',
+		// AI sparkles.
+		'ai'       => '<path d="M12 3l1.2 3.6L17 8l-3.8 1.4L12 13l-1.2-3.6L7 8l3.8-1.4L12 3Z"></path><path d="M19 14l.7 2.1L22 17l-2.3.8L19 20l-.7-2.2L16 17l2.3-.9L19 14Z"></path><path d="M6 15l.6 1.7L8.5 17.5 6.6 18.2 6 20l-.6-1.8L3.5 17.5l1.9-.8L6 15Z"></path>',
+		// RAG / knowledge base.
+		'rag'      => '<ellipse cx="12" cy="6" rx="7" ry="2.5"></ellipse><path d="M5 6v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6"></path><path d="M5 10v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-4"></path><path d="M5 14v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-4"></path>',
 		'docker'   => '<rect x="3" y="4" width="8" height="7" rx="1"></rect><rect x="13" y="4" width="8" height="7" rx="1"></rect><rect x="8" y="13" width="8" height="7" rx="1"></rect><line x1="7" y1="11" x2="12" y2="13"></line><line x1="17" y1="11" x2="12" y2="13"></line>',
-		'vps'      => '<rect x="4" y="4" width="16" height="6" rx="1"></rect><rect x="4" y="14" width="16" height="6" rx="1"></rect><circle cx="8" cy="7" r="0.8" style="fill:currentColor;stroke:none"></circle><circle cx="8" cy="17" r="0.8" style="fill:currentColor;stroke:none"></circle>',
-		'max-bot'  => '<path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"></path><circle cx="9" cy="10" r="0.8" style="fill:currentColor;stroke:none"></circle><circle cx="12" cy="10" r="0.8" style="fill:currentColor;stroke:none"></circle><circle cx="15" cy="10" r="0.8" style="fill:currentColor;stroke:none"></circle>',
 		'domain'   => '<circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a14 14 0 0 1 0 18"></path><path d="M12 3a14 14 0 0 0 0 18"></path>',
 		'cloud'    => '<path d="M7 18h10a4 4 0 0 0 .4-8A6 6 0 0 0 6 11a3.5 3.5 0 0 0 1 7Z"></path>',
 		'security' => '<path d="M12 3l7 3v5c0 4.5-2.9 8.1-7 10-4.1-1.9-7-5.5-7-10V6l7-3Z"></path><path d="M9.5 12.5l1.8 1.8 3.7-4.1"></path>',
 		'speed'    => '<circle cx="12" cy="12" r="8"></circle><line x1="12" y1="12" x2="16.5" y2="9.5"></line><line x1="12" y1="12" x2="12" y2="7"></line>',
 		'cdn'      => '<rect x="3" y="6" width="7" height="5" rx="1"></rect><rect x="14" y="4" width="7" height="5" rx="1"></rect><rect x="14" y="15" width="7" height="5" rx="1"></rect><line x1="10" y1="8.5" x2="14" y2="6.5"></line><line x1="10" y1="8.5" x2="14" y2="17.5"></line>',
-		'ads'      => '<rect x="4" y="6" width="16" height="12" rx="2"></rect><path d="M8 10.5h8"></path><path d="M8 13.5h5"></path>',
 		'support'  => '<circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1 1 0 0 0 .2 1.1l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1 1 0 0 0-1.1-.2 1 1 0 0 0-.6.9V20a2 2 0 1 1-4 0v-.2a1 1 0 0 0-.6-.9 1 1 0 0 0-1.1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1 1 0 0 0 .2-1.1 1 1 0 0 0-.9-.6H4a2 2 0 1 1 0-4h.2a1 1 0 0 0 .9-.6 1 1 0 0 0-.2-1.1l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1 1 0 0 0 1.1.2 1 1 0 0 0 .6-.9V4a2 2 0 1 1 4 0v.2a1 1 0 0 0 .6.9 1 1 0 0 0 1.1-.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1 1 0 0 0-.2 1.1 1 1 0 0 0 .9.6H20a2 2 0 1 1 0 4h-.2a1 1 0 0 0-.9.6Z"></path>',
 		'seo'      => '<circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line>',
 	);
 
-	return $icons[ $key ] ?? '';
+	return $icons[ $key ] ?? $icons['web-dev'];
 }
 
 /**
@@ -311,17 +321,20 @@ function krv_services_landing_register_acf(): void {
 
 	$service_icon_choices = array(
 		'web-dev'  => 'Веб-разработка',
-		'docker'   => 'Docker',
-		'vps'      => 'VPS',
+		'vps'      => 'VPS / серверы',
 		'max-bot'  => 'MAX бот',
+		'ads'      => 'Реклама',
+		'landing'  => 'Лендинг',
+		'ai'       => 'AI',
+		'rag'      => 'RAG / база',
+		'support'  => 'Поддержка',
+		'seo'      => 'SEO / поиск',
+		'docker'   => 'Docker',
 		'domain'   => 'Домен',
 		'cloud'    => 'Облако',
 		'security' => 'Безопасность',
 		'speed'    => 'Скорость',
 		'cdn'      => 'CDN',
-		'ads'      => 'Реклама',
-		'support'  => 'Поддержка',
-		'seo'      => 'SEO',
 	);
 
 	$pricing_icon_choices = array(
@@ -712,10 +725,12 @@ function krv_services_landing_render_service_icon( array $item ): string {
 	$icon_svg = trim( (string) ( $item['icon_svg'] ?? '' ) );
 	$inner    = $icon_svg !== '' ? $icon_svg : krv_services_landing_service_icon_preset( $icon_key );
 
-	return sprintf(
-		'<svg class="krv-landing-service-icon" viewBox="0 0 24 24" aria-hidden="true">%s</svg>',
+	$svg = sprintf(
+		'<svg class="krv-landing-service-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">%s</svg>',
 		wp_kses( $inner, krv_services_landing_svg_kses() )
 	);
+
+	return '<span class="krv-landing-service-icon-wrap" aria-hidden="true">' . $svg . '</span>';
 }
 
 /**
@@ -878,12 +893,23 @@ function krv_services_landing_render(): string {
 							$badge_class = $is_demo ? 'krv-landing-service-price krv-landing-service-badge' : 'krv-landing-service-price';
 							?>
 							<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> class="krv-landing-service-item<?php echo esc_attr( $extra_class ); ?>"<?php echo $href_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-								<?php if ( $badge_text !== '' ) : ?>
-									<span class="<?php echo esc_attr( $badge_class ); ?>"><?php echo esc_html( $badge_text ); ?></span>
-								<?php endif; ?>
-								<?php echo krv_services_landing_render_service_icon( $service_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-								<h3><?php echo esc_html( $title ); ?></h3>
-								<p><?php echo esc_html( (string) ( $service_item['description'] ?? '' ) ); ?></p>
+								<div class="krv-landing-service-inner">
+									<?php if ( $badge_text !== '' ) : ?>
+										<span class="<?php echo esc_attr( $badge_class ); ?>"><?php echo esc_html( $badge_text ); ?></span>
+									<?php endif; ?>
+									<?php if ( $url !== '' ) : ?>
+										<span class="krv-landing-service-ext" aria-hidden="true">
+											<svg width="14" height="14" viewBox="0 0 24 24" fill="none" focusable="false">
+												<path d="M14 5h5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M10 14L19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+											</svg>
+										</span>
+									<?php endif; ?>
+									<?php echo krv_services_landing_render_service_icon( $service_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+									<h3 class="krv-landing-service-title"><?php echo esc_html( $title ); ?></h3>
+									<p class="krv-landing-service-desc"><?php echo esc_html( (string) ( $service_item['description'] ?? '' ) ); ?></p>
+								</div>
 							</<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<?php endforeach; ?>
 					</div>

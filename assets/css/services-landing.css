@@ -145,78 +145,252 @@
 }
 
 .krv-landing-services {
-	padding: 15px 0 0;
+	padding: 8px 0 0;
 }
 
 .krv-landing-services-header {
-	margin-bottom: 20px;
+	margin-bottom: 22px;
 	text-align: center;
 }
 
 .krv-landing-services-header h2 {
-	margin: 0 0 10px;
+	margin: 0 0 8px;
 	font-size: 2rem;
+	line-height: 1.2;
+	font-weight: 700;
+	letter-spacing: -0.02em;
 	color: var(--text-main);
 }
 
 .krv-landing-services-header p {
-	margin: 0;
-	font-size: 1rem;
+	margin: 0 auto;
+	max-width: 40rem;
+	font-size: 1.02rem;
+	line-height: 1.55;
 	color: var(--text-soft);
+	text-align: center;
 }
 
 .krv-landing-services-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	gap: 20px;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 16px;
 	width: 100%;
+	align-items: stretch;
 }
 
+/* Service cards — integrator parity with clients */
 .krv-landing-service-item {
+	position: relative;
+	display: flex;
+	flex-direction: column;
 	width: 100%;
-	padding: 15px;
+	height: 100%;
+	min-height: 100%;
+	padding: 0;
 	text-align: center;
+	text-decoration: none;
+	color: inherit;
 	background: var(--card-bg);
-	border-radius: var(--service-radius);
-	box-shadow: var(--card-shadow);
-	transition: box-shadow 0.25s ease;
+	border: 1px solid rgba(15, 35, 80, 0.08);
+	border-radius: 14px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+	transition:
+		box-shadow 0.22s ease,
+		transform 0.22s ease,
+		border-color 0.22s ease;
+	overflow: hidden;
+	-webkit-tap-highlight-color: transparent;
 }
 
-.krv-landing-service-item:hover {
-	box-shadow: var(--card-shadow-hover);
+.krv-landing-service-inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex: 1 1 auto;
+	min-height: 200px;
+	padding: 22px 16px 18px;
+	position: relative;
+}
+
+.krv-landing-service-item--link {
+	cursor: pointer;
+}
+
+.krv-landing-service-item--link:hover {
+	transform: translateY(-2px);
+	border-color: rgba(81, 129, 254, 0.35);
+	box-shadow: 0 10px 24px rgba(15, 35, 80, 0.12);
+}
+
+.krv-landing-service-item--link:active {
+	transform: translateY(0);
+}
+
+.krv-landing-service-item--link:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}
+
+/* Theme-colored icon plate */
+.krv-landing-service-icon-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 58px;
+	height: 58px;
+	margin: 4px auto 14px;
+	border-radius: 14px;
+	color: #315fe8;
+	background: linear-gradient(145deg, rgba(81, 129, 254, 0.16), rgba(81, 129, 254, 0.06));
+	border: 1px solid rgba(81, 129, 254, 0.2);
+	transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+}
+
+.krv-landing-service-item--link:hover .krv-landing-service-icon-wrap {
+	background: linear-gradient(145deg, rgba(81, 129, 254, 0.22), rgba(81, 129, 254, 0.1));
+	border-color: rgba(81, 129, 254, 0.32);
+	transform: translateY(-1px);
 }
 
 .krv-landing-service-icon {
-	display: inline-block;
-	width: 34px;
-	height: 34px;
-	margin-bottom: 15px;
-	color: var(--accent);
+	display: block;
+	width: 28px;
+	height: 28px;
+	margin: 0;
+	color: inherit;
+	flex-shrink: 0;
 }
 
 .krv-landing-service-icon path,
 .krv-landing-service-icon circle,
 .krv-landing-service-icon rect,
 .krv-landing-service-icon polyline,
-.krv-landing-service-icon line {
+.krv-landing-service-icon line,
+.krv-landing-service-icon ellipse {
 	fill: none;
 	stroke: currentColor;
-	stroke-width: 1.8;
+	stroke-width: 1.75;
 	stroke-linecap: round;
 	stroke-linejoin: round;
 }
 
-.krv-landing-service-item h3 {
-	margin: 0 0 10px;
-	font-size: 1.25rem;
-	color: var(--text-main);
+/* Filled dots stay solid */
+.krv-landing-service-icon [fill="currentColor"] {
+	fill: currentColor;
+	stroke: none;
 }
 
+.krv-landing-service-title,
+.krv-landing-service-item h3 {
+	margin: 0 0 8px;
+	font-size: 1.08rem;
+	font-weight: 650;
+	line-height: 1.3;
+	color: var(--text-main);
+	letter-spacing: -0.01em;
+}
+
+.krv-landing-service-desc,
 .krv-landing-service-item p {
 	margin: 0;
-	font-size: 0.9rem;
+	font-size: 0.88rem;
 	line-height: 1.5;
 	color: var(--text-soft);
+	flex: 1 1 auto;
+}
+
+/* Quiet external affordance */
+.krv-landing-service-ext {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border-radius: 8px;
+	color: var(--accent);
+	opacity: 0.3;
+	transition: opacity 0.2s ease, background 0.2s ease;
+	pointer-events: none;
+}
+
+.krv-landing-service-item--link:hover .krv-landing-service-ext,
+.krv-landing-service-item--link:focus-visible .krv-landing-service-ext {
+	opacity: 1;
+	background: var(--accent-bg);
+}
+
+@media (max-width: 1100px) {
+	.krv-landing-services-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 14px;
+	}
+}
+
+@media (max-width: 768px) {
+	.krv-landing-services-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+	}
+
+	.krv-landing-service-inner {
+		min-height: 180px;
+		padding: 18px 12px 14px;
+	}
+
+	.krv-landing-service-icon-wrap {
+		width: 50px;
+		height: 50px;
+		border-radius: 12px;
+	}
+
+	.krv-landing-service-icon {
+		width: 24px;
+		height: 24px;
+	}
+
+	.krv-landing-service-title,
+	.krv-landing-service-item h3 {
+		font-size: 0.98rem;
+	}
+
+	.krv-landing-service-desc,
+	.krv-landing-service-item p {
+		font-size: 0.82rem;
+	}
+
+	.krv-landing-service-ext {
+		opacity: 0.5;
+	}
+}
+
+@media (max-width: 420px) {
+	.krv-landing-services-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+html[data-theme="dark"] .krv-landing-service-item {
+	border-color: rgba(255, 255, 255, 0.08);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .krv-landing-service-item--link:hover {
+	border-color: rgba(140, 175, 255, 0.35);
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .krv-landing-service-icon-wrap {
+	color: #9db7ff;
+	background: linear-gradient(145deg, rgba(120, 160, 255, 0.18), rgba(120, 160, 255, 0.06));
+	border-color: rgba(120, 160, 255, 0.22);
+}
+
+html[data-theme="dark"] .krv-landing-service-ext {
+	color: #9db7ff;
 }
 
 .krv-landing-pricing {
@@ -315,11 +489,7 @@
 	transform: translateY(1px);
 }
 
-@media (max-width: 890px) {
-	.krv-landing-services-grid {
-		grid-template-columns: 1fr;
-	}
-}
+/* tablet 2-col handled above at 768/1100; do not collapse to 1 early */
 
 @media (max-width: 768px) {
 	.krv-services-landing {
@@ -363,11 +533,6 @@
 		height: 20px;
 	}
 
-	.krv-landing-service-icon {
-		width: 30px;
-		height: 30px;
-	}
-
 	.krv-landing-pricing-rate {
 		font-size: 1.8rem;
 	}
@@ -406,11 +571,6 @@
 		height: 18px;
 	}
 
-	.krv-landing-service-icon {
-		width: 28px;
-		height: 28px;
-	}
-
 	.krv-landing-title,
 	.krv-landing-services-header h2,
 	.krv-landing-pricing-title {
@@ -440,34 +600,21 @@
 	}
 }
 
-/* Flagship service cards: price badge + note + pricing actions */
-.krv-landing-service-item {
-	position: relative;
-}
-.krv-landing-service-item--link {
-	display: block;
-	text-decoration: none;
-	color: inherit;
-	transition: transform .15s ease, box-shadow .15s ease;
-	cursor: pointer;
-}
-.krv-landing-service-item--link:hover {
-	transform: translateY(-2px);
-}
+/* Price badge */
 .krv-landing-service-price {
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 12px;
+	right: 12px;
 	z-index: 1;
 	font-size: 0.72rem;
 	font-weight: 650;
 	line-height: 1.2;
-	padding: 0.28rem 0.55rem;
+	padding: 0.3rem 0.6rem;
 	border-radius: 999px;
 	background: rgba(49, 95, 232, 0.12);
 	color: #2346b0;
 	white-space: nowrap;
-	max-width: 55%;
+	max-width: 58%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
