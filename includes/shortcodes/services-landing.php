@@ -775,6 +775,10 @@ function krv_services_landing_render(): string {
 							if ( $line === '' ) {
 								continue;
 							}
+							// Quieter legal ids (OGRN / INN) even if ACF row has no class field.
+							if ( $class === '' && ( false !== stripos( $line, 'ОГРН' ) || false !== stripos( $line, 'ИНН' ) ) ) {
+								$class = 'is-legal';
+							}
 							$cls = 'krv-landing-meta-line' . ( $class !== '' ? ' ' . sanitize_html_class( $class ) : '' );
 							?>
 							<span class="<?php echo esc_attr( $cls ); ?>"><?php echo esc_html( $line ); ?></span>
