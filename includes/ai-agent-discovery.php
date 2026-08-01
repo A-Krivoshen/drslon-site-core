@@ -106,7 +106,7 @@ function drslon_ai_agent_json_ld() {
 			array(
 				'@type'       => 'ProfessionalService',
 				'@id'         => home_url( '/#/schema/ProfessionalService' ),
-				'name'        => 'ИТ Решения — ИП Кривошеин Алексей Сергеевич',
+				'name'        => 'ИТ Решения, ИП Кривошеин Алексей Сергеевич',
 				'url'         => home_url( '/' ),
 				'description' => 'Разработка и поддержка сайтов на WordPress, Linux/VPS, техническое SEO, Яндекс.Директ, боты MAX, AI-ready подготовка сайтов.',
 				'priceRange'  => '₽₽',

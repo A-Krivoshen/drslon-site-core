@@ -85,7 +85,7 @@ function krv_tg_discuss_links_html(): string {
 		'<span class="krv-tg-discuss-links__label">%s</span>'
 		. '<a class="krv-tg-discuss-links__link" href="%s" target="_blank" rel="noopener noreferrer">Telegram — @%s</a>'
 		. '<span class="krv-tg-discuss-links__sep" aria-hidden="true">/</span>'
-		. '<a class="krv-tg-discuss-links__link" href="%s" target="_blank" rel="noopener noreferrer">MAX — канал</a>',
+		. '<a class="krv-tg-discuss-links__link" href="%s" target="_blank" rel="noopener noreferrer">MAX, канал</a>',
 		'Обсудить в',
 		esc_url( 'https://t.me/' . KRV_TG_DISCUSSION ),
 		esc_html( KRV_TG_DISCUSSION ),

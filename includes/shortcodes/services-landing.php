@@ -21,7 +21,8 @@ function krv_services_landing_get_defaults(): array {
 	return array(
 		'profile_avatar'         => 10321,
 		'profile_name'           => 'Алексей Кривошеин',
-		'profile_tagline'        => 'WordPress, VPS, боты MAX, Директ и AI-ready - делаю сам, как ИП',
+		// No em/en dash: people write a period or drop the second clause.
+		'profile_tagline'        => 'WordPress, VPS, боты MAX, Директ и AI-ready',
 		'profile_lead'           => 'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.',
 		'profile_meta_lines'       => array(
 			array( 'line' => 'ИП Кривошеин Алексей Сергеевич · договор и безналичный расчёт' ),
@@ -687,6 +688,12 @@ function krv_services_landing_get_data(): array {
 			continue;
 		}
 
+		// Empty ACF text → keep sensible default (avoids blank hero tagline).
+		if ( ( null === $value || '' === $value ) && is_string( $default_value ) && $default_value !== '' ) {
+			$data[ $field_name ] = $default_value;
+			continue;
+		}
+
 		$data[ $field_name ] = $value;
 	}
 
@@ -777,6 +784,10 @@ function krv_services_landing_render(): string {
 
 				<?php
 				$tagline = trim( (string) ( $data['profile_tagline'] ?? '' ) );
+				// Never show AI-looking long dashes in the hero line.
+				$tagline = str_replace( array( '—', '–', '&#8212;', '&#8211;', ' - ', ' – ', ' — ' ), array( '. ', '. ', '. ', '. ', '. ', '. ', '. ' ), $tagline );
+				$tagline = preg_replace( '/\.\s*\./u', '.', $tagline ) ?? $tagline;
+				$tagline = trim( $tagline, " \t\n\r\0\x0B." );
 				if ( $tagline !== '' ) :
 					?>
 					<p class="krv-landing-tagline"><?php echo esc_html( $tagline ); ?></p>
