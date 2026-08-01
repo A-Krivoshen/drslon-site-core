@@ -825,19 +825,13 @@ function krv_services_landing_render(): string {
 							$url         = trim( (string) ( $service_item['url'] ?? '' ) );
 							$price_label = trim( (string) ( $service_item['price_label'] ?? '' ) );
 							$tag         = $url !== '' ? 'a' : 'div';
-							$href_attr   = $url !== '' ? ' href="' . esc_url( $url ) . '"' : '';
-							// External landings open in same tab for hub conversion; keep noopener only if offsite.
-							$rel_attr = '';
-							if ( $url !== '' && preg_match( '#^https?://#i', $url ) && strpos( $url, home_url() ) !== 0 ) {
-								// Same ecosystem *.krivoshein.site - same tab, no nofollow.
-								$host = wp_parse_url( $url, PHP_URL_HOST );
-								if ( is_string( $host ) && ! preg_match( '/(^|\.)krivoshein\.site$/i', $host ) ) {
-									$rel_attr = ' rel="noopener noreferrer" target="_blank"';
-								}
-							}
+							// Always open service landings/demos in a new tab; keep hub page in place.
+							$href_attr   = $url !== ''
+								? ' href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer"'
+								: '';
 							$extra_class = $url !== '' ? ' krv-landing-service-item--link' : '';
 							?>
-							<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> class="krv-landing-service-item<?php echo esc_attr( $extra_class ); ?>"<?php echo $href_attr . $rel_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+							<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> class="krv-landing-service-item<?php echo esc_attr( $extra_class ); ?>"<?php echo $href_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 								<?php if ( $price_label !== '' ) : ?>
 									<span class="krv-landing-service-price"><?php echo esc_html( $price_label ); ?></span>
 								<?php endif; ?>
