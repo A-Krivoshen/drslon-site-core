@@ -255,8 +255,8 @@
 
 .krv-landing-service-icon {
 	display: block;
-	width: 28px;
-	height: 28px;
+	width: 30px;
+	height: 30px;
 	margin: 0;
 	color: inherit;
 	flex-shrink: 0;
@@ -270,9 +270,10 @@
 .krv-landing-service-icon ellipse {
 	fill: none;
 	stroke: currentColor;
-	stroke-width: 1.75;
+	stroke-width: 1.65;
 	stroke-linecap: round;
 	stroke-linejoin: round;
+	vector-effect: non-scaling-stroke;
 }
 
 /* Filled dots stay solid */
