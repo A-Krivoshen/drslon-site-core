@@ -1,0 +1,168 @@
+/**
+ * Privacy / cookie policy page — uses krv-service-page tokens (light defaults).
+ * Dark overrides live in krv-ui-dark.css.
+ */
+
+.krv-service-page.krv-policy {
+	max-width: 900px;
+}
+
+.krv-policy__info {
+	margin: 0 0 28px;
+	padding: 18px 20px;
+	border-radius: 12px;
+	border-left: 5px solid var(--krv-sp-accent, #5181fe);
+	background: var(--krv-sp-accent-soft, #eef4ff);
+	color: var(--krv-sp-text, #111827);
+	line-height: 1.55;
+}
+
+.krv-policy__info b,
+.krv-policy__info strong {
+	color: var(--krv-sp-text, #111827);
+}
+
+.krv-policy h2 {
+	margin: 2rem 0 0.85rem;
+	padding-bottom: 0.35rem;
+	border-bottom: 1px solid var(--krv-sp-line, #e7ecf5);
+	font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+	font-weight: 700;
+	color: var(--krv-sp-text, #111827);
+	text-align: left;
+}
+
+.krv-policy h3 {
+	margin: 1.35rem 0 0.6rem;
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: var(--krv-sp-text, #111827);
+	text-align: left;
+}
+
+.krv-policy p,
+.krv-policy li {
+	font-size: 1rem;
+	line-height: 1.7;
+	color: var(--krv-sp-muted, #5b6472);
+	margin: 0 0 0.85em;
+}
+
+.krv-policy p b,
+.krv-policy p strong,
+.krv-policy li b,
+.krv-policy li strong {
+	color: var(--krv-sp-text, #111827);
+	font-weight: 600;
+}
+
+.krv-policy a {
+	color: var(--krv-sp-accent, #5181fe);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.krv-policy a:hover {
+	color: var(--krv-sp-accent, #244ac2);
+}
+
+.krv-policy ul,
+.krv-policy ol {
+	padding-left: 1.35em;
+	margin: 0 0 1.2em;
+}
+
+.krv-policy li {
+	margin-bottom: 0.55em;
+}
+
+.krv-policy li ul {
+	margin-top: 0.45em;
+	margin-bottom: 0.45em;
+}
+
+/* Cookie category cards */
+.krv-policy__cats {
+	display: grid;
+	gap: 12px;
+	margin: 0 0 1.4em;
+}
+
+.krv-policy__cat {
+	padding: 14px 16px;
+	border-radius: 12px;
+	border: 1px solid var(--krv-sp-line, #e7ecf5);
+	background: var(--krv-sp-surface, #ffffff);
+	box-shadow: var(--krv-sp-shadow, 0 8px 24px rgba(15, 23, 42, 0.04));
+}
+
+.krv-policy__cat-title {
+	margin: 0 0 0.35em;
+	font-size: 0.98rem;
+	font-weight: 700;
+	color: var(--krv-sp-text, #111827);
+}
+
+.krv-policy__cat-meta {
+	display: inline-block;
+	margin: 0 0 0.55em;
+	padding: 2px 8px;
+	border-radius: 999px;
+	font-size: 0.75rem;
+	font-weight: 650;
+	letter-spacing: 0.01em;
+	background: var(--krv-sp-accent-soft, #eef4ff);
+	color: var(--krv-sp-accent, #315fe8);
+}
+
+.krv-policy__cat-meta--lock {
+	background: rgba(91, 100, 114, 0.12);
+	color: var(--krv-sp-muted, #5b6472);
+}
+
+.krv-policy__cat p {
+	margin: 0;
+	font-size: 0.95rem;
+}
+
+.krv-policy__rekvizity {
+	margin-top: 2rem;
+	padding: 18px 20px;
+	border-radius: 12px;
+	border: 1px solid var(--krv-sp-line, #e7ecf5);
+	background: var(--krv-sp-surface, #ffffff);
+	color: var(--krv-sp-text, #111827);
+	line-height: 1.7;
+	word-break: break-word;
+	box-shadow: var(--krv-sp-shadow, 0 8px 24px rgba(15, 23, 42, 0.06));
+}
+
+.krv-policy__rekvizity b {
+	color: var(--krv-sp-text, #111827);
+}
+
+.krv-policy__email {
+	direction: ltr;
+	unicode-bidi: embed;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.krv-policy__note {
+	margin-top: 1.5rem;
+	font-size: 0.92rem;
+	color: var(--krv-sp-muted, #5b6472);
+	text-align: right;
+	line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+	.krv-policy__info,
+	.krv-policy__rekvizity,
+	.krv-policy__cat {
+		padding: 14px 14px;
+	}
+
+	.krv-policy__note {
+		text-align: left;
+	}
+}

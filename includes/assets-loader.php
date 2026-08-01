@@ -203,6 +203,59 @@ add_action(
 );
 
 /**
+ * Privacy / cookie policy: .krv-policy + service-page shell tokens.
+ */
+add_action(
+	'wp_enqueue_scripts',
+	static function (): void {
+		if ( is_admin() ) {
+			return;
+		}
+
+		$need = is_page( 'politika-v-otnoshenii-obrabotki-personalnyh-dannyh' )
+			|| is_privacy_policy();
+		if ( ! $need && is_singular() ) {
+			$post = get_post();
+			$need = $post instanceof WP_Post && false !== strpos( (string) $post->post_content, 'krv-policy' );
+		}
+		if ( ! $need ) {
+			return;
+		}
+
+		$plugin_file = DRSLON_SITE_CORE_DIR . 'drslon-site-core.php';
+		$shell       = DRSLON_SITE_CORE_DIR . 'assets/css/service-page-shell.css';
+		$policy      = DRSLON_SITE_CORE_DIR . 'assets/css/content-policy.css';
+		$dark        = DRSLON_SITE_CORE_DIR . 'assets/css/krv-ui-dark.css';
+
+		if ( file_exists( $shell ) ) {
+			wp_enqueue_style(
+				'drslon-service-page-shell',
+				plugins_url( 'assets/css/service-page-shell.css', $plugin_file ),
+				[],
+				(string) filemtime( $shell )
+			);
+		}
+		if ( file_exists( $policy ) ) {
+			wp_enqueue_style(
+				'drslon-content-policy',
+				plugins_url( 'assets/css/content-policy.css', $plugin_file ),
+				[ 'drslon-service-page-shell' ],
+				(string) filemtime( $policy )
+			);
+		}
+		if ( file_exists( $dark ) ) {
+			wp_enqueue_style(
+				'drslon-krv-ui-dark',
+				plugins_url( 'assets/css/krv-ui-dark.css', $plugin_file ),
+				[ 'drslon-content-policy' ],
+				(string) filemtime( $dark )
+			);
+		}
+	},
+	21
+);
+
+/**
  * Build or refresh a combined CSS file for the active shortcode styles (+ optional dark).
  *
  * @param list<array{handle:string,file:string,path:string,url:string,ver:string}> $style_queue Styles to include.
