@@ -122,8 +122,8 @@ add_action( 'wp_head', function () {
 	}
 	$done = true;
 
+	// context.js is loaded by krv-cookie-consent only when ads consent is on (RF default: on).
 	echo "<script>window.yaContextCb=window.yaContextCb||[];</script>\n";
-	echo "<script async src=\"https://yandex.ru/ads/system/context.js\"></script>\n";
 }, 30 );
 
 /** =========================
@@ -517,15 +517,27 @@ add_action( 'wp_footer', function () {
 	(function () {
 		var renderTo = <?php echo wp_json_encode( krv_rsya_reco_render_to() ); ?>;
 		var blockId  = <?php echo wp_json_encode( krv_rsya_reco_block_id() ); ?>;
-
 		var el = document.getElementById(renderTo);
 		if (!el) return;
+
+		function adsAllowed() {
+			// RF default ON until consent script sets window.krvConsent.ads = false.
+			if (window.krvConsent && window.krvConsent.ads === false) return false;
+			return true;
+		}
 
 		function hasFill() {
 			return !!el.querySelector('iframe');
 		}
 
 		function renderOnce() {
+			if (!adsAllowed()) {
+				el.style.display = 'none';
+				var wrap = el.closest('.krv-rsya-reco');
+				if (wrap) wrap.style.display = 'none';
+				return;
+			}
+			el.style.display = '';
 			if (el.dataset.krvRecoInit === '1') return;
 			el.dataset.krvRecoInit = '1';
 
@@ -534,7 +546,6 @@ add_action( 'wp_footer', function () {
 				try {
 					if (!window.Ya || !Ya.Context || !Ya.Context.AdvManager) return;
 					if (hasFill()) return;
-
 					Ya.Context.AdvManager.renderWidget({
 						renderTo: renderTo,
 						blockId: blockId
@@ -543,14 +554,31 @@ add_action( 'wp_footer', function () {
 			});
 		}
 
-		renderOnce();
-
-		setTimeout(function () {
-			if (hasFill()) return;
-			el.innerHTML = '';
-			el.dataset.krvRecoInit = '0';
+		function boot() {
 			renderOnce();
-		}, 9000);
+			setTimeout(function () {
+				if (!adsAllowed() || hasFill()) return;
+				el.innerHTML = '';
+				el.dataset.krvRecoInit = '0';
+				renderOnce();
+			}, 9000);
+		}
+
+		if (window.krvConsent) boot();
+		else {
+			window.addEventListener('krv-consent-change', boot, { once: true });
+			// Fallback if consent script missing: allow after short delay (RF default on).
+			setTimeout(function () {
+				if (!window.krvConsent) {
+					window.krvConsent = { analytics: true, ads: true, necessary: true };
+				}
+				boot();
+			}, 50);
+		}
+		window.addEventListener('krv-ads-ready', function () {
+			el.dataset.krvRecoInit = '0';
+			boot();
+		});
 	})();
 	</script>
 	<?php

@@ -410,11 +410,23 @@ function krv_service_page_render_rsya_block(): void {
 				var el = document.getElementById(renderTo);
 				if (!el) return;
 
+				function adsAllowed() {
+					if (window.krvConsent && window.krvConsent.ads === false) return false;
+					return true;
+				}
+
 				function hasFill() {
 					return !!el.querySelector('iframe');
 				}
 
 				function renderOnce() {
+					if (!adsAllowed()) {
+						el.style.display = 'none';
+						var wrap = el.closest('.krv-service-page__rsya');
+						if (wrap) wrap.style.display = 'none';
+						return;
+					}
+					el.style.display = '';
 					if (el.dataset.krvRecoInit === '1') return;
 					el.dataset.krvRecoInit = '1';
 
@@ -432,14 +444,30 @@ function krv_service_page_render_rsya_block(): void {
 					});
 				}
 
-				renderOnce();
-
-				setTimeout(function () {
-					if (hasFill()) return;
-					el.innerHTML = '';
-					el.dataset.krvRecoInit = '0';
+				function boot() {
 					renderOnce();
-				}, 9000);
+					setTimeout(function () {
+						if (!adsAllowed() || hasFill()) return;
+						el.innerHTML = '';
+						el.dataset.krvRecoInit = '0';
+						renderOnce();
+					}, 9000);
+				}
+
+				if (window.krvConsent) boot();
+				else {
+					window.addEventListener('krv-consent-change', boot, { once: true });
+					setTimeout(function () {
+						if (!window.krvConsent) {
+							window.krvConsent = { analytics: true, ads: true, necessary: true };
+						}
+						boot();
+					}, 50);
+				}
+				window.addEventListener('krv-ads-ready', function () {
+					el.dataset.krvRecoInit = '0';
+					boot();
+				});
 			})();
 			</script>
 		<?php endif; ?>
@@ -555,8 +583,8 @@ add_action(
 		}
 		$done = true;
 
+		// context.js loaded by krv-cookie-consent when ads consent is on (RF default: on).
 		echo "<script>window.yaContextCb=window.yaContextCb||[];</script>\n";
-		echo "<script async src=\"https://yandex.ru/ads/system/context.js\"></script>\n";
 	},
 	30
 );
