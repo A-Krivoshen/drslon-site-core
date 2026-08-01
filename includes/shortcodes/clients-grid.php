@@ -11,6 +11,45 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** =========================
  *  10) Clients grid shortcode + styles + random
  *  ========================= */
+
+/**
+ * Short display name for client cards (grid-friendly).
+ */
+function krv_client_display_title( int $post_id, string $title ): string {
+	$map = array(
+		9168 => 'Стоматолог Мурашова',
+		8450 => 'Храм в Рогово',
+		8423 => 'Соловьи.Ай.Ти',
+		8081 => 'Технолидер',
+		6671 => 'СКД',
+		6115 => 'Форновогаз KZ',
+		6113 => 'АГНКС',
+		6111 => 'НАКС ЦНИИТМАШ',
+		5702 => 'Fornovo Gas',
+		5701 => 'АЦ ЦНИИТМАШ',
+		6151 => 'Метком-Калуга',
+	);
+
+	if ( isset( $map[ $post_id ] ) ) {
+		return $map[ $post_id ];
+	}
+
+	// Soften long legal names: ООО «X» → X.
+	$short = preg_replace( '/^ООО\s*[«"]?\s*/u', '', $title );
+	$short = preg_replace( '/\s*[»"]\s*$/u', '', (string) $short );
+	$short = trim( (string) $short );
+
+	if ( $short !== '' && mb_strlen( $short, 'UTF-8' ) <= 42 ) {
+		return $short;
+	}
+
+	if ( mb_strlen( $title, 'UTF-8' ) > 42 ) {
+		return rtrim( mb_substr( $title, 0, 40, 'UTF-8' ) ) . '…';
+	}
+
+	return $title;
+}
+
 add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 	$atts = shortcode_atts( [
 		'random' => '1',
@@ -49,16 +88,25 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 			while ( $q->have_posts() ) :
 				$q->the_post();
 
-				$post_id     = get_the_ID();
-				$title       = get_the_title();
-				$url         = trim( (string) get_post_meta( $post_id, 'client_url', true ) );
-				$description = trim( wp_strip_all_tags( (string) get_post_meta( $post_id, 'client_description', true ) ) );
+				$post_id       = (int) get_the_ID();
+				$title_raw     = get_the_title();
+				$title_display = krv_client_display_title( $post_id, $title_raw );
+				$url           = trim( (string) get_post_meta( $post_id, 'client_url', true ) );
+				$description   = trim( wp_strip_all_tags( (string) get_post_meta( $post_id, 'client_description', true ) ) );
 
-				$thumb = get_the_post_thumbnail( $post_id, 'medium', [
-					'class'   => 'krv-client-logo',
-					'loading' => 'lazy',
-					'alt'     => $title,
-				] );
+				// data-no-lazy: keep real logos (avoid WPFC sign.png placeholder flash).
+				$thumb = get_the_post_thumbnail(
+					$post_id,
+					'medium',
+					[
+						'class'         => 'krv-client-logo',
+						'loading'       => 'lazy',
+						'decoding'      => 'async',
+						'alt'           => $title_display,
+						'data-no-lazy'  => '1',
+						'data-skip-lazy'=> '1',
+					]
+				);
 
 				$tag_open = $url
 					? '<a class="krv-client-card" href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer">'
@@ -66,23 +114,23 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 
 				$tag_close = $url ? '</a>' : '</div>';
 				?>
-				<?php echo $tag_open; ?>
+				<?php echo $tag_open; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					<div class="krv-client-card-inner">
 						<div class="krv-client-logo-wrap">
 							<?php if ( $thumb ) : ?>
-								<?php echo $thumb; ?>
+								<?php echo $thumb; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							<?php else : ?>
-								<div class="krv-client-no-logo"><?php echo esc_html( mb_substr( $title, 0, 1, 'UTF-8' ) ); ?></div>
+								<div class="krv-client-no-logo" aria-hidden="true"><?php echo esc_html( mb_substr( $title_display, 0, 1, 'UTF-8' ) ); ?></div>
 							<?php endif; ?>
 						</div>
 
-						<h3 class="krv-client-title"><?php echo esc_html( $title ); ?></h3>
+						<h3 class="krv-client-title" title="<?php echo esc_attr( $title_raw ); ?>"><?php echo esc_html( $title_display ); ?></h3>
 
 						<?php if ( $description !== '' ) : ?>
 							<p class="krv-client-description"><?php echo esc_html( $description ); ?></p>
 						<?php endif; ?>
 					</div>
-				<?php echo $tag_close; ?>
+				<?php echo $tag_close; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<?php endwhile; ?>
 		</div>
 	</div>

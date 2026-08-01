@@ -21,12 +21,17 @@ function krv_services_landing_get_defaults(): array {
 	return array(
 		'profile_avatar'         => 10321,
 		'profile_name'           => 'Алексей Кривошеин',
-		'profile_lead'           => 'Специализируюсь на разработке и продвижении веб-сайтов, администрировании серверов и поддержке существующих проектов.',
+		'profile_tagline'        => 'WordPress, VPS, боты MAX, Яндекс.Директ и AI-ready - под ключ',
+		'profile_lead'           => 'Один специалист: сайты, серверы, реклама и автоматизация. Работаю по договору, безнал, закрывающие документы.',
 		'profile_meta_lines'       => array(
 			array( 'line' => 'Работаю по договору и принимаю безналичный расчёт.' ),
 			array( 'line' => 'ОГРН 321774600479249' ),
 			array( 'line' => 'ИНН 770603253213' ),
 		),
+		'hero_cta_primary_text'    => 'Смотреть прайс',
+		'hero_cta_primary_url'     => 'https://krivoshein.site/prays-list/',
+		'hero_cta_secondary_text'  => 'Написать в Telegram',
+		'hero_cta_secondary_url'   => 'https://t.me/DrSlon',
 		'social_links'           => array(
 			array(
 				'url'      => 'https://t.me/DrSlon',
@@ -743,13 +748,20 @@ function krv_services_landing_render(): string {
 		<div class="krv-services-landing-section">
 			<div class="krv-landing-contact-card">
 				<div class="krv-landing-avatar-wrap">
-					<img class="krv-landing-avatar" src="<?php echo esc_url( krv_services_landing_resolve_avatar_url( $data['profile_avatar'] ?? '' ) ); ?>" alt="<?php echo esc_attr( (string) $data['profile_name'] ); ?>">
+					<img class="krv-landing-avatar" src="<?php echo esc_url( krv_services_landing_resolve_avatar_url( $data['profile_avatar'] ?? '' ) ); ?>" alt="<?php echo esc_attr( (string) $data['profile_name'] ); ?>" width="160" height="160" decoding="async" fetchpriority="high" data-no-lazy="1">
 				</div>
 
 				<?php if ( is_front_page() ) : ?>
 					<h1 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h1>
 				<?php else : ?>
 					<h2 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h2>
+				<?php endif; ?>
+
+				<?php
+				$tagline = trim( (string) ( $data['profile_tagline'] ?? '' ) );
+				if ( $tagline !== '' ) :
+					?>
+					<p class="krv-landing-tagline"><?php echo esc_html( $tagline ); ?></p>
 				<?php endif; ?>
 
 				<p class="krv-landing-lead"><?php echo esc_html( (string) $data['profile_lead'] ); ?></p>
@@ -765,6 +777,23 @@ function krv_services_landing_render(): string {
 							?>
 							<span class="krv-landing-meta-line"><?php echo esc_html( $line ); ?></span>
 						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+
+				<?php
+				$cta1_text = trim( (string) ( $data['hero_cta_primary_text'] ?? '' ) );
+				$cta1_url  = trim( (string) ( $data['hero_cta_primary_url'] ?? '' ) );
+				$cta2_text = trim( (string) ( $data['hero_cta_secondary_text'] ?? '' ) );
+				$cta2_url  = trim( (string) ( $data['hero_cta_secondary_url'] ?? '' ) );
+				if ( ( $cta1_text !== '' && $cta1_url !== '' ) || ( $cta2_text !== '' && $cta2_url !== '' ) ) :
+					?>
+					<div class="krv-landing-hero-cta">
+						<?php if ( $cta1_text !== '' && $cta1_url !== '' ) : ?>
+							<a class="krv-landing-pricing-button" href="<?php echo esc_url( $cta1_url ); ?>"><?php echo esc_html( $cta1_text ); ?></a>
+						<?php endif; ?>
+						<?php if ( $cta2_text !== '' && $cta2_url !== '' ) : ?>
+							<a class="krv-landing-hero-cta-secondary" href="<?php echo esc_url( $cta2_url ); ?>"<?php echo ( 0 === strpos( $cta2_url, 'http' ) && false === strpos( $cta2_url, home_url() ) ) ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $cta2_text ); ?></a>
+						<?php endif; ?>
 					</div>
 				<?php endif; ?>
 
@@ -904,6 +933,59 @@ function krv_services_landing_render(): string {
 		</div>
 	</div>
 	<?php
+
+	// Homepage Service/Offer schema (helps rich results; prices are "from").
+	if ( is_front_page() && ! empty( $data['services_items'] ) && is_array( $data['services_items'] ) ) {
+		$offers = array();
+		foreach ( $data['services_items'] as $item ) {
+			if ( ! is_array( $item ) ) {
+				continue;
+			}
+			$t = trim( (string) ( $item['title'] ?? '' ) );
+			if ( $t === '' ) {
+				continue;
+			}
+			$offer = array(
+				'@type'       => 'Offer',
+				'itemOffered' => array(
+					'@type'       => 'Service',
+					'name'        => $t,
+					'description' => trim( (string) ( $item['description'] ?? '' ) ),
+					'provider'    => array(
+						'@type' => 'Person',
+						'name'  => 'Алексей Кривошеин',
+					),
+				),
+			);
+			$url = trim( (string) ( $item['url'] ?? '' ) );
+			if ( $url !== '' ) {
+				$offer['url'] = $url;
+				$offer['itemOffered']['url'] = $url;
+			}
+			$price_label = trim( (string) ( $item['price_label'] ?? '' ) );
+			if ( $price_label !== '' ) {
+				$offer['description'] = $price_label;
+			}
+			$offers[] = $offer;
+		}
+		if ( $offers ) {
+			$graph = array(
+				'@context' => 'https://schema.org',
+				'@type'    => 'ItemList',
+				'name'     => 'Услуги Dr.Slon',
+				'itemListElement' => array(),
+			);
+			foreach ( $offers as $i => $offer ) {
+				$graph['itemListElement'][] = array(
+					'@type'    => 'ListItem',
+					'position' => $i + 1,
+					'item'     => $offer['itemOffered'],
+				);
+			}
+			echo '<script type="application/ld+json">' . wp_json_encode( $graph, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+	}
+
 	return (string) ob_get_clean();
 }
 

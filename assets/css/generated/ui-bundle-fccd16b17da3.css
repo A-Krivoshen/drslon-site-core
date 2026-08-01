@@ -525,6 +525,36 @@ html[data-theme="dark"] .krv-landing-service-price {
 	}
 }
 
+/* Hero value prop + primary CTAs */
+.krv-landing-tagline {
+	margin: 0.35rem 0 0.55rem;
+	font-size: clamp(1.05rem, 2vw, 1.25rem);
+	font-weight: 650;
+	line-height: 1.35;
+	color: var(--text-main);
+	max-width: 36rem;
+}
+.krv-landing-hero-cta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1rem;
+	align-items: center;
+	justify-content: center;
+	margin: 1rem 0 0.35rem;
+	width: 100%;
+}
+.krv-landing-hero-cta-secondary {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 46px;
+	padding: 0 0.35rem;
+	font-size: 0.98rem;
+	font-weight: 600;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
 
 /* >>> clients-grid.css */
 .krv-clients-grid-wrap {
