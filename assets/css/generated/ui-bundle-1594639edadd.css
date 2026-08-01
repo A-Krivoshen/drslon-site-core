@@ -29,8 +29,11 @@
 }
 
 .krv-landing-contact-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 100%;
-	padding: 24px;
+	padding: 28px 24px 26px;
 	text-align: center;
 	background: var(--card-bg);
 	border-radius: var(--card-radius);
@@ -66,18 +69,26 @@
 }
 
 .krv-landing-title {
-	margin: 0 0 15px;
+	margin: 0 0 12px;
+	width: 100%;
+	max-width: 40rem;
 	font-size: 1.8rem;
 	line-height: 1.2;
+	font-weight: 700;
 	color: var(--text-main);
+	text-align: center;
+	letter-spacing: -0.02em;
 }
 
 .krv-landing-lead,
 .krv-landing-meta {
 	margin: 0 0 14px;
+	width: 100%;
+	max-width: 40rem;
 	font-size: 1rem;
-	line-height: 1.5;
+	line-height: 1.55;
 	color: var(--text-soft);
+	text-align: center;
 }
 
 .krv-landing-meta {
@@ -85,10 +96,12 @@
 	flex-direction: column;
 	gap: 4px;
 	align-items: center;
+	justify-content: center;
 }
 
 .krv-landing-meta-line {
 	display: block;
+	text-align: center;
 }
 
 .krv-landing-contacts {
@@ -525,14 +538,18 @@ html[data-theme="dark"] .krv-landing-service-price {
 	}
 }
 
-/* Hero value prop + primary CTAs */
+/* Hero value prop + primary CTAs — always centered as a block */
 .krv-landing-tagline {
-	margin: 0.35rem 0 0.55rem;
+	display: block;
+	margin: 0 auto 0.65rem;
+	padding: 0 8px;
+	width: 100%;
+	max-width: 36rem;
 	font-size: clamp(1.05rem, 2vw, 1.25rem);
 	font-weight: 650;
-	line-height: 1.35;
+	line-height: 1.4;
 	color: var(--text-main);
-	max-width: 36rem;
+	text-align: center;
 }
 .krv-landing-hero-cta {
 	display: flex;
@@ -540,8 +557,9 @@ html[data-theme="dark"] .krv-landing-service-price {
 	gap: 0.75rem 1rem;
 	align-items: center;
 	justify-content: center;
-	margin: 1rem 0 0.35rem;
+	margin: 1rem auto 0.45rem;
 	width: 100%;
+	max-width: 36rem;
 }
 .krv-landing-hero-cta-secondary {
 	display: inline-flex;
