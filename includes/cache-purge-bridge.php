@@ -85,6 +85,7 @@ final class DrSlon_Cache_Purge_Bridge {
 
 		if ( $post_id === 'krv-services-showcase' ) {
 			delete_transient( 'krv_services_showcase_v1' );
+			delete_transient( 'krv_services_showcase_v2' );
 			self::purge_page_cache( DRSLON_SERVICES_PAGE_ID );
 			return;
 		}
