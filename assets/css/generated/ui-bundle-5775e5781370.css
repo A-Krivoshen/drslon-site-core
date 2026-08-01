@@ -555,6 +555,21 @@ html[data-theme="dark"] .krv-landing-service-price {
 	text-underline-offset: 3px;
 }
 
+.krv-landing-services-crosslink {
+	margin: 0.85rem auto 0;
+	max-width: 40rem;
+	padding: 0 12px;
+	text-align: center;
+	font-size: 0.95rem;
+	line-height: 1.5;
+	opacity: 0.92;
+}
+.krv-landing-services-crosslink a {
+	font-weight: 650;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
 
 /* >>> clients-grid.css */
 .krv-clients-grid-wrap {

@@ -30,8 +30,9 @@ function krv_services_landing_get_defaults(): array {
 		),
 		'hero_cta_primary_text'    => 'Смотреть прайс',
 		'hero_cta_primary_url'     => 'https://krivoshein.site/prays-list/',
-		'hero_cta_secondary_text'  => 'Написать в Telegram',
-		'hero_cta_secondary_url'   => 'https://t.me/DrSlon',
+		// Secondary CTA empty: social icons under the photo already cover Telegram/MAX/etc.
+		'hero_cta_secondary_text'  => '',
+		'hero_cta_secondary_url'   => '',
 		'social_links'           => array(
 			array(
 				'url'      => 'https://t.me/DrSlon',
@@ -876,6 +877,10 @@ function krv_services_landing_render(): string {
 						обычно внутри WordPress&nbsp;/&nbsp;VPS&#8209;проекта.<br>
 						Полный список цен в
 						<a href="<?php echo esc_url( home_url( '/prays-list/' ) ); ?>">прайс&#8209;листе</a>.
+					</p>
+					<p class="krv-landing-services-crosslink">
+						Нужен хостинг, VPS или платёжка?
+						<a href="<?php echo esc_url( home_url( '/partnery/' ) ); ?>">Партнёры и сервисы, которыми пользуюсь</a>
 					</p>
 				<?php endif; ?>
 			</div>

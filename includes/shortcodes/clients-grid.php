@@ -50,6 +50,34 @@ function krv_client_display_title( int $post_id, string $title ): string {
 	return $title;
 }
 
+/**
+ * Whether client thumbnail is usable as a logo (skip screenshots / 1×1 / favicons).
+ */
+function krv_client_logo_is_usable( int $post_id ): bool {
+	$thumb_id = (int) get_post_thumbnail_id( $post_id );
+	if ( $thumb_id <= 0 ) {
+		return false;
+	}
+
+	$src = wp_get_attachment_image_src( $thumb_id, 'full' );
+	if ( ! is_array( $src ) || empty( $src[0] ) ) {
+		return false;
+	}
+
+	$w = (int) ( $src[1] ?? 0 );
+	$h = (int) ( $src[2] ?? 0 );
+	if ( $w > 0 && $h > 0 && ( $w < 48 || $h < 24 ) ) {
+		return false;
+	}
+
+	$file = strtolower( basename( (string) $src[0] ) );
+	if ( preg_match( '/screenshot|favicon|sign\.png|dummy|placeholder/i', $file ) ) {
+		return false;
+	}
+
+	return true;
+}
+
 add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 	$atts = shortcode_atts( [
 		'random' => '1',
@@ -80,7 +108,7 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 	<div class="krv-clients-grid-wrap">
 		<div class="krv-clients-grid-header">
 			<h2>Клиенты</h2>
-			<p>Компании и проекты, с которыми я работал</p>
+			<p>Сайты, интеграции и поддержка для бизнеса, которому важна стабильность</p>
 		</div>
 
 		<div class="krv-clients-grid"<?php echo $randomize ? ' data-random-grid="1"' : ''; ?> style="min-height: <?php echo esc_attr( (string) $grid_min_h ); ?>px;">
@@ -94,19 +122,22 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 				$url           = trim( (string) get_post_meta( $post_id, 'client_url', true ) );
 				$description   = trim( wp_strip_all_tags( (string) get_post_meta( $post_id, 'client_description', true ) ) );
 
+				$show_logo = krv_client_logo_is_usable( $post_id );
 				// data-no-lazy: keep real logos (avoid WPFC sign.png placeholder flash).
-				$thumb = get_the_post_thumbnail(
-					$post_id,
-					'medium',
-					[
-						'class'         => 'krv-client-logo',
-						'loading'       => 'lazy',
-						'decoding'      => 'async',
-						'alt'           => $title_display,
-						'data-no-lazy'  => '1',
-						'data-skip-lazy'=> '1',
-					]
-				);
+				$thumb     = $show_logo
+					? get_the_post_thumbnail(
+						$post_id,
+						'medium',
+						[
+							'class'          => 'krv-client-logo',
+							'loading'        => 'lazy',
+							'decoding'       => 'async',
+							'alt'            => $title_display,
+							'data-no-lazy'   => '1',
+							'data-skip-lazy' => '1',
+						]
+					)
+					: '';
 
 				$tag_open = $url
 					? '<a class="krv-client-card" href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer">'
