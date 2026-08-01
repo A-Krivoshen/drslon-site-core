@@ -24,8 +24,8 @@ function krv_services_landing_get_defaults(): array {
 		// No em/en dash: people write a period or drop the second clause.
 		'profile_tagline'        => 'WordPress, VPS, боты MAX, Директ и AI-ready',
 		'profile_lead'           => 'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.',
+		// Full legal name is in H1/lead/proof; keep only quiet OGRN/INN here.
 		'profile_meta_lines'       => array(
-			array( 'line' => 'ИП Кривошеин Алексей Сергеевич · договор и безналичный расчёт' ),
 			array( 'line' => 'ОГРН 321774600479249 · ИНН 770603253213', 'class' => 'is-legal' ),
 		),
 		'hero_cta_primary_text'    => 'Смотреть прайс',
