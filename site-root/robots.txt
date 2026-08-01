@@ -4,14 +4,25 @@ Disallow: /wp-admin/
 Allow: /wp-admin/admin-ajax.php
 Allow: /wp-content/uploads/
 Allow: /llms.txt
+Allow: /llms-full.txt
 Allow: /ai.txt
+Allow: /agents.md
+Allow: /openapi.json
 Allow: /humans.txt
 Allow: /.well-known/security.txt
 Allow: /.well-known/api-catalog
+Allow: /.well-known/agent.json
 
 Sitemap: https://krivoshein.site/sitemap.xml
 
-# Для AI-агентов
-# Полное описание: https://krivoshein.site/llms.txt
-# Краткий индекс: https://krivoshein.site/ai.txt
-# API-каталог: https://krivoshein.site/.well-known/api-catalog
+# Для AI-агентов (рекомендуемый порядок)
+# 1. https://krivoshein.site/ai.txt
+# 2. https://krivoshein.site/llms.txt
+# 3. https://krivoshein.site/llms-full.txt
+# 4. https://krivoshein.site/agents.md
+# 5. https://krivoshein.site/openapi.json
+# 6. https://krivoshein.site/.well-known/api-catalog
+# 7. https://krivoshein.site/.well-known/agent.json
+# 8. https://krivoshein.site/sitemap.xml
+# 9. https://krivoshein.site/feed/drslon-pulse-feed/
+# 10. https://krivoshein.site/wp-json/

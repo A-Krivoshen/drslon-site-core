@@ -457,11 +457,13 @@ html[data-theme="dark"] .krv-landing-service-price {
 	color: #b9c9ff;
 }
 .krv-landing-services-note {
-	margin: 1rem 0 0;
+	margin: 1.25rem auto 0;
+	padding: 0 12px;
+	max-width: 40rem;
 	font-size: 0.9rem;
-	line-height: 1.5;
+	line-height: 1.55;
 	opacity: 0.88;
-	max-width: 46rem;
+	text-align: center;
 }
 .krv-landing-services-note a {
 	text-decoration: underline;
@@ -472,6 +474,7 @@ html[data-theme="dark"] .krv-landing-service-price {
 	flex-wrap: wrap;
 	gap: 0.75rem 1.1rem;
 	align-items: center;
+	justify-content: center;
 	margin-top: 0.5rem;
 }
 .krv-landing-pricing-secondary {

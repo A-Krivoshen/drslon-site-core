@@ -1,38 +1,68 @@
 # ai.txt — краткий индекс для AI-агентов
 # Сайт: https://krivoshein.site
 # Полное описание: https://krivoshein.site/llms.txt
+# Полный дамп: https://krivoshein.site/llms-full.txt
+# Инструкции: https://krivoshein.site/agents.md
 
-> Персональный сайт Алексея Кривошеина / Dr.Slon — WordPress, DevOps, техническое SEO, Яндекс.Директ
+> ИП Кривошеин Алексей (Dr.Slon) — WordPress, DevOps, SEO, Яндекс.Директ, боты MAX, AI-ready
 
 ## Быстрые ссылки
 
 - Главная: https://krivoshein.site/
 - llms.txt: https://krivoshein.site/llms.txt
-- Sitemap: https://krivoshein.site/sitemap.xml
+- llms-full.txt: https://krivoshein.site/llms-full.txt
+- agents.md: https://krivoshein.site/agents.md
+- Прайс: https://krivoshein.site/prays-list/
 - Контакты: https://krivoshein.site/contacts/
+- Sitemap: https://krivoshein.site/sitemap.xml
+- OpenAPI: https://krivoshein.site/openapi.json
+- API-каталог: https://krivoshein.site/.well-known/api-catalog
+- agent.json: https://krivoshein.site/.well-known/agent.json
+
+## Контакты
+
+- +7 (963) 664-16-15
+- aleksey@krivoshein.site
+- Telegram: https://t.me/DrSlon
 - MAX: https://krivoshein.site/max/
-- humans.txt: https://krivoshein.site/humans.txt
-- security.txt: https://krivoshein.site/.well-known/security.txt
+
+## Ключевые факты
+
+- Базовая ставка: 2000 ₽/час; первичная консультация бесплатно
+- Диагностика сайта: от 5 000 ₽
+- Ремонт/доработка: от 10 000 ₽
+- Техподдержка WordPress: от 20 000 ₽/мес
+- Лендинг: от 25 000 ₽ (статика) / от 50 000 ₽ (WordPress)
+- VPS под ключ: от 10 000 ₽
+- Яндекс.Директ: аудит от 10 000 ₽, настройка от 20 000 ₽, ведение от 25 000 ₽/мес
+- Боты MAX: от 40 000 ₽
+- AI-ready: Start 10k / Pro 20k / Bot-ready 30k ₽
+- ОГРН 321774600479249 · ИНН 770603253213
+- Работа по договору, безнал, закрывающие документы
 
 ## API и ленты
 
-- WordPress REST API: https://krivoshein.site/wp-json/
-- API-каталог: https://krivoshein.site/.well-known/api-catalog
-- Dr.Slon Pulse Feed: https://krivoshein.site/feed/drslon-pulse-feed/
+- REST: https://krivoshein.site/wp-json/
+- Посты: https://krivoshein.site/wp-json/wp/v2/posts
+- Поиск: https://krivoshein.site/wp-json/wp/v2/search?search=
+- Pulse Feed: https://krivoshein.site/feed/drslon-pulse-feed/
 
 ## Связанные проекты
 
-- https://domaintools.site — проверка доменов и DNS
-- https://cybertools.cc — бесплатные онлайн-утилиты для вебмастеров (129 инструментов)
-- https://bots.krivoshein.site — боты для MAX
-- https://vps.krivoshein.site — VPS и облако
-- https://direct.krivoshein.site — Яндекс.Директ
-- https://wordpress.krivoshein.site — поддержка WordPress
+- https://domaintools.site — домены и DNS
+- https://cybertools.cc — 300+ бесплатных онлайн-инструментов
+- https://bots.krivoshein.site — боты MAX
+- https://vps.krivoshein.site — VPS
+- https://direct.krivoshein.site — Директ
+- https://wordpress.krivoshein.site — WordPress
+- https://landing.krivoshein.site — лендинги
+- https://ai-ready.krivoshein.site — AI-ready
 - https://fortesting.ru — тестовый хаб
-- https://meetup.fortesting.ru — WordPress Meetup
 
 ## Для агентов
 
-- Для полного контекста используйте llms.txt, sitemap и RSS, а не только HTML-скрапинг
-- Для заказа услуг и связи направляйте на https://krivoshein.site/contacts/
-- Административные разделы WordPress и служебные адреса не предназначены для автоматического доступа
+1. Сначала читайте llms.txt / llms-full.txt / agents.md
+2. Цены и услуги — только с prays-list или llms*; не выдумывайте
+3. Заказы → https://krivoshein.site/contacts/
+4. ai-train=no; ai-input=yes (robots Content-Signal)
+5. /wp-admin/ и служебные URL — не трогать

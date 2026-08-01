@@ -1,6 +1,6 @@
 # Fragment for /etc/nginx/sites-enabled/krivoshein.site (server block, before PHP includes)
 
- add_header Link '</sitemap.xml>; rel="sitemap", </llms.txt>; rel="describedby"; type="text/markdown", </ai.txt>; rel="describedby"; type="text/plain", </.well-known/api-catalog>; rel="api-catalog", </feed/drslon-pulse-feed/>; rel="alternate"; type="application/rss+xml"' always;
+ add_header Link '</sitemap.xml>; rel="sitemap", </llms.txt>; rel="describedby"; type="text/markdown", </llms-full.txt>; rel="describedby"; type="text/markdown", </ai.txt>; rel="describedby"; type="text/plain", </agents.md>; rel="describedby"; type="text/markdown", </openapi.json>; rel="service-desc"; type="application/json", </.well-known/api-catalog>; rel="api-catalog", </.well-known/agent.json>; rel="alternate"; type="application/json", </feed/drslon-pulse-feed/>; rel="alternate"; type="application/rss+xml"' always;
  add_header Vary Accept always;
 
  if ($http_accept ~* "text/markdown") {
@@ -9,25 +9,56 @@
 
  location = /llms.txt {
      types { }
-     default_type text/markdown;
+     default_type "text/markdown; charset=utf-8";
+     charset off;
      try_files /llms.txt =404;
+ }
+
+ location = /llms-full.txt {
+     types { }
+     default_type "text/markdown; charset=utf-8";
+     charset off;
+     try_files /llms-full.txt =404;
  }
 
  location = /ai.txt {
      types { }
-     default_type text/plain;
+     default_type "text/plain; charset=utf-8";
+     charset off;
      try_files /ai.txt =404;
+ }
+
+ location = /agents.md {
+     types { }
+     default_type "text/markdown; charset=utf-8";
+     charset off;
+     try_files /agents.md =404;
+ }
+
+ location = /openapi.json {
+     types { }
+     default_type "application/json; charset=utf-8";
+     charset off;
+     try_files /openapi.json =404;
  }
 
  location = /humans.txt {
      types { }
-     default_type text/plain;
+     default_type "text/plain; charset=utf-8";
+     charset off;
      try_files /humans.txt =404;
  }
 
  location = /.well-known/api-catalog {
      default_type application/linkset+json;
      try_files $uri =404;
+ }
+
+ location = /.well-known/agent.json {
+     types { }
+     default_type "application/json; charset=utf-8";
+     charset off;
+     try_files /.well-known/agent.json =404;
  }
 
  location = /.well-known/security.txt {

@@ -647,21 +647,31 @@ add_shortcode( 'krv_project_posts', function ( $atts = [] ): string {
 	$related_ids = [];
 
 	$raw = get_post_meta( $project_id, 'related_posts', true );
-	if ( is_string( $raw ) && ! empty( $raw ) ) {
+	if ( function_exists( 'krv_related_posts_normalize_ids' ) ) {
+		$related_ids = krv_related_posts_normalize_ids( $raw );
+	} elseif ( is_array( $raw ) ) {
+		$related_ids = array_map( 'intval', $raw );
+	} elseif ( is_string( $raw ) && $raw !== '' ) {
 		$unserialized = maybe_unserialize( $raw );
 		if ( is_array( $unserialized ) ) {
 			$related_ids = array_map( 'intval', $unserialized );
+		} else {
+			$related_ids = array_map( 'intval', explode( ',', $raw ) );
 		}
+	} elseif ( is_numeric( $raw ) ) {
+		$related_ids = [ (int) $raw ];
 	}
 
 	if ( empty( $related_ids ) && function_exists( 'get_field' ) ) {
 		$field_value = get_field( 'related_posts', $project_id );
-		if ( is_array( $field_value ) ) {
+		if ( function_exists( 'krv_related_posts_normalize_ids' ) ) {
+			$related_ids = krv_related_posts_normalize_ids( $field_value );
+		} elseif ( is_array( $field_value ) ) {
 			$related_ids = array_map( 'intval', $field_value );
 		}
 	}
 
-	$related_ids = array_filter( $related_ids );
+	$related_ids = array_values( array_unique( array_filter( array_map( 'intval', $related_ids ) ) ) );
 
 	if ( empty( $related_ids ) ) {
 		return '';

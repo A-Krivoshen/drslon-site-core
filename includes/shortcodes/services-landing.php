@@ -842,8 +842,11 @@ function krv_services_landing_render(): string {
 						<?php endforeach; ?>
 					</div>
 					<p class="krv-landing-services-note">
-						Также: домены, CDN, SSL, Docker, миграции и точечный SEO - обычно внутри WordPress / VPS-проекта.
-						Полный список цен - в <a href="<?php echo esc_url( home_url( '/prays-list/' ) ); ?>">прайс-листе</a>.
+						Также: домены, CDN, SSL, Docker, миграции и точечный SEO
+						<span class="krv-landing-services-note-sep">·</span>
+						обычно внутри WordPress&nbsp;/&nbsp;VPS&#8209;проекта.<br>
+						Полный список цен в
+						<a href="<?php echo esc_url( home_url( '/prays-list/' ) ); ?>">прайс&#8209;листе</a>.
 					</p>
 				<?php endif; ?>
 			</div>

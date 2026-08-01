@@ -1,0 +1,98 @@
+{
+  "name": "krivoshein.site",
+  "description": "Personal site and IT services of Aleksey Krivoshein (Dr.Slon): WordPress, Linux/DevOps, technical SEO, Yandex Direct, MAX bots, AI-ready websites. Practical blog and free web utilities.",
+  "url": "https://krivoshein.site/",
+  "provider": {
+    "organization": "ИП Кривошеин Алексей Сергеевич",
+    "name": "Aleksey Krivoshein / Dr.Slon",
+    "url": "https://krivoshein.site/",
+    "email": "aleksey@krivoshein.site",
+    "phone": "+79636641615",
+    "ogrn": "321774600479249",
+    "inn": "770603253213"
+  },
+  "language": ["ru"],
+  "preferredContentTypes": [
+    "text/markdown",
+    "application/json",
+    "application/rss+xml",
+    "application/xml"
+  ],
+  "documentation": {
+    "llms": "https://krivoshein.site/llms.txt",
+    "llmsFull": "https://krivoshein.site/llms-full.txt",
+    "aiIndex": "https://krivoshein.site/ai.txt",
+    "agents": "https://krivoshein.site/agents.md",
+    "openapi": "https://krivoshein.site/openapi.json",
+    "apiCatalog": "https://krivoshein.site/.well-known/api-catalog",
+    "sitemap": "https://krivoshein.site/sitemap.xml",
+    "security": "https://krivoshein.site/.well-known/security.txt",
+    "humans": "https://krivoshein.site/humans.txt",
+    "pricing": "https://krivoshein.site/prays-list/",
+    "contacts": "https://krivoshein.site/contacts/"
+  },
+  "endpoints": {
+    "rest": "https://krivoshein.site/wp-json/",
+    "posts": "https://krivoshein.site/wp-json/wp/v2/posts",
+    "pages": "https://krivoshein.site/wp-json/wp/v2/pages",
+    "search": "https://krivoshein.site/wp-json/wp/v2/search",
+    "pulseFeed": "https://krivoshein.site/feed/drslon-pulse-feed/"
+  },
+  "contactChannels": [
+    { "type": "url", "value": "https://krivoshein.site/contacts/", "label": "Contacts page" },
+    { "type": "email", "value": "aleksey@krivoshein.site" },
+    { "type": "phone", "value": "+79636641615" },
+    { "type": "telegram", "value": "https://t.me/DrSlon" },
+    { "type": "max", "value": "https://krivoshein.site/max/" }
+  ],
+  "services": [
+    "WordPress development and support",
+    "Landing pages",
+    "Linux / VPS / DevOps",
+    "Technical SEO",
+    "Yandex Direct",
+    "MAX messenger bots",
+    "AI-ready website preparation",
+    "Site diagnostics and repair"
+  ],
+  "pricingHints": {
+    "hourlyRateRub": 2000,
+    "siteDiagnosticsFromRub": 5000,
+    "wordpressSupportMonthlyFromRub": 20000,
+    "landingStaticFromRub": 25000,
+    "landingWordpressFromRub": 50000,
+    "vpsSetupFromRub": 10000,
+    "maxBotFromRub": 40000,
+    "aiReadyStartFromRub": 10000,
+    "currency": "RUB",
+    "source": "https://krivoshein.site/prays-list/"
+  },
+  "relatedSites": [
+    "https://domaintools.site",
+    "https://cybertools.cc",
+    "https://bots.krivoshein.site",
+    "https://vps.krivoshein.site",
+    "https://direct.krivoshein.site",
+    "https://wordpress.krivoshein.site",
+    "https://landing.krivoshein.site",
+    "https://ai-ready.krivoshein.site",
+    "https://fortesting.ru"
+  ],
+  "usagePolicy": {
+    "search": true,
+    "aiInput": true,
+    "aiTrain": false,
+    "citationRequired": true,
+    "adminAreasForbidden": true,
+    "notes": "Public content may be used for answers with source URL. Model training on site content is not welcome (robots Content-Signal ai-train=no)."
+  },
+  "capabilities": {
+    "markdownHome": true,
+    "acceptMarkdownOnRoot": true,
+    "structuredData": true,
+    "publicRestApi": true,
+    "rss": true,
+    "sitemap": true
+  },
+  "updated": "2026-07-29"
+}

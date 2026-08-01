@@ -1,6 +1,14 @@
 .krv-rp-wrap { margin-top: 8px; }
 .krv-rp-search { width: 100%; margin-bottom: 8px; }
-.krv-rp-results { max-height: 160px; overflow-y: auto; border: 1px solid #ddd; border-radius: 4px; display: none; }
+.krv-rp-results {
+	max-height: 160px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	/* visibility toggled via inline style.display in JS */
+	background: #fff;
+	margin-bottom: 8px;
+}
 .krv-rp-results .krv-rp-result {
 	padding: 6px 8px; cursor: pointer; border-bottom: 1px solid #eee;
 	font-size: 13px; line-height: 1.3;

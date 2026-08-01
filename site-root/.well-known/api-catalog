@@ -4,10 +4,58 @@
       "anchor": "https://krivoshein.site/",
       "item": [
         {
+          "href": "https://krivoshein.site/llms.txt",
+          "type": "text/markdown",
+          "title": "llms.txt",
+          "description": "AI-readable summary: services, prices, contacts, agent policy"
+        },
+        {
+          "href": "https://krivoshein.site/llms-full.txt",
+          "type": "text/markdown",
+          "title": "llms-full.txt",
+          "description": "Expanded dump with pricing tables and recent posts index"
+        },
+        {
+          "href": "https://krivoshein.site/ai.txt",
+          "type": "text/plain",
+          "title": "ai.txt",
+          "description": "Short AI agent index"
+        },
+        {
+          "href": "https://krivoshein.site/agents.md",
+          "type": "text/markdown",
+          "title": "agents.md",
+          "description": "Operational instructions for AI agents"
+        },
+        {
+          "href": "https://krivoshein.site/openapi.json",
+          "type": "application/json",
+          "title": "OpenAPI",
+          "description": "OpenAPI 3.1 description of public endpoints"
+        },
+        {
+          "href": "https://krivoshein.site/.well-known/agent.json",
+          "type": "application/json",
+          "title": "agent.json",
+          "description": "Agent discovery card for krivoshein.site"
+        },
+        {
           "href": "https://krivoshein.site/wp-json/",
           "type": "application/json",
           "title": "WordPress REST API",
-          "description": "Public WordPress REST API for krivoshein.site"
+          "description": "Public WordPress REST API root"
+        },
+        {
+          "href": "https://krivoshein.site/wp-json/wp/v2/posts",
+          "type": "application/json",
+          "title": "Posts API",
+          "description": "Published blog posts as JSON"
+        },
+        {
+          "href": "https://krivoshein.site/wp-json/wp/v2/search",
+          "type": "application/json",
+          "title": "Search API",
+          "description": "Search public content via ?search="
         },
         {
           "href": "https://krivoshein.site/sitemap.xml",
@@ -19,19 +67,19 @@
           "href": "https://krivoshein.site/feed/drslon-pulse-feed/",
           "type": "application/rss+xml",
           "title": "Dr.Slon Pulse Feed",
-          "description": "RSS feed with recent publications from krivoshein.site"
+          "description": "RSS feed with recent publications"
         },
         {
-          "href": "https://krivoshein.site/llms.txt",
-          "type": "text/markdown",
-          "title": "llms.txt",
-          "description": "AI-readable summary of krivoshein.site"
+          "href": "https://krivoshein.site/prays-list/",
+          "type": "text/html",
+          "title": "Pricing",
+          "description": "Human-readable service price list"
         },
         {
-          "href": "https://krivoshein.site/ai.txt",
-          "type": "text/plain",
-          "title": "ai.txt",
-          "description": "Short AI agent index for krivoshein.site"
+          "href": "https://krivoshein.site/contacts/",
+          "type": "text/html",
+          "title": "Contacts",
+          "description": "Contact and order page"
         },
         {
           "href": "https://krivoshein.site/humans.txt",

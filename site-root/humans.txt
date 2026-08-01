@@ -2,15 +2,23 @@
 Developer: ИП Кривошеин А.С. / Алексей Кривошеин (Dr.Slon)
 Site: https://krivoshein.site
 Contact: mailto:aleksey@krivoshein.site
+Telegram: https://t.me/DrSlon
+MAX: https://krivoshein.site/max/
 Location: Россия
+OGRN: 321774600479249
+INN: 770603253213
 
 /* SITE */
-Standards: HTML5, Schema.org, WordPress, hreflang
+Standards: HTML5, Schema.org, WordPress, hreflang, OpenAPI, RFC 9727 api-catalog, RFC 9116 security.txt
 Languages: ru
 LLMs: https://krivoshein.site/llms.txt
+LLMs-Full: https://krivoshein.site/llms-full.txt
 AI: https://krivoshein.site/ai.txt
+Agents: https://krivoshein.site/agents.md
+OpenAPI: https://krivoshein.site/openapi.json
 API: https://krivoshein.site/wp-json/
 API-Catalog: https://krivoshein.site/.well-known/api-catalog
+Agent-Card: https://krivoshein.site/.well-known/agent.json
 
 /* THANKS */
 WordPress, Nginx, Redis, PHP

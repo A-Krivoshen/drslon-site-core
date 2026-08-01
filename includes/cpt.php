@@ -23,7 +23,9 @@ add_action( 'init', function () {
 			'name'          => 'Проекты',
 			'singular_name' => 'Проект',
 			'menu_name'     => 'Проекты',
-			'supports'      => [ 'title', 'editor', 'thumbnail' ],
+			// custom-fields required so register_post_meta(..., show_in_rest)
+			// appears in REST schema / Gutenberg (meta.related_posts).
+			'supports'      => [ 'title', 'editor', 'thumbnail', 'custom-fields' ],
 			'has_archive'   => 'project',
 		],
 		'usluga'  => [

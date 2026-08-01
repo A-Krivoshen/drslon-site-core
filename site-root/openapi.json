@@ -1,0 +1,324 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "krivoshein.site public discovery API",
+    "description": "Public, unauthenticated endpoints for AI agents, crawlers and integrations. Prefer these over HTML scraping.",
+    "version": "1.1.0",
+    "contact": {
+      "name": "Aleksey Krivoshein / Dr.Slon",
+      "email": "aleksey@krivoshein.site",
+      "url": "https://krivoshein.site/contacts/"
+    },
+    "license": {
+      "name": "Public content — citation required; training disallowed (ai-train=no)"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://krivoshein.site",
+      "description": "Production"
+    }
+  ],
+  "tags": [
+    { "name": "discovery", "description": "Agent discovery files" },
+    { "name": "wordpress", "description": "WordPress REST API" },
+    { "name": "feeds", "description": "RSS and sitemaps" }
+  ],
+  "paths": {
+    "/llms.txt": {
+      "get": {
+        "tags": ["discovery"],
+        "summary": "AI-oriented site summary (markdown)",
+        "operationId": "getLlmsTxt",
+        "responses": {
+          "200": {
+            "description": "Markdown summary",
+            "content": {
+              "text/markdown": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/llms-full.txt": {
+      "get": {
+        "tags": ["discovery"],
+        "summary": "Expanded AI dump with services, prices and recent posts",
+        "operationId": "getLlmsFullTxt",
+        "responses": {
+          "200": {
+            "description": "Expanded markdown dump",
+            "content": {
+              "text/markdown": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai.txt": {
+      "get": {
+        "tags": ["discovery"],
+        "summary": "Short AI agent index",
+        "operationId": "getAiTxt",
+        "responses": {
+          "200": {
+            "description": "Plain-text index",
+            "content": {
+              "text/plain": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents.md": {
+      "get": {
+        "tags": ["discovery"],
+        "summary": "Operational instructions for AI agents",
+        "operationId": "getAgentsMd",
+        "responses": {
+          "200": {
+            "description": "Markdown instructions",
+            "content": {
+              "text/markdown": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi.json": {
+      "get": {
+        "tags": ["discovery"],
+        "summary": "This OpenAPI document",
+        "operationId": "getOpenApi",
+        "responses": {
+          "200": {
+            "description": "OpenAPI 3.1 document",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/api-catalog": {
+      "get": {
+        "tags": ["discovery"],
+        "summary": "RFC 9727 API catalog (linkset+json)",
+        "operationId": "getApiCatalog",
+        "responses": {
+          "200": {
+            "description": "Linkset catalog",
+            "content": {
+              "application/linkset+json": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/agent.json": {
+      "get": {
+        "tags": ["discovery"],
+        "summary": "Agent discovery card",
+        "operationId": "getAgentCard",
+        "responses": {
+          "200": {
+            "description": "JSON agent card",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/security.txt": {
+      "get": {
+        "tags": ["discovery"],
+        "summary": "Security contact (RFC 9116)",
+        "operationId": "getSecurityTxt",
+        "responses": {
+          "200": {
+            "description": "security.txt",
+            "content": {
+              "text/plain": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sitemap.xml": {
+      "get": {
+        "tags": ["feeds"],
+        "summary": "XML sitemap of public URLs",
+        "operationId": "getSitemap",
+        "responses": {
+          "200": {
+            "description": "Sitemap",
+            "content": {
+              "application/xml": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/feed/drslon-pulse-feed/": {
+      "get": {
+        "tags": ["feeds"],
+        "summary": "Dr.Slon Pulse RSS feed of recent publications",
+        "operationId": "getPulseFeed",
+        "responses": {
+          "200": {
+            "description": "RSS feed",
+            "content": {
+              "application/rss+xml": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wp-json/": {
+      "get": {
+        "tags": ["wordpress"],
+        "summary": "WordPress REST API root (namespaces and routes)",
+        "operationId": "getWpJsonRoot",
+        "responses": {
+          "200": {
+            "description": "API index",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wp-json/wp/v2/posts": {
+      "get": {
+        "tags": ["wordpress"],
+        "summary": "List published posts",
+        "operationId": "listPosts",
+        "parameters": [
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 1, "maximum": 100, "default": 10 }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 1, "default": 1 }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "_fields",
+            "in": "query",
+            "description": "Comma-separated fields, e.g. id,date,title,link,excerpt",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of posts",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "type": "object" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wp-json/wp/v2/pages": {
+      "get": {
+        "tags": ["wordpress"],
+        "summary": "List published pages",
+        "operationId": "listPages",
+        "parameters": [
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 1, "maximum": 100, "default": 10 }
+          },
+          {
+            "name": "_fields",
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of pages",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "type": "object" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wp-json/wp/v2/search": {
+      "get": {
+        "tags": ["wordpress"],
+        "summary": "Search public content",
+        "operationId": "searchContent",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": { "type": "string", "enum": ["post", "term", "post-format"] }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 1, "maximum": 100, "default": 10 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "type": "object" } }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Human-readable AI instructions",
+    "url": "https://krivoshein.site/agents.md"
+  }
+}

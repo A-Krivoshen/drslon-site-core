@@ -184,7 +184,7 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 							<div class="krv-service-page-card-inner">
 								<div class="krv-service-page-image-wrap">
 									<?php if ( $thumb ) : ?>
-										<?php echo $thumb; ?>
+										<?php echo $thumb; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									<?php else : ?>
 										<div class="krv-service-page-no-image"><?php echo esc_html( mb_substr( $title, 0, 1, 'UTF-8' ) ); ?></div>
 									<?php endif; ?>
@@ -198,6 +198,47 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 							</div>
 						</a>
 					<?php endforeach; ?>
+
+					<?php
+					/**
+					 * Extra cards (external URLs) for the last section only.
+					 *
+					 * @param array<int, array{title:string,url:string,description?:string,letter?:string}> $cards Cards.
+					 * @param int                                                                           $index Section index.
+					 */
+					$extra_cards = apply_filters( 'krv_services_showcase_extra_cards', [], 0 );
+					// Only inject once — after the first section grid (services tools grid).
+					if ( $section === $sections[0] && is_array( $extra_cards ) ) :
+						foreach ( $extra_cards as $card ) :
+							if ( ! is_array( $card ) ) {
+								continue;
+							}
+							$c_title = trim( (string) ( $card['title'] ?? '' ) );
+							$c_url   = trim( (string) ( $card['url'] ?? '' ) );
+							$c_desc  = trim( (string) ( $card['description'] ?? '' ) );
+							$c_letter = trim( (string) ( $card['letter'] ?? '' ) );
+							if ( $c_title === '' || $c_url === '' ) {
+								continue;
+							}
+							if ( $c_letter === '' ) {
+								$c_letter = mb_substr( $c_title, 0, 1, 'UTF-8' );
+							}
+							?>
+							<a class="krv-service-page-card krv-service-page-card--external" href="<?php echo esc_url( $c_url ); ?>">
+								<div class="krv-service-page-card-inner">
+									<div class="krv-service-page-image-wrap">
+										<div class="krv-service-page-no-image"><?php echo esc_html( $c_letter ); ?></div>
+									</div>
+									<h3 class="krv-service-page-title"><?php echo esc_html( $c_title ); ?></h3>
+									<?php if ( $c_desc !== '' ) : ?>
+										<p class="krv-service-page-description"><?php echo esc_html( $c_desc ); ?></p>
+									<?php endif; ?>
+								</div>
+							</a>
+							<?php
+						endforeach;
+					endif;
+					?>
 				</div>
 			</section>
 		<?php endforeach; ?>
@@ -205,6 +246,11 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 	<?php
 	return ob_get_clean();
 } );
+
+/*
+ * RAG extra card lives in mu-plugin krv-rag-service-card.php only
+ * (avoid double card on /servisy/).
+ */
 
 function krv_services_showcase_purge_for_page( int $post_id ): void {
 	foreach ( krv_services_showcase_get_sections() as $section ) {
