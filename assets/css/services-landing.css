@@ -566,3 +566,64 @@ html[data-theme="dark"] .krv-landing-service-price {
 	text-decoration: underline;
 	text-underline-offset: 3px;
 }
+
+/* Legal meta quieter (IP / OGRN / INN) */
+.krv-landing-meta-line.is-legal {
+	font-size: 0.82rem;
+	opacity: 0.72;
+	letter-spacing: 0.01em;
+}
+
+/* Demo badge on RAG card */
+.krv-landing-service-badge {
+	background: rgba(16, 185, 129, 0.14) !important;
+	color: #0f766e !important;
+}
+html[data-theme="dark"] .krv-landing-service-badge {
+	background: rgba(52, 211, 153, 0.18) !important;
+	color: #6ee7b7 !important;
+}
+
+/* After pricing: next steps */
+.krv-landing-next {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 0.35rem 0.55rem;
+	margin: 1.35rem auto 0.25rem;
+	padding: 0.85rem 1rem;
+	max-width: 40rem;
+	text-align: center;
+	font-size: 0.95rem;
+	line-height: 1.45;
+	border-radius: 12px;
+	background: rgba(81, 129, 254, 0.06);
+	border: 1px solid rgba(81, 129, 254, 0.14);
+}
+.krv-landing-next-label {
+	font-weight: 650;
+	opacity: 0.9;
+}
+.krv-landing-next a {
+	font-weight: 600;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+.krv-landing-next-sep {
+	opacity: 0.45;
+	user-select: none;
+}
+html[data-theme="dark"] .krv-landing-next {
+	background: rgba(120, 160, 255, 0.08);
+	border-color: rgba(120, 160, 255, 0.16);
+}
+
+/* Focus polish */
+.krv-landing-pricing-button:focus-visible,
+.krv-landing-hero-cta-secondary:focus-visible,
+.krv-landing-pricing-secondary:focus-visible,
+.krv-landing-service-item--link:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}

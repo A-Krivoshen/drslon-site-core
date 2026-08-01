@@ -108,7 +108,7 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 	<div class="krv-clients-grid-wrap">
 		<div class="krv-clients-grid-header">
 			<h2>Клиенты</h2>
-			<p>Сайты, интеграции и поддержка для бизнеса, которому важна стабильность</p>
+			<p>Реальные заказчики: промышленность, e&#8209;commerce, медиа и сервисный бизнес</p>
 		</div>
 
 		<div class="krv-clients-grid"<?php echo $randomize ? ' data-random-grid="1"' : ''; ?> style="min-height: <?php echo esc_attr( (string) $grid_min_h ); ?>px;">

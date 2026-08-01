@@ -21,18 +21,17 @@ function krv_services_landing_get_defaults(): array {
 	return array(
 		'profile_avatar'         => 10321,
 		'profile_name'           => 'Алексей Кривошеин',
-		'profile_tagline'        => 'WordPress, VPS, боты MAX, Яндекс.Директ и AI-ready - под ключ',
-		'profile_lead'           => 'Один специалист: сайты, серверы, реклама и автоматизация. Работаю по договору, безнал, закрывающие документы.',
+		'profile_tagline'        => 'WordPress, VPS, боты MAX, Директ и AI-ready - делаю сам, как ИП',
+		'profile_lead'           => 'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.',
 		'profile_meta_lines'       => array(
-			array( 'line' => 'Работаю по договору и принимаю безналичный расчёт.' ),
-			array( 'line' => 'ОГРН 321774600479249' ),
-			array( 'line' => 'ИНН 770603253213' ),
+			array( 'line' => 'ИП Кривошеин Алексей Сергеевич · договор и безналичный расчёт' ),
+			array( 'line' => 'ОГРН 321774600479249 · ИНН 770603253213', 'class' => 'is-legal' ),
 		),
 		'hero_cta_primary_text'    => 'Смотреть прайс',
 		'hero_cta_primary_url'     => 'https://krivoshein.site/prays-list/',
-		// Secondary CTA empty: social icons under the photo already cover Telegram/MAX/etc.
-		'hero_cta_secondary_text'  => '',
-		'hero_cta_secondary_url'   => '',
+		// Same-page jump; social icons under photo cover messengers.
+		'hero_cta_secondary_text'  => 'К услугам',
+		'hero_cta_secondary_url'   => '#uslugi',
 		'social_links'           => array(
 			array(
 				'url'      => 'https://t.me/DrSlon',
@@ -132,7 +131,7 @@ function krv_services_landing_get_defaults(): array {
 			),
 		),
 		'pricing_title'       => 'Стоимость услуг',
-		'pricing_lead'        => "Ориентиры «от» - в карточках выше и в прайс-листе.\nБазовая ставка:",
+		'pricing_lead'        => "Ориентиры «от» в карточках выше и в прайс-листе.\nБазовая ставка:",
 		'pricing_rate'        => '2000 ₽/час',
 		'pricing_bullets'     => array(
 			array(
@@ -144,7 +143,7 @@ function krv_services_landing_get_defaults(): array {
 				'icon_key' => 'scope',
 			),
 			array(
-				'text'     => 'Первичная консультация - бесплатно.',
+				'text'     => 'Первичная консультация бесплатно.',
 				'icon_key' => 'chat',
 			),
 		),
@@ -771,12 +770,14 @@ function krv_services_landing_render(): string {
 					<div class="krv-landing-meta">
 						<?php foreach ( $data['profile_meta_lines'] as $meta_line ) : ?>
 							<?php
-							$line = is_array( $meta_line ) ? (string) ( $meta_line['line'] ?? '' ) : (string) $meta_line;
+							$line  = is_array( $meta_line ) ? (string) ( $meta_line['line'] ?? '' ) : (string) $meta_line;
+							$class = is_array( $meta_line ) ? trim( (string) ( $meta_line['class'] ?? '' ) ) : '';
 							if ( $line === '' ) {
 								continue;
 							}
+							$cls = 'krv-landing-meta-line' . ( $class !== '' ? ' ' . sanitize_html_class( $class ) : '' );
 							?>
-							<span class="krv-landing-meta-line"><?php echo esc_html( $line ); ?></span>
+							<span class="<?php echo esc_attr( $cls ); ?>"><?php echo esc_html( $line ); ?></span>
 						<?php endforeach; ?>
 					</div>
 				<?php endif; ?>
@@ -793,7 +794,12 @@ function krv_services_landing_render(): string {
 							<a class="krv-landing-pricing-button" href="<?php echo esc_url( $cta1_url ); ?>"><?php echo esc_html( $cta1_text ); ?></a>
 						<?php endif; ?>
 						<?php if ( $cta2_text !== '' && $cta2_url !== '' ) : ?>
-							<a class="krv-landing-hero-cta-secondary" href="<?php echo esc_url( $cta2_url ); ?>"<?php echo ( 0 === strpos( $cta2_url, 'http' ) && false === strpos( $cta2_url, home_url() ) ) ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $cta2_text ); ?></a>
+							<?php
+							$is_hash   = isset( $cta2_url[0] ) && $cta2_url[0] === '#';
+							$is_ext    = 0 === strpos( $cta2_url, 'http' ) && false === strpos( $cta2_url, home_url() );
+							$sec_attrs = $is_ext ? ' target="_blank" rel="noopener noreferrer"' : '';
+							?>
+							<a class="krv-landing-hero-cta-secondary" href="<?php echo esc_url( $cta2_url ); ?>"<?php echo $sec_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $cta2_text ); ?></a>
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
@@ -854,16 +860,22 @@ function krv_services_landing_render(): string {
 							}
 							$url         = trim( (string) ( $service_item['url'] ?? '' ) );
 							$price_label = trim( (string) ( $service_item['price_label'] ?? '' ) );
+							$is_demo     = ( false !== stripos( $title, 'RAG' ) || false !== stripos( $title, 'демо' ) );
 							$tag         = $url !== '' ? 'a' : 'div';
 							// Always open service landings/demos in a new tab; keep hub page in place.
 							$href_attr   = $url !== ''
-								? ' href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer"'
+								? ' href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer" title="' . esc_attr( $title . ' (откроется в новой вкладке)' ) . '"'
 								: '';
 							$extra_class = $url !== '' ? ' krv-landing-service-item--link' : '';
+							if ( $is_demo ) {
+								$extra_class .= ' krv-landing-service-item--demo';
+							}
+							$badge_text  = $is_demo ? ( $price_label !== '' ? $price_label : 'демо' ) : $price_label;
+							$badge_class = $is_demo ? 'krv-landing-service-price krv-landing-service-badge' : 'krv-landing-service-price';
 							?>
 							<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> class="krv-landing-service-item<?php echo esc_attr( $extra_class ); ?>"<?php echo $href_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-								<?php if ( $price_label !== '' ) : ?>
-									<span class="krv-landing-service-price"><?php echo esc_html( $price_label ); ?></span>
+								<?php if ( $badge_text !== '' ) : ?>
+									<span class="<?php echo esc_attr( $badge_class ); ?>"><?php echo esc_html( $badge_text ); ?></span>
 								<?php endif; ?>
 								<?php echo krv_services_landing_render_service_icon( $service_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								<h3><?php echo esc_html( $title ); ?></h3>
@@ -936,6 +948,17 @@ function krv_services_landing_render(): string {
 				</div>
 			</div>
 		</div>
+
+		<nav class="krv-landing-next" aria-label="Дальше по сайту">
+			<span class="krv-landing-next-label">Дальше:</span>
+			<a href="<?php echo esc_url( home_url( '/partnery/' ) ); ?>">Партнёры</a>
+			<span class="krv-landing-next-sep" aria-hidden="true">·</span>
+			<a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Блог</a>
+			<span class="krv-landing-next-sep" aria-hidden="true">·</span>
+			<a href="<?php echo esc_url( home_url( '/servisy/' ) ); ?>">Сервисы</a>
+			<span class="krv-landing-next-sep" aria-hidden="true">·</span>
+			<a href="<?php echo esc_url( home_url( '/contacts/' ) ); ?>">Контакты</a>
+		</nav>
 	</div>
 	<?php
 

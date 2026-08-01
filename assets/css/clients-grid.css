@@ -217,3 +217,23 @@
 			font-size: 0.82rem;
 		}
 	}
+
+.krv-client-no-logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 64px;
+	height: 64px;
+	border-radius: 14px;
+	font-size: 1.35rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: #315fe8;
+	background: linear-gradient(145deg, rgba(49,95,232,.12), rgba(49,95,232,.04));
+	border: 1px solid rgba(49,95,232,.18);
+}
+html[data-theme="dark"] .krv-client-no-logo {
+	color: #9db7ff;
+	background: linear-gradient(145deg, rgba(120,160,255,.16), rgba(120,160,255,.05));
+	border-color: rgba(120,160,255,.2);
+}
