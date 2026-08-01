@@ -782,7 +782,7 @@ html[data-theme="dark"] .krv-landing-next {
 	transform: translate(1px, -1px);
 }
 
-/* Logo plate: neutral, one frame only */
+/* Logo plate: quiet theme surface */
 .krv-client-logo-wrap {
 	display: flex;
 	align-items: center;
@@ -793,10 +793,22 @@ html[data-theme="dark"] .krv-landing-next {
 	padding: 8px 10px;
 	overflow: hidden;
 	border-radius: 12px;
-	background: #f8f9fc;
-	border: 1px solid rgba(15, 35, 80, 0.05);
+	background: linear-gradient(180deg, #f5f7ff 0%, #eef2fb 100%);
+	border: 1px solid rgba(81, 129, 254, 0.1);
+	transition: background 0.22s ease, border-color 0.22s ease;
 }
 
+.krv-client-card--link:hover .krv-client-logo-wrap,
+.krv-client-card--link:focus-visible .krv-client-logo-wrap {
+	background: linear-gradient(180deg, #eef3ff 0%, #e4ebfc 100%);
+	border-color: rgba(81, 129, 254, 0.18);
+}
+
+/*
+ * Logos in theme mono (not brand-rainbow).
+ * Grayscale + soft blue plate = one visual system with services.
+ * Hover stays mono, slightly clearer (no full multicolor).
+ */
 .krv-client-logo {
 	display: block !important;
 	width: auto !important;
@@ -809,6 +821,15 @@ html[data-theme="dark"] .krv-landing-next {
 	border: 0 !important;
 	box-shadow: none !important;
 	background: transparent !important;
+	filter: grayscale(1) contrast(1.08) brightness(0.96);
+	opacity: 0.78;
+	transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+.krv-client-card--link:hover .krv-client-logo,
+.krv-client-card--link:focus-visible .krv-client-logo {
+	filter: grayscale(1) contrast(1.14) brightness(0.9);
+	opacity: 0.95;
 }
 
 .krv-client-no-logo {
@@ -992,8 +1013,25 @@ html[data-theme="dark"] .krv-clients-grid-meta {
 }
 
 html[data-theme="dark"] .krv-client-logo-wrap {
-	background: #222a3d;
-	border-color: rgba(255, 255, 255, 0.06);
+	background: linear-gradient(180deg, #222a3d 0%, #1c2333 100%);
+	border-color: rgba(120, 160, 255, 0.12);
+}
+
+html[data-theme="dark"] .krv-client-card--link:hover .krv-client-logo-wrap,
+html[data-theme="dark"] .krv-client-card--link:focus-visible .krv-client-logo-wrap {
+	background: linear-gradient(180deg, #283249 0%, #222a3d 100%);
+	border-color: rgba(120, 160, 255, 0.22);
+}
+
+html[data-theme="dark"] .krv-client-logo {
+	filter: grayscale(1) contrast(1.05) brightness(1.15);
+	opacity: 0.82;
+}
+
+html[data-theme="dark"] .krv-client-card--link:hover .krv-client-logo,
+html[data-theme="dark"] .krv-client-card--link:focus-visible .krv-client-logo {
+	filter: grayscale(1) contrast(1.12) brightness(1.22);
+	opacity: 0.96;
 }
 
 html[data-theme="dark"] .krv-client-no-logo {
