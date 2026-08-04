@@ -1602,6 +1602,77 @@ html[data-theme="dark"] .krv-oferta__note {
   color: #a8b6d4 !important;
 }
 
+/* ── Privacy / cookie policy ── */
+html[data-theme="dark"] .krv-policy .krv-service-page__heading,
+html[data-theme="dark"] .krv-policy h2,
+html[data-theme="dark"] .krv-policy h3 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-bottom-color: #243049 !important;
+}
+
+html[data-theme="dark"] .krv-policy__info {
+  background: #1a2744 !important;
+  border-left-color: #5b8cff !important;
+  color: #e8eefc !important;
+}
+
+html[data-theme="dark"] .krv-policy__info b,
+html[data-theme="dark"] .krv-policy__info strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .krv-policy p,
+html[data-theme="dark"] .krv-policy li {
+  color: #d5def0 !important;
+}
+
+html[data-theme="dark"] .krv-policy p b,
+html[data-theme="dark"] .krv-policy p strong,
+html[data-theme="dark"] .krv-policy li b,
+html[data-theme="dark"] .krv-policy li strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .krv-policy a {
+  color: #8aacff !important;
+}
+
+html[data-theme="dark"] .krv-policy__cat {
+  background: #152238 !important;
+  border-color: #3d5a9a !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-theme="dark"] .krv-policy__cat-title {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .krv-policy__cat-meta {
+  background: rgba(91, 140, 255, 0.18) !important;
+  color: #9db7ff !important;
+}
+
+html[data-theme="dark"] .krv-policy__cat-meta--lock {
+  background: rgba(168, 182, 212, 0.14) !important;
+  color: #a8b6d4 !important;
+}
+
+html[data-theme="dark"] .krv-policy__rekvizity {
+  background: #152238 !important;
+  border-color: #3d5a9a !important;
+  color: #e8eefc !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme="dark"] .krv-policy__rekvizity b {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .krv-policy__note {
+  color: #a8b6d4 !important;
+}
+
 html[data-theme="dark"] .krv-service-page__heading {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
