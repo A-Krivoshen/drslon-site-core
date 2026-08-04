@@ -28,27 +28,38 @@
 	margin-top: 2.5rem;
 }
 
-.krv-landing-contact-card {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+/* Stage 3: hero shell (replaces centered profile card) */
+.krv-landing-hero-inner {
+	display: block;
 	width: 100%;
-	padding: 28px 24px 26px;
-	text-align: center;
-	background: var(--card-bg);
-	border-radius: var(--card-radius);
-	box-shadow: var(--card-shadow);
+	padding: 0.25rem 0 0.35rem;
+	text-align: left;
+	background: transparent;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+/* Legacy alias if cached HTML still has contact-card */
+.krv-landing-contact-card {
+	display: block;
+	width: 100%;
+	padding: 0;
+	text-align: left;
+	background: transparent;
+	border-radius: 0;
+	box-shadow: none;
 }
 
 .krv-landing-avatar-wrap {
 	width: 126px;
 	height: 126px;
 	aspect-ratio: 1 / 1;
-	margin: 0 auto 20px;
-	border: 3px solid var(--accent);
+	margin: 0;
+	border: 2px solid var(--accent);
 	border-radius: 50%;
 	overflow: hidden;
 	background: #fff;
+	box-shadow: var(--card-shadow);
 }
 
 .krv-services-landing .krv-landing-avatar-wrap > .krv-landing-avatar {
@@ -69,60 +80,62 @@
 }
 
 .krv-landing-title {
-	margin: 0 0 12px;
+	margin: 0 0 0.65rem;
 	width: 100%;
-	max-width: 40rem;
-	font-size: clamp(2.25rem, 1.9rem + 1.35vw, 3rem);
-	line-height: 1.12;
+	max-width: 36rem;
+	font-size: clamp(2.35rem, 2rem + 1.4vw, 3.1rem);
+	line-height: 1.08;
 	font-weight: 700;
 	color: var(--text-main);
-	text-align: center;
-	letter-spacing: -0.025em;
+	text-align: left;
+	letter-spacing: -0.03em;
 }
 
 .krv-landing-lead,
 .krv-landing-meta {
-	margin: 0 0 14px;
+	margin: 0 0 1.15rem;
 	width: 100%;
-	max-width: 40rem;
+	max-width: 34rem;
 	font-size: 1rem;
-	line-height: 1.55;
+	line-height: 1.6;
 	color: var(--text-soft);
-	text-align: center;
+	text-align: left;
 }
 
 .krv-landing-meta {
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
-	align-items: center;
-	justify-content: center;
+	align-items: flex-start;
+	justify-content: flex-start;
+	margin: 0;
+	max-width: none;
 }
 
 .krv-landing-meta-line {
 	display: block;
-	text-align: center;
+	text-align: left;
 }
 
 .krv-landing-contacts {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
 	flex-wrap: wrap;
-	gap: 15px;
-	margin-top: 10px;
+	gap: 10px;
+	margin: 0;
 }
 
 .krv-landing-contacts a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 50px;
-	height: 50px;
+	width: 36px;
+	height: 36px;
 	text-decoration: none;
 	color: var(--accent);
-	background: #f9f9f9;
-	border: 3px solid var(--accent);
+	background: transparent;
+	border: 1.5px solid var(--accent);
 	border-radius: 50%;
 	transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
@@ -505,17 +518,16 @@ html[data-theme="dark"] .krv-landing-service-ext {
 		padding: 16px 10px;
 	}
 
-	.krv-landing-contact-card,
 	.krv-landing-pricing {
 		padding: 15px;
 	}
 
-	.krv-landing-avatar-wrap {
-		width: 112px;
-		height: 112px;
+	.krv-landing-hero-aside .krv-landing-avatar-wrap {
+		width: 120px;
+		height: 120px;
 	}
 
-	.krv-landing-title {
+	.krv-landing-hero-copy .krv-landing-title {
 		font-size: clamp(1.9rem, 5.2vw, 2.4rem);
 	}
 
@@ -559,14 +571,13 @@ html[data-theme="dark"] .krv-landing-service-ext {
 		padding: 12px 8px;
 	}
 
-	.krv-landing-contact-card,
 	.krv-landing-pricing {
 		padding: 10px;
 	}
 
-	.krv-landing-avatar-wrap {
-		width: 104px;
-		height: 104px;
+	.krv-landing-hero-aside .krv-landing-avatar-wrap {
+		width: 108px;
+		height: 108px;
 	}
 
 	.krv-landing-contacts {
@@ -583,7 +594,7 @@ html[data-theme="dark"] .krv-landing-service-ext {
 		height: 18px;
 	}
 
-	.krv-landing-title {
+	.krv-landing-hero-copy .krv-landing-title {
 		font-size: clamp(1.85rem, 6vw, 2.15rem);
 	}
 
@@ -707,18 +718,18 @@ html[data-theme="dark"] .krv-landing-service-price {
 	}
 }
 
-/* Hero value prop + primary CTAs — always centered as a block */
+/* Hero value prop + primary CTAs */
 .krv-landing-tagline {
 	display: block;
-	margin: 0 auto 0.65rem;
-	padding: 0 12px;
+	margin: 0 0 0.75rem;
+	padding: 0;
 	width: 100%;
-	max-width: 42rem;
+	max-width: 36rem;
 	font-size: clamp(1.05rem, 2vw, 1.22rem);
 	font-weight: 650;
 	line-height: 1.4;
 	color: var(--text-main);
-	text-align: center;
+	text-align: left;
 	text-wrap: balance;
 }
 .krv-landing-hero-cta {
@@ -726,8 +737,8 @@ html[data-theme="dark"] .krv-landing-service-price {
 	flex-wrap: wrap;
 	gap: 0.75rem 1rem;
 	align-items: center;
-	justify-content: center;
-	margin: 1rem auto 0.45rem;
+	justify-content: flex-start;
+	margin: 0;
 	width: 100%;
 	max-width: 36rem;
 }
@@ -767,18 +778,18 @@ html[data-theme="dark"] .krv-landing-service-price {
 	font-variant-numeric: tabular-nums;
 }
 
-/* Social proof strip under hero meta */
+/* Social proof — default (aside scopes overrides) */
 .krv-landing-proof {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: stretch;
 	align-items: stretch;
 	gap: 10px 12px;
 	list-style: none;
-	margin: 4px auto 14px;
+	margin: 0;
 	padding: 0;
 	width: 100%;
-	max-width: 44rem;
+	max-width: 100%;
 }
 
 .krv-landing-proof-item {
@@ -787,12 +798,13 @@ html[data-theme="dark"] .krv-landing-service-price {
 	align-items: center;
 	justify-content: center;
 	min-width: 6.5rem;
-	flex: 1 1 6.5rem;
-	max-width: 9.5rem;
+	flex: 1 1 calc(50% - 8px);
+	max-width: none;
 	padding: 10px 12px;
 	border-radius: 12px;
-	background: linear-gradient(180deg, #f5f7ff 0%, #eef2fb 100%);
-	border: 1px solid rgba(49, 95, 232, 0.14);
+	background: var(--accent-bg, #eef3fb);
+	border: 1px solid rgba(49, 95, 232, 0.1);
+	box-shadow: none;
 	text-align: center;
 }
 
@@ -888,6 +900,134 @@ html[data-theme="dark"] .krv-landing-next {
 .krv-landing-service-item--link:focus-visible {
 	outline: 2px solid var(--accent);
 	outline-offset: 3px;
+}
+
+
+/* === Stage 3: split hero layout (calm technical-premium) === */
+.krv-landing-hero-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+	gap: clamp(1.5rem, 3vw, 2.75rem);
+	align-items: center;
+}
+
+.krv-landing-hero-copy {
+	min-width: 0;
+}
+
+.krv-landing-hero-copy .krv-landing-title,
+.krv-landing-hero-copy .krv-landing-tagline,
+.krv-landing-hero-copy .krv-landing-lead {
+	text-align: left;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.krv-landing-hero-copy .krv-landing-lead {
+	margin-bottom: 1.25rem;
+}
+
+.krv-landing-hero-aside {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.1rem;
+	min-width: 0;
+}
+
+.krv-landing-hero-aside .krv-landing-avatar-wrap {
+	width: clamp(140px, 18vw, 176px);
+	height: clamp(140px, 18vw, 176px);
+	margin: 0;
+	flex-shrink: 0;
+}
+
+.krv-landing-hero-aside .krv-landing-proof {
+	width: 100%;
+	margin: 0;
+}
+
+.krv-landing-hero-foot {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem 1.25rem;
+	margin-top: 1.5rem;
+	padding-top: 1rem;
+	border-top: 1px solid rgba(23, 33, 51, 0.08);
+}
+
+.krv-landing-hero-foot .krv-landing-meta {
+	align-items: flex-start;
+	margin: 0;
+	max-width: none;
+}
+
+.krv-landing-hero-foot .krv-landing-meta-line {
+	text-align: left;
+	opacity: 0.68;
+	font-size: 0.78rem;
+}
+
+.krv-landing-hero-foot .krv-landing-meta-line.is-legal {
+	opacity: 0.65;
+	font-size: 0.78rem;
+}
+
+.krv-landing-hero-foot .krv-landing-contacts {
+	margin: 0;
+	justify-content: flex-end;
+}
+
+html[data-theme="dark"] .krv-landing-hero-foot {
+	border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
+	background: #121a2b;
+	border-color: #6b93ff;
+}
+
+@media (max-width: 768px) {
+	.krv-landing-hero-grid {
+		grid-template-columns: 1fr;
+		gap: 1.35rem;
+	}
+
+	.krv-landing-hero-copy .krv-landing-title,
+	.krv-landing-hero-copy .krv-landing-tagline,
+	.krv-landing-hero-copy .krv-landing-lead {
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.krv-landing-hero-copy .krv-landing-hero-cta {
+		justify-content: center;
+	}
+
+	.krv-landing-hero-aside {
+		order: 0;
+	}
+
+	.krv-landing-hero-foot {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.krv-landing-hero-foot .krv-landing-meta {
+		align-items: center;
+	}
+
+	.krv-landing-hero-foot .krv-landing-meta-line {
+		text-align: center;
+	}
+
+	.krv-landing-hero-foot .krv-landing-contacts {
+		justify-content: center;
+	}
 }
 
 

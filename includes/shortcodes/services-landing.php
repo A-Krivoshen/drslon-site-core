@@ -771,122 +771,130 @@ function krv_services_landing_render(): string {
 	ob_start();
 	?>
 	<div class="krv-services-landing">
-		<div class="krv-services-landing-section">
-			<div class="krv-landing-contact-card">
-				<div class="krv-landing-avatar-wrap">
-					<img class="krv-landing-avatar" src="<?php echo esc_url( krv_services_landing_resolve_avatar_url( $data['profile_avatar'] ?? '' ) ); ?>" alt="<?php echo esc_attr( (string) $data['profile_name'] ); ?>" width="160" height="160" decoding="async" fetchpriority="high" data-no-lazy="1">
+		<div class="krv-services-landing-section krv-landing-hero">
+			<div class="krv-landing-hero-inner">
+				<div class="krv-landing-hero-grid">
+					<div class="krv-landing-hero-copy">
+						<?php if ( is_front_page() ) : ?>
+							<h1 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h1>
+						<?php else : ?>
+							<h2 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h2>
+						<?php endif; ?>
+
+						<?php
+						$tagline = trim( (string) ( $data['profile_tagline'] ?? '' ) );
+						// Never show AI-looking long dashes in the hero line.
+						$tagline = str_replace( array( '—', '–', '&#8212;', '&#8211;', ' - ', ' – ', ' — ' ), array( '. ', '. ', '. ', '. ', '. ', '. ', '. ' ), $tagline );
+						$tagline = preg_replace( '/\.\s*\./u', '.', $tagline ) ?? $tagline;
+						$tagline = trim( $tagline, " \t\n\r\0\x0B." );
+						if ( $tagline !== '' ) :
+							?>
+							<p class="krv-landing-tagline"><?php echo esc_html( $tagline ); ?></p>
+						<?php endif; ?>
+
+						<p class="krv-landing-lead"><?php echo esc_html( (string) $data['profile_lead'] ); ?></p>
+
+						<?php
+						$cta1_text = trim( (string) ( $data['hero_cta_primary_text'] ?? '' ) );
+						$cta1_url  = trim( (string) ( $data['hero_cta_primary_url'] ?? '' ) );
+						$cta2_text = trim( (string) ( $data['hero_cta_secondary_text'] ?? '' ) );
+						$cta2_url  = trim( (string) ( $data['hero_cta_secondary_url'] ?? '' ) );
+						if ( ( $cta1_text !== '' && $cta1_url !== '' ) || ( $cta2_text !== '' && $cta2_url !== '' ) ) :
+							?>
+							<div class="krv-landing-hero-cta">
+								<?php if ( $cta1_text !== '' && $cta1_url !== '' ) : ?>
+									<a class="krv-landing-pricing-button" href="<?php echo esc_url( $cta1_url ); ?>"><?php echo esc_html( $cta1_text ); ?></a>
+								<?php endif; ?>
+								<?php if ( $cta2_text !== '' && $cta2_url !== '' ) : ?>
+									<?php
+									$is_hash   = isset( $cta2_url[0] ) && $cta2_url[0] === '#';
+									$is_ext    = 0 === strpos( $cta2_url, 'http' ) && false === strpos( $cta2_url, home_url() );
+									$sec_attrs = $is_ext ? ' target="_blank" rel="noopener noreferrer"' : '';
+									?>
+									<a class="krv-landing-hero-cta-secondary" href="<?php echo esc_url( $cta2_url ); ?>"<?php echo $sec_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $cta2_text ); ?></a>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
+					</div>
+
+					<div class="krv-landing-hero-aside">
+						<div class="krv-landing-avatar-wrap">
+							<img class="krv-landing-avatar" src="<?php echo esc_url( krv_services_landing_resolve_avatar_url( $data['profile_avatar'] ?? '' ) ); ?>" alt="<?php echo esc_attr( (string) $data['profile_name'] ); ?>" width="160" height="160" decoding="async" fetchpriority="high" data-no-lazy="1">
+						</div>
+
+						<?php
+						// Honest social proof: only facts already on the page (clients count, OGRN year, offers).
+						$proof_clients = 0;
+						if ( post_type_exists( 'client' ) ) {
+							$proof_clients = (int) wp_count_posts( 'client' )->publish;
+						}
+						?>
+						<ul class="krv-landing-proof" aria-label="Коротко о работе">
+							<?php if ( $proof_clients > 0 ) : ?>
+								<li class="krv-landing-proof-item">
+									<strong class="krv-landing-proof-value"><?php echo esc_html( (string) $proof_clients ); ?></strong>
+									<span class="krv-landing-proof-label">клиентов в витрине</span>
+								</li>
+							<?php endif; ?>
+							<li class="krv-landing-proof-item">
+								<strong class="krv-landing-proof-value">с 2021</strong>
+								<span class="krv-landing-proof-label">ИП в реестре</span>
+							</li>
+							<li class="krv-landing-proof-item">
+								<strong class="krv-landing-proof-value">8</strong>
+								<span class="krv-landing-proof-label">флагманских услуг</span>
+							</li>
+							<li class="krv-landing-proof-item">
+								<strong class="krv-landing-proof-value">договор</strong>
+								<span class="krv-landing-proof-label">и безнал</span>
+							</li>
+						</ul>
+					</div>
 				</div>
 
-				<?php if ( is_front_page() ) : ?>
-					<h1 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h1>
-				<?php else : ?>
-					<h2 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h2>
-				<?php endif; ?>
-
-				<?php
-				$tagline = trim( (string) ( $data['profile_tagline'] ?? '' ) );
-				// Never show AI-looking long dashes in the hero line.
-				$tagline = str_replace( array( '—', '–', '&#8212;', '&#8211;', ' - ', ' – ', ' — ' ), array( '. ', '. ', '. ', '. ', '. ', '. ', '. ' ), $tagline );
-				$tagline = preg_replace( '/\.\s*\./u', '.', $tagline ) ?? $tagline;
-				$tagline = trim( $tagline, " \t\n\r\0\x0B." );
-				if ( $tagline !== '' ) :
-					?>
-					<p class="krv-landing-tagline"><?php echo esc_html( $tagline ); ?></p>
-				<?php endif; ?>
-
-				<p class="krv-landing-lead"><?php echo esc_html( (string) $data['profile_lead'] ); ?></p>
-
-				<?php if ( ! empty( $data['profile_meta_lines'] ) && is_array( $data['profile_meta_lines'] ) ) : ?>
-					<div class="krv-landing-meta">
-						<?php foreach ( $data['profile_meta_lines'] as $meta_line ) : ?>
-							<?php
-							$line  = is_array( $meta_line ) ? (string) ( $meta_line['line'] ?? '' ) : (string) $meta_line;
-							$class = is_array( $meta_line ) ? trim( (string) ( $meta_line['class'] ?? '' ) ) : '';
-							if ( $line === '' ) {
-								continue;
-							}
-							// Quieter legal ids (OGRN / INN) even if ACF row has no class field.
-							if ( $class === '' && ( false !== stripos( $line, 'ОГРН' ) || false !== stripos( $line, 'ИНН' ) ) ) {
-								$class = 'is-legal';
-							}
-							$cls = 'krv-landing-meta-line' . ( $class !== '' ? ' ' . sanitize_html_class( $class ) : '' );
-							?>
-							<span class="<?php echo esc_attr( $cls ); ?>"><?php echo esc_html( $line ); ?></span>
-						<?php endforeach; ?>
-					</div>
-				<?php endif; ?>
-
-				<?php
-				// Honest social proof: only facts already on the page (clients count, OGRN year, offers).
-				$proof_clients = 0;
-				if ( post_type_exists( 'client' ) ) {
-					$proof_clients = (int) wp_count_posts( 'client' )->publish;
-				}
-				?>
-				<ul class="krv-landing-proof" aria-label="Коротко о работе">
-					<?php if ( $proof_clients > 0 ) : ?>
-						<li class="krv-landing-proof-item">
-							<strong class="krv-landing-proof-value"><?php echo esc_html( (string) $proof_clients ); ?></strong>
-							<span class="krv-landing-proof-label">клиентов в витрине</span>
-						</li>
+				<div class="krv-landing-hero-foot">
+					<?php if ( ! empty( $data['profile_meta_lines'] ) && is_array( $data['profile_meta_lines'] ) ) : ?>
+						<div class="krv-landing-meta">
+							<?php foreach ( $data['profile_meta_lines'] as $meta_line ) : ?>
+								<?php
+								$line  = is_array( $meta_line ) ? (string) ( $meta_line['line'] ?? '' ) : (string) $meta_line;
+								$class = is_array( $meta_line ) ? trim( (string) ( $meta_line['class'] ?? '' ) ) : '';
+								if ( $line === '' ) {
+									continue;
+								}
+								// Quieter legal ids (OGRN / INN) even if ACF row has no class field.
+								if ( $class === '' && ( false !== stripos( $line, 'ОГРН' ) || false !== stripos( $line, 'ИНН' ) ) ) {
+									$class = 'is-legal';
+								}
+								$cls = 'krv-landing-meta-line' . ( $class !== '' ? ' ' . sanitize_html_class( $class ) : '' );
+								?>
+								<span class="<?php echo esc_attr( $cls ); ?>"><?php echo esc_html( $line ); ?></span>
+							<?php endforeach; ?>
+						</div>
 					<?php endif; ?>
-					<li class="krv-landing-proof-item">
-						<strong class="krv-landing-proof-value">с 2021</strong>
-						<span class="krv-landing-proof-label">ИП в реестре</span>
-					</li>
-					<li class="krv-landing-proof-item">
-						<strong class="krv-landing-proof-value">8</strong>
-						<span class="krv-landing-proof-label">флагманских услуг</span>
-					</li>
-					<li class="krv-landing-proof-item">
-						<strong class="krv-landing-proof-value">договор</strong>
-						<span class="krv-landing-proof-label">и безнал</span>
-					</li>
-				</ul>
 
-				<?php
-				$cta1_text = trim( (string) ( $data['hero_cta_primary_text'] ?? '' ) );
-				$cta1_url  = trim( (string) ( $data['hero_cta_primary_url'] ?? '' ) );
-				$cta2_text = trim( (string) ( $data['hero_cta_secondary_text'] ?? '' ) );
-				$cta2_url  = trim( (string) ( $data['hero_cta_secondary_url'] ?? '' ) );
-				if ( ( $cta1_text !== '' && $cta1_url !== '' ) || ( $cta2_text !== '' && $cta2_url !== '' ) ) :
-					?>
-					<div class="krv-landing-hero-cta">
-						<?php if ( $cta1_text !== '' && $cta1_url !== '' ) : ?>
-							<a class="krv-landing-pricing-button" href="<?php echo esc_url( $cta1_url ); ?>"><?php echo esc_html( $cta1_text ); ?></a>
-						<?php endif; ?>
-						<?php if ( $cta2_text !== '' && $cta2_url !== '' ) : ?>
-							<?php
-							$is_hash   = isset( $cta2_url[0] ) && $cta2_url[0] === '#';
-							$is_ext    = 0 === strpos( $cta2_url, 'http' ) && false === strpos( $cta2_url, home_url() );
-							$sec_attrs = $is_ext ? ' target="_blank" rel="noopener noreferrer"' : '';
-							?>
-							<a class="krv-landing-hero-cta-secondary" href="<?php echo esc_url( $cta2_url ); ?>"<?php echo $sec_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $cta2_text ); ?></a>
-						<?php endif; ?>
-					</div>
-				<?php endif; ?>
+					<?php if ( ! empty( $data['social_links'] ) && is_array( $data['social_links'] ) ) : ?>
+						<div class="krv-landing-contacts">
+							<?php foreach ( $data['social_links'] as $social_link ) : ?>
+								<?php
+								if ( ! is_array( $social_link ) ) {
+									continue;
+								}
 
-				<?php if ( ! empty( $data['social_links'] ) && is_array( $data['social_links'] ) ) : ?>
-					<div class="krv-landing-contacts">
-						<?php foreach ( $data['social_links'] as $social_link ) : ?>
-							<?php
-							if ( ! is_array( $social_link ) ) {
-								continue;
-							}
+								$url   = (string) ( $social_link['url'] ?? '' );
+								$label = (string) ( $social_link['label'] ?? '' );
 
-							$url   = (string) ( $social_link['url'] ?? '' );
-							$label = (string) ( $social_link['label'] ?? '' );
-
-							if ( $url === '' ) {
-								continue;
-							}
-							?>
-							<a href="<?php echo esc_url( $url ); ?>" target="_blank" title="<?php echo esc_attr( $label ); ?>" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $label ); ?>">
-								<?php echo krv_services_landing_render_social_icon( $social_link ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-							</a>
-						<?php endforeach; ?>
-					</div>
-				<?php endif; ?>
+								if ( $url === '' ) {
+									continue;
+								}
+								?>
+								<a href="<?php echo esc_url( $url ); ?>" target="_blank" title="<?php echo esc_attr( $label ); ?>" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $label ); ?>">
+									<?php echo krv_services_landing_render_social_icon( $social_link ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								</a>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 
