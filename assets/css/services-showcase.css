@@ -1,21 +1,21 @@
 /* /servisy/ showcase — theme icon cards, integrator UX */
 
 .krv-service-pages-wrap {
-	--krv-accent: #5181fe;
-	--krv-accent-hover: #4169d4;
-	--krv-accent-bg: #eaf1ff;
+	--krv-accent: #315fe8;
+	--krv-accent-hover: #244ac2;
+	--krv-accent-bg: #eef3fb;
 	--krv-card-bg: #fff;
 	--krv-text-main: #333;
 	--krv-text-soft: #666;
 	--krv-border: rgba(15, 35, 80, 0.08);
-	--krv-border-hover: rgba(81, 129, 254, 0.35);
+	--krv-border-hover: rgba(49, 95, 232, 0.35);
 	--krv-card-radius: 14px;
 	--krv-card-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 	--krv-card-shadow-hover: 0 10px 24px rgba(15, 35, 80, 0.12);
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 12px 15px 28px;
-	font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+	font-family: var(--krv-font-sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
 }
 
 .krv-service-pages-wrap,
@@ -140,14 +140,14 @@
 	margin: 2px auto 14px;
 	border-radius: 14px;
 	color: #315fe8;
-	background: linear-gradient(145deg, rgba(81, 129, 254, 0.16), rgba(81, 129, 254, 0.06));
-	border: 1px solid rgba(81, 129, 254, 0.2);
+	background: linear-gradient(145deg, rgba(49, 95, 232, 0.16), rgba(49, 95, 232, 0.06));
+	border: 1px solid rgba(49, 95, 232, 0.2);
 	transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
 }
 
 .krv-service-page-card:hover .krv-service-page-icon-wrap {
-	background: linear-gradient(145deg, rgba(81, 129, 254, 0.24), rgba(81, 129, 254, 0.1));
-	border-color: rgba(81, 129, 254, 0.35);
+	background: linear-gradient(145deg, rgba(49, 95, 232, 0.24), rgba(49, 95, 232, 0.1));
+	border-color: rgba(49, 95, 232, 0.35);
 	transform: translateY(-1px);
 }
 
@@ -210,8 +210,8 @@
 	width: 58px;
 	height: 58px;
 	border-radius: 14px;
-	background: linear-gradient(145deg, rgba(81, 129, 254, 0.16), rgba(81, 129, 254, 0.06));
-	border: 1px solid rgba(81, 129, 254, 0.2);
+	background: linear-gradient(145deg, rgba(49, 95, 232, 0.16), rgba(49, 95, 232, 0.06));
+	border: 1px solid rgba(49, 95, 232, 0.2);
 	color: #315fe8;
 	font-size: 1.2rem;
 	font-weight: 700;
@@ -304,7 +304,7 @@ html[data-theme="dark"] .krv-service-pages-wrap {
 	--krv-border-hover: rgba(140, 175, 255, 0.35);
 	--krv-card-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
 	--krv-card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.4);
-	--krv-accent-bg: rgba(81, 129, 254, 0.16);
+	--krv-accent-bg: rgba(49, 95, 232, 0.16);
 }
 
 html[data-theme="dark"] .krv-service-page-icon-wrap,

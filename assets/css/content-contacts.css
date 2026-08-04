@@ -1,7 +1,7 @@
 /* content-contacts.css — light UI for content shortcodes (dark: theme 10-theme-dark.css) */
 .krv-contact-block {
-  --accent: #5181fe;
-  --accent-hover: #4169d4;
+  --accent: #315fe8;
+  --accent-hover: #244ac2;
   --accent-bg: #eaf1ff;
   --border-soft: #d9e6ff;
   --text-main: #333;
@@ -14,7 +14,7 @@
   max-width: 1000px;
   margin: 30px auto;
   padding: 0 12px;
-  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: var(--krv-font-sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
 }
 
 .krv-contact-block,

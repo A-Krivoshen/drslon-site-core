@@ -1,5 +1,5 @@
 /* content-resume.css — light UI for content shortcodes (dark: theme 10-theme-dark.css) */
-.krv-resume-widget { --bg: #f5f7fb; --card: #ffffff; --line: #e7ecf5; --text: #111827; --muted: #5b6472; --accent: #5181fe; --accent-dark: #3d6df2; --tag-bg: #eef4ff; --soft: #f8fafc; --shadow: 0 10px 30px rgba(15, 23, 42, 0.06); --radius: 22px; font-family: Inter, Arial, sans-serif; color: var(--text); background: var(--bg); padding: 20px; border-radius: 24px; box-sizing: border-box; }
+.krv-resume-widget { --bg: #f5f7fb; --card: #ffffff; --line: #e7ecf5; --text: #111827; --muted: #5b6472; --accent: #315fe8; --accent-dark: #244ac2; --tag-bg: #eef4ff; --soft: #f8fafc; --shadow: 0 10px 30px rgba(15, 23, 42, 0.06); --radius: 22px; font-family: var(--krv-font-sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif); color: var(--text); background: var(--bg); padding: 20px; border-radius: 24px; box-sizing: border-box; }
     .krv-resume-widget *, .krv-resume-widget *::before, .krv-resume-widget *::after { box-sizing: border-box; }
     .krv-resume-shell { max-width: 1180px; margin: 0 auto; }
     .krv-resume-hero { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 28px; box-shadow: var(--shadow); margin-bottom: 20px; }
@@ -47,7 +47,7 @@
     .krv-resume-lang-row { display: grid; gap: 6px; }
     .krv-resume-lang-top { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #374151; }
     .krv-resume-lang-bar { width: 100%; height: 10px; border-radius: 999px; background: #e5e7eb; overflow: hidden; }
-    .krv-resume-lang-bar span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #5181fe 0%, #7da1ff 100%); }
+    .krv-resume-lang-bar span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #315fe8 0%, #5b8cff 100%); }
     @media (max-width: 960px) { .krv-resume-grid { grid-template-columns: 1fr; } }
     @media (max-width: 768px) { .krv-resume-widget { padding: 12px; } .krv-resume-hero, .krv-resume-card { padding: 18px; border-radius: 18px; } .krv-resume-name { font-size: 29px; } .krv-resume-role { font-size: 16px; } .krv-resume-summary { font-size: 15px; } .krv-resume-card h2 { font-size: 20px; } }
     @media (max-width: 480px) { .krv-resume-name { font-size: 24px; } .krv-resume-role { font-size: 15px; } .krv-resume-summary, .krv-resume-ul li, .krv-resume-card p { font-size: 14px; } .krv-resume-contacts a, .krv-resume-contacts span { font-size: 13px; } }

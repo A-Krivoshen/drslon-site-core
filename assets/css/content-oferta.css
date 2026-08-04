@@ -11,7 +11,7 @@
 	margin: 0 0 28px;
 	padding: 18px 20px;
 	border-radius: 12px;
-	border-left: 5px solid var(--krv-sp-accent, #5181fe);
+	border-left: 5px solid var(--krv-sp-accent, #315fe8);
 	background: var(--krv-sp-accent-soft, #eef4ff);
 	color: var(--krv-sp-text, #111827);
 	line-height: 1.55;
@@ -57,7 +57,7 @@
 }
 
 .krv-oferta a {
-	color: var(--krv-sp-accent, #5181fe);
+	color: var(--krv-sp-accent, #315fe8);
 	text-decoration: underline;
 	text-underline-offset: 2px;
 }

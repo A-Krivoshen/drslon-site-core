@@ -1,22 +1,28 @@
 /**
  * KRV landing design tokens — shared with price-list-widget.php
  * Used by wordpress / vps / direct / bots subdomains.
+ * Stage 1: calm technical-premium — unified accent, type, radius, shadow.
  */
 :root {
   --krv-bg: #ffffff;
   --krv-card: #ffffff;
-  --krv-soft: #f8fafc;
-  --krv-soft-2: #f8fafc;
-  --krv-line: #e7ecf5;
-  --krv-line-strong: #d7e0ee;
-  --krv-text: #111827;
-  --krv-muted: #5b6472;
-  --krv-accent: #5181fe;
-  --krv-accent-dark: #315fe8;
-  --krv-accent-soft: #eef4ff;
-  --krv-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
-  --krv-shadow-soft: 0 8px 22px rgba(15, 23, 42, 0.05);
-  --krv-shadow-cta: 0 20px 48px rgba(49, 95, 232, 0.26);
+  --krv-soft: #f7f9fc;
+  --krv-soft-2: #eef3fb;
+  --krv-line: #d8e0ee;
+  --krv-line-strong: #c5d0e3;
+  --krv-text: #172133;
+  --krv-muted: #52627d;
+  --krv-accent: #315fe8;
+  --krv-accent-dark: #244ac2;
+  --krv-accent-soft: #eef3fb;
+  --krv-radius: 16px;
+  --krv-radius-sm: 10px;
+  --krv-shadow: 0 4px 14px rgba(23, 33, 51, 0.06);
+  --krv-shadow-soft: 0 8px 22px rgba(23, 33, 51, 0.05);
+  --krv-shadow-hover: 0 10px 28px rgba(23, 33, 51, 0.1);
+  --krv-shadow-cta: 0 16px 40px rgba(49, 95, 232, 0.22);
+  --krv-font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --krv-font-mono: ui-monospace, "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
 /* Base hooks for static landings (Tailwind handles most styling) */
@@ -26,13 +32,14 @@ html {
 }
 
 body {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: var(--krv-font-sans);
   color: var(--krv-text);
 }
 
 .font-display {
-  font-family: 'Inter', Arial, sans-serif;
-  font-weight: 600;
+  font-family: var(--krv-font-sans);
+  font-weight: 650;
+  letter-spacing: -0.02em;
 }
 
 /* Optional utility classes for non-Tailwind elements */

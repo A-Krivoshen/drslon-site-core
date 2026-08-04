@@ -1,6 +1,6 @@
 .krv-partners-wrap {
-	--krv-accent: #5181fe;
-	--krv-accent-hover: #4169d4;
+	--krv-accent: #315fe8;
+	--krv-accent-hover: #244ac2;
 	--krv-card-bg: #fff;
 	--krv-text-main: #333;
 	--krv-text-soft: #666;
@@ -10,7 +10,7 @@
 	max-width: 1320px;
 	margin: 0 auto;
 	padding: 20px 15px;
-	font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+	font-family: var(--krv-font-sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
 }
 
 .krv-partners-wrap,
@@ -80,7 +80,7 @@
 
 .krv-partner-card--featured {
 	border-color: var(--krv-accent);
-	box-shadow: 0 6px 18px rgba(81, 129, 254, 0.14);
+	box-shadow: 0 6px 18px rgba(49, 95, 232, 0.14);
 }
 
 .krv-partner-card--static:hover {
