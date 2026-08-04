@@ -750,6 +750,98 @@ function krv_services_landing_render_service_icon( array $item ): string {
  * @param array<string, string> $bullet Pricing bullet row.
  * @return string
  */
+/**
+ * Whether a service title is a homepage flagship (WordPress / VPS / MAX bots).
+ * RAG/demo tiles are never flagship.
+ */
+function krv_services_landing_is_flagship_title( string $title ): bool {
+	$title_l = function_exists( 'mb_strtolower' ) ? mb_strtolower( $title, 'UTF-8' ) : strtolower( $title );
+	if ( false !== strpos( $title_l, 'rag' ) || false !== strpos( $title_l, 'демо' ) || false !== strpos( $title_l, 'demo' ) ) {
+		return false;
+	}
+	if ( false !== strpos( $title_l, 'wordpress' ) ) {
+		return true;
+	}
+	if ( false !== strpos( $title_l, 'vps' ) ) {
+		return true;
+	}
+	// «Боты для MAX» — not «AI-ready» etc.
+	if ( false !== strpos( $title_l, 'max' ) ) {
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Render one service tile (flagship or compact).
+ *
+ * @param array<string, mixed> $service_item Service row.
+ * @param bool                 $is_flagship  Hierarchy class.
+ */
+function krv_services_landing_render_service_card( array $service_item, bool $is_flagship ): void {
+	$title = (string) ( $service_item['title'] ?? '' );
+	if ( $title === '' ) {
+		return;
+	}
+	$url         = trim( (string) ( $service_item['url'] ?? '' ) );
+	$price_label = trim( (string) ( $service_item['price_label'] ?? '' ) );
+	$is_demo     = ( false !== stripos( $title, 'RAG' ) || false !== stripos( $title, 'демо' ) );
+	$tag         = $url !== '' ? 'a' : 'div';
+
+	$home_host   = (string) wp_parse_url( home_url( '/' ), PHP_URL_HOST );
+	$link_host   = (string) wp_parse_url( $url, PHP_URL_HOST );
+	$is_external = $url !== '' && $link_host !== '' && strcasecmp( $link_host, $home_host ) !== 0;
+
+	$href_attr = '';
+	if ( $url !== '' ) {
+		if ( $is_external ) {
+			$href_attr = ' href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer" title="' . esc_attr( $title . ' (откроется в новой вкладке)' ) . '"';
+		} else {
+			$href_attr = ' href="' . esc_url( $url ) . '" title="' . esc_attr( $title ) . '"';
+		}
+	}
+
+	$extra_class = $url !== '' ? ' krv-landing-service-item--link' : '';
+	if ( $is_demo ) {
+		$extra_class .= ' krv-landing-service-item--demo';
+	}
+	if ( $url !== '' && ! $is_external ) {
+		$extra_class .= ' krv-landing-service-item--onsite';
+	}
+	$extra_class .= $is_flagship ? ' krv-landing-service-item--flagship' : ' krv-landing-service-item--compact';
+
+	$badge_text  = $is_demo ? ( $price_label !== '' ? $price_label : 'демо' ) : $price_label;
+	$badge_class = $is_demo ? 'krv-landing-service-price krv-landing-service-badge' : 'krv-landing-service-price';
+	?>
+	<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> class="krv-landing-service-item<?php echo esc_attr( $extra_class ); ?>"<?php echo $href_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+		<div class="krv-landing-service-inner">
+			<?php if ( $badge_text !== '' ) : ?>
+				<span class="<?php echo esc_attr( $badge_class ); ?>"><?php echo esc_html( $badge_text ); ?></span>
+			<?php endif; ?>
+			<?php if ( $url !== '' ) : ?>
+				<span class="krv-landing-service-ext" aria-hidden="true">
+					<?php if ( $is_external ) : ?>
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" focusable="false">
+							<path d="M14 5h5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M10 14L19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					<?php else : ?>
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" focusable="false">
+							<path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+							<path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					<?php endif; ?>
+				</span>
+			<?php endif; ?>
+			<?php echo krv_services_landing_render_service_icon( $service_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<h3 class="krv-landing-service-title"><?php echo esc_html( $title ); ?></h3>
+			<p class="krv-landing-service-desc"><?php echo esc_html( (string) ( $service_item['description'] ?? '' ) ); ?></p>
+		</div>
+	</<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+	<?php
+}
+
 function krv_services_landing_render_pricing_icon( array $bullet ): string {
 	$icon_key = (string) ( $bullet['icon_key'] ?? 'focus' );
 	$inner    = krv_services_landing_pricing_icon_preset( $icon_key );
@@ -916,75 +1008,38 @@ function krv_services_landing_render(): string {
 					if ( ! is_array( $services_items ) ) {
 						$services_items = $data['services_items'];
 					}
+
+					$flagship_items = array();
+					$compact_items  = array();
+					foreach ( $services_items as $service_item ) {
+						if ( ! is_array( $service_item ) ) {
+							continue;
+						}
+						$title = (string) ( $service_item['title'] ?? '' );
+						if ( $title === '' ) {
+							continue;
+						}
+						if ( krv_services_landing_is_flagship_title( $title ) ) {
+							$flagship_items[] = $service_item;
+						} else {
+							$compact_items[] = $service_item;
+						}
+					}
 					?>
-					<div class="krv-landing-services-grid">
-						<?php foreach ( $services_items as $service_item ) : ?>
-							<?php
-							if ( ! is_array( $service_item ) ) {
-								continue;
-							}
-
-							$title = (string) ( $service_item['title'] ?? '' );
-							if ( $title === '' ) {
-								continue;
-							}
-							$url         = trim( (string) ( $service_item['url'] ?? '' ) );
-							$price_label = trim( (string) ( $service_item['price_label'] ?? '' ) );
-							$is_demo     = ( false !== stripos( $title, 'RAG' ) || false !== stripos( $title, 'демо' ) );
-							$tag         = $url !== '' ? 'a' : 'div';
-
-							// External flagship landings open in a new tab; same-site (prays-list, rag-demo) stay here.
-							$home_host   = (string) wp_parse_url( home_url( '/' ), PHP_URL_HOST );
-							$link_host   = (string) wp_parse_url( $url, PHP_URL_HOST );
-							$is_external = $url !== '' && $link_host !== '' && strcasecmp( $link_host, $home_host ) !== 0;
-
-							$href_attr = '';
-							if ( $url !== '' ) {
-								if ( $is_external ) {
-									$href_attr = ' href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer" title="' . esc_attr( $title . ' (откроется в новой вкладке)' ) . '"';
-								} else {
-									$href_attr = ' href="' . esc_url( $url ) . '" title="' . esc_attr( $title ) . '"';
-								}
-							}
-
-							$extra_class = $url !== '' ? ' krv-landing-service-item--link' : '';
-							if ( $is_demo ) {
-								$extra_class .= ' krv-landing-service-item--demo';
-							}
-							if ( $url !== '' && ! $is_external ) {
-								$extra_class .= ' krv-landing-service-item--onsite';
-							}
-							$badge_text  = $is_demo ? ( $price_label !== '' ? $price_label : 'демо' ) : $price_label;
-							$badge_class = $is_demo ? 'krv-landing-service-price krv-landing-service-badge' : 'krv-landing-service-price';
-							?>
-							<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> class="krv-landing-service-item<?php echo esc_attr( $extra_class ); ?>"<?php echo $href_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-								<div class="krv-landing-service-inner">
-									<?php if ( $badge_text !== '' ) : ?>
-										<span class="<?php echo esc_attr( $badge_class ); ?>"><?php echo esc_html( $badge_text ); ?></span>
-									<?php endif; ?>
-									<?php if ( $url !== '' ) : ?>
-										<span class="krv-landing-service-ext" aria-hidden="true">
-											<?php if ( $is_external ) : ?>
-												<svg width="14" height="14" viewBox="0 0 24 24" fill="none" focusable="false">
-													<path d="M14 5h5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-													<path d="M10 14L19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-													<path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-											<?php else : ?>
-												<svg width="14" height="14" viewBox="0 0 24 24" fill="none" focusable="false">
-													<path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-													<path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-											<?php endif; ?>
-										</span>
-									<?php endif; ?>
-									<?php echo krv_services_landing_render_service_icon( $service_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-									<h3 class="krv-landing-service-title"><?php echo esc_html( $title ); ?></h3>
-									<p class="krv-landing-service-desc"><?php echo esc_html( (string) ( $service_item['description'] ?? '' ) ); ?></p>
-								</div>
-							</<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-						<?php endforeach; ?>
-					</div>
+					<?php if ( ! empty( $flagship_items ) ) : ?>
+						<div class="krv-landing-services-grid krv-landing-services-grid--flagship">
+							<?php foreach ( $flagship_items as $service_item ) : ?>
+								<?php krv_services_landing_render_service_card( $service_item, true ); ?>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+					<?php if ( ! empty( $compact_items ) ) : ?>
+						<div class="krv-landing-services-grid krv-landing-services-grid--compact">
+							<?php foreach ( $compact_items as $service_item ) : ?>
+								<?php krv_services_landing_render_service_card( $service_item, false ); ?>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
 					<p class="krv-landing-services-note">
 						Также: домены, CDN, SSL, Docker, миграции и точечный SEO
 						<span class="krv-landing-services-note-sep">·</span>

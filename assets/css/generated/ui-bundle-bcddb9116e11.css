@@ -195,6 +195,10 @@
 	align-items: stretch;
 }
 
+.krv-landing-services-grid--flagship + .krv-landing-services-grid--compact {
+	margin-top: 14px;
+}
+
 /* Service cards — integrator parity with clients */
 .krv-landing-service-item {
 	position: relative;
@@ -210,7 +214,7 @@
 	background: var(--card-bg);
 	border: 1px solid rgba(15, 35, 80, 0.08);
 	border-radius: 14px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+	box-shadow: 0 4px 14px rgba(23, 33, 51, 0.06);
 	transition:
 		box-shadow 0.22s ease,
 		transform 0.22s ease,
@@ -1031,8 +1035,136 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 }
 
 
+/* === Stage 4: services hierarchy (flagship + compact) === */
+.krv-landing-services-grid--flagship {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.krv-landing-services-grid--compact {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.krv-landing-service-item--flagship {
+	box-shadow: 0 4px 14px rgba(23, 33, 51, 0.06);
+	border-color: rgba(15, 35, 80, 0.1);
+}
+
+.krv-landing-service-item--flagship .krv-landing-service-inner {
+	min-height: 0;
+	padding: 18px 16px 20px;
+}
+
+.krv-landing-service-item--flagship .krv-landing-service-icon-wrap {
+	width: 54px;
+	height: 54px;
+}
+
+.krv-landing-service-item--flagship .krv-landing-service-title,
+.krv-landing-service-item--flagship.krv-landing-service-item h3 {
+	font-size: 1.12rem;
+}
+
+.krv-landing-service-item--flagship .krv-landing-service-desc {
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
+.krv-landing-service-item--compact {
+	box-shadow: none;
+	background: transparent;
+	border-color: rgba(15, 35, 80, 0.1);
+}
+
+.krv-landing-service-item--compact .krv-landing-service-inner {
+	min-height: 0;
+	padding: 12px 12px 14px;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-icon-wrap {
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	margin-bottom: 8px;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-icon {
+	width: 22px;
+	height: 22px;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-title,
+.krv-landing-service-item--compact.krv-landing-service-item h3 {
+	font-size: 0.95rem;
+	margin-bottom: 4px;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-desc {
+	font-size: 0.8rem;
+	line-height: 1.4;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-price {
+	font-size: 0.72rem;
+	padding: 3px 8px;
+}
+
+.krv-landing-service-item--compact.krv-landing-service-item--link:hover {
+	transform: none;
+	box-shadow: none;
+	border-color: rgba(49, 95, 232, 0.28);
+	background: var(--accent-bg, #eef3fb);
+}
+
+.krv-landing-service-item--compact.krv-landing-service-item--link:hover .krv-landing-service-icon-wrap {
+	transform: none;
+}
+
+html[data-theme="dark"] .krv-landing-service-item--compact {
+	background: transparent;
+	border-color: rgba(255, 255, 255, 0.1);
+	box-shadow: none;
+}
+
+html[data-theme="dark"] .krv-landing-service-item--compact.krv-landing-service-item--link:hover {
+	background: rgba(120, 160, 255, 0.08);
+	border-color: rgba(120, 160, 255, 0.28);
+	box-shadow: none;
+	transform: none;
+}
+
+@media (max-width: 1100px) {
+	.krv-landing-services-grid--flagship {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+	.krv-landing-services-grid--compact {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 768px) {
+	.krv-landing-services-grid--flagship,
+	.krv-landing-services-grid--compact {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+	}
+}
+
+@media (max-width: 420px) {
+	.krv-landing-services-grid--flagship,
+	.krv-landing-services-grid--compact {
+		grid-template-columns: 1fr;
+	}
+}
+
+
 /* >>> clients-grid.css */
-/* Clients grid — integrator UX, parity with services landing */
+/* Clients grid — Stage 4 quiet logo board (not service-card clone) */
 
 .krv-clients-grid-wrap {
 	--krv-accent: #315fe8;
@@ -1091,8 +1223,8 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 
 .krv-clients-grid {
 	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 16px;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 12px;
 	width: 100%;
 	align-items: stretch;
 }
@@ -1108,11 +1240,9 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 	color: inherit;
 	background: var(--krv-card-bg);
 	border: 1px solid var(--krv-border);
-	border-radius: var(--krv-card-radius);
-	box-shadow: var(--krv-card-shadow);
+	border-radius: 12px;
+	box-shadow: none;
 	transition:
-		box-shadow 0.22s ease,
-		transform 0.22s ease,
 		border-color 0.22s ease,
 		background 0.22s ease;
 	overflow: hidden;
@@ -1125,9 +1255,10 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 }
 
 .krv-client-card--link:hover {
-	transform: translateY(-2px);
+	transform: none;
 	border-color: var(--krv-border-hover);
-	box-shadow: var(--krv-card-shadow-hover);
+	box-shadow: none;
+	background: #fafbfd;
 }
 
 .krv-client-card--link:active {
@@ -1150,8 +1281,9 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 	align-items: center;
 	justify-content: flex-start;
 	flex: 1 1 auto;
-	min-height: 188px;
-	padding: 18px 14px 16px;
+	min-height: 0;
+	padding: 14px 12px 12px;
+	gap: 8px;
 	text-align: center;
 	position: relative;
 }
@@ -1169,16 +1301,15 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 	border-radius: 8px;
 	color: var(--krv-accent);
 	background: transparent;
-	opacity: 0.35;
-	transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+	opacity: 0.25;
+	transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
 	pointer-events: none;
 }
 
 .krv-client-card--link:hover .krv-client-ext,
 .krv-client-card--link:focus-visible .krv-client-ext {
-	opacity: 1;
+	opacity: 0.85;
 	background: var(--krv-accent-bg);
-	transform: translate(1px, -1px);
 }
 
 /* Logo plate: quiet theme surface */
@@ -1187,12 +1318,12 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	height: 84px;
-	margin-bottom: 14px;
+	height: 72px;
+	margin-bottom: 0;
 	padding: 8px 10px;
 	overflow: hidden;
-	border-radius: 12px;
-	background: linear-gradient(180deg, #f5f7ff 0%, #eef2fb 100%);
+	border-radius: 10px;
+	background: linear-gradient(180deg, #f7f9fc 0%, #eef3fb 100%);
 	border: 1px solid rgba(49, 95, 232, 0.1);
 	transition: background 0.22s ease, border-color 0.22s ease;
 }
@@ -1212,7 +1343,7 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 	width: auto !important;
 	height: auto !important;
 	max-width: 100% !important;
-	max-height: 64px !important;
+	max-height: 52px !important;
 	margin: 0 auto !important;
 	object-fit: contain;
 	object-position: center;
@@ -1257,36 +1388,34 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 
 .krv-client-title {
 	margin: 0;
-	font-size: 0.98rem;
-	font-weight: 600;
-	line-height: 1.3;
+	font-size: 0.88rem;
+	font-weight: 650;
+	line-height: 1.25;
 	color: var(--krv-text-main);
 	word-break: break-word;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-	min-height: 2.6em;
 }
 
 .krv-client-description {
-	margin: 8px 0 0;
-	font-size: 0.82rem;
-	line-height: 1.45;
+	margin: 0;
+	font-size: 0.75rem;
+	line-height: 1.35;
 	color: var(--krv-text-soft);
+	opacity: 0.78;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-	min-height: 2.4em;
-	flex: 1 1 auto;
 }
 
 /* Tablet */
 @media (max-width: 1100px) {
 	.krv-clients-grid {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 14px;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 12px;
 	}
 }
 
@@ -1455,6 +1584,18 @@ html[data-theme="dark"] .krv-client-no-logo {
 
 html[data-theme="dark"] .krv-client-ext {
 	color: #9db7ff;
+}
+
+/* Stage 4: align section header with editorial left rhythm on wide screens */
+@media (min-width: 900px) {
+	.krv-clients-grid-header {
+		text-align: left;
+	}
+	.krv-clients-grid-lead,
+	.krv-clients-grid-meta {
+		margin-left: 0;
+		margin-right: 0;
+	}
 }
 
 

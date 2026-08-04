@@ -148,7 +148,18 @@ function krv_clients_showcase_order(): array {
 		8450 => 130, // Храм
 		6671 => 140, // СКД
 		6112 => 150, // DFR
-		6151 => 160, // Метком (static, last)
+		// 6151 Метком-Калуга — excluded from homepage grid (see post__not_in).
+	);
+}
+
+/**
+ * Client post IDs hidden from [krv_clients_grid] showcase.
+ *
+ * @return list<int>
+ */
+function krv_clients_grid_excluded_ids(): array {
+	return array(
+		6151, // Метком-Калуга
 	);
 }
 
@@ -162,11 +173,14 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 		'krv_clients_grid'
 	);
 
+	$excluded = krv_clients_grid_excluded_ids();
+
 	$q = new WP_Query(
 		[
 			'post_type'      => 'client',
 			'post_status'    => 'publish',
 			'posts_per_page' => -1,
+			'post__not_in'   => $excluded,
 			'orderby'        => [
 				'menu_order' => 'ASC',
 				'date'       => 'DESC',

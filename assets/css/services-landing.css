@@ -192,6 +192,10 @@
 	align-items: stretch;
 }
 
+.krv-landing-services-grid--flagship + .krv-landing-services-grid--compact {
+	margin-top: 14px;
+}
+
 /* Service cards — integrator parity with clients */
 .krv-landing-service-item {
 	position: relative;
@@ -207,7 +211,7 @@
 	background: var(--card-bg);
 	border: 1px solid rgba(15, 35, 80, 0.08);
 	border-radius: 14px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+	box-shadow: 0 4px 14px rgba(23, 33, 51, 0.06);
 	transition:
 		box-shadow 0.22s ease,
 		transform 0.22s ease,
@@ -1024,5 +1028,133 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 
 	.krv-landing-hero-foot .krv-landing-contacts {
 		justify-content: center;
+	}
+}
+
+
+/* === Stage 4: services hierarchy (flagship + compact) === */
+.krv-landing-services-grid--flagship {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.krv-landing-services-grid--compact {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.krv-landing-service-item--flagship {
+	box-shadow: 0 4px 14px rgba(23, 33, 51, 0.06);
+	border-color: rgba(15, 35, 80, 0.1);
+}
+
+.krv-landing-service-item--flagship .krv-landing-service-inner {
+	min-height: 0;
+	padding: 18px 16px 20px;
+}
+
+.krv-landing-service-item--flagship .krv-landing-service-icon-wrap {
+	width: 54px;
+	height: 54px;
+}
+
+.krv-landing-service-item--flagship .krv-landing-service-title,
+.krv-landing-service-item--flagship.krv-landing-service-item h3 {
+	font-size: 1.12rem;
+}
+
+.krv-landing-service-item--flagship .krv-landing-service-desc {
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
+.krv-landing-service-item--compact {
+	box-shadow: none;
+	background: transparent;
+	border-color: rgba(15, 35, 80, 0.1);
+}
+
+.krv-landing-service-item--compact .krv-landing-service-inner {
+	min-height: 0;
+	padding: 12px 12px 14px;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-icon-wrap {
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	margin-bottom: 8px;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-icon {
+	width: 22px;
+	height: 22px;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-title,
+.krv-landing-service-item--compact.krv-landing-service-item h3 {
+	font-size: 0.95rem;
+	margin-bottom: 4px;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-desc {
+	font-size: 0.8rem;
+	line-height: 1.4;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-price {
+	font-size: 0.72rem;
+	padding: 3px 8px;
+}
+
+.krv-landing-service-item--compact.krv-landing-service-item--link:hover {
+	transform: none;
+	box-shadow: none;
+	border-color: rgba(49, 95, 232, 0.28);
+	background: var(--accent-bg, #eef3fb);
+}
+
+.krv-landing-service-item--compact.krv-landing-service-item--link:hover .krv-landing-service-icon-wrap {
+	transform: none;
+}
+
+html[data-theme="dark"] .krv-landing-service-item--compact {
+	background: transparent;
+	border-color: rgba(255, 255, 255, 0.1);
+	box-shadow: none;
+}
+
+html[data-theme="dark"] .krv-landing-service-item--compact.krv-landing-service-item--link:hover {
+	background: rgba(120, 160, 255, 0.08);
+	border-color: rgba(120, 160, 255, 0.28);
+	box-shadow: none;
+	transform: none;
+}
+
+@media (max-width: 1100px) {
+	.krv-landing-services-grid--flagship {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+	.krv-landing-services-grid--compact {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 768px) {
+	.krv-landing-services-grid--flagship,
+	.krv-landing-services-grid--compact {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+	}
+}
+
+@media (max-width: 420px) {
+	.krv-landing-services-grid--flagship,
+	.krv-landing-services-grid--compact {
+		grid-template-columns: 1fr;
 	}
 }
