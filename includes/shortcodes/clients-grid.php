@@ -134,6 +134,7 @@ function krv_client_logo_is_usable( int $post_id ): bool {
 function krv_clients_showcase_order(): array {
 	return array(
 		9244 => 10,  // LUMISTEK
+		11393 => 15, // KOVIFINANCE
 		6113 => 20,  // АГНКС
 		5702 => 30,  // Fornovo Gas
 		8081 => 40,  // Технолидер
@@ -148,7 +149,7 @@ function krv_clients_showcase_order(): array {
 		8450 => 130, // Храм
 		6671 => 140, // СКД
 		6112 => 150, // DFR
-		// 6151 Метком-Калуга — excluded from homepage grid (see post__not_in).
+		// 6151 Метком-Калуга - excluded from homepage grid (see post__not_in).
 	);
 }
 
