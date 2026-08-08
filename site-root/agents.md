@@ -1,4 +1,4 @@
-# agents.md — инструкции для AI-агентов на krivoshein.site
+# Инструкции для AI-агентов на krivoshein.site
 
 Версия: 2026-07-29  
 Владелец: ИП Кривошеин Алексей Сергеевич (Dr.Slon)  
@@ -19,10 +19,14 @@
 
 **Не начинайте** с полного HTML-скрапинга главной: там много разметки, кэша и UI. Markdown- и JSON-эндпоинты дешевле и точнее.
 
-## Content negotiation
+## Content negotiation (Markdown for Agents)
 
-- Запрос `Accept: text/markdown` к `/` отдаёт содержимое `llms.txt`
-- HTTP `Link` на всех ответах указывает sitemap, llms.txt, ai.txt, api-catalog, RSS
+- Запрос с `Accept: text/markdown` к любой HTML-странице (включая `/`) возвращает **markdown** с `Content-Type: text/markdown; charset=utf-8`
+- Заголовки: `Vary: Accept`, `x-markdown-tokens` (оценка токенов), при наличии `x-original-tokens`
+- Главная: markdown-версия на базе `llms.txt` + YAML frontmatter
+- Посты/страницы: title, description, тело в markdown + мета
+- Без `Accept: text/markdown` (браузеры) — обычный HTML
+- HTTP `Link` на ответах: sitemap, llms.txt, ai.txt, api-catalog, RSS
 - В HTML `<head>` есть `<link rel="describedby">` на llms.txt / agents.md
 
 ## Публичные машинные API

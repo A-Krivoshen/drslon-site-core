@@ -10,15 +10,17 @@
   Ссылка: https://beget.com/p754742
 - **Reg.ru** - Регистрация доменов и хостинг в одном окне. Базовый выбор, когда нужен .ru/.рф и размещение сайта без лишних приключений.
   Ссылка: https://krivoshein.site/regru
-- **SpaceWeb** - Недорогой хостинг на NVMe с антивирусом и защитой от DDoS. Вариант для лендингов и небольших WordPress-сайтов.
+- **SpaceWeb** - Хостинг и VDS (Linux/Windows Server), NVMe, DDoS-защита. Лендинги, WP, боты.
   Ссылка: https://krivoshein.site/sweb
 
 ### Cloud
+- **Selectel** - Облачная платформа: VPC, ВМ (Linux/Windows Server), инфраструктура для продакшена. Когда нужен mature cloud в РФ, а не «просто VPS».
+  Ссылка: https://selectel.ru/services/cloud/vpc/?ref_code=2c6445c777
 - **CLO** - Облачные VDS/VPS для сайтов, порталов и тестовых стендов. Гибкие конфигурации, когда нужен свой сервер без покупки железа.
   Ссылка: https://krivoshein.site/clo
-- **FirstVDS** - VPS и серверы с GPU: удобно для ИИ, научных задач и видео. Есть готовые конфигурации, если CPU уже не тянет нагрузку.
+- **FirstVDS** - VPS/VDS (Linux и Windows Server): сайты, боты, GPU при необходимости. Есть готовые конфигурации.
   Ссылка: https://krivoshein.site/firstvds
-- **UltraVDS** - VPS с 2013 года: Windows Server с лицензией или Linux (Debian и др.). Стабильный вариант, когда нужен предсказуемый сервер.
+- **UltraVDS** - VPS с 2013 года: удобный Windows VPS под 1С/RDP (Windows также есть у FirstVDS, SpaceWeb, Selectel, Yandex Cloud). Linux тоже.
   Ссылка: https://krivoshein.site/ultravds
 - **Yandex Cloud** - Облако Яндекса: ВМ, Kubernetes, объектное хранилище и managed-сервисы. Когда инфраструктура нужна «как сервис», а не стойка в шкафу.
   Ссылка: https://krivoshein.site/yandexcloud

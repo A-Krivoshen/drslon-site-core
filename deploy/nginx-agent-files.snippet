@@ -3,9 +3,7 @@
  add_header Link '</sitemap.xml>; rel="sitemap", </llms.txt>; rel="describedby"; type="text/markdown", </llms-full.txt>; rel="describedby"; type="text/markdown", </ai.txt>; rel="describedby"; type="text/plain", </agents.md>; rel="describedby"; type="text/markdown", </openapi.json>; rel="service-desc"; type="application/json", </.well-known/api-catalog>; rel="api-catalog", </.well-known/agent.json>; rel="alternate"; type="application/json", </feed/drslon-pulse-feed/>; rel="alternate"; type="application/rss+xml"' always;
  add_header Vary Accept always;
 
- if ($http_accept ~* "text/markdown") {
-     rewrite ^/$ /llms.txt last;
- }
+ # Markdown negotiation: WP mu-plugin krv-markdown-negotiation.php (not rewrite to llms.txt).
 
  location = /llms.txt {
      types { }
