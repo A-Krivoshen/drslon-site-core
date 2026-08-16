@@ -520,6 +520,10 @@ body.page-id-7304 .entry-content {
 		flex-direction: column;
 		justify-content: center;
 	}
+
+	html.krv-cookie-bar-open body.page-id-6204 main.drslon-page-shell {
+		min-height: calc(100dvh - 80px - var(--krv-cookie-bar-space, 140px));
+	}
 }
 
 @media (max-width: 640px) {

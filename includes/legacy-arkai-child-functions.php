@@ -141,6 +141,15 @@ add_action( 'wp_head', function () {
 
 	$title = wp_strip_all_tags( get_the_title( $id ) );
 
+	// RSYA card titles: keep published post titles, but show Russian tool names in the widget.
+	$reco_titles = array(
+		7314 => 'DNS-записи: как проверять',
+		7332 => 'Whois: домен и IP',
+	);
+	if ( isset( $reco_titles[ $id ] ) ) {
+		$title = $reco_titles[ $id ];
+	}
+
 	$img = get_the_post_thumbnail_url( $id, 'full' );
 	if ( ! $img ) {
 		$img = get_site_icon_url( 512 );
