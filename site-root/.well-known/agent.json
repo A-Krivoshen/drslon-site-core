@@ -11,7 +11,9 @@
     "ogrn": "321774600479249",
     "inn": "770603253213"
   },
-  "language": ["ru"],
+  "language": [
+    "ru"
+  ],
   "preferredContentTypes": [
     "text/markdown",
     "application/json",
@@ -23,13 +25,16 @@
     "llmsFull": "https://krivoshein.site/llms-full.txt",
     "aiIndex": "https://krivoshein.site/ai.txt",
     "agents": "https://krivoshein.site/agents.md",
+    "agentsTxt": "https://krivoshein.site/agents.txt",
+    "agentsJson": "https://krivoshein.site/agents.json",
     "openapi": "https://krivoshein.site/openapi.json",
     "apiCatalog": "https://krivoshein.site/.well-known/api-catalog",
     "sitemap": "https://krivoshein.site/sitemap.xml",
     "security": "https://krivoshein.site/.well-known/security.txt",
     "humans": "https://krivoshein.site/humans.txt",
     "pricing": "https://krivoshein.site/prays-list/",
-    "contacts": "https://krivoshein.site/contacts/"
+    "contacts": "https://krivoshein.site/contacts/",
+    "ecosystemHub": "https://krivoshein.site/llms.txt"
   },
   "endpoints": {
     "rest": "https://krivoshein.site/wp-json/",
@@ -39,11 +44,27 @@
     "pulseFeed": "https://krivoshein.site/feed/drslon-pulse-feed/"
   },
   "contactChannels": [
-    { "type": "url", "value": "https://krivoshein.site/contacts/", "label": "Contacts page" },
-    { "type": "email", "value": "aleksey@krivoshein.site" },
-    { "type": "phone", "value": "+79636641615" },
-    { "type": "telegram", "value": "https://t.me/DrSlon" },
-    { "type": "max", "value": "https://krivoshein.site/max/" }
+    {
+      "type": "url",
+      "value": "https://krivoshein.site/contacts/",
+      "label": "Contacts page"
+    },
+    {
+      "type": "email",
+      "value": "aleksey@krivoshein.site"
+    },
+    {
+      "type": "phone",
+      "value": "+79636641615"
+    },
+    {
+      "type": "telegram",
+      "value": "https://t.me/DrSlon"
+    },
+    {
+      "type": "max",
+      "value": "https://krivoshein.site/max/"
+    }
   ],
   "services": [
     "WordPress development and support",
@@ -68,23 +89,27 @@
     "source": "https://krivoshein.site/prays-list/"
   },
   "relatedSites": [
-    "https://domaintools.site",
+    "https://krivoshein.site",
     "https://cybertools.cc",
-    "https://bots.krivoshein.site",
-    "https://vps.krivoshein.site",
-    "https://direct.krivoshein.site",
+    "https://domaintools.site",
     "https://wordpress.krivoshein.site",
+    "https://vps.krivoshein.site",
+    "https://bots.krivoshein.site",
+    "https://direct.krivoshein.site",
     "https://landing.krivoshein.site",
     "https://ai-ready.krivoshein.site",
+    "https://study.krivoshein.site",
+    "https://support.krivoshein.site",
     "https://fortesting.ru"
   ],
   "usagePolicy": {
     "search": true,
     "aiInput": true,
-    "aiTrain": false,
-    "citationRequired": true,
+    "aiTrain": true,
+    "citationRequired": false,
+    "copyrightHolder": "ИП Кривошеин Алексей Сергеевич (Dr.Slon)",
     "adminAreasForbidden": true,
-    "notes": "Public content may be used for answers with source URL. Model training on site content is not welcome (robots Content-Signal ai-train=no)."
+    "notes": "Public content may be used for model training and answers. This is Aleksey Krivoshein's work. Attribution is welcome, not required."
   },
   "capabilities": {
     "markdownHome": true,
@@ -94,5 +119,5 @@
     "rss": true,
     "sitemap": true
   },
-  "updated": "2026-07-29"
+  "updated": "2026-08-16"
 }

@@ -1,0 +1,44 @@
+{
+  "issuer": "https://krivoshein.site",
+  "oauth_enabled": false,
+  "error": "not_enabled",
+  "note": "This is discovery metadata only. Automated OAuth registration, authorization-code, jwt-bearer, and token issuance are not enabled. Public APIs need no bearer. Humans: https://krivoshein.site/contacts/",
+  "authorization_endpoint": "https://krivoshein.site/contacts/",
+  "token_endpoint": "https://krivoshein.site/oauth2/token",
+  "revocation_endpoint": "https://krivoshein.site/oauth2/revoke",
+  "registration_endpoint": "https://krivoshein.site/agent/auth",
+  "response_types_supported": [
+    "none"
+  ],
+  "grant_types_supported": [],
+  "token_endpoint_auth_methods_supported": [
+    "none"
+  ],
+  "scopes_supported": [
+    "public:read",
+    "agent:discover"
+  ],
+  "service_documentation": "https://krivoshein.site/auth.md",
+  "ui_locales_supported": [
+    "ru",
+    "en"
+  ],
+  "agent_auth": {
+    "skill": "https://krivoshein.site/auth.md",
+    "register_uri": "https://krivoshein.site/agent/auth",
+    "claim_uri": "https://krivoshein.site/contacts/",
+    "revocation_uri": "https://krivoshein.site/oauth2/revoke",
+    "identity_types_supported": [
+      "anonymous"
+    ],
+    "anonymous": {
+      "credential_types_supported": [],
+      "claim_uri": "https://krivoshein.site/contacts/"
+    },
+    "identity_assertion": {
+      "assertion_types_supported": [],
+      "credential_types_supported": []
+    },
+    "events_supported": []
+  }
+}

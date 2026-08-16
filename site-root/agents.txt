@@ -1,0 +1,8 @@
+# agents.txt
+# Standard: https://agents-txt.com
+# JSON: https://krivoshein.site/agents.json
+#
+# Public discovery only. This site does not run an MCP server,
+# does not accept agent payments, and does not offer automated registration.
+# Read content via /llms.txt and /agents.md. Card: /.well-known/agent.json
+# Training allowed (ai-train=yes). Copyright: ИП Кривошеин Алексей Сергеевич (Dr.Slon).

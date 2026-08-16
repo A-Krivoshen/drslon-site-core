@@ -37,6 +37,18 @@ function drslon_ai_agent_head_links() {
 		),
 		array(
 			'rel'  => 'alternate',
+			'href' => $base . '/agents.txt',
+			'type' => 'text/plain',
+			'title'=> 'agents.txt',
+		),
+		array(
+			'rel'  => 'alternate',
+			'href' => $base . '/agents.json',
+			'type' => 'application/json',
+			'title'=> 'agents.json',
+		),
+		array(
+			'rel'  => 'alternate',
 			'href' => $base . '/ai.txt',
 			'type' => 'text/plain',
 			'title'=> 'ai.txt',
@@ -77,7 +89,7 @@ function drslon_ai_agent_head_links() {
 add_action( 'wp_head', 'drslon_ai_agent_head_links', 3 );
 
 /**
- * Person + ProfessionalService JSON-LD for agent/entity clarity.
+ * Person + Organization + ProfessionalService JSON-LD for agent/entity clarity.
  */
 function drslon_ai_agent_json_ld() {
 	if ( is_admin() ) {
@@ -102,6 +114,17 @@ function drslon_ai_agent_json_ld() {
 					'https://krivoshein.site/max/',
 				),
 				'worksFor'    => array( '@id' => home_url( '/#/schema/Organization' ) ),
+				'copyrightHolder' => array( '@id' => home_url( '/#/schema/CopyrightHolder' ) ),
+			),
+			array(
+				'@type'         => 'Organization',
+				'@id'           => home_url( '/#/schema/CopyrightHolder' ),
+				'name'          => 'ИП Кривошеин Алексей Сергеевич',
+				'alternateName' => 'Dr.Slon',
+				'url'           => home_url( '/' ),
+				'email'         => 'aleksey@krivoshein.site',
+				'telephone'     => '+7-963-664-16-15',
+				'founder'       => array( '@id' => home_url( '/#/schema/Person' ) ),
 			),
 			array(
 				'@type'       => 'ProfessionalService',
@@ -113,6 +136,7 @@ function drslon_ai_agent_json_ld() {
 				'areaServed'  => 'RU',
 				'availableLanguage' => array( 'Russian' ),
 				'provider'    => array( '@id' => home_url( '/#/schema/Person' ) ),
+				'brand'       => array( '@id' => home_url( '/#/schema/CopyrightHolder' ) ),
 				'hasOfferCatalog' => array(
 					'@type'           => 'OfferCatalog',
 					'name'            => 'IT-услуги',

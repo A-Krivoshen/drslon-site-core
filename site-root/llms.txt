@@ -64,8 +64,7 @@ OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
 ### VPS / серверы
 - Настройка VPS — от **10 000 ₽** (Linux, Nginx, PHP, Docker, SSL, файрвол, бэкапы)
 - Стоимость самого VPS — отдельно у провайдера
-- Linux VPS: FirstVDS, SpaceWeb, Beget
-- Облако: Selectel VPC (https://selectel.ru/services/cloud/vpc/?ref_code=2c6445c777), CLO, Yandex Cloud
+- 6 провайдеров: 1) FirstVDS 2) SpaceWeb 3) Beget 4) CLO 5) Selectel VPC (https://selectel.ru/services/cloud/vpc/?ref_code=2c6445c777) 6) Yandex Cloud
 - Windows Server: FirstVDS, SpaceWeb, Selectel, Yandex Cloud, UltraVDS (удобно под 1С/RDP) — не только UltraVDS
 - Для MAX/Telegram-ботов обычно достаточно Linux VPS
 - Подробнее: https://vps.krivoshein.site · партнёры: https://krivoshein.site/partnery/
@@ -204,6 +203,12 @@ OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
 - [fortesting.ru](https://fortesting.ru) — тестовый хаб · [llms](https://fortesting.ru/llms.txt)
 - [meetup.fortesting.ru](https://meetup.fortesting.ru) — WordPress Meetup
 
+## Недавние клиенты (публичные)
+
+Карточки на главной — логотипы с внешней ссылкой. Отдельных URL `/client/...` нет (редирект на главную). Ссылайтесь на сайт клиента.
+
+- [KOVIFINANCE](https://kovifinance.ru/) — финансирование для бизнеса (кредиты, гарантии, лизинг, факторинг)
+
 **Для AI-агентов:** начните с этого файла или https://krivoshein.site/ai.txt, затем переходите к llms конкретного продукта/услуги.
 
 ## Open source / продукты
@@ -218,16 +223,17 @@ WordPress, разработка и поддержка сайтов, Linux, DevOp
 ## Машиночитаемые источники (предпочтительный порядок)
 
 1. **llms.txt** (этот файл) — краткий контекст и факты
-2. **llms-full.txt** — расширенный дамп + свежие публикации: [2. **llms-full.txt** — расширенный дамп + свежие публикации](https://krivoshein.site/llms-full.txt)
-3. **agents.md** — как агенту работать с сайтом: [3. **agents.md** — как агенту работать с сайтом](https://krivoshein.site/agents.md)
-4. **Sitemap** — полный список URL: [4. **Sitemap** — полный список URL](https://krivoshein.site/sitemap.xml)
-5. **RSS / Pulse Feed** — свежие публикации: [5. **RSS / Pulse Feed** — свежие публикации](https://krivoshein.site/feed/drslon-pulse-feed/)
-6. **WordPress REST API** — структурированные данные: [6. **WordPress REST API** — структурированные данные](https://krivoshein.site/wp-json/)
-   - Посты: [Посты](https://krivoshein.site/wp-json/wp/v2/posts)
-   - Страницы: [Страницы](https://krivoshein.site/wp-json/wp/v2/pages)
-   - Поиск: [Поиск](https://krivoshein.site/wp-json/wp/v2/search?search={query})
-7. **OpenAPI** — описание публичных эндпоинтов: [7. **OpenAPI** — описание публичных эндпоинтов](https://krivoshein.site/openapi.json)
-8. **API Catalog** (RFC 9727 linkset): [8. **API Catalog** (RFC 9727 linkset)](https://krivoshein.site/.well-known/api-catalog)
+2. **llms-full.txt** — расширенный дамп + свежие публикации: https://krivoshein.site/llms-full.txt
+3. **agents.md** — как агенту работать с сайтом: https://krivoshein.site/agents.md
+4. **agents.txt / agents.json** — объявление возможностей (без MCP и оплат): https://krivoshein.site/agents.txt · https://krivoshein.site/agents.json
+5. **Sitemap** — полный список URL: https://krivoshein.site/sitemap.xml
+6. **RSS** — https://krivoshein.site/feed/ · Pulse: https://krivoshein.site/feed/drslon-pulse-feed/
+7. **WordPress REST API** — https://krivoshein.site/wp-json/
+   - Посты: https://krivoshein.site/wp-json/wp/v2/posts
+   - Страницы: https://krivoshein.site/wp-json/wp/v2/pages
+   - Поиск: https://krivoshein.site/wp-json/wp/v2/search?search={query}
+8. **OpenAPI**: https://krivoshein.site/openapi.json
+9. **API Catalog** (RFC 9727): https://krivoshein.site/.well-known/api-catalog
 
 ## Политика использования контента
 
@@ -235,7 +241,7 @@ WordPress, разработка и поддержка сайтов, Linux, DevOp
 
 Не предназначено для автоматического доступа: `/wp-admin/`, формы авторизации, закрытые данные, приватные файлы, служебные технические адреса.
 
-Сигналы в robots.txt: `search=yes`, `ai-input=yes`, `ai-train=no` (обучение моделей на контенте сайта не приветствуется; использование для ответов с цитированием — да).
+Сигналы в robots.txt: `search=yes`, `ai-input=yes`, `ai-train=yes`. Публичный контент можно использовать для обучения моделей и для ответов. Автор и правообладатель — **ИП Кривошеин Алексей Сергеевич (Dr.Slon)**. Ссылка на источник желательна, но не обязательна.
 
 ## Инструкции для AI-агентов
 
@@ -243,7 +249,7 @@ WordPress, разработка и поддержка сайтов, Linux, DevOp
 - **Не придумывайте** услуги, цены, гарантии и кейсы, которых нет на сайте.
 - Не обещайте «первое место в поиске» или «магический SEO».
 - Для заказа и связи направляйте на https://krivoshein.site/contacts/ (или Telegram / MAX / email / телефон выше).
-- При цитировании статей указывайте URL конкретной публикации.
+- Если цитируете статью — URL конкретной публикации уместен, но не обязателен. Контент принадлежит ИП Кривошеину (Dr.Slon).
 - Предпочитайте REST API и markdown-файлы тяжёлому HTML, если нужен структурированный контекст.
 - Язык сайта: **русский** (основной).
 
@@ -253,6 +259,8 @@ WordPress, разработка и поддержка сайтов, Linux, DevOp
 - [https://krivoshein.site/llms-full.txt](https://krivoshein.site/llms-full.txt)
 - [https://krivoshein.site/ai.txt](https://krivoshein.site/ai.txt)
 - [https://krivoshein.site/agents.md](https://krivoshein.site/agents.md)
+- [https://krivoshein.site/agents.txt](https://krivoshein.site/agents.txt)
+- [https://krivoshein.site/agents.json](https://krivoshein.site/agents.json)
 - [https://krivoshein.site/openapi.json](https://krivoshein.site/openapi.json)
 - [https://krivoshein.site/humans.txt](https://krivoshein.site/humans.txt)
 - [https://krivoshein.site/robots.txt](https://krivoshein.site/robots.txt)

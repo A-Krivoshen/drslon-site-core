@@ -10,7 +10,7 @@
       "url": "https://krivoshein.site/contacts/"
     },
     "license": {
-      "name": "Public content — citation required; training disallowed (ai-train=no)"
+      "name": "Public content — training allowed (ai-train=yes); copyright ИП Кривошеин Алексей Сергеевич (Dr.Slon)"
     }
   },
   "servers": [

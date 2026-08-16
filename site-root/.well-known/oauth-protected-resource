@@ -1,0 +1,18 @@
+{
+  "resource": "https://krivoshein.site/wp-json/",
+  "resource_name": "krivoshein.site WordPress REST API",
+  "resource_documentation": "https://krivoshein.site/auth.md",
+  "oauth_enabled": false,
+  "error": "not_enabled",
+  "note": "Bearer tokens are not issued on this host. Public WordPress REST and Markdown discovery need no credential. Automated registration is not enabled. Humans: https://krivoshein.site/contacts/",
+  "authorization_servers": [
+    "https://krivoshein.site"
+  ],
+  "scopes_supported": [
+    "public:read",
+    "agent:discover"
+  ],
+  "bearer_methods_supported": [],
+  "resource_signing_alg_values_supported": [],
+  "agent_auth_uri": "https://krivoshein.site/.well-known/oauth-authorization-server"
+}

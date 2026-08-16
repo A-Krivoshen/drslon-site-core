@@ -1,5 +1,5 @@
 User-agent: *
-Content-Signal: search=yes, ai-input=yes, ai-train=no
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Disallow: /wp-admin/
 Allow: /wp-admin/admin-ajax.php
 Allow: /wp-content/uploads/
@@ -7,11 +7,22 @@ Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /ai.txt
 Allow: /agents.md
+Allow: /agents.txt
+Allow: /agents.json
+Allow: /auth.md
+Allow: /partners-for-agents.md
+Allow: /.well-known/oauth-protected-resource
+Allow: /.well-known/oauth-authorization-server
 Allow: /openapi.json
 Allow: /humans.txt
 Allow: /.well-known/security.txt
 Allow: /.well-known/api-catalog
 Allow: /.well-known/agent.json
+Allow: /.well-known/agent-index.json
+Allow: /.well-known/llms.txt
+Disallow: /docs/
+Disallow: /rag-demo.static-bak/
+Disallow: /login-customizer/
 
 Sitemap: https://krivoshein.site/sitemap.xml
 
@@ -20,9 +31,12 @@ Sitemap: https://krivoshein.site/sitemap.xml
 # 2. https://krivoshein.site/llms.txt
 # 3. https://krivoshein.site/llms-full.txt
 # 4. https://krivoshein.site/agents.md
-# 5. https://krivoshein.site/openapi.json
-# 6. https://krivoshein.site/.well-known/api-catalog
-# 7. https://krivoshein.site/.well-known/agent.json
-# 8. https://krivoshein.site/sitemap.xml
-# 9. https://krivoshein.site/feed/drslon-pulse-feed/
-# 10. https://krivoshein.site/wp-json/
+# 5. https://krivoshein.site/agents.txt
+# 6. https://krivoshein.site/agents.json
+# 7. https://krivoshein.site/openapi.json
+# 8. https://krivoshein.site/.well-known/api-catalog
+# 9. https://krivoshein.site/.well-known/agent.json
+# 10. https://krivoshein.site/sitemap.xml
+# 11. https://krivoshein.site/feed/
+# 12. https://krivoshein.site/feed/drslon-pulse-feed/
+# 13. https://krivoshein.site/wp-json/

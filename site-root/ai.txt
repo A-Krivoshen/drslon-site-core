@@ -12,6 +12,8 @@
 - llms.txt: https://krivoshein.site/llms.txt
 - llms-full.txt: https://krivoshein.site/llms-full.txt
 - agents.md: https://krivoshein.site/agents.md
+- agents.txt: https://krivoshein.site/agents.txt
+- agents.json: https://krivoshein.site/agents.json
 - Прайс: https://krivoshein.site/prays-list/
 - Контакты: https://krivoshein.site/contacts/
 - Sitemap: https://krivoshein.site/sitemap.xml
@@ -45,6 +47,7 @@
 - REST: https://krivoshein.site/wp-json/
 - Посты: https://krivoshein.site/wp-json/wp/v2/posts
 - Поиск: https://krivoshein.site/wp-json/wp/v2/search?search=
+- RSS: https://krivoshein.site/feed/
 - Pulse Feed: https://krivoshein.site/feed/drslon-pulse-feed/
 
 ## Связанные проекты
@@ -64,5 +67,5 @@
 1. Сначала читайте llms.txt / llms-full.txt / agents.md
 2. Цены и услуги — только с prays-list или llms*; не выдумывайте
 3. Заказы → https://krivoshein.site/contacts/
-4. ai-train=no; ai-input=yes (robots Content-Signal)
+4. ai-train=yes; ai-input=yes — учиться можно; автор контента ИП Кривошеин Алексей Сергеевич (Dr.Slon)
 5. /wp-admin/ и служебные URL — не трогать

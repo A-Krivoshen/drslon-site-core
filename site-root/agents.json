@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agents-txt.com/schema/agents-json/v1.0.json",
+  "version": "1.0",
+  "standard": "https://agents-txt.com",
+  "site": {
+    "name": "krivoshein.site",
+    "url": "https://krivoshein.site",
+    "description": "Personal site and IT services of Aleksey Krivoshein (Dr.Slon): WordPress, Linux/DevOps, technical SEO, Yandex Direct, MAX bots, AI-ready websites."
+  },
+  "documentation": {
+    "llms": "https://krivoshein.site/llms.txt",
+    "llmsFull": "https://krivoshein.site/llms-full.txt",
+    "aiIndex": "https://krivoshein.site/ai.txt",
+    "agentsMd": "https://krivoshein.site/agents.md",
+    "agentCard": "https://krivoshein.site/.well-known/agent.json",
+    "openapi": "https://krivoshein.site/openapi.json",
+    "apiCatalog": "https://krivoshein.site/.well-known/api-catalog",
+    "sitemap": "https://krivoshein.site/sitemap.xml",
+    "pricing": "https://krivoshein.site/prays-list/",
+    "contacts": "https://krivoshein.site/contacts/"
+  },
+  "notes": "No MCP, x402, or automated agent registration. Public content may be used for model training and answers. Copyright: ИП Кривошеин Алексей Сергеевич (Dr.Slon). Attribution welcome, not required."
+}
