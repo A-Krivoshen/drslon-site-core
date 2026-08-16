@@ -639,10 +639,9 @@ add_shortcode( 'krv_project_posts', function ( $atts = [] ): string {
 	}
 
 	$atts = shortcode_atts( [
-		'posts_per_page' => 6,
+		// 0 = show every attached related post (editor list is the source of truth).
+		'posts_per_page' => 0,
 	], $atts, 'krv_project_posts' );
-
-	$posts_per_page = max( 1, min( 20, (int) $atts['posts_per_page'] ) );
 
 	$related_ids = [];
 
@@ -677,10 +676,16 @@ add_shortcode( 'krv_project_posts', function ( $atts = [] ): string {
 		return '';
 	}
 
+	$limit = (int) $atts['posts_per_page'];
+	$posts_per_page = $limit > 0
+		? max( 1, min( 50, $limit ) )
+		: min( 50, count( $related_ids ) );
+
 	$posts = get_posts( [
 		'post_type'      => 'post',
 		'post_status'    => 'publish',
 		'posts_per_page' => $posts_per_page,
+		'ignore_sticky_posts' => true,
 		'post__in'       => $related_ids,
 		'orderby'        => 'post__in',
 		'no_found_rows'  => true,
@@ -694,8 +699,20 @@ add_shortcode( 'krv_project_posts', function ( $atts = [] ): string {
 	}
 
 	$project_title = get_the_title( $project_id );
-	$html  = '<section class="krv-project-posts">';
+	$count         = count( $posts );
+	$is_slider     = $count > 1;
+
+	$html  = '<section class="krv-project-posts' . ( $is_slider ? ' krv-project-posts--slider' : '' ) . '" data-count="' . esc_attr( (string) $count ) . '">';
+	$html .= '<div class="krv-project-posts__head">';
 	$html .= '<h2 class="krv-project-posts__heading">Статьи по проекту «' . esc_html( $project_title ) . '»</h2>';
+	if ( $is_slider ) {
+		$html .= '<div class="krv-project-posts__nav">';
+		$html .= '<button type="button" class="krv-project-posts__arrow krv-project-posts__arrow--prev" aria-label="Предыдущие статьи"></button>';
+		$html .= '<button type="button" class="krv-project-posts__arrow krv-project-posts__arrow--next" aria-label="Следующие статьи"></button>';
+		$html .= '</div>';
+	}
+	$html .= '</div>';
+	$html .= '<div class="krv-project-posts__viewport"' . ( $is_slider ? ' tabindex="0" role="region" aria-roledescription="карусель" aria-label="Статьи по проекту"' : '' ) . '>';
 	$html .= '<div class="krv-project-posts__grid">';
 
 	foreach ( $posts as $post ) {
@@ -738,7 +755,11 @@ add_shortcode( 'krv_project_posts', function ( $atts = [] ): string {
 
 	wp_reset_postdata();
 
-	$html .= '</div></section>';
+	$html .= '</div></div>';
+	if ( $is_slider ) {
+		$html .= '<div class="krv-project-posts__dots" role="tablist" aria-label="Страницы статей"></div>';
+	}
+	$html .= '</section>';
 
 	return $html;
 } );
