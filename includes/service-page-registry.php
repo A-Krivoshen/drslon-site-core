@@ -22,7 +22,7 @@ function krv_service_page_registry(): array {
 		),
 		6204 => array(
 			'shortcode' => 'wpdomainchecker',
-			'atts'      => 'button="Поиск домена"',
+			'atts'      => 'button="Найти" width="640" placeholder="example.com"',
 			'shell'     => 'tool',
 		),
 		7287 => array(

@@ -151,7 +151,148 @@
 }
 
 .krv-service-page__rsya-slot {
-	min-height: 320px;
+	min-height: 0;
+}
+
+.krv-service-page__rsya-slot:has(iframe) {
+	min-height: 280px;
+}
+
+.krv-service-page__tlds {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 6px;
+	margin: 0 0 22px;
+	padding: 0;
+	list-style: none;
+}
+
+.krv-service-page__tlds li {
+	margin: 0;
+	padding: 4px 10px;
+	border: 1px solid var(--krv-sp-line);
+	border-radius: 8px;
+	background: var(--krv-sp-surface);
+	color: var(--krv-sp-muted);
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 0.78rem;
+	font-weight: 500;
+	letter-spacing: 0.01em;
+	line-height: 1.3;
+}
+
+.krv-service-page__related {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0 0 8px;
+}
+
+.krv-service-page__related a {
+	display: inline-flex;
+	align-items: center;
+	padding: 8px 14px;
+	border: 1px solid var(--krv-sp-line);
+	border-radius: 999px;
+	background: var(--krv-sp-surface);
+	color: var(--krv-sp-text);
+	font-size: 0.9rem;
+	font-weight: 500;
+	text-decoration: none;
+	line-height: 1.2;
+}
+
+.krv-service-page__related a:hover,
+.krv-service-page__related a:focus-visible {
+	border-color: var(--krv-sp-accent);
+	color: var(--krv-sp-accent);
+	outline: none;
+}
+
+/* WP Domain Checker 7: sit inside the tool card, site tokens, no vendor chrome */
+.krv-service-page[data-page-id="6204"] .krv-service-page__tool {
+	padding: 20px 18px 16px;
+}
+
+.krv-service-page .wdc-style-1-clean {
+	--search-button-bg-color: #315fe8;
+	--search-button-text-color: #ffffff;
+	--search-button-border-color: #315fe8;
+	--search-input-bg-color: #ffffff;
+	--search-input-border-color: #d7e0ee;
+	--search-input-text-color: #111827;
+	--purchase-button-bg-color: #315fe8;
+	--purchase-button-text-color: #ffffff;
+	--whois-button-bg-color: #111827;
+	--whois-button-text-color: #ffffff;
+	--skeleton-color: #e7ecf5;
+	--result-item-bg-color: #f8fafc;
+	--domain-name-color: #111827;
+	--status-available-color: #15803d;
+	--status-taken-color: #5b6472;
+	font-family: inherit;
+	padding: 0;
+}
+
+.krv-service-page .wdc-style-1-clean-container {
+	max-width: none;
+}
+
+.krv-service-page .wdc-style-1-clean-search-container {
+	border-radius: 14px;
+	border-color: var(--krv-sp-line);
+	background: var(--krv-sp-surface);
+	padding: 6px;
+	gap: 6px;
+	box-shadow: inset 0 0 0 1px transparent;
+}
+
+.krv-service-page .wdc-style-1-clean-search-container:focus-within {
+	border-color: #315fe8;
+	box-shadow: 0 0 0 3px rgba(49, 95, 232, 0.16);
+}
+
+.krv-service-page .wdc-style-1-clean-search-input,
+.krv-service-page .wdc-style-1-clean-search-container input[type="text"] {
+	font-family: inherit;
+	font-size: 1rem;
+	line-height: 1.4;
+	color: var(--krv-sp-text);
+}
+
+.krv-service-page .wdc-style-1-clean-search-button,
+.krv-service-page .wdc-style-1-clean-search-button.btn {
+	border-radius: 12px;
+	padding: 12px 18px;
+	font-family: inherit;
+	font-weight: 600;
+	background: #315fe8;
+	border-color: #315fe8;
+	color: #fff;
+	white-space: nowrap;
+}
+
+.krv-service-page .wdc-style-1-clean-search-button:hover,
+.krv-service-page .wdc-style-1-clean-search-button.btn:hover {
+	background: #254cd4;
+	border-color: #254cd4;
+}
+
+.krv-service-page .wdc-style-1-clean-results-container {
+	margin-top: 8px;
+}
+
+.krv-service-page .wdc-domain-result__list,
+.krv-service-page .wdc-style-1-clean-result-item {
+	border-radius: 12px;
+	border: 1px solid var(--krv-sp-line);
+	background: #f8fafc;
+}
+
+.krv-service-page .g-recaptcha,
+.krv-service-page .grecaptcha-badge {
+	margin-top: 8px;
 }
 
 @media (max-width: 640px) {
@@ -165,5 +306,284 @@
 
 	.krv-service-page--minimal .krv-service-page__tool {
 		padding: 0;
+	}
+
+	.krv-service-page .wdc-style-1-clean-search-container {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.krv-service-page .wdc-style-1-clean-search-button,
+	.krv-service-page .wdc-style-1-clean-search-button.btn {
+		width: 100%;
+	}
+}
+
+/* All tool pages: center the WP title + lead, same as domain checker */
+body.krv-tool-page .wp-block-post-title {
+	text-align: center;
+	max-width: 40rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body.krv-tool-page .krv-service-page__intro {
+	text-align: center;
+}
+
+body.krv-tool-page .krv-service-page__intro p {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 40rem;
+}
+
+/* Domain / Whois / DNS: same centered tool card */
+body.page-id-6204 .wp-block-post-title,
+body.page-id-7323 .wp-block-post-title,
+body.page-id-7304 .wp-block-post-title {
+	text-align: center;
+	max-width: 680px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body.page-id-6204 .entry-content,
+body.page-id-7323 .entry-content,
+body.page-id-7304 .entry-content {
+	max-width: 680px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.krv-service-page[data-page-id="7323"],
+.krv-service-page[data-page-id="7304"] {
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.krv-service-page[data-page-id="7323"] .krv-service-page__tool,
+.krv-service-page[data-page-id="7304"] .krv-service-page__tool {
+	padding: 0;
+	border: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.krv-service-page[data-page-id="7323"] .krv-nt,
+.krv-service-page[data-page-id="7304"] .krv-nt {
+	max-width: none;
+	margin: 0 0 1rem;
+}
+
+.krv-service-page[data-page-id="7323"] .krv-service-page__related,
+.krv-service-page[data-page-id="7304"] .krv-service-page__related {
+	justify-content: center;
+}
+
+.krv-service-page[data-page-id="6204"] {
+	display: flex;
+	flex-direction: column;
+	max-width: 640px;
+	margin: 0 auto;
+	padding-top: 8px;
+}
+
+.krv-service-page[data-page-id="6204"] .krv-service-page__intro {
+	max-width: 38rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.krv-service-page[data-page-id="6204"] .krv-service-page__related {
+	justify-content: center;
+}
+
+.krv-service-page[data-page-id="6204"] .krv-service-page__after--before-tool {
+	margin: 0 0 18px;
+}
+
+.krv-service-page[data-page-id="6204"] .krv-service-page__tool {
+	padding: 22px 22px 20px;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean {
+	padding: 0;
+	font-family: inherit;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-container {
+	max-width: 100% !important;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-form {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-search-container {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	gap: 8px;
+	padding: 6px;
+	border-radius: 14px;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-search-container::before {
+	content: "Имя домена";
+	position: absolute;
+	top: -22px;
+	left: 2px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--krv-sp-muted);
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-form {
+	padding-top: 22px;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-search-input,
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-search-container input[type="text"] {
+	min-width: 0;
+	flex: 1 1 auto;
+	line-height: 1.4;
+	font-size: 1.05rem;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-search-button,
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-search-button.btn {
+	flex: 0 0 auto;
+	min-width: 7.5rem;
+	border-radius: 12px;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-result-item {
+	line-height: 1.35;
+	padding: 14px 16px;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-result-info {
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-action-buttons {
+	flex-shrink: 0;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-buy-button,
+.krv-service-page[data-page-id="6204"] a.order-btn .wdc-style-1-clean-buy-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 36px;
+	padding: 8px 14px;
+	border-radius: 10px;
+	background: #315fe8;
+	color: #fff;
+	font-size: 0.85rem;
+	font-weight: 600;
+	border: 0;
+	cursor: pointer;
+}
+
+.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-result-item.available .wdc-style-1-clean-action-buttons a.hide {
+	display: none;
+}
+
+@media (min-width: 641px) {
+	.krv-service-page[data-page-id="6204"] .krv-service-page__tool {
+		order: 1;
+	}
+
+	.krv-service-page[data-page-id="6204"] .krv-service-page__after--before-tool {
+		order: 2;
+		margin: 16px 0 0;
+	}
+
+	.krv-service-page[data-page-id="6204"] .krv-service-page__rsya {
+		order: 3;
+	}
+}
+
+@media (min-width: 900px) {
+	body.page-id-6204 main.drslon-page-shell {
+		min-height: calc(100dvh - 80px);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 640px) {
+	body.page-id-6204 .wp-block-post-title,
+	body.page-id-6204 .entry-content {
+		max-width: 100%;
+	}
+
+	body.page-id-6204 .wp-block-post-title {
+		font-size: clamp(1.55rem, 7vw, 1.9rem);
+		margin-bottom: 0.45rem;
+	}
+
+	.krv-service-page[data-page-id="6204"] .krv-service-page__intro {
+		margin-bottom: 12px;
+	}
+
+	.krv-service-page[data-page-id="6204"] .krv-service-page__intro p {
+		font-size: 0.92rem;
+		margin-bottom: 0;
+	}
+
+	.krv-service-page[data-page-id="6204"] .krv-service-page__tlds {
+		margin-bottom: 10px;
+	}
+
+	.krv-service-page[data-page-id="6204"] .krv-service-page__after--before-tool {
+		margin-bottom: 12px;
+	}
+
+	.krv-service-page[data-page-id="6204"] {
+		padding-left: 4px;
+		padding-right: 4px;
+		padding-bottom: 24px;
+	}
+
+	.krv-service-page[data-page-id="6204"] .krv-service-page__tool {
+		padding: 16px 14px 14px;
+	}
+
+	.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-search-container {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-search-button,
+	.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-search-button.btn {
+		width: 100%;
+		min-width: 0;
+	}
+
+	.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-result-item {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+	}
+
+	.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-action-buttons {
+		width: 100%;
+	}
+
+	.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-action-buttons .wdc-style-1-clean-whois-button,
+	.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-action-buttons .wdc-style-1-clean-buy-button {
+		flex: 1;
+		text-align: center;
 	}
 }

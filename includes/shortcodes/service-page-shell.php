@@ -37,18 +37,14 @@ function krv_service_page_get_seed_rows(): array {
 	return array(
 		array(
 			'page_id'               => 6204,
-			'page_heading'          => 'Добро пожаловать на страницу «Информация о домене»!',
+			'page_heading'          => '',
 			'intro_paragraphs'      => array(
-				array( 'text' => 'Здесь вы можете получить все необходимые данные о вашем сайте или потенциальном домене всего за несколько секунд.' ),
-				array( 'text' => 'Наша проверка WhoIs — это удобный инструмент, который поможет вам узнать регистрационную информацию о любом сайте.' ),
-				array( 'text' => 'С помощью проверки WhoIs вы получите подробную информацию о владельце домена, дате регистрации и истечении срока её действия, контактной информации и других важных данных.' ),
-				array( 'text' => 'Эта информация может быть полезной для принятия решений при выборе доменного имени или проведении маркетинговых исследований.' ),
-				array( 'text' => 'Не упустите возможность воспользоваться нашим надёжным сервисом проверки WhoIs уже сегодня!' ),
+				array( 'text' => 'Проверьте, свободен ли домен в популярных зонах: ru, com, org, net и ещё нескольких TLD. Если имя занято, откроется Whois. Купить можно у регистратора.' ),
 			),
 			'quote_text'            => '',
 			'show_dns_record_types' => 0,
 			'show_yandex_rsya'      => 1,
-			'custom_html_after'     => '',
+			'custom_html_after'     => '<nav class="krv-service-page__related" aria-label="Смежные инструменты"><a href="https://krivoshein.site/whois-lookup/">Whois</a><a href="https://krivoshein.site/easy-dns-lookup/">DNS-записи</a><a href="https://krivoshein.site/konverter-punycode-dlya-domena/">Punycode</a></nav>',
 		),
 		array(
 			'page_id'               => 7287,
@@ -65,25 +61,23 @@ function krv_service_page_get_seed_rows(): array {
 			'page_id'               => 7304,
 			'page_heading'          => '',
 			'intro_paragraphs'      => array(
-				array( 'text' => 'Добро пожаловать на страницу Easy DNS Lookup! Здесь вы можете легко и быстро получить информацию о DNS-записях для любого доменного имени.' ),
-				array( 'text' => 'Используйте форму ниже, чтобы начать поиск и получить полные данные о вашем домене.' ),
+				array( 'text' => 'A, AAAA, MX, TXT, NS и CNAME для любого домена.' ),
 			),
-			'quote_text'            => 'Для того чтобы выполнить поиск, введите доменное имя в поле ниже, выберите тип DNS-записи (или выберите "Все записи" для получения всей доступной информации), и нажмите кнопку "Поиск DNS-записей".',
+			'quote_text'            => '',
 			'show_dns_record_types' => 1,
 			'show_yandex_rsya'      => 1,
-			'custom_html_after'     => '',
+			'custom_html_after'     => '<nav class="krv-service-page__related" aria-label="Смежные инструменты"><a href="https://krivoshein.site/informatsiya-o-domene/">Домен</a><a href="https://krivoshein.site/whois-lookup/">Whois</a><a href="https://krivoshein.site/konverter-punycode-dlya-domena/">Punycode</a></nav>',
 		),
 		array(
 			'page_id'               => 7323,
 			'page_heading'          => '',
 			'intro_paragraphs'      => array(
-				array( 'text' => 'Проверьте информацию о домене или IP-адресе' ),
-				array( 'text' => 'Введите IP-адрес или доменное имя, чтобы получить детальную информацию о нем, включая страну, город, интернет-провайдера и другие параметры. Это удобный инструмент для быстрой проверки данных о владельце IP-адреса или домена.' ),
+				array( 'text' => 'Whois по домену или IP: страна, город, провайдер.' ),
 			),
-			'quote_text'            => 'Этот сервис может быть полезен для системных администраторов, специалистов по безопасности или просто пользователей, желающих узнать больше о доменах и IP-адресах в сети.',
+			'quote_text'            => '',
 			'show_dns_record_types' => 0,
 			'show_yandex_rsya'      => 1,
-			'custom_html_after'     => '',
+			'custom_html_after'     => '<nav class="krv-service-page__related" aria-label="Смежные инструменты"><a href="https://krivoshein.site/informatsiya-o-domene/">Домен</a><a href="https://krivoshein.site/easy-dns-lookup/">DNS-записи</a><a href="https://krivoshein.site/konverter-punycode-dlya-domena/">Punycode</a></nav>',
 		),
 		array(
 			'page_id'               => 7352,
@@ -339,10 +333,8 @@ function krv_service_page_get_render_data( ?int $page_id = null ): ?array {
 		$show_rsya = (bool) $source['show_yandex_rsya'];
 	}
 
-	$heading = trim( (string) ( $source['page_heading'] ?? '' ) );
-	if ( $heading === '' ) {
-		$heading = get_the_title( $page_id );
-	}
+	$heading_raw = trim( (string) ( $source['page_heading'] ?? '' ) );
+	$heading     = $heading_raw !== '' ? $heading_raw : (string) get_the_title( $page_id );
 
 	$intro_paragraphs = array();
 	if ( ! empty( $source['intro_paragraphs'] ) && is_array( $source['intro_paragraphs'] ) ) {
@@ -364,6 +356,7 @@ function krv_service_page_get_render_data( ?int $page_id = null ): ?array {
 		'shortcode'        => (string) ( $config['shortcode'] ?? '' ),
 		'atts'             => (string) ( $config['atts'] ?? '' ),
 		'heading'          => $heading,
+		'show_heading'     => $heading_raw !== '',
 		'intro_paragraphs' => $intro_paragraphs,
 		'quote_text'       => trim( (string) ( $source['quote_text'] ?? '' ) ),
 		'show_dns_types'   => $show_dns,
@@ -507,7 +500,7 @@ function krv_service_page_render( $atts = array() ): string {
 	ob_start();
 	?>
 	<div class="krv-service-page <?php echo esc_attr( $shell_class ); ?>" data-page-id="<?php echo esc_attr( (string) $data['page_id'] ); ?>">
-		<?php if ( $data['heading'] !== '' ) : ?>
+		<?php if ( ! empty( $data['show_heading'] ) && $data['heading'] !== '' ) : ?>
 			<h2 class="krv-service-page__heading"><?php echo esc_html( $data['heading'] ); ?></h2>
 		<?php endif; ?>
 
@@ -519,10 +512,28 @@ function krv_service_page_render( $atts = array() ): string {
 			</div>
 		<?php endif; ?>
 
+		<?php if ( (int) $data['page_id'] === 6204 ) : ?>
+			<ul class="krv-service-page__tlds" aria-label="Проверяемые зоны">
+				<?php foreach ( array( 'ru', 'com', 'org', 'net', 'online', 'site', 'io', 'xyz' ) as $tld ) : ?>
+					<li><?php echo esc_html( '.' . $tld ); ?></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+
 		<?php if ( $data['quote_text'] !== '' && $data['shell'] === 'tool' ) : ?>
 			<blockquote class="krv-service-page__quote">
 				<p><?php echo esc_html( $data['quote_text'] ); ?></p>
 			</blockquote>
+		<?php endif; ?>
+
+		<?php
+		$related_html  = (string) ( $data['custom_html_after'] ?? '' );
+		$related_first = (int) $data['page_id'] === 6204 && $related_html !== '';
+		?>
+		<?php if ( $related_first ) : ?>
+			<div class="krv-service-page__after krv-service-page__after--before-tool">
+				<?php echo wp_kses_post( $related_html ); ?>
+			</div>
 		<?php endif; ?>
 
 		<div class="krv-service-page__tool">
@@ -540,9 +551,9 @@ function krv_service_page_render( $atts = array() ): string {
 			</div>
 		<?php endif; ?>
 
-		<?php if ( $data['custom_html_after'] !== '' ) : ?>
+		<?php if ( $related_html !== '' && ! $related_first ) : ?>
 			<div class="krv-service-page__after">
-				<?php echo wp_kses_post( $data['custom_html_after'] ); ?>
+				<?php echo wp_kses_post( $related_html ); ?>
 			</div>
 		<?php endif; ?>
 
@@ -556,6 +567,21 @@ function krv_service_page_render( $atts = array() ): string {
 }
 
 add_shortcode( 'krv_service_page', 'krv_service_page_render' );
+
+add_filter(
+	'body_class',
+	static function ( $classes ) {
+		if ( ! is_singular( 'page' ) || ! function_exists( 'krv_service_page_get_config' ) ) {
+			return $classes;
+		}
+
+		if ( is_array( krv_service_page_get_config() ) ) {
+			$classes[] = 'krv-tool-page';
+		}
+
+		return $classes;
+	}
+);
 
 /**
  * Load Yandex context script on service pages that show RSYA.

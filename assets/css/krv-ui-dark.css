@@ -404,6 +404,62 @@ html[data-theme="dark"] .krv-service-page__dns-types strong {
   color: #8aacff !important;
 }
 
+html[data-theme="dark"] .krv-service-page__related a {
+  background: #121a2b !important;
+  border-color: #243049 !important;
+  color: #e8eefc !important;
+}
+
+html[data-theme="dark"] .krv-service-page__related a:hover,
+html[data-theme="dark"] .krv-service-page__related a:focus-visible {
+  border-color: #8aacff !important;
+  color: #8aacff !important;
+}
+
+html[data-theme="dark"] .krv-service-page__tlds li {
+  background: #121a2b;
+  border-color: #243049;
+  color: #a8b6d4;
+}
+
+html[data-theme="dark"] .krv-service-page[data-page-id="6204"] .wdc-style-1-clean-search-container::before {
+  color: #a8b6d4;
+}
+
+html[data-theme="dark"] .krv-service-page .wdc-style-1-clean {
+  --search-button-bg-color: #315fe8;
+  --search-button-border-color: #315fe8;
+  --search-input-bg-color: #0f1728;
+  --search-input-border-color: #243049;
+  --search-input-text-color: #e8eefc;
+  --purchase-button-bg-color: #315fe8;
+  --whois-button-bg-color: #8aacff;
+  --whois-button-text-color: #0b1220;
+  --skeleton-color: #243049;
+  --result-item-bg-color: #0f1728;
+  --domain-name-color: #e8eefc;
+  --status-available-color: #4ade80;
+  --status-taken-color: #a8b6d4;
+}
+
+html[data-theme="dark"] .krv-service-page .wdc-style-1-clean-search-container {
+  background: #0f1728 !important;
+  border-color: #243049 !important;
+}
+
+html[data-theme="dark"] .krv-service-page .wdc-style-1-clean-search-input,
+html[data-theme="dark"] .krv-service-page .wdc-style-1-clean-search-container input[type="text"] {
+  color: #e8eefc !important;
+  background: transparent !important;
+}
+
+html[data-theme="dark"] .krv-service-page .wdc-domain-result__list,
+html[data-theme="dark"] .krv-service-page .wdc-style-1-clean-result-item {
+  background: #0f1728 !important;
+  border-color: #243049 !important;
+  color: #e8eefc !important;
+}
+
 /* Tool plugins: white inline cards → dark surfaces */
 html[data-theme="dark"] .dns-lookup-container,
 html[data-theme="dark"] .whois-lookup-container,
