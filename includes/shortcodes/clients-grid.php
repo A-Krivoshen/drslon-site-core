@@ -24,7 +24,7 @@ function krv_client_display_title( int $post_id, string $title ): string {
 		6113 => 'АГНКС',
 		6111 => 'НАКС ЦНИИТМАШ',
 		5702 => 'Fornovo Gas',
-		5701 => 'АЦ ЦНИИТМАШ',
+		5701 => 'ООО «АСП»',
 		6151 => 'Метком-Калуга',
 		6147 => 'GroupST',
 		9184 => 'Softcomlan',
@@ -143,7 +143,7 @@ function krv_clients_showcase_order(): array {
 		8081 => 40,  // Технолидер
 		8423 => 50,  // Соловьи
 		9184 => 60,  // Softcomlan
-		5701 => 70,  // АЦ ЦНИИТМАШ
+		5701 => 70,  // ООО «АСП»
 		6111 => 80,  // НАКС
 		6115 => 90,  // Форновогаз KZ
 		6147 => 100, // GroupST
