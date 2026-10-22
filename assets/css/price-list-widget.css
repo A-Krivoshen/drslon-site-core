@@ -145,7 +145,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  min-height: 44px;
   padding: 9px 14px;
   border-radius: 999px;
   border: 1px solid var(--krv-line);
@@ -214,6 +214,10 @@
   line-height: 1.55;
 }
 
+.krv-hero-panel-note strong {
+  white-space: nowrap;
+}
+
 .krv-hero-panel-quick {
   margin-bottom: 14px;
 }
@@ -269,7 +273,9 @@
 
 .krv-hero-panel-link {
   display: inline-flex;
-  margin-top: 12px;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 4px;
   color: var(--krv-accent-dark);
   font-size: 13px;
   font-weight: 800;
@@ -942,8 +948,9 @@
 .krv-service-cta {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   gap: 6px;
-  margin-top: 10px;
+  margin-top: 4px;
   color: var(--krv-accent-dark);
   font-size: 13px;
   font-weight: 800;
@@ -997,8 +1004,8 @@
 .krv-landings-strip a {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
-  padding: 6px 12px;
+  min-height: 44px;
+  padding: 8px 12px;
   border-radius: 999px;
   background: var(--krv-card);
   border: 1px solid var(--krv-line);
@@ -1027,14 +1034,18 @@
 
 .krv-anchor-nav-sticky {
   position: sticky;
-  top: 12px;
+  top: calc(var(--drslon-header-height, 72px) + 8px);
   z-index: 20;
+}
+
+.krv-price-widget :is(section, [id]) {
+  scroll-margin-top: calc(var(--drslon-header-height, 72px) + 72px);
 }
 
 .krv-anchor-nav a {
   display: inline-flex;
   align-items: center;
-  min-height: 36px;
+  min-height: 44px;
   padding: 8px 14px;
   border-radius: 999px;
   background: var(--krv-card);
@@ -1064,7 +1075,7 @@
 .krv-prices-tab {
   display: inline-flex;
   align-items: center;
-  min-height: 38px;
+  min-height: 44px;
   padding: 8px 14px;
   border-radius: 999px;
   border: 1px solid var(--krv-line);
@@ -1114,7 +1125,7 @@
   .krv-anchor-nav a {
     flex: 1 1 calc(50% - 5px);
     justify-content: center;
-    min-height: 40px;
+    min-height: 44px;
   }
 
   .krv-mobile-cta {
@@ -1146,13 +1157,52 @@
   }
 
   .krv-mobile-cta .krv-btn {
-    min-height: 40px;
+    min-height: 44px;
     padding: 8px 10px;
     font-size: 13px;
   }
 
   .krv-price-widget {
-    padding-bottom: 88px;
+    padding-bottom: 112px;
+  }
+
+  .krv-hero-panel-meta {
+    padding-right: 68px;
+  }
+
+  /* Bubble sits above the bar. Inline widget offset loses to !important. */
+  body:has(.krv-mobile-cta.is-visible) .krv-assistant {
+    --krv-a-stack-bottom: 96px !important;
+  }
+
+  body.krv-a-panel-open .krv-mobile-cta {
+    display: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .krv-badge {
+    max-width: calc(100% - 72px);
+  }
+
+  .krv-trust-strip {
+    padding-right: 76px;
+  }
+
+  .drslon-site-header .drslon-main-navigation .wp-block-navigation__responsive-container-open,
+  .drslon-site-header .krv-controls .krv-theme-btn,
+  .drslon-site-header .drslon-header-utility .krv-theme-btn,
+  .drslon-site-header .drslon-header-utility .drslon-header-search.wp-block-search__button,
+  .drslon-site-header .drslon-header-search,
+  .drslon-site-header .drslon-header-search .wp-block-search__button,
+  .drslon-site-header .drslon-header-search__loupe {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+    flex: 0 0 44px !important;
   }
 }
 
