@@ -1170,14 +1170,18 @@
     padding-right: 68px;
   }
 
-  /* Bubble sits above the bar. Inline widget offset loses to !important. */
-  body:has(.krv-mobile-cta.is-visible) .krv-assistant {
+  /* CTA offset only while the cookie bar is closed. Cookie height wins when it is open. */
+  html:not(.krv-cookie-bar-open) body:has(.krv-mobile-cta.is-visible) .krv-assistant {
     --krv-a-stack-bottom: 96px !important;
   }
 
   body.krv-a-panel-open .krv-mobile-cta {
     display: none !important;
   }
+}
+
+html.krv-cookie-bar-open .krv-assistant {
+  --krv-a-stack-bottom: calc(var(--krv-cookie-bar-space, 140px) + 12px) !important;
 }
 
 @media (max-width: 900px) {

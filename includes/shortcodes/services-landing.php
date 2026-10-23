@@ -607,7 +607,7 @@ function krv_services_landing_resolve_avatar_url( $value ): string {
 
 	if ( is_array( $value ) ) {
 		if ( ! empty( $value['url'] ) ) {
-			return (string) $value['url'];
+			return krv_services_landing_prefer_avatar_320( (string) $value['url'] );
 		}
 		if ( ! empty( $value['ID'] ) ) {
 			$value = (int) $value['ID'];
@@ -616,14 +616,42 @@ function krv_services_landing_resolve_avatar_url( $value ): string {
 
 	if ( is_numeric( $value ) ) {
 		$url = wp_get_attachment_image_url( (int) $value, 'full' );
-		return is_string( $url ) && $url !== '' ? $url : $fallback;
+		return krv_services_landing_prefer_avatar_320( is_string( $url ) && $url !== '' ? $url : $fallback );
 	}
 
 	if ( is_string( $value ) && $value !== '' ) {
-		return $value;
+		return krv_services_landing_prefer_avatar_320( $value );
 	}
 
-	return $fallback;
+	return krv_services_landing_prefer_avatar_320( $fallback );
+}
+
+/**
+ * Use the 320px portrait when it sits next to the full PNG.
+ */
+function krv_services_landing_prefer_avatar_320( string $url ): string {
+	if ( ! str_contains( $url, 'drslon_avatar.png' ) ) {
+		return $url;
+	}
+
+	$uploads = wp_upload_dir();
+	if ( ! empty( $uploads['error'] ) || empty( $uploads['baseurl'] ) || empty( $uploads['basedir'] ) ) {
+		return $url;
+	}
+
+	$baseurl = trailingslashit( $uploads['baseurl'] );
+	$basedir = trailingslashit( $uploads['basedir'] );
+	if ( ! str_starts_with( $url, $baseurl ) ) {
+		return $url;
+	}
+
+	$rel   = substr( $url, strlen( $baseurl ) );
+	$sized = preg_replace( '/\.png$/', '-320.png', $rel );
+	if ( ! is_string( $sized ) || ! is_readable( $basedir . $sized ) ) {
+		return $url;
+	}
+
+	return $baseurl . $sized;
 }
 
 /**
@@ -911,7 +939,7 @@ function krv_services_landing_render(): string {
 
 					<div class="krv-landing-hero-aside">
 						<div class="krv-landing-avatar-wrap">
-							<img class="krv-landing-avatar" src="<?php echo esc_url( krv_services_landing_resolve_avatar_url( $data['profile_avatar'] ?? '' ) ); ?>" alt="<?php echo esc_attr( (string) $data['profile_name'] ); ?>" width="160" height="160" decoding="async" fetchpriority="high" data-no-lazy="1">
+							<img class="krv-landing-avatar" src="<?php echo esc_url( krv_services_landing_resolve_avatar_url( $data['profile_avatar'] ?? '' ) ); ?>" alt="<?php echo esc_attr( (string) $data['profile_name'] ); ?>" width="160" height="160" decoding="async" data-no-lazy="1">
 						</div>
 
 						<?php
