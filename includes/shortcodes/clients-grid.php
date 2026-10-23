@@ -24,13 +24,13 @@ function krv_client_display_title( int $post_id, string $title ): string {
 		6113 => 'АГНКС',
 		6111 => 'НАКС ЦНИИТМАШ',
 		5702 => 'Fornovo Gas',
-		5701 => 'АЦ ЦНИИТМАШ',
 		6151 => 'Метком-Калуга',
 		6147 => 'GroupST',
 		9184 => 'Softcomlan',
-		9244 => 'LUMISTEK',
+		9244 => 'Арго Тур',
 		7693 => 'Cambobiz',
 		6112 => 'Designers from Russia',
+		11561 => 'ООО «АСП»',
 	);
 
 	if ( isset( $map[ $post_id ] ) ) {
@@ -133,14 +133,15 @@ function krv_client_logo_is_usable( int $post_id ): bool {
  */
 function krv_clients_showcase_order(): array {
 	return array(
-		9244 => 10,  // LUMISTEK
+		9244 => 10,  // Арго Тур (argotur.ru)
+		11603 => 12, // Сила бухгалтерии
 		11393 => 15, // KOVIFINANCE
+		11561 => 18, // АСП acasp.ru
 		6113 => 20,  // АГНКС
 		5702 => 30,  // Fornovo Gas
 		8081 => 40,  // Технолидер
 		8423 => 50,  // Соловьи
 		9184 => 60,  // Softcomlan
-		5701 => 70,  // АЦ ЦНИИТМАШ
 		6111 => 80,  // НАКС
 		6115 => 90,  // Форновогаз KZ
 		6147 => 100, // GroupST
