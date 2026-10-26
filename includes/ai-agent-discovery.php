@@ -96,92 +96,127 @@ function drslon_ai_agent_json_ld() {
 		return;
 	}
 
-	$data = array(
-		'@context' => 'https://schema.org',
-		'@graph'   => array(
-			array(
-				'@type'       => 'Person',
-				'@id'         => home_url( '/#/schema/Person' ),
-				'name'        => 'Алексей Кривошеин',
-				'alternateName' => array( 'Dr.Slon', 'Aleksey Krivoshein' ),
-				'url'         => home_url( '/' ),
-				'email'       => 'aleksey@krivoshein.site',
-				'telephone'   => '+7-963-664-16-15',
-				'jobTitle'    => 'WordPress-разработчик, Linux/DevOps, техническое SEO',
-				'sameAs'      => array(
-					'https://t.me/DrSlon',
-					'https://github.com/A-Krivoshen',
-					'https://krivoshein.site/max/',
-				),
-				'worksFor'    => array( '@id' => home_url( '/#/schema/Organization' ) ),
-				'copyrightHolder' => array( '@id' => home_url( '/#/schema/CopyrightHolder' ) ),
+	$person_id = home_url( '/#/schema/Person' );
+	$org_id    = home_url( '/#/schema/CopyrightHolder' );
+
+	$graph = array(
+		array(
+			'@type'       => 'Person',
+			'@id'         => $person_id,
+			'name'        => 'Алексей Кривошеин',
+			'alternateName' => array( 'Dr.Slon', 'Aleksey Krivoshein' ),
+			'url'         => home_url( '/' ),
+			'email'       => 'aleksey@krivoshein.site',
+			'telephone'   => '+7-963-664-16-15',
+			'jobTitle'    => 'WordPress-разработчик, Linux/DevOps, техническое SEO',
+			'sameAs'      => array(
+				'https://t.me/DrSlon',
+				'https://github.com/A-Krivoshen',
+				'https://krivoshein.site/max/',
 			),
-			array(
-				'@type'         => 'Organization',
-				'@id'           => home_url( '/#/schema/CopyrightHolder' ),
-				'name'          => 'ИП Кривошеин Алексей Сергеевич',
-				'alternateName' => 'Dr.Slon',
-				'url'           => home_url( '/' ),
-				'email'         => 'aleksey@krivoshein.site',
-				'telephone'     => '+7-963-664-16-15',
-				'founder'       => array( '@id' => home_url( '/#/schema/Person' ) ),
-			),
-			array(
-				'@type'       => 'ProfessionalService',
-				'@id'         => home_url( '/#/schema/ProfessionalService' ),
-				'name'        => 'ИТ Решения, ИП Кривошеин Алексей Сергеевич',
-				'url'         => home_url( '/' ),
-				'description' => 'Разработка и поддержка сайтов на WordPress, Linux/VPS, техническое SEO, Яндекс.Директ, боты MAX, AI-ready подготовка сайтов.',
-				'priceRange'  => '₽₽',
-				'areaServed'  => 'RU',
-				'availableLanguage' => array( 'Russian' ),
-				'provider'    => array( '@id' => home_url( '/#/schema/Person' ) ),
-				'brand'       => array( '@id' => home_url( '/#/schema/CopyrightHolder' ) ),
-				'hasOfferCatalog' => array(
-					'@type'           => 'OfferCatalog',
-					'name'            => 'IT-услуги',
-					'itemListElement' => array(
-						array(
-							'@type' => 'Offer',
-							'itemOffered' => array(
-								'@type' => 'Service',
-								'name'  => 'Диагностика сайта',
-							),
-							'priceSpecification' => array(
-								'@type'         => 'PriceSpecification',
-								'priceCurrency' => 'RUB',
-								'minPrice'      => 5000,
-							),
+			'worksFor'    => array( '@id' => home_url( '/#/schema/Organization' ) ),
+			'copyrightHolder' => array( '@id' => $org_id ),
+		),
+		array(
+			'@type'         => 'Organization',
+			'@id'           => $org_id,
+			'name'          => 'ИП Кривошеин Алексей Сергеевич',
+			'alternateName' => 'Dr.Slon',
+			'url'           => home_url( '/' ),
+			'email'         => 'aleksey@krivoshein.site',
+			'telephone'     => '+7-963-664-16-15',
+			'founder'       => array( '@id' => $person_id ),
+		),
+	);
+
+	$show_catalog = is_front_page() || is_page( 'prays-list' ) || is_singular( 'price' );
+	if ( $show_catalog ) {
+		$graph[] = array(
+			'@type'       => 'ProfessionalService',
+			'@id'         => home_url( '/#/schema/ProfessionalService' ),
+			'name'        => 'ИТ Решения, ИП Кривошеин Алексей Сергеевич',
+			'url'         => home_url( '/' ),
+			'description' => 'Разработка и поддержка сайтов на WordPress, Linux/VPS, техническое SEO, Яндекс.Директ, боты MAX, AI-ready подготовка сайтов.',
+			'priceRange'  => '₽₽',
+			'areaServed'  => 'RU',
+			'availableLanguage' => array( 'Russian' ),
+			'provider'    => array( '@id' => $person_id ),
+			'brand'       => array( '@id' => $org_id ),
+			'hasOfferCatalog' => array(
+				'@type'           => 'OfferCatalog',
+				'name'            => 'IT-услуги',
+				'itemListElement' => array(
+					array(
+						'@type' => 'Offer',
+						'itemOffered' => array(
+							'@type' => 'Service',
+							'name'  => 'Диагностика сайта',
 						),
-						array(
-							'@type' => 'Offer',
-							'itemOffered' => array(
-								'@type' => 'Service',
-								'name'  => 'Техническая поддержка WordPress',
-							),
-							'priceSpecification' => array(
-								'@type'         => 'UnitPriceSpecification',
-								'priceCurrency' => 'RUB',
-								'minPrice'      => 20000,
-								'unitText'      => 'MONTH',
-							),
+						'priceSpecification' => array(
+							'@type'         => 'PriceSpecification',
+							'priceCurrency' => 'RUB',
+							'minPrice'      => 5000,
 						),
-						array(
-							'@type' => 'Offer',
-							'itemOffered' => array(
-								'@type' => 'Service',
-								'name'  => 'AI-ready подготовка сайта',
-							),
-							'priceSpecification' => array(
-								'@type'         => 'PriceSpecification',
-								'priceCurrency' => 'RUB',
-								'minPrice'      => 10000,
-							),
+					),
+					array(
+						'@type' => 'Offer',
+						'itemOffered' => array(
+							'@type' => 'Service',
+							'name'  => 'Техническая поддержка WordPress',
+						),
+						'priceSpecification' => array(
+							'@type'         => 'UnitPriceSpecification',
+							'priceCurrency' => 'RUB',
+							'minPrice'      => 20000,
+							'unitText'      => 'MONTH',
+						),
+					),
+					array(
+						'@type' => 'Offer',
+						'itemOffered' => array(
+							'@type' => 'Service',
+							'name'  => 'AI-ready подготовка сайта',
+						),
+						'priceSpecification' => array(
+							'@type'         => 'PriceSpecification',
+							'priceCurrency' => 'RUB',
+							'minPrice'      => 10000,
 						),
 					),
 				),
 			),
-		),
+		);
+	}
+
+	if ( is_singular( 'post' ) ) {
+		$post_id = get_queried_object_id();
+		$article = array(
+			'@type'            => 'BlogPosting',
+			'@id'              => get_permalink( $post_id ) . '#article',
+			'headline'         => wp_strip_all_tags( get_the_title( $post_id ) ),
+			'datePublished'    => get_post_time( 'c', true, $post_id ),
+			'dateModified'     => get_post_modified_time( 'c', true, $post_id ),
+			'author'           => array( '@id' => $person_id ),
+			'publisher'        => array( '@id' => $org_id ),
+			'mainEntityOfPage' => get_permalink( $post_id ),
+			'inLanguage'       => 'ru-RU',
+		);
+		$thumb_id = (int) get_post_thumbnail_id( $post_id );
+		$image    = $thumb_id ? wp_get_attachment_image_src( $thumb_id, 'full' ) : false;
+		if ( is_array( $image ) && ! empty( $image[0] ) ) {
+			$article['image'] = array(
+				'@type'  => 'ImageObject',
+				'url'    => $image[0],
+				'width'  => (int) $image[1],
+				'height' => (int) $image[2],
+			);
+		}
+		$graph[] = $article;
+	}
+
+	$data = array(
+		'@context' => 'https://schema.org',
+		'@graph'   => $graph,
 	);
 
 	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . "</script>\n";

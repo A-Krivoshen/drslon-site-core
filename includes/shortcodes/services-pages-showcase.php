@@ -250,7 +250,7 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 	?>
 	<div class="krv-service-pages-wrap">
 		<header class="krv-showcase-header">
-			<h1 class="krv-showcase-intro"><?php echo esc_html( $intro_heading ); ?></h1>
+			<h2 class="krv-showcase-intro"><?php echo esc_html( $intro_heading ); ?></h2>
 			<?php if ( $intro_lead !== '' ) : ?>
 				<p class="krv-showcase-lead"><?php echo esc_html( $intro_lead ); ?></p>
 			<?php endif; ?>

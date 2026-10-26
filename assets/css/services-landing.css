@@ -665,12 +665,16 @@ html[data-theme="dark"] .krv-landing-service-price {
 	max-width: 40rem;
 	font-size: 0.9rem;
 	line-height: 1.55;
-	opacity: 0.88;
+	opacity: 1;
 	text-align: center;
 }
 .krv-landing-services-note a {
+	color: #2346b0;
 	text-decoration: underline;
 	text-underline-offset: 2px;
+}
+html[data-theme="dark"] .krv-landing-services-note a {
+	color: #b9c9ff;
 }
 /* Pricing CTAs: always centered under the block */
 .krv-landing-pricing .krv-landing-pricing-actions {
@@ -765,18 +769,26 @@ html[data-theme="dark"] .krv-landing-service-price {
 	opacity: 0.92;
 }
 .krv-landing-services-crosslink a {
+	color: #2346b0;
 	font-weight: 650;
 	text-decoration: underline;
 	text-underline-offset: 3px;
 }
+html[data-theme="dark"] .krv-landing-services-crosslink a {
+	color: #b9c9ff;
+}
 
-/* Legal meta quieter (IP / OGRN / INN) */
+/* Legal meta quieter (IP / OGRN / INN), still AA on the page background */
 .krv-landing-meta-line.is-legal {
 	font-size: 0.82rem;
-	opacity: 0.72;
+	opacity: 1;
+	color: #3e4c63;
 	letter-spacing: 0.01em;
 	font-family: var(--krv-font-mono, ui-monospace, "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace);
 	font-variant-numeric: tabular-nums;
+}
+html[data-theme="dark"] .krv-landing-meta-line.is-legal {
+	color: #d5deee;
 }
 
 /* Social proof — default (aside scopes overrides) */
@@ -967,13 +979,20 @@ html[data-theme="dark"] .krv-landing-next {
 
 .krv-landing-hero-foot .krv-landing-meta-line {
 	text-align: left;
-	opacity: 0.68;
+	opacity: 1;
+	color: #3e4c63;
 	font-size: 0.78rem;
 }
 
 .krv-landing-hero-foot .krv-landing-meta-line.is-legal {
-	opacity: 0.65;
+	opacity: 1;
+	color: #3e4c63;
 	font-size: 0.78rem;
+}
+
+html[data-theme="dark"] .krv-landing-hero-foot .krv-landing-meta-line,
+html[data-theme="dark"] .krv-landing-hero-foot .krv-landing-meta-line.is-legal {
+	color: #d5deee;
 }
 
 .krv-landing-hero-foot .krv-landing-contacts {

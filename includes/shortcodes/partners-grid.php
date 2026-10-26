@@ -193,7 +193,7 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 	?>
 	<div class="krv-partners-wrap">
 		<header class="krv-partners-seo-header">
-			<h1 class="krv-partners-h1"><?php echo esc_html( $page_h1 ); ?></h1>
+			<h2 class="krv-partners-h1"><?php echo esc_html( $page_h1 ); ?></h2>
 			<p class="krv-partners-lead">
 				Подборка сервисов для сайтов и бизнеса: от хостинга и VPS до эквайринга, Директа и AI-агентов.
 				Список живой - пополняю то, чем реально пользуюсь. Полный каталог ниже по категориям.

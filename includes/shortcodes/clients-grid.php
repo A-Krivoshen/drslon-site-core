@@ -237,26 +237,21 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 						$post_id,
 						'medium',
 						[
-							'class'          => 'krv-client-logo',
-							'loading'        => 'lazy',
-							'decoding'       => 'async',
-							'alt'            => $title_display,
-							'data-no-lazy'   => '1',
-							'data-skip-lazy' => '1',
+							'class'    => 'krv-client-logo',
+							'loading'  => 'lazy',
+							'decoding' => 'async',
+							'alt'      => $title_display,
 						]
 					)
 					: '';
 
 				$is_link    = $url !== '';
 				$card_class = 'krv-client-card' . ( $is_link ? ' krv-client-card--link' : ' krv-client-card--static' );
-				$aria       = $is_link
-					? $title_display . '. Открыть сайт клиента в новой вкладке'
-					: $title_display;
 
 				if ( $is_link ) {
-					echo '<a class="' . esc_attr( $card_class ) . '" href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr( $aria ) . '">';
+					echo '<a class="' . esc_attr( $card_class ) . '" href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer">';
 				} else {
-					echo '<div class="' . esc_attr( $card_class ) . '" role="group" aria-label="' . esc_attr( $aria ) . '">';
+					echo '<div class="' . esc_attr( $card_class ) . '">';
 				}
 				?>
 					<div class="krv-client-card-inner">

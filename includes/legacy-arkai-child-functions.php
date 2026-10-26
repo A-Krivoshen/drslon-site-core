@@ -212,9 +212,45 @@ if ( function_exists( 'tsf' ) ) {
 		return rtrim( $cut, " \t\n\r\0\x0B.,;:!-" ) . '…';
 	}
 
+	function krv_tsf_title_cap( string $title, int $max = 58 ): string {
+		$title = trim( (string) preg_replace( '/\s+/u', ' ', $title ) );
+		if ( $title === '' || mb_strlen( $title, 'UTF-8' ) <= $max ) {
+			return $title;
+		}
+
+		$cut = mb_substr( $title, 0, $max, 'UTF-8' );
+		$cut = (string) preg_replace( '/\s+\S*$/u', '', $cut );
+		$cut = rtrim( $cut, " \t\n\r\0\x0B.,;:!-—–" );
+		if ( $cut === '' ) {
+			$cut = rtrim( mb_substr( $title, 0, $max, 'UTF-8' ) );
+		}
+
+		return $cut . '…';
+	}
+
+	/**
+	 * Short brand in the title tag only. Visible blog name and og:site_name stay full.
+	 */
+	function krv_tsf_short_document_title( string $title ): string {
+		$title = str_replace(
+			'ИТ Решения, ИП Кривошеин Алексей Сергеевич',
+			'Кривошеин',
+			$title
+		);
+		$brand = ' • Кривошеин';
+		$brand_len = mb_strlen( $brand, 'UTF-8' );
+
+		if ( mb_strlen( $title, 'UTF-8' ) > $brand_len && str_ends_with( $title, $brand ) ) {
+			$head = mb_substr( $title, 0, mb_strlen( $title, 'UTF-8' ) - $brand_len, 'UTF-8' );
+			return krv_tsf_title_cap( $head, 58 ) . $brand;
+		}
+
+		return krv_tsf_title_cap( $title, 70 );
+	}
+
 	function krv_build_meta_title(): string {
-		$paged        = (int) get_query_var( 'paged' );
-		$paged_suffix = $paged > 1 ? ' — страница ' . $paged : '';
+		// Pagination is added once by The SEO Framework. A second suffix doubled «страница N».
+		$paged_suffix = '';
 
 		if ( is_front_page() ) {
 			return 'IT Решения — ИП Кривошеин Алексей Сергеевич' . $paged_suffix;
@@ -339,6 +375,18 @@ if ( function_exists( 'tsf' ) ) {
 				return '';
 			}
 
+			$tool_descriptions = array(
+				'generator-crontab'               => 'Генератор crontab: выберите минуты, часы, дни и месяцы и скопируйте готовую строку расписания.',
+				'kalkulyator-setevyh-masok'       => 'Калькулятор масок подсети: сеть, broadcast, число хостов и диапазон адресов по IP и CIDR.',
+				'konverter-punycode-dlya-domena'  => 'Конвертер Punycode: перевод домена между обычной записью и xn-- для кириллических имён.',
+				'izmeritel-skorosti-internetak'   => 'Измеритель скорости интернета в браузере: загрузка, отдача и задержка до сервера.',
+				'categories'                      => 'Метки блога: темы статей по WordPress, Linux, серверам, безопасности и разработке.',
+				'kastomazitsiya-html-css-php'     => 'Доработка HTML, CSS и PHP на существующем сайте: правки шаблона, стилей и серверной логики.',
+			);
+			if ( isset( $tool_descriptions[ $post->post_name ] ) ) {
+				return trim( krv_tsf_trim( $tool_descriptions[ $post->post_name ], 155 ) . $paged_suffix );
+			}
+
 			$ex = krv_tsf_clean_text( get_the_excerpt( $post ) );
 			$pt = get_post_type( $id );
 
@@ -457,8 +505,19 @@ if ( function_exists( 'tsf' ) ) {
 			$meta['noindex'] = 'noindex';
 		}
 
+		$is_author_view = ( null === $args && is_author() ) || ( is_array( $args ) && ! empty( $args['uid'] ) );
+		$is_tags_page  = ( null === $args && is_page( 'categories' ) )
+			|| ( is_array( $args ) && ! empty( $args['id'] ) && (int) $args['id'] === 867 );
+		if ( $is_author_view || $is_tags_page ) {
+			$meta['noindex'] = 'noindex';
+		}
+
 		return $meta;
 	}, 10, 3 );
+
+	add_filter( 'the_seo_framework_pre_get_document_title', function( $title ) {
+		return krv_tsf_short_document_title( (string) $title );
+	}, 20 );
 }
 
 /** =========================
