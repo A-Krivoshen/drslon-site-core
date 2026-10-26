@@ -38,7 +38,7 @@ function krv_price_list_get_defaults(): array {
 	return array(
 		'hero_badge'                    => 'Прозрачный прайс • сайты / серверы / реклама / боты / AI',
 		'hero_title'                    => 'Стоимость сайтов, поддержки, рекламы и технических работ',
-		'hero_subtitle'                 => 'Лендинги • WordPress • VPS • Яндекс Директ • Боты • AI-ready',
+		'hero_subtitle'                 => 'Лендинги • WordPress • Flask • VPS • Яндекс Директ • Боты • AI-ready',
 		'hero_lead'                     => 'Ниже — базовые ориентиры по стоимости. Для простой задачи с понятным объёмом можно отталкиваться от указанной цены; интеграции, срочность и нестандартная логика считаются отдельно.',
 		'hero_phone'                    => '+7 (963) 664-16-15',
 		'hero_email'                    => 'aleksey@krivoshein.site',
@@ -59,18 +59,29 @@ function krv_price_list_get_defaults(): array {
 		),
 		'show_scenarios'               => 1,
 		'scenarios_title'              => 'Выберите направление',
-		'scenarios_text'               => 'Шесть отдельных лендингов подробно объясняют формат работы, цены и результат по каждому направлению.',
+		'scenarios_text'               => 'Семь отдельных лендингов подробно объясняют формат работы, цены и результат по каждому направлению.',
 		'routes'                       => array(
 			array(
 				'kicker'         => 'One-page',
 				'title'          => 'Нужен лендинг',
-				'text'           => 'Быстрый статический one-page или WordPress-лендинг под услугу, продукт, B2B и рекламу.',
+				'text'           => 'Быстрый статический one-page, лендинг на WordPress или сайт на Flask (Python) под услугу, продукт, B2B и рекламу.',
 				'link_mode'      => 'url',
 				'url'            => 'https://landing.krivoshein.site/',
 				'contacts_topic' => 'general',
 				'new_tab'        => 1,
 				'go_label'       => 'Лендинги под ключ ↗',
 			),
+			array(
+				'kicker'         => 'Python',
+				'title'          => 'Нужен сайт на Flask',
+				'text'           => 'Страницы, форма заявок и серверная логика на Python без CMS. Кабинет, оплата и интеграции — отдельно.',
+				'link_mode'      => 'url',
+				'url'            => 'https://flask.krivoshein.site/',
+				'contacts_topic' => 'general',
+				'new_tab'        => 1,
+				'go_label'       => 'Сайт на Flask ↗',
+			),
+
 			array(
 				'kicker'         => 'WordPress',
 				'title'          => 'Нужны доработки или поддержка',
@@ -126,6 +137,7 @@ function krv_price_list_get_defaults(): array {
 		'landings'                     => array(
 			array( 'label' => 'landing', 'url' => 'https://landing.krivoshein.site/' ),
 			array( 'label' => 'wordpress', 'url' => 'https://wordpress.krivoshein.site/' ),
+			array( 'label' => 'flask', 'url' => 'https://flask.krivoshein.site/' ),
 			array( 'label' => 'vps', 'url' => 'https://vps.krivoshein.site/' ),
 			array( 'label' => 'direct', 'url' => 'https://direct.krivoshein.site/' ),
 			array( 'label' => 'bots', 'url' => 'https://bots.krivoshein.site/' ),
@@ -210,7 +222,7 @@ function krv_price_list_get_defaults(): array {
 				'tab_label'             => 'Лендинги',
 				'tab_id'                => 'landings',
 				'heading'               => 'Лендинги под ключ',
-				'intro'                 => 'Статика — когда важны скорость и простой деплой. WordPress — когда нужен редактор контента.',
+				'intro'                 => 'Статика — когда важны скорость и простой деплой. WordPress — когда нужен редактор контента. Flask на Python — когда нужна своя серверная логика без CMS.',
 				'landing_label'         => 'Лендинг landing.krivoshein.site ↗',
 				'landing_url'           => 'https://landing.krivoshein.site/',
 				'items'                 => array(
@@ -247,6 +259,17 @@ function krv_price_list_get_defaults(): array {
 						'cta_url'     => '',
 						'cta_new_tab' => 0,
 					),
+					array(
+						'style'       => 'card',
+						'kicker'      => 'Свой бэкенд',
+						'title'       => 'Сайт на Flask (Python)',
+						'price'       => 'от 50 000 ₽',
+						'price_note'  => '',
+						'text'        => 'Страницы, форма заявок и серверная логика на Python и Flask. Без CMS, когда редактор WordPress не нужен.',
+						'cta_label'   => '',
+						'cta_url'     => '',
+						'cta_new_tab' => 0,
+					),
 				),
 				'panel_features'       => array(),
 				'panel_note'           => 'Мультиязык, сложные анимации и интеграции считаются отдельно.',
@@ -265,6 +288,7 @@ function krv_price_list_get_defaults(): array {
 					array( 'style' => 'card', 'kicker' => 'Точечные задачи', 'title' => 'Доработки существующего сайта', 'price' => 'от 5 000 ₽', 'price_note' => 'минимальный чек', 'text' => 'Правки, новые блоки, формы, переносы, ускорение и настройка плагинов.', 'cta_label' => '', 'cta_url' => '', 'cta_new_tab' => 0 ),
 					array( 'style' => 'card', 'kicker' => 'Удобная админка', 'title' => 'ACF и кастомные блоки', 'price' => 'от 15 000 ₽', 'price_note' => '', 'text' => 'Повторяемые блоки, карточки, каталоги и управляемая структура контента.', 'cta_label' => '', 'cta_url' => '', 'cta_new_tab' => 0 ),
 					array( 'style' => 'card', 'kicker' => 'Регулярно', 'title' => 'Техническая поддержка', 'price' => 'от 20 000 ₽ / месяц', 'price_note' => '', 'text' => 'Обновления, бэкапы, безопасность, мелкие правки и контроль ошибок.', 'cta_label' => '', 'cta_url' => '', 'cta_new_tab' => 0 ),
+					array( 'style' => 'card', 'kicker' => 'Конструктор страниц', 'title' => 'Сайт с ACF Flexible Content', 'price' => 'от 60 000 ₽', 'price_note' => '', 'text' => 'WordPress без Elementor: набор секций в теме, клиент сам добавляет, переставляет и выключает блоки в админке.', 'cta_label' => '', 'cta_url' => '', 'cta_new_tab' => 0 ),
 					array( 'style' => 'card', 'kicker' => 'Сайт компании', 'title' => 'Корпоративный сайт', 'price' => 'от 90 000 ₽', 'price_note' => '', 'text' => 'Услуги, контакты, формы, блог, базовая SEO-структура и понятная админка.', 'cta_label' => '', 'cta_url' => '', 'cta_new_tab' => 0 ),
 					array( 'style' => 'card', 'kicker' => 'Расширенный проект', 'title' => 'Сайт со сложной логикой', 'price' => 'от 180 000 ₽', 'price_note' => '', 'text' => 'Каталог, CPT, фильтры, интеграции и нестандартные пользовательские сценарии.', 'cta_label' => '', 'cta_url' => '', 'cta_new_tab' => 0 ),
 				),
@@ -375,7 +399,7 @@ function krv_price_list_get_defaults(): array {
 		'show_stack'                   => 1,
 		'stack_title'                  => 'Что обычно входит в работу',
 		'stack_items'                  => krv_price_list_text_rows(
-			array( 'WordPress', 'Linux', 'Nginx', 'Docker', 'Redis', 'VPS', 'Адаптивность', 'Формы', 'SSL', 'Метрика', 'Яндекс Директ', 'SEO', 'Schema.org', 'MAX-боты', 'Cookies', 'Техподдержка' )
+			array( 'WordPress', 'Python', 'Flask', 'Linux', 'Nginx', 'Docker', 'Redis', 'VPS', 'Адаптивность', 'Формы', 'SSL', 'Метрика', 'Яндекс Директ', 'SEO', 'Schema.org', 'MAX-боты', 'Cookies', 'Техподдержка' )
 		),
 		'show_process'                 => 1,
 		'process_title'                => 'Как проходит работа',
@@ -390,10 +414,12 @@ function krv_price_list_get_defaults(): array {
 		'faq_title'                    => 'Частые вопросы',
 		'faq_items'                    => array(
 			array( 'question' => 'Почему статический лендинг стоит от 25 000 ₽, а WordPress-лендинг — от 50 000 ₽?', 'answer' => 'Это разные форматы. Статика проще, быстрее и не требует CMS. WordPress нужен, когда важны редактор контента, управляемые блоки, плагины и дальнейшее развитие сайта.' ),
+			array( 'question' => 'Чем сайт с Flexible Content отличается от кастомных блоков за 15 000 ₽?', 'answer' => 'Кастомные блоки — точечная задача на существующем сайте: несколько управляемых секций. Flexible Content — конструктор страницы целиком: набор layout’ов в теме, клиент сам собирает порядок. Такой сайт начинается от 60 000 ₽.' ),
 			array( 'question' => 'Можно ли просто посмотреть сайт и сказать, что с ним не так?', 'answer' => 'Да. Для этого подходит диагностика или консультация. После неё становится понятно, нужен новый сайт или достаточно привести в порядок текущий.' ),
 			array( 'question' => 'Вы берёте небольшие задачи?', 'answer' => 'Да, если задача понятная и её можно нормально оценить: форма, SSL, блок, Метрика, ошибка WordPress или небольшая доработка.' ),
 			array( 'question' => 'Можно ли заказать только рекламу?', 'answer' => 'Можно. Но перед запуском лучше проверить сайт, формы и цели, чтобы реклама не сжигала бюджет из-за технических проблем.' ),
 			array( 'question' => 'Бот для MAX или Telegram можно связать с сайтом?', 'answer' => 'Да. Можно настроить сбор заявок, уведомления, таблицы, CRM и передачу данных между сайтом и ботом.' ),
+			array( 'question' => 'Делаете сайты на Python, не только на WordPress?', 'answer' => 'Да. Если редактор контента не нужен, а нужна своя серверная логика, собираю сайт на Flask: страницы, формы и бэкенд на Python. Небольшой такой сайт начинается от 50 000 ₽. Кабинет, оплата и интеграции считаются отдельно.' ),
 		),
 		'show_cta'                     => 1,
 		'cta_title'                    => 'Есть задача, но непонятно, с чего начать?',
