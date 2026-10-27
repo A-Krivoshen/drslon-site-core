@@ -15,13 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function krv_max_shortlink_map(): array {
 	return array(
-		'/max'        => 'https://max.ru/join/aa3v8rWdS_5M0156Q3ulFCsfJGeCMThryOOY2SrlyJM',
-		'/max_drslon' => 'https://max.ru/join/aa3v8rWdS_5M0156Q3ulFCsfJGeCMThryOOY2SrlyJM',
+		'/max'        => 'https://max.ru/u/f9LHodD0cOI6DGcD1_YA-bwnKmPrDxXinvbnoNMQdVhvBHwrJW8-euqdUyc',
+		'/max_drslon' => 'https://max.ru/u/f9LHodD0cOI6DGcD1_YA-bwnKmPrDxXinvbnoNMQdVhvBHwrJW8-euqdUyc',
 	);
 }
 
 /**
- * Redirect MAX short links, with or without query strings, to the channel.
+ * Redirect MAX short links, with or without query strings, to the personal MAX profile.
  */
 function krv_max_shortlink_redirect(): void {
 	if ( is_admin() ) {
@@ -42,7 +42,7 @@ function krv_max_shortlink_redirect(): void {
 		return;
 	}
 
-	wp_redirect( $map[ $slug ], 301 ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- external max.ru channel.
+	wp_redirect( $map[ $slug ], 301 ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- external max.ru personal profile.
 	exit;
 }
 
