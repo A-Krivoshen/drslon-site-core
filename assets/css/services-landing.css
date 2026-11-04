@@ -1177,3 +1177,24 @@ html[data-theme="dark"] .krv-landing-service-item--compact.krv-landing-service-i
 		grid-template-columns: 1fr;
 	}
 }
+
+/* Five compact offers: 3 + 2 filled rows, so support is not a leftover card. */
+@media (min-width: 769px) {
+	.krv-landing-services-grid--compact:has(> :nth-child(5):last-child) {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+	}
+
+	.krv-landing-services-grid--compact:has(> :nth-child(5):last-child) > :nth-child(-n+3) {
+		grid-column: span 2;
+	}
+
+	.krv-landing-services-grid--compact:has(> :nth-child(5):last-child) > :nth-child(n+4) {
+		grid-column: span 3;
+	}
+}
+
+@media (max-width: 768px) and (min-width: 421px) {
+	.krv-landing-services-grid--compact:has(> :nth-child(5):last-child) > :nth-child(5):last-child {
+		grid-column: 1 / -1;
+	}
+}

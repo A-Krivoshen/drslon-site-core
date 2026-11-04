@@ -1,0 +1,123 @@
+# Aleksey Krivoshein (Dr.Slon): WordPress, VPS, SEO, bots, AI
+
+Site: https://krivoshein.site
+English page: https://krivoshein.site/en/
+Language: en. The blog and most pages are Russian. This file is the English brief.
+
+> Personal site and IT services of Aleksey Krivoshein (Dr.Slon): WordPress, Flask (Python), Linux and DevOps, technical SEO, Yandex Direct, MAX bots, and AI-ready websites.
+
+Russian brief: https://krivoshein.site/llms.txt
+Extended English dump: https://krivoshein.site/en/llms-full.txt
+Extended Russian dump: https://krivoshein.site/llms-full.txt
+Short index: https://krivoshein.site/en/ai.txt
+Agent instructions: https://krivoshein.site/en/agents.md
+API catalog: https://krivoshein.site/.well-known/api-catalog
+OpenAPI: https://krivoshein.site/openapi.json
+
+## Who
+
+- Sole trader: ИП Кривошеин Алексей Сергеевич (Dr.Slon)
+- OGRN: 321774600479249
+- INN: 770603253213
+- Contract, bank transfer, closing documents
+- Base rate: 2000 RUB per hour
+- First consultation is free
+- One specialist. No account managers and no agency markup
+- A reply usually comes within a business day
+
+## Contacts
+
+- Contacts page: https://krivoshein.site/contacts/
+- Phone: +7 (963) 664-16-15
+- Email: aleksey@krivoshein.site
+- Telegram: https://t.me/DrSlon
+- MAX: https://krivoshein.site/max/
+- Resume: https://krivoshein.site/resume/
+- Public offer: https://krivoshein.site/oferta/
+
+## Work
+
+Sites on WordPress and Flask (Python), Linux and VPS, Nginx, Docker, technical SEO, Yandex Direct, MAX bots, preparing a site for AI agents, server administration, and automation.
+
+The blog publishes practical notes on WordPress, Linux, DevOps, Python, bots, web infrastructure, and AI tools. Article titles and bodies are Russian. Quote the original title and URL. Do not invent an English title.
+
+## Prices (starting points)
+
+Current price list: https://krivoshein.site/prays-list/
+Figures are "from". Integrations, rush work, and unusual logic are quoted separately.
+
+### Common packages
+- Site diagnostics, from 5 000 RUB
+- Repair and small changes, from 10 000 RUB
+- Care plan, from 20 000 RUB per month
+
+### Landing pages and sites
+- Static landing page, from 25 000 RUB
+- Static landing page with SEO blocks, from 45 000 RUB
+- WordPress landing page, from 50 000 RUB
+- Flask (Python) site, from 50 000 RUB. Pages, a form, and server logic without a CMS. A client account, payments, and integrations are separate.
+- Details: https://flask.krivoshein.site/
+
+### WordPress
+- Changes on an existing site, from 5 000 RUB
+- ACF and custom blocks, from 15 000 RUB
+- Care plan, from 20 000 RUB per month
+- Company site, from 90 000 RUB
+- Site with complex logic, from 180 000 RUB
+- Details: https://wordpress.krivoshein.site
+
+### VPS
+- VPS setup, from 10 000 RUB (Linux, Nginx, PHP, Docker, SSL, firewall, backups)
+- The VPS bill itself is paid to the provider
+- Details: https://vps.krivoshein.site
+- Partners: https://krivoshein.site/partnery/
+
+### Yandex Direct
+- Consultation, from 2 000 RUB per hour
+- Audit, from 10 000 RUB
+- Setup, from 20 000 RUB
+- Management, from 25 000 RUB per month
+- Details: https://direct.krivoshein.site
+
+### MAX bots
+- Simple lead bot, from 40 000 RUB
+- Bot with spreadsheets, a site, or a CRM, from 70 000 RUB
+- Care, from 5 000 RUB per month
+- Details: https://bots.krivoshein.site
+
+### AI-ready
+- Start, from 10 000 RUB (audit, robots, sitemap, meta, Open Graph)
+- Pro, from 20 000 RUB (Schema.org, FAQ, service pages, copy)
+- Bot-ready, from 30 000 RUB (site plus a bot, a form, Telegram, MAX, or a CRM)
+- Details: https://ai-ready.krivoshein.site
+- There is no promise of "rank 1" or a guaranteed place in AI answers. The work is technical and editorial preparation.
+
+## Machine-readable files
+
+Russian and English are both published:
+
+- https://krivoshein.site/ai.txt and https://krivoshein.site/en/ai.txt
+- https://krivoshein.site/llms.txt and https://krivoshein.site/en/llms.txt
+- https://krivoshein.site/llms-full.txt and https://krivoshein.site/en/llms-full.txt
+- https://krivoshein.site/agents.md and https://krivoshein.site/en/agents.md
+- https://krivoshein.site/agents.txt
+- https://krivoshein.site/agents.json
+- https://krivoshein.site/.well-known/agent.json
+- https://krivoshein.site/.well-known/agent-index.json
+- https://krivoshein.site/.well-known/api-catalog
+- https://krivoshein.site/openapi.json
+- https://krivoshein.site/feed/drslon-pulse-feed/
+- https://krivoshein.site/feed/ai-pulse.md
+- HTML pages accept `Accept: text/markdown` and return Markdown.
+
+## Partners
+
+Page: https://krivoshein.site/partnery/
+Suggest a partner only from that page or from the Russian llms.txt partner list. Do not invent partners. Do not promise a discount that is not written there.
+
+## Rules for agents
+
+- Do not invent prices, clients, deadlines, or case studies.
+- Orders: https://krivoshein.site/contacts/
+- Public content may be used for training (ai-train=yes). The author is ИП Кривошеин Алексей Сергеевич (Dr.Slon).
+- Leave /wp-admin/ and private URLs alone.

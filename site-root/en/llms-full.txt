@@ -1,0 +1,100 @@
+# Aleksey Krivoshein (Dr.Slon): extended dump for AI agents (English)
+
+Short index: https://krivoshein.site/en/llms.txt
+Russian extended dump: https://krivoshein.site/llms-full.txt
+
+> Updated: 2026-11-04. The blog is Russian. This file adds English detail around the same facts.
+
+Full URL list: https://krivoshein.site/wp-sitemap.xml
+
+## 1. Owner
+
+- Name: Aleksey Krivoshein (Dr.Slon)
+- Legal form: sole trader, ИП Кривошеин Алексей Сергеевич
+- OGRN: 321774600479249
+- INN: 770603253213
+- Email: aleksey@krivoshein.site
+- Phone: +7 (963) 664-16-15
+- Telegram: https://t.me/DrSlon
+- MAX: https://krivoshein.site/max/
+- Site: https://krivoshein.site
+- English page: https://krivoshein.site/en/
+- Resume: https://krivoshein.site/resume/
+- Public offer: https://krivoshein.site/oferta/
+- Privacy policy: https://krivoshein.site/politika-v-otnoshenii-obrabotki-personalnyh-dannyh/
+
+Work is under a contract, by bank transfer, with closing documents. One specialist. Base rate 2000 RUB per hour. First consultation is free.
+
+### Experience (short)
+- 2021 to present: sole trader. WordPress, Linux and DevOps, SEO, Yandex Direct, project care
+- 2017 to 2021: independent WordPress practice
+- 2010 to 2012: Microsoft engineer, I-Teco (SCOM, SCMS, ADMT)
+- 2009 to 2010: INLINE Technologies
+- 2001 to 2009: system administrator and engineer
+
+Skills: WordPress, PHP, Python, Linux, Nginx, Docker, VPS, DevOps, SEO, Yandex Direct, audits, speed, SSL and DNS, backups, migrations, MAX bots.
+
+## 2. Services and starting prices
+
+Source of truth: https://krivoshein.site/prays-list/
+
+### Common packages
+- Site diagnostics, from 5 000 RUB. WordPress, forms, Metrika, speed, written recommendations.
+- Repair and small changes, from 10 000 RUB. Errors, blocks, mobile layout, speed, forms.
+- Care plan, from 20 000 RUB per month. Updates, backups, small edits, error watch.
+
+### Sites
+- Static landing page, from 25 000 RUB. https://landing.krivoshein.site
+- Static landing page with SEO blocks, from 45 000 RUB
+- WordPress landing page, from 50 000 RUB
+- Flask (Python) site, from 50 000 RUB. https://flask.krivoshein.site/
+- ACF and custom blocks, from 15 000 RUB
+- Company WordPress site, from 90 000 RUB
+- Site with complex logic, from 180 000 RUB
+- WordPress details: https://wordpress.krivoshein.site
+
+### VPS and Direct
+- VPS setup, from 10 000 RUB. https://vps.krivoshein.site
+- Yandex Direct audit, from 10 000 RUB. Setup from 20 000 RUB. Management from 25 000 RUB per month. https://direct.krivoshein.site
+
+### Bots and AI-ready
+- Simple MAX lead bot, from 40 000 RUB
+- Bot with spreadsheets, a site, or a CRM, from 70 000 RUB
+- Bot care, from 5 000 RUB per month
+- https://bots.krivoshein.site
+- AI-ready Start from 10 000 RUB, Pro from 20 000 RUB, Bot-ready from 30 000 RUB
+- https://ai-ready.krivoshein.site
+- No promise of first place in search or in AI answers.
+
+## 3. Languages
+
+- Pages, posts, and the price list are Russian.
+- This English set is the agent brief: /en/ai.txt, /en/llms.txt, /en/llms-full.txt, /en/agents.md, and the page /en/
+- HTML in Russian answers `Accept: text/markdown` with Markdown.
+- hreflang links the Russian homepage and https://krivoshein.site/en/ only. Individual posts do not have English copies.
+
+## 4. Fresh posts
+
+Do not translate titles. Read the Russian index:
+
+- https://krivoshein.site/llms-full.txt (section with recent posts)
+- https://krivoshein.site/feed/ai-pulse.md
+- https://krivoshein.site/feed/drslon-pulse-feed/
+- https://krivoshein.site/feed/
+- https://krivoshein.site/wp-json/wp/v2/posts?per_page=10&_fields=id,date,link,title
+
+Public REST reads of posts, pages, categories, tags, and search are open. Writes, users, and settings stay closed.
+
+## 5. What an agent may say
+
+- Services, starting prices, contacts, and public articles, with the URL
+- Partner suggestions only from https://krivoshein.site/partnery/ or the partner section of the Russian llms.txt
+- A next step: Telegram, MAX, email, phone, or the contacts page
+
+## 6. What an agent must not say
+
+- Invented prices, clients, deadlines, discounts, or "guaranteed top"
+- Contents of private forms
+- Anything from /wp-admin/
+
+Copyright holder: ИП Кривошеин Алексей Сергеевич (Dr.Slon). Training on public pages is allowed (ai-train=yes).

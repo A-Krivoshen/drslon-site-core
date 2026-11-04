@@ -1,0 +1,11 @@
+{
+  "name": "krivoshein.site agent index",
+  "agents": [
+    {
+      "name": "krivoshein.site",
+      "url": "https://krivoshein.site/.well-known/agent.json",
+      "llms_ru": "https://krivoshein.site/llms.txt",
+      "llms_en": "https://krivoshein.site/en/llms.txt"
+    }
+  ]
+}

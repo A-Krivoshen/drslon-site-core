@@ -2,11 +2,13 @@
 
 Сайт: [https://krivoshein.site](https://krivoshein.site)
 
-> Персональный сайт и IT-услуги Алексея Кривошеина (Dr.Slon): WordPress, Linux/DevOps, техническое SEO, Яндекс.Директ, боты MAX, AI-ready сайты.
+> Персональный сайт и IT-услуги Алексея Кривошеина (Dr.Slon): WordPress, Flask (Python), Linux/DevOps, техническое SEO, Яндекс.Директ, боты MAX, AI-ready сайты.
 
 Полный дамп для агентов: [Полный дамп для агентов](https://krivoshein.site/llms-full.txt)
 Краткий индекс: [Краткий индекс](https://krivoshein.site/ai.txt)
 Инструкции агентам: [Инструкции агентам](https://krivoshein.site/agents.md)
+English brief: [English brief](https://krivoshein.site/en/llms.txt)
+English page: [English page](https://krivoshein.site/en/)
 API-каталог: [API-каталог](https://krivoshein.site/.well-known/api-catalog)
 OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
 
@@ -33,7 +35,7 @@ OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
 
 ## Чем занимается
 
-Разработка и поддержка сайтов (в первую очередь WordPress), настройка Linux/VPS, Nginx, Docker, техническое SEO, Яндекс.Директ, боты для MAX, подготовка сайтов к нейропоиску и AI-агентам, серверное администрирование, автоматизация.
+Разработка и поддержка сайтов на WordPress и на Flask (Python), настройка Linux/VPS, Nginx, Docker, техническое SEO, Яндекс.Директ, боты для MAX, подготовка сайтов к нейропоиску и AI-агентам, серверное администрирование, автоматизация.
 
 На сайте публикуются практические материалы по WordPress, Linux, DevOps, Python, ботам, веб-инфраструктуре, AI-инструментам и личному техническому опыту.
 
@@ -51,7 +53,8 @@ OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
 - Статический лендинг-визитка — от **25 000 ₽**
 - Статический лендинг с SEO и блоками — от **45 000 ₽**
 - Лендинг на WordPress — от **50 000 ₽**
-- Подробнее: [Подробнее](https://landing.krivoshein.site)
+- Сайт на Flask (Python) — от **50 000 ₽**. Страницы, форма и серверная логика без CMS. Кабинет, оплата и интеграции отдельно.
+- Подробнее: [Подробнее](https://flask.krivoshein.site/)
 
 ### WordPress
 - Доработки существующего сайта — от **5 000 ₽**

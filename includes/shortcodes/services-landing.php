@@ -22,7 +22,7 @@ function krv_services_landing_get_defaults(): array {
 		'profile_avatar'         => 10321,
 		'profile_name'           => 'Алексей Кривошеин',
 		// No em/en dash: people write a period or drop the second clause.
-		'profile_tagline'        => 'WordPress, VPS, боты MAX, Директ и AI-ready',
+		'profile_tagline'        => 'WordPress, Flask, VPS, боты MAX, Директ и AI-ready',
 		'profile_lead'           => 'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.',
 		// Full legal name is in H1/lead/proof; keep only quiet OGRN/INN here.
 		'profile_meta_lines'       => array(
@@ -72,7 +72,7 @@ function krv_services_landing_get_defaults(): array {
 			),
 		),
 		'services_header_title'    => 'Услуги',
-		'services_header_subtitle' => 'Флагманские направления: WordPress, VPS, боты MAX, Директ и AI-ready. Цены «от» в карточках, детали в прайсе.',
+		'services_header_subtitle' => 'Флагманские направления: WordPress, Flask, VPS, боты MAX, Директ и AI-ready. Цены «от» в карточках, детали в прайсе.',
 		'services_items'           => array(
 			array(
 				'title'       => 'WordPress',
@@ -113,6 +113,14 @@ function krv_services_landing_get_defaults(): array {
 				'icon_svg'    => '',
 				'url'         => 'https://landing.krivoshein.site/',
 				'price_label' => 'от 25 000 ₽',
+			),
+			array(
+				'title'       => 'Flask (Python)',
+				'description' => 'Страницы, форма заявок и серверная логика на Python. Без CMS, когда редактор WordPress не нужен.',
+				'icon_key'    => 'flask',
+				'icon_svg'    => '',
+				'url'         => 'https://flask.krivoshein.site/',
+				'price_label' => 'от 50 000 ₽',
 			),
 			array(
 				'title'       => 'AI-ready',
@@ -258,6 +266,8 @@ function krv_services_landing_service_icon_preset( string $key ): string {
 		'ads'      => '<circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="4"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M2 12h2"></path><path d="M20 12h2"></path>',
 		// Landing layout.
 		'landing'  => '<rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M5 8h14"></path><rect x="8" y="11" width="8" height="2.5" rx="0.5"></rect><path d="M8 16h5"></path>',
+		// Lab flask: Python / Flask sites.
+		'flask'    => '<path d="M9 3h6"></path><path d="M10 3v6.2L4.8 19.2A2 2 0 0 0 6.6 22h10.8a2 2 0 0 0 1.8-2.8L14 9.2V3"></path><path d="M8.2 15h7.6"></path>',
 		// Spark / AI.
 		'ai'       => '<path d="M12 2v4"></path><path d="M12 18v4"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M16.24 16.24l2.83 2.83"></path><path d="M2 12h4"></path><path d="M18 12h4"></path><path d="M4.93 19.07l2.83-2.83"></path><path d="M16.24 7.76l2.83-2.83"></path><circle cx="12" cy="12" r="3"></circle>',
 		// Database / RAG.
@@ -330,6 +340,7 @@ function krv_services_landing_register_acf(): void {
 		'max-bot'  => 'MAX бот',
 		'ads'      => 'Реклама',
 		'landing'  => 'Лендинг',
+		'flask'    => 'Flask / Python',
 		'ai'       => 'AI',
 		'rag'      => 'RAG / база',
 		'support'  => 'Поддержка',
@@ -586,6 +597,96 @@ function krv_services_landing_seed_defaults(): void {
 
 	update_option( 'krv_services_landing_seeded_v1', DRSLON_SITE_CORE_VERSION, false );
 }
+
+/**
+ * Default homepage card for a Flask site. Price matches the landings tab.
+ *
+ * @return array<string, string>
+ */
+function krv_services_landing_flask_card(): array {
+	return array(
+		'title'       => 'Flask (Python)',
+		'description' => 'Страницы, форма заявок и серверная логика на Python. Без CMS, когда редактор WordPress не нужен.',
+		'icon_key'    => 'flask',
+		'icon_svg'    => '',
+		'url'         => 'https://flask.krivoshein.site/',
+		'price_label' => 'от 50 000 ₽',
+	);
+}
+
+/**
+ * Insert the Flask card and name it in the hero once. ACF keeps the seeded copy.
+ */
+function krv_services_landing_migrate_flask_v1(): void {
+	if ( get_option( 'krv_services_landing_flask_v1' ) ) {
+		return;
+	}
+
+	if ( ! function_exists( 'get_field' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+
+	$option_id = krv_services_landing_option_id();
+	$items     = get_field( 'services_items', $option_id );
+	if ( ! is_array( $items ) || array() === $items ) {
+		return;
+	}
+
+	$has_flask = false;
+	foreach ( $items as $item ) {
+		if ( ! is_array( $item ) ) {
+			continue;
+		}
+		$title = function_exists( 'mb_strtolower' ) ? mb_strtolower( (string) ( $item['title'] ?? '' ), 'UTF-8' ) : strtolower( (string) ( $item['title'] ?? '' ) );
+		if ( false !== strpos( $title, 'flask' ) ) {
+			$has_flask = true;
+			break;
+		}
+	}
+
+	if ( ! $has_flask ) {
+		$card      = krv_services_landing_flask_card();
+		$next      = array();
+		$inserted  = false;
+		foreach ( $items as $item ) {
+			if ( ! is_array( $item ) ) {
+				continue;
+			}
+			$next[] = $item;
+			$title  = function_exists( 'mb_strtolower' ) ? mb_strtolower( (string) ( $item['title'] ?? '' ), 'UTF-8' ) : strtolower( (string) ( $item['title'] ?? '' ) );
+			if ( ! $inserted && false !== strpos( $title, 'лендинг' ) ) {
+				$next[]   = $card;
+				$inserted = true;
+			}
+		}
+		if ( ! $inserted ) {
+			$next[] = $card;
+		}
+		update_field( 'services_items', $next, $option_id );
+	}
+
+	$tagline = (string) get_field( 'profile_tagline', $option_id );
+	if ( $tagline !== '' && false === stripos( $tagline, 'flask' ) ) {
+		$updated = str_replace( 'WordPress, VPS', 'WordPress, Flask, VPS', $tagline );
+		if ( $updated === $tagline ) {
+			$updated = 'WordPress, Flask, VPS, боты MAX, Директ и AI-ready';
+		}
+		update_field( 'profile_tagline', $updated, $option_id );
+	}
+
+	$subtitle = (string) get_field( 'services_header_subtitle', $option_id );
+	if ( $subtitle !== '' && false === stripos( $subtitle, 'flask' ) ) {
+		$updated = str_replace( 'WordPress, VPS', 'WordPress, Flask, VPS', $subtitle );
+		if ( $updated === $subtitle ) {
+			$updated = 'Флагманские направления: WordPress, Flask, VPS, боты MAX, Директ и AI-ready. Цены «от» в карточках, детали в прайсе.';
+		}
+		update_field( 'services_header_subtitle', $updated, $option_id );
+	}
+
+	update_option( 'krv_services_landing_flask_v1', DRSLON_SITE_CORE_VERSION, false );
+}
+
+add_action( 'acf/init', 'krv_services_landing_migrate_flask_v1', 32 );
 
 add_action(
 	'acf/init',

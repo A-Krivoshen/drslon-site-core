@@ -5,7 +5,7 @@
   "site": {
     "name": "krivoshein.site",
     "url": "https://krivoshein.site",
-    "description": "Personal site and IT services of Aleksey Krivoshein (Dr.Slon): WordPress, Linux/DevOps, technical SEO, Yandex Direct, MAX bots, AI-ready websites."
+    "description": "Personal site and IT services of Aleksey Krivoshein (Dr.Slon): WordPress, Flask (Python), Linux/DevOps, technical SEO, Yandex Direct, MAX bots, AI-ready websites."
   },
   "documentation": {
     "llms": "https://krivoshein.site/llms.txt",

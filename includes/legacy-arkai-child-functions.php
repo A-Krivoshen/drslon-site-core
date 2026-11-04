@@ -253,11 +253,11 @@ if ( function_exists( 'tsf' ) ) {
 		$paged_suffix = '';
 
 		if ( is_front_page() ) {
-			return 'IT Решения — ИП Кривошеин Алексей Сергеевич' . $paged_suffix;
+			return 'Алексей Кривошеин: WordPress, Flask, VPS и AI-ready' . $paged_suffix;
 		}
 
 		if ( is_home() ) {
-			return 'Блог — krivoshein.site' . $paged_suffix;
+			return 'Блог' . $paged_suffix;
 		}
 
 		if ( is_singular() ) {
@@ -346,7 +346,7 @@ if ( function_exists( 'tsf' ) ) {
 		$paged_suffix = $paged > 1 ? ' Страница ' . $paged . '.' : '';
 
 		if ( is_front_page() ) {
-			return trim( 'Разработка и продвижение сайтов, WordPress, Linux, DevOps, настройка серверов и практические разборы.' . $paged_suffix );
+			return trim( 'Сайты на WordPress и Flask, VPS и DevOps, Яндекс.Директ, боты MAX и подготовка AI-ready. ИП Кривошеин Алексей Сергеевич.' . $paged_suffix );
 		}
 
 		if ( is_home() ) {
@@ -381,6 +381,10 @@ if ( function_exists( 'tsf' ) ) {
 				'konverter-punycode-dlya-domena'  => 'Конвертер Punycode: перевод домена между обычной записью и xn-- для кириллических имён.',
 				'izmeritel-skorosti-internetak'   => 'Измеритель скорости интернета в браузере: загрузка, отдача и задержка до сервера.',
 				'categories'                      => 'Метки блога: темы статей по WordPress, Linux, серверам, безопасности и разработке.',
+				'oferta'                          => 'Публичная оферта ИП Кривошеин Алексей Сергеевич на информационно-консультационные услуги.',
+				'resume'                          => 'Резюме Алексея Кривошеина: WordPress, Flask, Linux и DevOps, SEO и боты MAX.',
+				'contacts'                        => 'Контакты ИП Кривошеин Алексей Сергеевич: телефон, почта, Telegram и MAX.',
+				'servisy'                         => 'Онлайн-сервисы: RAG по блогу, домены, скорость, Punycode, маски сети и crontab.',
 				'kastomazitsiya-html-css-php'     => 'Доработка HTML, CSS и PHP на существующем сайте: правки шаблона, стилей и серверной логики.',
 			);
 			if ( isset( $tool_descriptions[ $post->post_name ] ) ) {
