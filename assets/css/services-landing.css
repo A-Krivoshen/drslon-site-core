@@ -22,7 +22,7 @@
 }
 
 .krv-services-landing-section + .krv-services-landing-section {
-	margin-top: 2.5rem;
+	margin-top: 3.5rem;
 }
 
 /* Stage 3: hero shell (replaces centered profile card) */
@@ -80,10 +80,10 @@
 	margin: 0 0 0.65rem;
 	width: 100%;
 	max-width: 36rem;
-	font-size: clamp(2.35rem, 2rem + 1.4vw, 3.1rem);
+	font-size: clamp(2rem, 4vw, 3rem);
 	line-height: 1.08;
-	font-weight: 700;
-	color: var(--text-main);
+	font-weight: 750;
+	color: #172133;
 	text-align: left;
 	letter-spacing: -0.03em;
 }
@@ -159,11 +159,12 @@
 
 .krv-landing-services {
 	padding: 8px 0 0;
+	scroll-margin-top: calc(var(--drslon-header-height, 72px) + 16px);
 }
 
 .krv-landing-services-header {
 	margin-bottom: 22px;
-	text-align: center;
+	text-align: left;
 }
 
 .krv-landing-services-header h2 {
@@ -176,12 +177,13 @@
 }
 
 .krv-landing-services-header p {
-	margin: 0 auto;
+	margin: 0;
 	max-width: 40rem;
 	font-size: 1.02rem;
 	line-height: 1.55;
 	color: var(--text-soft);
-	text-align: center;
+	text-align: left;
+	text-wrap: balance;
 }
 
 .krv-landing-services-grid {
@@ -209,13 +211,13 @@
 	text-decoration: none;
 	color: inherit;
 	background: var(--card-bg);
-	border: 1px solid rgba(15, 35, 80, 0.08);
-	border-radius: 14px;
-	box-shadow: 0 4px 14px rgba(23, 33, 51, 0.06);
+	border: 1px solid #d8e0ee;
+	border-radius: 16px;
+	box-shadow: 0 8px 24px rgba(23, 33, 51, 0.06);
 	transition:
-		box-shadow 0.22s ease,
-		transform 0.22s ease,
-		border-color 0.22s ease;
+		box-shadow 0.2s ease,
+		transform 0.2s ease,
+		border-color 0.2s ease;
 	overflow: hidden;
 	-webkit-tap-highlight-color: transparent;
 }
@@ -262,7 +264,7 @@
 	color: #315fe8;
 	background: linear-gradient(145deg, rgba(49, 95, 232, 0.16), rgba(49, 95, 232, 0.06));
 	border: 1px solid rgba(49, 95, 232, 0.2);
-	transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+	transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 	flex-shrink: 0;
 }
 
@@ -309,6 +311,7 @@
 	line-height: 1.3;
 	color: var(--text-main);
 	letter-spacing: -0.01em;
+	text-wrap: balance;
 }
 
 .krv-landing-service-desc,
@@ -491,20 +494,20 @@ html[data-theme="dark"] .krv-landing-service-ext {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 46px;
+	min-height: 44px;
 	padding: 12px 22px;
-	border-radius: 10px;
-	background: var(--accent-hover);
+	border-radius: 999px;
+	background: #315fe8;
 	color: #fff;
 	text-decoration: none;
 	font-size: 1rem;
 	font-weight: 600;
 	line-height: 1;
-	transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+	transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .krv-landing-pricing-button:hover {
-	background: #3154b5;
+	background: #244ac2;
 	box-shadow: var(--card-shadow-hover);
 }
 
@@ -529,7 +532,7 @@ html[data-theme="dark"] .krv-landing-service-ext {
 	}
 
 	.krv-landing-hero-copy .krv-landing-title {
-		font-size: clamp(1.9rem, 5.2vw, 2.4rem);
+		font-size: clamp(2rem, 4vw, 3rem);
 	}
 
 	.krv-landing-services-header h2,
@@ -596,7 +599,7 @@ html[data-theme="dark"] .krv-landing-service-ext {
 	}
 
 	.krv-landing-hero-copy .krv-landing-title {
-		font-size: clamp(1.85rem, 6vw, 2.15rem);
+		font-size: clamp(2rem, 4vw, 3rem);
 	}
 
 	.krv-landing-services-header h2,
@@ -660,13 +663,13 @@ html[data-theme="dark"] .krv-landing-service-price {
 
 
 .krv-landing-services-note {
-	margin: 1.25rem auto 0;
-	padding: 0 12px;
+	margin: 1.25rem 0 0;
+	padding: 0;
 	max-width: 40rem;
 	font-size: 0.9rem;
 	line-height: 1.55;
 	opacity: 1;
-	text-align: center;
+	text-align: left;
 }
 .krv-landing-services-note a {
 	color: #2346b0;
@@ -1018,13 +1021,13 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 	.krv-landing-hero-copy .krv-landing-title,
 	.krv-landing-hero-copy .krv-landing-tagline,
 	.krv-landing-hero-copy .krv-landing-lead {
-		text-align: center;
-		margin-left: auto;
-		margin-right: auto;
+		text-align: left;
+		margin-left: 0;
+		margin-right: 0;
 	}
 
 	.krv-landing-hero-copy .krv-landing-hero-cta {
-		justify-content: center;
+		justify-content: flex-start;
 	}
 
 	.krv-landing-hero-aside {
@@ -1033,20 +1036,20 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 
 	.krv-landing-hero-foot {
 		flex-direction: column;
-		align-items: center;
-		text-align: center;
+		align-items: flex-start;
+		text-align: left;
 	}
 
 	.krv-landing-hero-foot .krv-landing-meta {
-		align-items: center;
+		align-items: flex-start;
 	}
 
 	.krv-landing-hero-foot .krv-landing-meta-line {
-		text-align: center;
+		text-align: left;
 	}
 
 	.krv-landing-hero-foot .krv-landing-contacts {
-		justify-content: center;
+		justify-content: flex-start;
 	}
 }
 
@@ -1058,13 +1061,13 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 }
 
 .krv-landing-services-grid--compact {
-	grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-columns: repeat(5, minmax(0, 1fr));
 	gap: 12px;
 }
 
 .krv-landing-service-item--flagship {
-	box-shadow: 0 4px 14px rgba(23, 33, 51, 0.06);
-	border-color: rgba(15, 35, 80, 0.1);
+	box-shadow: 0 8px 24px rgba(23, 33, 51, 0.06);
+	border-color: #d8e0ee;
 }
 
 .krv-landing-service-item--flagship .krv-landing-service-inner {
@@ -1088,20 +1091,20 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 }
 
 .krv-landing-service-item--compact {
-	box-shadow: none;
-	background: transparent;
-	border-color: rgba(15, 35, 80, 0.1);
+	background: var(--card-bg);
+	box-shadow: 0 8px 24px rgba(23, 33, 51, 0.06);
+	border-color: #d8e0ee;
 }
 
 .krv-landing-service-item--compact .krv-landing-service-inner {
 	min-height: 0;
-	padding: 12px 12px 14px;
+	padding: 14px 10px 16px;
 }
 
 .krv-landing-service-item--compact .krv-landing-service-icon-wrap {
-	width: 40px;
-	height: 40px;
-	border-radius: 10px;
+	width: 44px;
+	height: 44px;
+	border-radius: 12px;
 	margin-bottom: 8px;
 }
 
@@ -1117,49 +1120,60 @@ html[data-theme="dark"] .krv-landing-hero-aside .krv-landing-avatar-wrap {
 }
 
 .krv-landing-service-item--compact .krv-landing-service-desc {
-	font-size: 0.8rem;
+	font-size: 0.78rem;
 	line-height: 1.4;
+	text-wrap: pretty;
 	display: -webkit-box;
-	-webkit-line-clamp: 3;
+	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 }
 
 .krv-landing-service-item--compact .krv-landing-service-price {
-	font-size: 0.72rem;
-	padding: 3px 8px;
+	font-size: 0.68rem;
+	line-height: 1.2;
+	padding: 0.28rem 0.45rem;
+	max-width: 100%;
+	letter-spacing: -0.01em;
+}
+
+.krv-landing-service-item--compact .krv-landing-service-ext {
+	opacity: 0;
 }
 
 .krv-landing-service-item--compact.krv-landing-service-item--link:hover {
-	transform: none;
-	box-shadow: none;
-	border-color: rgba(49, 95, 232, 0.28);
-	background: var(--accent-bg, #eef3fb);
-}
-
-.krv-landing-service-item--compact.krv-landing-service-item--link:hover .krv-landing-service-icon-wrap {
-	transform: none;
+	transform: translateY(-2px);
+	border-color: rgba(49, 95, 232, 0.35);
+	box-shadow: 0 10px 24px rgba(15, 35, 80, 0.1);
+	background: var(--card-bg);
 }
 
 html[data-theme="dark"] .krv-landing-service-item--compact {
-	background: transparent;
-	border-color: rgba(255, 255, 255, 0.1);
-	box-shadow: none;
+	background: var(--card-bg);
+	border-color: #243049;
+	box-shadow: var(--card-shadow);
 }
 
 html[data-theme="dark"] .krv-landing-service-item--compact.krv-landing-service-item--link:hover {
-	background: rgba(120, 160, 255, 0.08);
-	border-color: rgba(120, 160, 255, 0.28);
-	box-shadow: none;
-	transform: none;
+	background: var(--card-bg);
+	border-color: rgba(140, 175, 255, 0.35);
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+	transform: translateY(-2px);
 }
 
-@media (max-width: 1100px) {
-	.krv-landing-services-grid--flagship {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
+/* Five compact offers stay on one row while the 1200px container can hold them.
+   Narrower desktops get two full rows (3 + 2), not a leftover card. */
+@media (max-width: 1040px) {
 	.krv-landing-services-grid--compact {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+	}
+
+	.krv-landing-services-grid--compact > :nth-child(-n+3) {
+		grid-column: span 2;
+	}
+
+	.krv-landing-services-grid--compact > :nth-child(n+4) {
+		grid-column: span 3;
 	}
 }
 
@@ -1169,6 +1183,14 @@ html[data-theme="dark"] .krv-landing-service-item--compact.krv-landing-service-i
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 12px;
 	}
+
+	.krv-landing-services-grid--compact > :nth-child(n) {
+		grid-column: auto;
+	}
+
+	.krv-landing-services-grid--compact > :nth-child(5):last-child {
+		grid-column: 1 / -1;
+	}
 }
 
 @media (max-width: 420px) {
@@ -1176,25 +1198,12 @@ html[data-theme="dark"] .krv-landing-service-item--compact.krv-landing-service-i
 	.krv-landing-services-grid--compact {
 		grid-template-columns: 1fr;
 	}
-}
 
-/* Five compact offers: 3 + 2 filled rows, so support is not a leftover card. */
-@media (min-width: 769px) {
-	.krv-landing-services-grid--compact:has(> :nth-child(5):last-child) {
-		grid-template-columns: repeat(6, minmax(0, 1fr));
+	.krv-landing-services-grid--compact > :nth-child(n) {
+		grid-column: auto;
 	}
 
-	.krv-landing-services-grid--compact:has(> :nth-child(5):last-child) > :nth-child(-n+3) {
-		grid-column: span 2;
-	}
-
-	.krv-landing-services-grid--compact:has(> :nth-child(5):last-child) > :nth-child(n+4) {
-		grid-column: span 3;
-	}
-}
-
-@media (max-width: 768px) and (min-width: 421px) {
-	.krv-landing-services-grid--compact:has(> :nth-child(5):last-child) > :nth-child(5):last-child {
-		grid-column: 1 / -1;
+	.krv-landing-services-grid--compact > :nth-child(5):last-child {
+		grid-column: auto;
 	}
 }

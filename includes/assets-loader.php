@@ -53,14 +53,17 @@ add_action(
 			'drslon-content-contacts' => [
 				'file'      => 'assets/css/content-contacts.css',
 				'shortcode' => [ 'krv_contact_block' ],
+				'marker'    => 'krv-contact-block',
 			],
 			'drslon-content-resume'   => [
 				'file'      => 'assets/css/content-resume.css',
 				'shortcode' => [ 'krv_resume' ],
+				'marker'    => 'krv-resume-widget',
 			],
 			'drslon-content-consult'  => [
 				'file'      => 'assets/css/content-consult.css',
 				'shortcode' => [ 'krv_consult', 'krv_consultations' ],
+				'marker'    => 'consult-all-container',
 			],
 		];
 
@@ -85,9 +88,17 @@ add_action(
 				continue;
 			}
 
-			$config = $styles[ $handle ];
+			$config  = $styles[ $handle ];
+			$matched = krv_page_has_ui_shortcode( $config['shortcode'] );
 
-			if ( ! krv_page_has_ui_shortcode( $config['shortcode'] ) ) {
+			// Pages still store the widget HTML (no shortcode). Match the root class in post_content.
+			if ( ! $matched && ! empty( $config['marker'] ) && is_singular() ) {
+				$marker_post = get_post();
+				$matched     = $marker_post instanceof WP_Post
+					&& false !== strpos( (string) $marker_post->post_content, (string) $config['marker'] );
+			}
+
+			if ( ! $matched ) {
 				continue;
 			}
 
