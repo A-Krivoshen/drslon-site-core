@@ -22,7 +22,7 @@ add_action(
 		$styles = [
 			'drslon-services-landing'  => [
 				'file'      => 'assets/css/services-landing.css',
-				'shortcode' => [ 'krv_services_landing' ],
+				'shortcode' => [ 'krv_services_landing', 'krv_en_home' ],
 			],
 			'drslon-clients-grid'      => [
 				'file'      => 'assets/css/clients-grid.css',
@@ -34,15 +34,15 @@ add_action(
 			],
 			'drslon-services-showcase' => [
 				'file'      => 'assets/css/services-showcase.css',
-				'shortcode' => [ 'krv_services_pages_showcase' ],
+				'shortcode' => [ 'krv_services_pages_showcase', 'krv_en_services' ],
 			],
 			'drslon-price-list-widget' => [
 				'file'      => 'assets/css/price-list-widget.css',
-				'shortcode' => [ 'krv_price_list' ],
+				'shortcode' => [ 'krv_price_list', 'krv_en_price' ],
 			],
 			'drslon-price-list-widget-js' => [
 				'file'      => 'assets/js/price-list-widget.js',
-				'shortcode' => [ 'krv_price_list' ],
+				'shortcode' => [ 'krv_price_list', 'krv_en_price' ],
 				'type'      => 'script',
 			],
 			'drslon-service-page-shell' => [
@@ -52,18 +52,22 @@ add_action(
 			// Content widgets (ex-inline post HTML); dark lives in theme 10-theme-dark.css.
 			'drslon-content-contacts' => [
 				'file'      => 'assets/css/content-contacts.css',
-				'shortcode' => [ 'krv_contact_block' ],
+				'shortcode' => [ 'krv_contact_block', 'krv_en_contacts' ],
 				'marker'    => 'krv-contact-block',
 			],
 			'drslon-content-resume'   => [
 				'file'      => 'assets/css/content-resume.css',
-				'shortcode' => [ 'krv_resume' ],
+				'shortcode' => [ 'krv_resume', 'krv_en_resume' ],
 				'marker'    => 'krv-resume-widget',
 			],
 			'drslon-content-consult'  => [
 				'file'      => 'assets/css/content-consult.css',
-				'shortcode' => [ 'krv_consult', 'krv_consultations' ],
+				'shortcode' => [ 'krv_consult', 'krv_consultations', 'krv_en_consult' ],
 				'marker'    => 'consult-all-container',
+			],
+			'drslon-en-pages'         => [
+				'file'      => 'assets/css/en-pages.css',
+				'shortcode' => [ 'krv_en_home', 'krv_en_services', 'krv_en_price', 'krv_en_consult', 'krv_en_resume', 'krv_en_contacts' ],
 			],
 		];
 
@@ -78,6 +82,7 @@ add_action(
 			'drslon-content-contacts'     => [ 'type' => 'style' ],
 			'drslon-content-resume'       => [ 'type' => 'style' ],
 			'drslon-content-consult'      => [ 'type' => 'style' ],
+			'drslon-en-pages'             => [ 'type' => 'style' ],
 		];
 
 		$style_queue = [];

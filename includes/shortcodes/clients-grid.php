@@ -27,10 +27,10 @@ function krv_client_display_title( int $post_id, string $title ): string {
 		6151 => 'Метком-Калуга',
 		6147 => 'GroupST',
 		9184 => 'Softcomlan',
-		9244 => 'Арго Тур',
+		9244 => 'LUMISTEK',
 		7693 => 'Cambobiz',
 		6112 => 'Designers from Russia',
-		11561 => 'ООО «АСП»',
+		11467 => 'АСП',
 	);
 
 	if ( isset( $map[ $post_id ] ) ) {
@@ -133,24 +133,25 @@ function krv_client_logo_is_usable( int $post_id ): bool {
  */
 function krv_clients_showcase_order(): array {
 	return array(
-		9244 => 10,  // Арго Тур (argotur.ru)
-		11603 => 12, // Сила бухгалтерии
-		11393 => 15, // KOVIFINANCE
-		11561 => 18, // АСП acasp.ru
-		6113 => 20,  // АГНКС
-		5702 => 30,  // Fornovo Gas
-		8081 => 40,  // Технолидер
-		8423 => 50,  // Соловьи
-		9184 => 60,  // Softcomlan
-		6111 => 80,  // НАКС
-		6115 => 90,  // Форновогаз KZ
-		6147 => 100, // GroupST
-		7693 => 110, // Cambobiz
-		9168 => 120, // Мурашова
-		8450 => 130, // Храм
-		6671 => 140, // СКД
-		6112 => 150, // DFR
-		// 6151 Метком-Калуга - excluded from homepage grid (see post__not_in).
+		11461 => 10,  // Арго Тур
+		11463 => 12,  // Сила бухгалтерии
+		11465 => 15,  // KOVIFINANCE
+		11467 => 18,  // АСП
+		9244  => 25,  // LUMISTEK
+		6113  => 20,  // АГНКС
+		5702  => 30,  // Fornovo Gas
+		8081  => 40,  // Технолидер
+		8423  => 50,  // Соловьи
+		9184  => 60,  // Softcomlan
+		6111  => 80,  // НАКС
+		6115  => 90,  // Форновогаз KZ
+		6147  => 100, // GroupST
+		7693  => 110, // Cambobiz
+		9168  => 120, // Мурашова
+		8450  => 130, // Храм
+		6671  => 140, // СКД
+		6112  => 150, // Designers from Russia
+		// 6151 Метком-Калуга stays out of the grid.
 	);
 }
 
@@ -211,14 +212,22 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 
 	$post_count = count( $posts );
 	$randomize  = $atts['random'] === '1';
+	$ui_en      = function_exists( 'krv_ui_locale' ) && 'en' === krv_ui_locale();
+	$ext_title  = $ui_en ? 'External link' : 'Внешняя ссылка';
 
 	ob_start();
 	?>
 	<section class="krv-clients-grid-wrap" id="klienty" aria-labelledby="krv-clients-heading">
 		<header class="krv-clients-grid-header">
+			<?php if ( $ui_en ) : ?>
+			<h2 id="krv-clients-heading">Clients</h2>
+			<p class="krv-clients-grid-lead">Real clients: industry, e&#8209;commerce, media and service businesses</p>
+			<p class="krv-clients-grid-meta"><?php echo esc_html( (string) $post_count ); ?> <?php echo 1 === $post_count ? 'company.' : 'companies.'; ?></p>
+			<?php else : ?>
 			<h2 id="krv-clients-heading">Клиенты</h2>
 			<p class="krv-clients-grid-lead">Реальные заказчики: промышленность, e&#8209;commerce, медиа и сервисный бизнес</p>
-			<p class="krv-clients-grid-meta"><?php echo esc_html( (string) $post_count ); ?> компаний · проекты, которые можно открыть</p>
+			<p class="krv-clients-grid-meta"><?php echo esc_html( (string) $post_count ); ?> компаний.</p>
+			<?php endif; ?>
 		</header>
 
 		<div class="krv-clients-grid"<?php echo $randomize ? ' data-random-grid="1"' : ''; ?>>
@@ -256,7 +265,7 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 				?>
 					<div class="krv-client-card-inner">
 						<?php if ( $is_link ) : ?>
-							<span class="krv-client-ext" aria-hidden="true" title="Внешняя ссылка">
+							<span class="krv-client-ext" aria-hidden="true" title="<?php echo esc_attr( $ext_title ); ?>">
 								<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
 									<path d="M14 5h5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 									<path d="M10 14L19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -318,7 +327,7 @@ add_action(
 add_action(
 	'wp_footer',
 	function () {
-		if ( is_admin() || ! krv_page_has_ui_shortcode( [ 'krv_clients_grid', 'krv_services_landing' ] ) ) {
+		if ( is_admin() || ! krv_page_has_ui_shortcode( [ 'krv_clients_grid', 'krv_services_landing', 'krv_en_home' ] ) ) {
 			return;
 		}
 		?>

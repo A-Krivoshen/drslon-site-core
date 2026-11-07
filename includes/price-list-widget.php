@@ -35,7 +35,12 @@ function krv_price_list_contacts_url( string $campaign, string $topic = '' ): st
 		$params['topic'] = sanitize_key( $topic );
 	}
 
-	return add_query_arg( $params, home_url( '/contacts/' ) ) . '#krv-contact-block';
+	$contacts_path = '/contacts/';
+	if ( function_exists( 'krv_ui_locale' ) && 'en' === krv_ui_locale() ) {
+		$contacts_path = '/en/contacts/';
+	}
+
+	return add_query_arg( $params, home_url( $contacts_path ) ) . '#krv-contact-block';
 }
 
 /**
@@ -212,11 +217,41 @@ function krv_price_list_render_price( string $price, string $note = '' ): void {
 
 /**
  * Render the complete ACF-driven price list.
+ *
+ * @param array<string, mixed>|null $settings Passed copy, or null to read saved settings.
  */
-function krv_price_list_render(): string {
-	$settings = function_exists( 'krv_price_list_get_settings' )
-		? krv_price_list_get_settings()
-		: array();
+function krv_price_list_render( ?array $settings = null ): string {
+	if ( null === $settings ) {
+		$settings = function_exists( 'krv_price_list_get_settings' )
+			? krv_price_list_get_settings()
+			: array();
+	}
+
+	$ui = array(
+		'nav_scenarios'     => 'Направления',
+		'nav_packages'      => 'Пакеты',
+		'nav_prices'        => 'Цены',
+		'nav_faq'           => 'FAQ',
+		'discuss'           => 'Обсудить задачу',
+		'nav_aria'          => 'Навигация по разделам прайса',
+		'tabs_aria'         => 'Категории услуг',
+		'mobile_cta_aria'   => 'Быстрые действия',
+		'mobile_diagnostic' => 'Диагностика',
+	);
+
+	if ( function_exists( 'krv_ui_locale' ) && 'en' === krv_ui_locale() ) {
+		$ui = array(
+			'nav_scenarios'     => 'Directions',
+			'nav_packages'      => 'Packages',
+			'nav_prices'        => 'Prices',
+			'nav_faq'           => 'FAQ',
+			'discuss'           => 'Discuss a task',
+			'nav_aria'          => 'Price sections',
+			'tabs_aria'         => 'Service categories',
+			'mobile_cta_aria'   => 'Quick actions',
+			'mobile_diagnostic' => 'Diagnostics',
+		);
+	}
 
 	$routes        = is_array( $settings['routes'] ?? null ) ? $settings['routes'] : array();
 	$landings      = is_array( $settings['landings'] ?? null ) ? $settings['landings'] : array();
@@ -291,16 +326,16 @@ function krv_price_list_render(): string {
 
 	$nav_links = array();
 	if ( $show_scenarios ) {
-		$nav_links['krv-scenarios'] = 'Направления';
+		$nav_links['krv-scenarios'] = $ui['nav_scenarios'];
 	}
 	if ( $show_packages ) {
-		$nav_links['krv-packages'] = 'Пакеты';
+		$nav_links['krv-packages'] = $ui['nav_packages'];
 	}
 	if ( $show_prices ) {
-		$nav_links['krv-prices'] = 'Цены';
+		$nav_links['krv-prices'] = $ui['nav_prices'];
 	}
 	if ( $show_faq ) {
-		$nav_links['krv-faq'] = 'FAQ';
+		$nav_links['krv-faq'] = $ui['nav_faq'];
 	}
 
 	ob_start();
@@ -319,7 +354,7 @@ function krv_price_list_render(): string {
 						<p class="krv-lead"><?php echo esc_html( (string) ( $settings['hero_lead'] ?? '' ) ); ?></p>
 
 						<div class="krv-actions">
-							<a class="krv-btn krv-btn-primary" href="<?php echo esc_url( $contacts_general ); ?>">Обсудить задачу</a>
+							<a class="krv-btn krv-btn-primary" href="<?php echo esc_url( $contacts_general ); ?>"><?php echo esc_html( $ui['discuss'] ); ?></a>
 							<a class="krv-btn" href="<?php echo esc_url( $telegram_url ); ?>" target="_blank" rel="noopener noreferrer">Telegram</a>
 							<a class="krv-btn krv-btn-max" href="<?php echo esc_url( $max_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo $max_icon; ?><span>MAX</span></a>
 						</div>
@@ -365,7 +400,7 @@ function krv_price_list_render(): string {
 			<?php endif; ?>
 
 			<?php if ( ! empty( $nav_links ) ) : ?>
-				<nav class="krv-anchor-nav krv-anchor-nav-sticky" aria-label="Навигация по разделам прайса">
+				<nav class="krv-anchor-nav krv-anchor-nav-sticky" aria-label="<?php echo esc_attr( $ui['nav_aria'] ); ?>">
 					<?php foreach ( $nav_links as $anchor => $label ) : ?>
 						<a href="#<?php echo esc_attr( $anchor ); ?>"><?php echo esc_html( $label ); ?></a>
 					<?php endforeach; ?>
@@ -474,7 +509,7 @@ function krv_price_list_render(): string {
 						<p><?php echo esc_html( (string) ( $settings['prices_text'] ?? '' ) ); ?></p>
 					</div>
 
-					<div class="krv-prices-tabs" role="tablist" aria-label="Категории услуг">
+					<div class="krv-prices-tabs" role="tablist" aria-label="<?php echo esc_attr( $ui['tabs_aria'] ); ?>">
 						<?php foreach ( $tabs as $index => $tab ) : ?>
 							<?php $slug = $tab['_slug']; ?>
 							<button type="button" class="krv-prices-tab<?php echo $index === 0 ? ' is-active' : ''; ?>" role="tab" id="krv-tab-<?php echo esc_attr( $slug ); ?>" aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-controls="krv-panel-<?php echo esc_attr( $slug ); ?>" tabindex="<?php echo $index === 0 ? '0' : '-1'; ?>"><?php echo esc_html( (string) ( $tab['tab_label'] ?? $tab['heading'] ?? '' ) ); ?></button>
@@ -630,8 +665,8 @@ function krv_price_list_render(): string {
 				<div class="krv-small"><?php echo esc_html( $settings['disclaimer'] ); ?></div>
 			<?php endif; ?>
 
-			<div class="krv-mobile-cta" aria-label="Быстрые действия">
-				<a class="krv-btn krv-btn-primary" href="<?php echo esc_url( $contacts_diagnostic ); ?>">Диагностика</a>
+			<div class="krv-mobile-cta" aria-label="<?php echo esc_attr( $ui['mobile_cta_aria'] ); ?>">
+				<a class="krv-btn krv-btn-primary" href="<?php echo esc_url( $contacts_diagnostic ); ?>"><?php echo esc_html( $ui['mobile_diagnostic'] ); ?></a>
 				<a class="krv-btn" href="<?php echo esc_url( $telegram_url ); ?>" target="_blank" rel="noopener noreferrer">Telegram</a>
 				<a class="krv-btn krv-btn-max" href="<?php echo esc_url( $max_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo $max_icon; ?><span>MAX</span></a>
 			</div>
@@ -641,4 +676,10 @@ function krv_price_list_render(): string {
 	return (string) ob_get_clean();
 }
 
-add_shortcode( 'krv_price_list', 'krv_price_list_render' );
+// WordPress passes shortcode attributes. Do not forward them as settings.
+add_shortcode(
+	'krv_price_list',
+	static function (): string {
+		return krv_price_list_render();
+	}
+);

@@ -55,7 +55,7 @@ function krv_page_has_ui_shortcode( array $shortcodes ): bool {
 
 	// Parent shortcodes that render nested UI shortcodes via do_shortcode().
 	$nested_shortcode_hosts = [
-		'krv_clients_grid' => [ 'krv_services_landing' ],
+		'krv_clients_grid' => [ 'krv_services_landing', 'krv_en_home' ],
 	];
 
 	foreach ( $shortcodes as $shortcode ) {
@@ -232,12 +232,14 @@ if ( function_exists( 'tsf' ) ) {
 	 * Short brand in the title tag only. Visible blog name and og:site_name stay full.
 	 */
 	function krv_tsf_short_document_title( string $title ): string {
+		$en    = function_exists( 'drslon_is_en_page' ) && drslon_is_en_page();
+		$short = $en ? 'Krivoshein' : 'Кривошеин';
 		$title = str_replace(
 			'ИТ Решения, ИП Кривошеин Алексей Сергеевич',
-			'Кривошеин',
+			$short,
 			$title
 		);
-		$brand = ' • Кривошеин';
+		$brand = ' • ' . $short;
 		$brand_len = mb_strlen( $brand, 'UTF-8' );
 
 		if ( mb_strlen( $title, 'UTF-8' ) > $brand_len && str_ends_with( $title, $brand ) ) {
@@ -592,8 +594,12 @@ add_action( 'wp_footer', function () {
 		var el = document.getElementById(renderTo);
 		if (!el) return;
 
+		var retryTimer = 0;
+		var hideTimer = 0;
+
 		function adsAllowed() {
-			// RF default ON until consent script sets window.krvConsent.ads = false.
+			// The theme head sets window.krvConsent before paint. Ads stay off
+			// until that object says ads === true.
 			if (window.krvConsent && window.krvConsent.ads === false) return false;
 			return true;
 		}
@@ -602,14 +608,26 @@ add_action( 'wp_footer', function () {
 			return !!el.querySelector('iframe');
 		}
 
+		function hideWrap() {
+			el.style.minHeight = '0';
+			el.style.display = 'none';
+			var wrap = el.closest('.krv-rsya-reco');
+			if (wrap) wrap.style.display = 'none';
+		}
+
+		function showWrap() {
+			el.style.minHeight = '';
+			el.style.display = '';
+			var wrap = el.closest('.krv-rsya-reco');
+			if (wrap) wrap.style.display = '';
+		}
+
 		function renderOnce() {
 			if (!adsAllowed()) {
-				el.style.display = 'none';
-				var wrap = el.closest('.krv-rsya-reco');
-				if (wrap) wrap.style.display = 'none';
+				hideWrap();
 				return;
 			}
-			el.style.display = '';
+			showWrap();
 			if (el.dataset.krvRecoInit === '1') return;
 			el.dataset.krvRecoInit = '1';
 
@@ -627,13 +645,19 @@ add_action( 'wp_footer', function () {
 		}
 
 		function boot() {
+			window.clearTimeout(retryTimer);
+			window.clearTimeout(hideTimer);
 			renderOnce();
-			setTimeout(function () {
+			retryTimer = window.setTimeout(function () {
 				if (!adsAllowed() || hasFill()) return;
 				el.innerHTML = '';
 				el.dataset.krvRecoInit = '0';
 				renderOnce();
 			}, 9000);
+			hideTimer = window.setTimeout(function () {
+				if (!adsAllowed() || hasFill()) return;
+				hideWrap();
+			}, 12000);
 		}
 
 		if (window.krvConsent) boot();

@@ -199,7 +199,69 @@ function krv_services_showcase_visible_section_title( string $title, int $sectio
 	return $title;
 }
 
+/**
+ * English titles and descriptions by page slug.
+ * A slug with no entry keeps get_the_title() and the catalog description.
+ * Title is set only where the stored title is Russian.
+ *
+ * @return array<string, array{title?:string, description:string, url?:string}>
+ */
+function krv_services_showcase_en_card_copy(): array {
+	return array(
+		'easy-dns-lookup'               => array(
+			'description' => 'DNS records for a domain: A, AAAA, MX, NS, TXT and others.',
+		),
+		'whois-lookup'                  => array(
+			'description' => 'Registrar, dates, status and contacts, where they are public.',
+		),
+		'wp-site-checker'               => array(
+			'description' => 'A quick look at a WordPress site: availability and basic hygiene.',
+		),
+		'konfigurator-fayrvola'         => array(
+			'title'       => 'Firewall rule builder',
+			'description' => 'Firewall rule templates for typical server cases.',
+		),
+		'izmeritel-skorosti-internetak' => array(
+			'title'       => 'Internet speed test',
+			'description' => 'A speed check in the browser, for a quick look at the line.',
+		),
+		'informatsiya-o-domene'         => array(
+			'title'       => 'Domain summary',
+			'description' => 'DNS, WHOIS and related checks in one place.',
+		),
+		'kalkulyator-setevyh-masok'     => array(
+			'title'       => 'Subnet calculator',
+			'description' => 'CIDR, address range and host count.',
+		),
+		'generator-crontab'             => array(
+			'title'       => 'Crontab generator',
+			'description' => 'A cron schedule in words and in cron syntax.',
+		),
+		'konverter-punycode-dlya-domena' => array(
+			'title'       => 'Punycode converter',
+			'description' => 'Cyrillic and other IDN domains to ASCII and back.',
+		),
+		'konsultatsii'                  => array(
+			'title'       => 'Consultations',
+			'description' => 'One-off and project advice on sites, VPS, Direct and automation.',
+			'url'         => '/en/consultations/',
+		),
+		'oferta'                        => array(
+			'title'       => 'Public offer',
+			'description' => 'The public offer. The page is in Russian.',
+		),
+		'rag-demo'                      => array(
+			'title'       => 'RAG: answers from the blog',
+			'description' => 'A live demo: answers from the blog, with links. The blog is in Russian.',
+		),
+	);
+}
+
 add_shortcode( 'krv_services_pages_showcase', function () {
+	return krv_services_showcase_render();
+} );
+
+function krv_services_showcase_render( string $locale = 'ru' ): string {
 	$sections      = krv_services_showcase_get_sections();
 	$section_count = count( $sections );
 
@@ -235,16 +297,23 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 
 	$intro_heading = '';
 	$intro_lead    = '';
-	if ( function_exists( 'get_field' ) ) {
-		$intro_heading = trim( (string) get_field( 'showcase_intro_heading', 'krv-services-showcase' ) );
-		$intro_lead    = trim( (string) get_field( 'showcase_intro_lead', 'krv-services-showcase' ) );
+	if ( 'en' === $locale ) {
+		$intro_heading = 'Online tools';
+		$intro_lead    = 'Free tools for domains, DNS, the network and WordPress, plus consultations and the blog demo. The tools open in Russian.';
+	} else {
+		if ( function_exists( 'get_field' ) ) {
+			$intro_heading = trim( (string) get_field( 'showcase_intro_heading', 'krv-services-showcase' ) );
+			$intro_lead    = trim( (string) get_field( 'showcase_intro_lead', 'krv-services-showcase' ) );
+		}
+		if ( $intro_heading === '' ) {
+			$intro_heading = 'Онлайн-сервисы и утилиты';
+		}
+		if ( $intro_lead === '' ) {
+			$intro_lead = 'Бесплатные инструменты для доменов, DNS, сети и WordPress. Плюс консультации и демо AI-базы.';
+		}
 	}
-	if ( $intro_heading === '' ) {
-		$intro_heading = 'Онлайн-сервисы и утилиты';
-	}
-	if ( $intro_lead === '' ) {
-		$intro_lead = 'Бесплатные инструменты для доменов, DNS, сети и WordPress. Плюс консультации и демо AI-базы.';
-	}
+
+	$en_copy = ( 'en' === $locale ) ? krv_services_showcase_en_card_copy() : array();
 
 	ob_start();
 	?>
@@ -283,6 +352,18 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 						$meta  = krv_services_showcase_resolve_meta( (int) $page_id, $slug, $title );
 						$desc  = $meta['description'];
 						$icon  = $meta['icon'];
+						if ( isset( $en_copy[ $slug ] ) ) {
+							$copy = $en_copy[ $slug ];
+							if ( isset( $copy['title'] ) && $copy['title'] !== '' ) {
+								$title = $copy['title'];
+							}
+							if ( isset( $copy['description'] ) && $copy['description'] !== '' ) {
+								$desc = $copy['description'];
+							}
+							if ( isset( $copy['url'] ) && $copy['url'] !== '' ) {
+								$url = home_url( $copy['url'] );
+							}
+						}
 						?>
 						<a class="krv-service-page-card" href="<?php echo esc_url( $url ); ?>">
 							<div class="krv-service-page-card-inner">
@@ -318,6 +399,12 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 							if ( $c_desc === '' ) {
 								$c_desc = 'Живое демо AI-базы по материалам сайта.';
 							}
+							if ( 'en' === $locale && $c_desc === 'Живое демо AI-базы по материалам сайта.' ) {
+								$c_desc = 'A live demo: answers from the blog, with links. The blog is in Russian.';
+							}
+							if ( 'en' === $locale && preg_match( '/\p{Cyrillic}/u', $c_title ) ) {
+								$c_title = 'RAG: answers from the blog';
+							}
 							?>
 							<a class="krv-service-page-card krv-service-page-card--external" href="<?php echo esc_url( $c_url ); ?>">
 								<div class="krv-service-page-card-inner">
@@ -342,7 +429,7 @@ add_shortcode( 'krv_services_pages_showcase', function () {
 	</div>
 	<?php
 	return ob_get_clean();
-} );
+}
 
 function krv_services_showcase_purge_for_page( int $post_id ): void {
 	delete_transient( 'krv_services_showcase_v1' );
