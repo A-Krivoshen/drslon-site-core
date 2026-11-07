@@ -7,7 +7,7 @@
 	--krv-sp-surface: #ffffff;
 	--krv-sp-radius: 16px;
 	--krv-sp-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
-	max-width: 960px;
+	max-width: 840px;
 	margin: 0 auto;
 	padding: 24px 16px 40px;
 	font-family: var(--krv-font-sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
@@ -20,11 +20,6 @@
 	box-sizing: border-box;
 }
 
-.krv-service-page--minimal {
-	max-width: 1100px;
-	padding-top: 12px;
-}
-
 .krv-service-page__heading {
 	margin: 0 0 20px;
 	font-size: clamp(1.5rem, 2.4vw, 2rem);
@@ -32,12 +27,6 @@
 	line-height: 1.25;
 	text-align: center;
 	color: var(--krv-sp-text);
-}
-
-.krv-service-page--minimal .krv-service-page__heading {
-	text-align: left;
-	font-size: clamp(1.35rem, 2vw, 1.75rem);
-	margin-bottom: 16px;
 }
 
 .krv-service-page__intro {
@@ -80,13 +69,6 @@
 	border-radius: var(--krv-sp-radius);
 	box-shadow: var(--krv-sp-shadow);
 	color: var(--krv-sp-text);
-}
-
-.krv-service-page--minimal .krv-service-page__tool {
-	padding: 0;
-	border: 0;
-	box-shadow: none;
-	background: transparent;
 }
 
 .krv-service-page__dns-types {
@@ -304,10 +286,6 @@
 		padding: 16px;
 	}
 
-	.krv-service-page--minimal .krv-service-page__tool {
-		padding: 0;
-	}
-
 	.krv-service-page .wdc-style-1-clean-search-container {
 		flex-direction: column;
 		align-items: stretch;
@@ -347,26 +325,9 @@ body.page-id-7304 .wp-block-post-title {
 	margin-right: auto;
 }
 
-body.page-id-6204 .entry-content,
-body.page-id-7323 .entry-content,
-body.page-id-7304 .entry-content {
-	max-width: 680px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.krv-service-page[data-page-id="7323"],
-.krv-service-page[data-page-id="7304"] {
-	max-width: 640px;
-	margin: 0 auto;
-}
-
 .krv-service-page[data-page-id="7323"] .krv-service-page__tool,
 .krv-service-page[data-page-id="7304"] .krv-service-page__tool {
-	padding: 0;
-	border: 0;
-	background: transparent;
-	box-shadow: none;
+	padding: 24px;
 }
 
 .krv-service-page[data-page-id="7323"] .krv-nt,
@@ -383,8 +344,6 @@ body.page-id-7304 .entry-content {
 .krv-service-page[data-page-id="6204"] {
 	display: flex;
 	flex-direction: column;
-	max-width: 640px;
-	margin: 0 auto;
 	padding-top: 8px;
 }
 
@@ -589,5 +548,616 @@ body.page-id-7304 .entry-content {
 	.krv-service-page[data-page-id="6204"] .wdc-style-1-clean-action-buttons .wdc-style-1-clean-buy-button {
 		flex: 1;
 		text-align: center;
+	}
+}
+
+/* One tool card. Vendor plugins ship a second white box and their own blues. */
+.krv-service-page__tool .punycode-converter-container,
+.krv-service-page__tool .dns-lookup-container,
+.krv-service-page__tool .whois-lookup-container,
+.krv-service-page__tool .crontab-generator-container,
+.krv-service-page__tool .firewall-configurator-container,
+.krv-service-page__tool .nm-calculator-container,
+.krv-service-page__tool .speed-test-container,
+.krv-service-page__tool .wpsc-shortcode-form,
+.krv-service-page__tool .wdc-style-1-clean {
+	max-width: none !important;
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: transparent !important;
+	background-color: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	border-radius: 0 !important;
+	font-family: inherit !important;
+	color: inherit !important;
+}
+
+.krv-service-page__tool form {
+	text-align: left !important;
+}
+
+.krv-service-page__tool form > div {
+	width: 100% !important;
+	max-width: none !important;
+}
+
+.krv-service-page__tool .form-row {
+	display: flex;
+	gap: 12px;
+	align-items: flex-end;
+}
+
+.krv-service-page__tool .form-group {
+	flex: 1 1 180px;
+	min-width: 0;
+}
+
+.krv-service-page__tool label {
+	font-size: 0.92rem;
+	font-weight: 600;
+}
+
+.krv-service-page__tool input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="image"]),
+.krv-service-page__tool select {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: none !important;
+	min-width: 0 !important;
+	height: 48px !important;
+	margin-top: 6px !important;
+	padding: 0 14px !important;
+	border: 1px solid var(--krv-sp-line) !important;
+	border-radius: 12px !important;
+	background: #ffffff !important;
+	color: var(--krv-sp-text) !important;
+	font-family: inherit !important;
+	font-size: 1rem !important;
+	line-height: 1.2 !important;
+	box-shadow: none !important;
+}
+
+.krv-service-page__tool textarea {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	min-height: 96px !important;
+	padding: 12px 14px !important;
+	border: 1px solid var(--krv-sp-line) !important;
+	border-radius: 12px !important;
+	background: #ffffff !important;
+	color: var(--krv-sp-text) !important;
+	font-family: inherit !important;
+	font-size: 1rem !important;
+	box-shadow: none !important;
+}
+
+.krv-service-page__tool form button,
+.krv-service-page__tool form input[type="submit"],
+.krv-service-page__tool .speed-test-button,
+.krv-service-page__tool .button-primary {
+	box-sizing: border-box !important;
+	min-height: 48px !important;
+	height: auto !important;
+	padding: 12px 18px !important;
+	border: 1px solid var(--krv-sp-accent) !important;
+	border-radius: 12px !important;
+	background: var(--krv-sp-accent) !important;
+	color: #ffffff !important;
+	font-family: inherit !important;
+	font-size: 0.95rem !important;
+	font-weight: 600 !important;
+	line-height: 1.2 !important;
+	cursor: pointer;
+	box-shadow: none !important;
+}
+
+.krv-service-page__tool form button[id*="clear"],
+.krv-service-page__tool form button[id*="Clear"] {
+	background: transparent !important;
+	color: var(--krv-sp-text) !important;
+	border-color: var(--krv-sp-line) !important;
+}
+
+.krv-service-page__tool form button:hover,
+.krv-service-page__tool form input[type="submit"]:hover,
+.krv-service-page__tool .speed-test-button:hover,
+.krv-service-page__tool .button-primary:hover {
+	background: #244ac2 !important;
+	border-color: #244ac2 !important;
+	color: #ffffff !important;
+}
+
+.krv-service-page__tool form button[id*="clear"]:hover {
+	background: var(--krv-sp-accent-soft) !important;
+	border-color: var(--krv-sp-accent) !important;
+	color: var(--krv-sp-accent) !important;
+}
+
+.krv-service-page__tool table {
+	width: 100% !important;
+	border-collapse: collapse;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+@media (max-width: 640px) {
+	.krv-service-page__tool form div[style*="display: flex"],
+	.krv-service-page__tool form div[style*="display:flex"],
+	.krv-service-page__tool .form-row {
+		flex-direction: column !important;
+		align-items: stretch !important;
+	}
+
+	.krv-service-page__tool form button,
+	.krv-service-page__tool form input[type="submit"],
+	.krv-service-page__tool .speed-test-button,
+	.krv-service-page__tool .button-primary {
+		width: 100% !important;
+	}
+}
+
+html[data-theme="dark"] .krv-service-page__tool .punycode-converter-container,
+html[data-theme="dark"] .krv-service-page__tool .dns-lookup-container,
+html[data-theme="dark"] .krv-service-page__tool .whois-lookup-container,
+html[data-theme="dark"] .krv-service-page__tool .crontab-generator-container,
+html[data-theme="dark"] .krv-service-page__tool .firewall-configurator-container,
+html[data-theme="dark"] .krv-service-page__tool .nm-calculator-container,
+html[data-theme="dark"] .krv-service-page__tool .speed-test-container,
+html[data-theme="dark"] .krv-service-page__tool .wpsc-shortcode-form,
+html[data-theme="dark"] .krv-service-page__tool .wdc-style-1-clean {
+	background: transparent !important;
+	background-color: transparent !important;
+	box-shadow: none !important;
+	border: 0 !important;
+	color: inherit !important;
+}
+
+html[data-theme="dark"] .krv-service-page__tool input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="image"]),
+html[data-theme="dark"] .krv-service-page__tool select,
+html[data-theme="dark"] .krv-service-page__tool textarea {
+	background: #0b1220 !important;
+	color: #ffffff !important;
+	-webkit-text-fill-color: #ffffff !important;
+	border-color: #3d5a9a !important;
+}
+
+html[data-theme="dark"] .krv-service-page__tool form button[id*="clear"] {
+	background: transparent !important;
+	color: #e8eefc !important;
+	-webkit-text-fill-color: #e8eefc !important;
+	border-color: #243049 !important;
+}
+
+/*
+ * Live tool pages do not print [krv_service_page]. The plugin widget is the
+ * card. These rules are the same fields and buttons on every network tool.
+ */
+body.krv-tool-page .dns-lookup-container,
+body.krv-tool-page .whois-lookup-container,
+body.krv-tool-page .punycode-converter-container,
+body.krv-tool-page .crontab-generator-container,
+body.krv-tool-page .firewall-configurator-container,
+body.krv-tool-page .nm-calculator-container,
+body.krv-tool-page .speed-test-container,
+body.krv-tool-page .wdc-form,
+body.krv-tool-page .wpsc-shortcode-form > div[style*="background"] {
+	box-sizing: border-box !important;
+	max-width: 840px !important;
+	width: 100% !important;
+	margin: 8px auto 28px !important;
+	padding: 24px !important;
+	background: #ffffff !important;
+	background-color: #ffffff !important;
+	border: 1px solid #e7ecf5 !important;
+	border-radius: 16px !important;
+	box-shadow: 0 12px 34px rgba(15, 23, 42, 0.07) !important;
+	font-family: inherit !important;
+	color: #111827 !important;
+}
+
+body.krv-tool-page .dns-lookup-container form,
+body.krv-tool-page .whois-lookup-container form,
+body.krv-tool-page .punycode-converter-container form,
+body.krv-tool-page .crontab-generator-container form,
+body.krv-tool-page .firewall-configurator-container form,
+body.krv-tool-page .nm-calculator-container form,
+body.krv-tool-page .wpsc-shortcode-form form {
+	text-align: left !important;
+}
+
+body.krv-tool-page .dns-lookup-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+body.krv-tool-page .whois-lookup-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+body.krv-tool-page .punycode-converter-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+body.krv-tool-page .crontab-generator-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+body.krv-tool-page .firewall-configurator-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+body.krv-tool-page .nm-calculator-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+body.krv-tool-page .nm-calculator-container select,
+body.krv-tool-page .dns-lookup-container select,
+body.krv-tool-page .firewall-configurator-container select,
+body.krv-tool-page .wpsc-shortcode-form input:not([type="hidden"]):not([type="submit"]):not([type="checkbox"]),
+body.krv-tool-page .wdc-form .form-control,
+body.krv-tool-page .speed-test-container input:not([type="hidden"]) {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: none !important;
+	min-width: 0 !important;
+	height: 48px !important;
+	margin-top: 6px !important;
+	padding: 0 14px !important;
+	border: 1px solid #e7ecf5 !important;
+	border-radius: 12px !important;
+	background: #ffffff !important;
+	color: #111827 !important;
+	font-family: inherit !important;
+	font-size: 1rem !important;
+	box-shadow: none !important;
+}
+
+body.krv-tool-page .dns-lookup-container form button,
+body.krv-tool-page .whois-lookup-container form button,
+body.krv-tool-page .punycode-converter-container form button,
+body.krv-tool-page .crontab-generator-container form button,
+body.krv-tool-page .firewall-configurator-container form button,
+body.krv-tool-page .nm-calculator-container form button,
+body.krv-tool-page .wpsc-shortcode-form input[type="submit"],
+body.krv-tool-page .wpsc-shortcode-form .button-primary,
+body.krv-tool-page .speed-test-button,
+body.krv-tool-page .wdc-form #Submit {
+	box-sizing: border-box !important;
+	min-height: 48px !important;
+	height: auto !important;
+	padding: 12px 18px !important;
+	border: 1px solid #315fe8 !important;
+	border-radius: 12px !important;
+	background: #315fe8 !important;
+	color: #ffffff !important;
+	font-family: inherit !important;
+	font-size: 0.95rem !important;
+	font-weight: 600 !important;
+	line-height: 1.2 !important;
+	box-shadow: none !important;
+	cursor: pointer;
+}
+
+body.krv-tool-page button[id*="clear"] {
+	background: transparent !important;
+	color: #111827 !important;
+	border-color: #e7ecf5 !important;
+}
+
+body.krv-tool-page .wdc-form .input-group {
+	display: flex !important;
+	gap: 10px;
+	align-items: center;
+	max-width: none !important;
+}
+
+body.krv-tool-page .wdc-form .input-group .form-control {
+	flex: 1 1 auto;
+	margin-top: 0 !important;
+}
+
+body.krv-tool-page .wdc-form .input-group-btn {
+	display: flex;
+	width: auto;
+}
+
+@media (max-width: 640px) {
+	body.krv-tool-page .dns-lookup-container,
+	body.krv-tool-page .whois-lookup-container,
+	body.krv-tool-page .punycode-converter-container,
+	body.krv-tool-page .crontab-generator-container,
+	body.krv-tool-page .firewall-configurator-container,
+	body.krv-tool-page .nm-calculator-container,
+	body.krv-tool-page .speed-test-container,
+	body.krv-tool-page .wdc-form,
+	body.krv-tool-page .wpsc-shortcode-form > div[style*="background"] {
+		padding: 16px !important;
+	}
+
+	body.krv-tool-page .dns-lookup-container form div[style*="display: flex"],
+	body.krv-tool-page .whois-lookup-container form div[style*="display: flex"],
+	body.krv-tool-page .punycode-converter-container form div[style*="display: flex"],
+	body.krv-tool-page .crontab-generator-container form div[style*="display: flex"],
+	body.krv-tool-page .firewall-configurator-container form div[style*="display: flex"],
+	body.krv-tool-page .wdc-form .input-group,
+	body.krv-tool-page .nm-calculator-container .form-row {
+		flex-direction: column !important;
+		align-items: stretch !important;
+	}
+
+	body.krv-tool-page .dns-lookup-container form button,
+	body.krv-tool-page .whois-lookup-container form button,
+	body.krv-tool-page .punycode-converter-container form button,
+	body.krv-tool-page .crontab-generator-container form button,
+	body.krv-tool-page .firewall-configurator-container form button,
+	body.krv-tool-page .nm-calculator-container form button,
+	body.krv-tool-page .wpsc-shortcode-form input[type="submit"],
+	body.krv-tool-page .speed-test-button,
+	body.krv-tool-page .wdc-form #Submit {
+		width: 100% !important;
+	}
+}
+
+html[data-theme="dark"] body.krv-tool-page .dns-lookup-container,
+html[data-theme="dark"] body.krv-tool-page .whois-lookup-container,
+html[data-theme="dark"] body.krv-tool-page .punycode-converter-container,
+html[data-theme="dark"] body.krv-tool-page .crontab-generator-container,
+html[data-theme="dark"] body.krv-tool-page .firewall-configurator-container,
+html[data-theme="dark"] body.krv-tool-page .nm-calculator-container,
+html[data-theme="dark"] body.krv-tool-page .speed-test-container,
+html[data-theme="dark"] body.krv-tool-page .wdc-form,
+html[data-theme="dark"] body.krv-tool-page .wpsc-shortcode-form > div[style*="background"] {
+	background: #121a2b !important;
+	background-color: #121a2b !important;
+	border-color: #243049 !important;
+	color: #e8eefc !important;
+	box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-theme="dark"] body.krv-tool-page .dns-lookup-container input,
+html[data-theme="dark"] body.krv-tool-page .whois-lookup-container input,
+html[data-theme="dark"] body.krv-tool-page .punycode-converter-container input,
+html[data-theme="dark"] body.krv-tool-page .crontab-generator-container input,
+html[data-theme="dark"] body.krv-tool-page .firewall-configurator-container input,
+html[data-theme="dark"] body.krv-tool-page .nm-calculator-container input,
+html[data-theme="dark"] body.krv-tool-page .nm-calculator-container select,
+html[data-theme="dark"] body.krv-tool-page .dns-lookup-container select,
+html[data-theme="dark"] body.krv-tool-page .firewall-configurator-container select,
+html[data-theme="dark"] body.krv-tool-page .wpsc-shortcode-form input:not([type="submit"]):not([type="button"]),
+html[data-theme="dark"] body.krv-tool-page .wdc-form .form-control,
+html[data-theme="dark"] body.krv-tool-page .speed-test-container input {
+	background: #0b1220 !important;
+	color: #ffffff !important;
+	-webkit-text-fill-color: #ffffff !important;
+	border-color: #3d5a9a !important;
+}
+
+html[data-theme="dark"] body.krv-tool-page button[id*="clear"] {
+	background: transparent !important;
+	color: #e8eefc !important;
+	-webkit-text-fill-color: #e8eefc !important;
+	border-color: #243049 !important;
+}
+
+/*
+ * Second pass. Vendor styles and the first pass lose on specificity:
+ * clear buttons stay accent, domain search is Bootstrap, cron fields
+ * stop at 600px, and a column flex-basis of 0 collapses mobile inputs.
+ */
+body.krv-tool-page .crontab-generator-container form > div,
+body.krv-tool-page .firewall-configurator-container form > div,
+body.krv-tool-page .nm-calculator-container form > div,
+body.krv-tool-page .dns-lookup-container form > div,
+body.krv-tool-page .whois-lookup-container form > div,
+body.krv-tool-page .punycode-converter-container form > div {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: none !important;
+}
+
+body.krv-tool-page .dns-lookup-container button[id*="clear"],
+body.krv-tool-page .whois-lookup-container button[id*="clear"],
+body.krv-tool-page .punycode-converter-container button[id*="clear"],
+body.krv-tool-page .crontab-generator-container button[id*="clear"],
+body.krv-tool-page .firewall-configurator-container button[id*="clear"],
+body.krv-tool-page .nm-calculator-container button[id*="clear"],
+body.krv-tool-page .wpsc-shortcode-form a.button {
+	background: #ffffff !important;
+	background-color: #ffffff !important;
+	color: #111827 !important;
+	-webkit-text-fill-color: #111827 !important;
+	border: 1px solid #e7ecf5 !important;
+	border-radius: 12px !important;
+	box-shadow: none !important;
+	text-decoration: none !important;
+}
+
+body.krv-tool-page #wdc-style {
+	font-family: inherit !important;
+	max-width: 100% !important;
+	color: #111827 !important;
+}
+
+body.krv-tool-page #wdc-style .input-group {
+	display: flex !important;
+	flex-wrap: nowrap !important;
+	align-items: stretch !important;
+	gap: 10px !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	overflow: visible !important;
+	background: transparent !important;
+	border: 0 !important;
+}
+
+body.krv-tool-page #wdc-style #Search.form-control {
+	flex: 1 1 auto !important;
+	width: auto !important;
+	min-width: 0 !important;
+	height: 48px !important;
+	min-height: 48px !important;
+	margin: 0 !important;
+	border-radius: 12px !important;
+	font-family: inherit !important;
+	font-size: 1rem !important;
+}
+
+body.krv-tool-page #wdc-style .input-group-btn {
+	display: flex !important;
+	flex: 0 0 auto !important;
+	width: auto !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	background: transparent !important;
+	float: none !important;
+}
+
+body.krv-tool-page #wdc-style button#Submit {
+	flex: 0 0 auto !important;
+	width: auto !important;
+	height: 48px !important;
+	min-height: 48px !important;
+	margin: 0 !important;
+	padding: 12px 18px !important;
+	border: 1px solid #315fe8 !important;
+	border-radius: 12px !important;
+	background: #315fe8 !important;
+	color: #ffffff !important;
+	font-family: inherit !important;
+	font-size: 0.95rem !important;
+	font-weight: 600 !important;
+	line-height: 1.2 !important;
+	letter-spacing: 0 !important;
+	text-transform: none !important;
+	box-shadow: none !important;
+}
+
+body.krv-tool-page .wpsc-shortcode-form > div[style*="background"] {
+	max-width: 840px !important;
+	margin: 8px auto 16px !important;
+	padding: 0 !important;
+	background: transparent !important;
+	background-color: transparent !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+}
+
+body.krv-tool-page .wpsc-shortcode-form > form {
+	box-sizing: border-box !important;
+	max-width: 840px !important;
+	width: 100% !important;
+	margin: 8px auto 28px !important;
+	padding: 24px !important;
+	background: #ffffff !important;
+	background-color: #ffffff !important;
+	border: 1px solid #e7ecf5 !important;
+	border-radius: 16px !important;
+	box-shadow: 0 12px 34px rgba(15, 23, 42, 0.07) !important;
+	align-items: stretch !important;
+}
+
+body.krv-tool-page .user-info-container,
+body.krv-tool-page .custom-captcha {
+	box-sizing: border-box !important;
+	max-width: 840px !important;
+	width: 100% !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	border: 1px solid #e7ecf5 !important;
+	border-radius: 16px !important;
+	background: #ffffff !important;
+	color: #111827 !important;
+	box-shadow: none !important;
+}
+
+@media (max-width: 640px) {
+	body.krv-tool-page .dns-lookup-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+	body.krv-tool-page .whois-lookup-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+	body.krv-tool-page .punycode-converter-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]) {
+		flex: 0 0 auto !important;
+		height: 48px !important;
+		min-height: 48px !important;
+		max-height: none !important;
+	}
+
+	body.krv-tool-page .crontab-generator-container form,
+	body.krv-tool-page .firewall-configurator-container form,
+	body.krv-tool-page .nm-calculator-container form,
+	body.krv-tool-page .dns-lookup-container form,
+	body.krv-tool-page .whois-lookup-container form,
+	body.krv-tool-page .punycode-converter-container form {
+		align-items: stretch !important;
+		width: 100% !important;
+	}
+
+	body.krv-tool-page #wdc-style .input-group {
+		flex-direction: column !important;
+	}
+
+	body.krv-tool-page #wdc-style button#Submit,
+	body.krv-tool-page #wdc-style .input-group-btn {
+		width: 100% !important;
+	}
+}
+
+html[data-theme="dark"] body.krv-tool-page .dns-lookup-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html[data-theme="dark"] body.krv-tool-page .whois-lookup-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html[data-theme="dark"] body.krv-tool-page .punycode-converter-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html[data-theme="dark"] body.krv-tool-page .crontab-generator-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html[data-theme="dark"] body.krv-tool-page .firewall-configurator-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html[data-theme="dark"] body.krv-tool-page .nm-calculator-container input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html[data-theme="dark"] body.krv-tool-page .nm-calculator-container select,
+html[data-theme="dark"] body.krv-tool-page .dns-lookup-container select,
+html[data-theme="dark"] body.krv-tool-page .firewall-configurator-container select,
+html[data-theme="dark"] body.krv-tool-page .wpsc-shortcode-form input:not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="checkbox"]),
+html[data-theme="dark"] body.krv-tool-page #wdc-style #Search.form-control,
+html[data-theme="dark"] body.krv-tool-page .speed-test-container input:not([type="hidden"]):not([type="submit"]):not([type="button"]) {
+	background: #0b1220 !important;
+	background-color: #0b1220 !important;
+	color: #ffffff !important;
+	-webkit-text-fill-color: #ffffff !important;
+	border-color: #3d5a9a !important;
+}
+
+html[data-theme="dark"] body.krv-tool-page .dns-lookup-container button[id*="clear"],
+html[data-theme="dark"] body.krv-tool-page .whois-lookup-container button[id*="clear"],
+html[data-theme="dark"] body.krv-tool-page .punycode-converter-container button[id*="clear"],
+html[data-theme="dark"] body.krv-tool-page .crontab-generator-container button[id*="clear"],
+html[data-theme="dark"] body.krv-tool-page .firewall-configurator-container button[id*="clear"],
+html[data-theme="dark"] body.krv-tool-page .nm-calculator-container button[id*="clear"],
+html[data-theme="dark"] body.krv-tool-page .wpsc-shortcode-form a.button {
+	background: transparent !important;
+	background-color: transparent !important;
+	color: #e8eefc !important;
+	-webkit-text-fill-color: #e8eefc !important;
+	border: 1px solid #243049 !important;
+}
+
+html[data-theme="dark"] body.krv-tool-page .wpsc-shortcode-form > form,
+html[data-theme="dark"] body.krv-tool-page .user-info-container,
+html[data-theme="dark"] body.krv-tool-page .custom-captcha {
+	background: #121a2b !important;
+	background-color: #121a2b !important;
+	border-color: #243049 !important;
+	color: #e8eefc !important;
+}
+
+html[data-theme="dark"] body.krv-tool-page .custom-captcha p,
+html[data-theme="dark"] body.krv-tool-page .user-info-container,
+html[data-theme="dark"] body.krv-tool-page .user-info-container p,
+html[data-theme="dark"] body.krv-tool-page .user-info-container span {
+	color: #e8eefc !important;
+	-webkit-text-fill-color: #e8eefc !important;
+}
+
+body.krv-tool-page .wpsc-shortcode-form input[type="submit"],
+body.krv-tool-page .wpsc-shortcode-form a.button {
+	width: auto !important;
+	flex: 0 0 auto !important;
+	box-sizing: border-box !important;
+	min-height: 48px !important;
+	height: auto !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	padding: 12px 18px !important;
+}
+
+@media (max-width: 640px) {
+	body.krv-tool-page .wpsc-shortcode-form form,
+	body.krv-tool-page .wpsc-shortcode-form form div,
+	body.krv-tool-page .nm-calculator-container form div[style*="display: flex"] {
+		flex-direction: column !important;
+		align-items: stretch !important;
+	}
+
+	body.krv-tool-page .wpsc-shortcode-form input[type="submit"],
+	body.krv-tool-page .wpsc-shortcode-form a.button,
+	body.krv-tool-page .nm-calculator-container form button {
+		width: 100% !important;
 	}
 }

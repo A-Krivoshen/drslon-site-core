@@ -17,6 +17,19 @@ add_action(
 			return;
 		}
 
+		// Network tools print jQuery() inside the shortcode HTML. That runs
+		// in the body, so jquery-core has to be in the head or the click
+		// never binds. The plugins themselves never enqueue it.
+		if ( function_exists( 'krv_service_page_get_config' ) && is_singular( 'page' ) && is_array( krv_service_page_get_config() ) ) {
+			wp_enqueue_script( 'jquery' );
+			$jquery_scripts = wp_scripts();
+			foreach ( array( 'jquery', 'jquery-core' ) as $jquery_handle ) {
+				if ( isset( $jquery_scripts->registered[ $jquery_handle ] ) ) {
+					$jquery_scripts->add_data( $jquery_handle, 'group', 0 );
+				}
+			}
+		}
+
 		$plugin_file = DRSLON_SITE_CORE_DIR . 'drslon-site-core.php';
 
 		$styles = [
@@ -95,6 +108,12 @@ add_action(
 
 			$config  = $styles[ $handle ];
 			$matched = krv_page_has_ui_shortcode( $config['shortcode'] );
+
+			// Tool pages keep the plugin shortcode in the post. The registry
+			// still marks them, and the shell stylesheet is what unifies them.
+			if ( ! $matched && $handle === 'drslon-service-page-shell' && function_exists( 'krv_service_page_get_config' ) && is_singular( 'page' ) ) {
+				$matched = is_array( krv_service_page_get_config() );
+			}
 
 			// Pages still store the widget HTML (no shortcode). Match the root class in post_content.
 			if ( ! $matched && ! empty( $config['marker'] ) && is_singular() ) {
