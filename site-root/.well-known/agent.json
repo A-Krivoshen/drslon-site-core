@@ -12,7 +12,8 @@
     "inn": "770603253213"
   },
   "language": [
-    "ru"
+    "ru",
+    "en"
   ],
   "preferredContentTypes": [
     "text/markdown",
@@ -34,7 +35,12 @@
     "humans": "https://krivoshein.site/humans.txt",
     "pricing": "https://krivoshein.site/prays-list/",
     "contacts": "https://krivoshein.site/contacts/",
-    "ecosystemHub": "https://krivoshein.site/llms.txt"
+    "ecosystemHub": "https://krivoshein.site/llms.txt",
+    "llmsEn": "https://krivoshein.site/en/llms.txt",
+    "llmsFullEn": "https://krivoshein.site/en/llms-full.txt",
+    "aiIndexEn": "https://krivoshein.site/en/ai.txt",
+    "agentsEn": "https://krivoshein.site/en/agents.md",
+    "homepageEn": "https://krivoshein.site/en/"
   },
   "endpoints": {
     "rest": "https://krivoshein.site/wp-json/",

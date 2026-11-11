@@ -3,6 +3,9 @@
 # Полное описание: https://krivoshein.site/llms.txt
 # Полный дамп: https://krivoshein.site/llms-full.txt
 # Инструкции: https://krivoshein.site/agents.md
+# English: https://krivoshein.site/en/ai.txt
+# English llms: https://krivoshein.site/en/llms.txt
+# English page: https://krivoshein.site/en/
 
 > ИП Кривошеин Алексей (Dr.Slon) — WordPress, DevOps, SEO, Яндекс.Директ, боты MAX, AI-ready
 

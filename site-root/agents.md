@@ -3,6 +3,7 @@
 Версия: 2026-08-16  
 Владелец: ИП Кривошеин Алексей Сергеевич (Dr.Slon)  
 Сайт: https://krivoshein.site
+English: https://krivoshein.site/en/agents.md
 
 ## Цель
 

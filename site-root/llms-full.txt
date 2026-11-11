@@ -2,7 +2,7 @@
 
 Краткий индекс: https://krivoshein.site/llms.txt
 
-> Сгенерировано/обновлено: 2026-07-31. Краткий индекс: /llms.txt · Инструкции: /agents.md
+> Сгенерировано/обновлено: 2026-11-11. Краткий индекс: /llms.txt · Инструкции: /agents.md
 
 Этот файл дополняет llms.txt: больше деталей по услугам, сервисам и свежим публикациям. Для полного списка URL используйте https://krivoshein.site/sitemap.xml
 
@@ -177,56 +177,56 @@ Content-Signal (robots): search=yes, ai-input=yes, ai-train=yes. Автор: И�
 
 Полные тексты — по URL статьи или через REST API. Ниже — заголовки и краткие выдержки для навигации.
 
-- [RAG по блогу: демо AI-базы знаний с GigaChat на WordPress](https://krivoshein.site/rag-po-blogu-demo-ai-bazy-znaniy-gigachat/) — 2026-07-31
-  На сайте появилось живое RAG-демо: можно задать вопрос по материалам блога и получить ответ через GigaChat со ссылками на конкретные статьи. Это не «чат, который всё знает», а разбор по уже опубликованным постам. Ниже: к
-- [Сегодня последняя пятница июля. День системного администратора.](https://krivoshein.site/segodnya-poslednyaya-pyatnitsa-iyulya-den-sistemnogo-administratora/) — 2026-07-31
-  Можно хотя бы на несколько часов перестать держать в голове все текущие тикеты и просто признать: без людей, которые сидят в консоли, большая часть того, что «просто работает», работать бы перестала. Я сам начинал как си
-- [Свой AI-помощник вместо Replain: единый чат на всех лендингах и сайте](https://krivoshein.site/svoy-ai-pomoschnik-vmesto-replain-kak-sdelal-edinyy-chat-na-vseh-lendingah-i-sayte/) — 2026-07-31
-  Долгое время на всех лендингах и на основном сайте стоял Replain. Он работал, но был чужим: один и тот же виджет на всех страницах, без понимания контекста, с отдельной системой заявок и без нормальной связки с услугами.
-- [Платный цифровой почтовый ящик на Госуслугах для ИП и ООО](https://krivoshein.site/platnyy-tsifrovoy-pochtovyy-yaschik-na-gosuslugah-dlya-ip-i-ooo/) — 2026-07-30
-  26 июля 2026 года подписан Федеральный закон № 271-ФЗ. Он вводит электронную почтовую систему на базе Госуслуг. Для ИП и юридических лиц появляется отдельный цифровой почтовый ящик. И он будет платным. Основная часть нор
-- [Бегет под санкциями ЕС. Что делать клиентам](https://krivoshein.site/beget-pod-sanktsiyami-es-chto-delat-klientam/) — 2026-07-24
-  Хостинг-провайдер «Бегет» и трое его руководителей внесены в санкционный список Европейского союза в 21-м пакете. Документы опубликованы, формулировки уже не слухи из чатов. В решении указано, что компания с 2014 года пр
-- [wp2shell: критическая дыра в ядре WordPress, патчи 6.9.5 / 7.0.2 / 6.8.6](https://krivoshein.site/esli-u-vas-wordpress-6-9-0-6-9-4-ili-7-0-0-7-0-1-snachala-proverte-versiyu-i-obnovites-potom-uzhe-chitayte-dalshe/) — 2026-07-24
-  17 июля 2026 WordPress выпустил экстренные патчи: 6.9.5, 7.0.2 и бэкпорт 6.8.6. Причина: цепочка из двух дыр в ядре, которую назвали wp2shell. На обычной установке без плагинов она даёт удалённое выполнение кода без авто
-- [Перенос почты с Яндекс 360 на Beget: технический разбор миграции](https://krivoshein.site/perenos-pochty-s-yandeks-360-na-beget-tehnicheskiy-razbor-migratsii/) — 2026-07-24
-  В июне 2026 года Яндекс ограничил бесплатный доступ по IMAP, POP3 и SMTP для сторонних клиентов. Похожие ограничения появились и у Mail.ru. Для доменной почты aleksey@krivoshein.site это стало причиной переезда с Яндекс 
-- [Чужие брендовые ключи в Яндекс Директе: можно ли рекламироваться по запросам конкурентов](https://krivoshein.site/chuzhie-brendovye-klyuchi-v-yandeks-direkte-mozhno-li-reklamirovatsya-po-zaprosam-konkurentov/) — 2026-07-22
-  Вопрос периодически возникает у тех, кто ведёт контекстную рекламу: можно ли показывать объявление по запросам с названием конкурента? Например, человек ищет конкретную компанию, сервис или товарный знак, а Яндекс показы
-- [Обновление MAX Autopost 1.11.6](https://krivoshein.site/obnovlenie-max-autopost-1-11-6/) — 2026-07-21
-  Вышла версия 1.11.6 плагина MAX Autopost. В ней поправлены ошибки интеграции с API MAX: переносы строк, склеивание заголовка с текстом, HTML-форматирование и контроль лимитов. Что исправили Что сделать Обновитесь до 1.11
-- [MAX Autopost 1.11.5: важное обновление](https://krivoshein.site/max-autopost-1-11-5-vazhnoe-obnovlenie/) — 2026-07-20
-  Вышла версия 1.11.5 плагина MAX Autopost. В ней закрыт критический баг после 1.11.4 и проблемы с SSL и картинками на shared-хостинге. Что было Что сделали в 1.11.5 Что сделать Обновитесь до 1.11.5 (Плагины → обновление и
-- [OpenCode: мой опыт перехода с локальных моделей и MWS на подписку Go](https://krivoshein.site/opencode-moy-opyt-perehoda-s-lokalnyh-modeley-i-mws-na-podpisku-go/) — 2026-07-18
-  Я долго искал удобный инструмент для работы с кодом. Cursor нравится, Grok Builder часто выручает, но лимиты быстро сгорают, а за 30 долларов в месяц уже хочется предсказуемости. Что пробовал до этого Сначала подключился
-- [MAX Autopost 1.11.4: CA Минцифры в плагине, кэш и защита от OOM](https://krivoshein.site/vylozhil-max-autopost-1-11-4-obkatali-dopilili-v-prodakshn/) — 2026-07-17
-  Выложил MAX Autopost 1.11.4. Обкатали, допилили, в продакшн. Коротко по делу: SSL из коробки, кэш там, где он реально нужен, и защита от случайных кликов и OOM. SSL больше не боль Встроили CA-bundle Минцифры прямо в плаг
-- [MAX Autopost 1.11.1: обязательное обновление и починка SSL-сертификата Минцифры](https://krivoshein.site/max-autopost-1-11-1-obyazatelnoe-obnovlenie-i-pochinka-ssl-sertifikata-mintsifry/) — 2026-07-16
-  С 19 июля 2026 года MAX полностью переводит API на новый хост platform-api2.max.ru. Старый адрес перестанет работать. Поэтому вышла версия MAX Autopost 1.11.1: без обновления после этой даты публикации просто перестанут 
-- [Почему нейросети любят Markdown: простой текст, структура и немного истории](https://krivoshein.site/pochemu-neyroseti-lyubyat-markdown-prostoy-tekst-struktura-i-nemnogo-istorii/) — 2026-07-03
-  Markdown выглядит слишком простым, чтобы быть важным. Пара решёток, звёздочки, списки, ссылки, блоки кода. Никакой магии, тяжёлых редакторов и визуального шума. Но именно поэтому нейросети его и любят. Markdown хорошо чи
-- [ZCode появился на Ubuntu: приложение Z.ai для AI-кодинга уже можно запускать на Linux](https://krivoshein.site/zcode-poyavilsya-na-ubuntu-prilozhenie-z-ai-dlya-ai-kodinga-uzhe-mozhno-zapuskat-na-linux/) — 2026-07-02
-  Поставил и запустил ZCode на Ubuntu. Это уже не просто вкладка в браузере и не очередной «чатик рядом с кодом», а отдельное приложение под Linux для AI-кодинга. На первом экране ZCode предлагает войти через Z.ai, подключ
-- [Посмотрел данные из свежего отчёта Thales и немного завис.](https://krivoshein.site/posmotrel-dannye-iz-svezhego-otchyota-thales-i-nemnogo-zavis/) — 2026-06-27
-  Посмотрел данные из свежего отчёта Thales и немного завис. По материалам TechRadar, автоматизированная активность уже занимает больше 53% интернет-трафика. То есть живой человек в сети теперь фактически в меньшинстве. В 
-- [Брешь в API python.org: уязвимость позволяла подменить ссылки на релизы Python](https://krivoshein.site/bresh-v-api-python-org-uyazvimost-pozvolyala-podmenit-ssylki-na-relizy-python/) — 2026-06-27
-  23 июня 2026 года Python Software Foundation опубликовала отчёт об уязвимости в API управления релизами на python.org. Её обнаружили ещё в феврале, быстро закрыли и теперь рассказали подробно. 23 февраля исследователь Sp
-- [Взрослый джун: как показать прежний опыт в резюме и не начинать с нуля](https://krivoshein.site/vzroslyy-dzhun-kak-pokazat-prezhniy-opyt-v-rezyume-i-ne-nachinat-s-nulya/) — 2026-06-27
-  Главная проблема взрослых джунов не в возрасте и даже не в отсутствии коммерческого опыта в новой сфере. Главная проблема в том, что они часто сами обнуляют всё, что делали раньше. Был человек инженером, бухгалтером, мен
-- [ИИ как отягчающее обстоятельство: МВД поддержало идею усилить ответственность за преступления с нейросетями](https://krivoshein.site/ii-kak-otyagchayuschee-obstoyatelstvo-mvd-podderzhalo-ideyu-usilit-otvetstvennost-za-prestupleniya-s-neyrosetyami/) — 2026-06-26
-  МВД поддержало идею признавать использование искусственного интеллекта отягчающим обстоятельством при совершении преступлений. Новость короткая, но смысл у неё большой: ИИ постепенно переходит из категории «модная технол
-- [PageSpeed Insights добавил «Агентный просмотр»: сайты теперь проверяют на готовность к ИИ-агентам](https://krivoshein.site/pagespeed-insights-dobavil-agentnyy-prosmotr-sayty-teper-proveryayut-na-gotovnost-k-ii-agentam/) — 2026-06-24
-  В PageSpeed Insights от Google появился новый блок проверок: «Агентный просмотр». На английском это Agentic Browsing. Если раньше мы привычно смотрели на производительность, доступность, лучшие практики и SEO, то теперь 
-- [WebDAV на Nginx: подключаем HTTPS-папку как сетевой диск Windows](https://krivoshein.site/webdav-na-nginx-podklyuchaem-https-papku-kak-setevoy-disk-windows/) — 2026-06-21
-  Иногда задача звучит просто: положить файл на сервер, чтобы его можно было открыть с другого компьютера. Есть VPS, есть Nginx, есть HTTPS, есть Windows, которая умеет подключать сетевые диски. На бумаге всё красиво: сейч
-- [WordPress для AI-агентов: как я поднял AgentReady с 21 до 50](https://krivoshein.site/wordpress-dlya-ai-agentov-kak-ya-podnyal-agentready-s-21-do-50/) — 2026-06-20
-  Сайты постепенно начинают читать не только люди, поисковые роботы и парсеры из подвала, но и AI-агенты. И агенту уже мало просто открыть главную страницу, утонуть в HTML, меню, стилях, виджетах и героически сказать: «я ч
-- [Я попробовал Вайбкрафт от Яндекса: навайбкодил Clock Battle и понял, где тут польза](https://krivoshein.site/ya-poproboval-vaybkraft-ot-yandeksa-navaybkodil-clock-battle-i-ponyal-gde-tut-polza/) — 2026-06-20
-  Мне подключили доступ к Вайбкрафту от Яндекса. Это сервис веб-кодинга внутри экосистемы SourceCraft: описываешь задачу обычным языком, агент пишет код, показывает предпросмотр, исправляет ошибки и помогает довести идею д
-- [DeepSeek получил компьютерное зрение: попробовал Vision-режим на картинках](https://krivoshein.site/deepseek-poluchil-kompyuternoe-zrenie-poproboval-vision-rezhim-na-kartinkah/) — 2026-06-19
-  У DeepSeek появился режим Vision в веб-чате. Теперь в чат можно отправить картинку, а модель попробует описать, что на ней изображено, разобрать детали, прочитать текст, объяснить интерфейс или подсказать, что происходит
-- [Я попробовал GLM-5.2 в Z.ai: браузерный агент собрал лендинг с 3D-кубом](https://krivoshein.site/ya-poproboval-glm-5-2-v-z-ai-brauzernyy-agent-sobral-lending-s-3d-kubom/) — 2026-06-17
-  Я решил не просто почитать очередные новости про GLM-5.2, а попробовать модель руками. Не в режиме «напиши функцию сортировки массива», а на задаче ближе к реальной веб-разработке: собрать интерактивный лендинг-визитку с
+- [BotPsy-0.8B: агент Tether на Qwen3.5, GGUF и Apache 2.0](https://krivoshein.site/botpsy-0-8b-tether-qwen-gguf/) — 2026-11-11
+  11 ноября Tether выложила BotPsy-0.8B на базе Qwen3.5: локальный вызов инструментов, веса Apache 2.0 и GGUF для llama.cpp. Thinking в шаблоне выключен.
+- [Alibaba открыла превью Qwen4-Max: где попробовать новую модель и сколько это стоит](https://krivoshein.site/qwen4-max-preview/) — 2026-11-11
+  11 ноября Alibaba открыла превью Qwen4-Max, первой модели семейства Qwen4. Её можно попробовать в Qwen Chat и через подписку Token Plan до 25 ноября.
+- [Открытые ИИ-модели для кибербезопасности: на чём запустить, как дообучить на своих логах и как защитить сервер](https://krivoshein.site/local-ai-models-cybersecurity/) — 2026-11-11
+  11 ноября 2026. Открытые модели для защиты на своём железе: от Mac на M4 до сервера с видеокартой, дообучение на логах nginx, Redis, WordPress и Flask, базовая защита Debian и Ubuntu, шифрование и DMZ.
+- [В Firefox 160 вкладку или фрагмент страницы можно держать поверх остальных окон](https://krivoshein.site/firefox-160-mini-window/) — 2026-11-11
+  10 ноября вышел Firefox 160. Вкладку или фрагмент страницы можно держать в мини-окне поверх остальных окон.
+- [В PyPI нашли пакеты, которые открывают доступ к серверу и крадут токены](https://krivoshein.site/pypi-malicious-packages-november-2026/) — 2026-11-10
+  С 4 по 7 ноября в PyPI нашли 19 вредоносных пакетов. Один открывает чужим командную строку через туннель, и часть пакетов до сих пор можно установить.
+- [Gemini 4 Carbon: API $2/$10 до 30 ноября и чат Ultra](https://krivoshein.site/gemini-4-carbon-api-2-10/) — 2026-11-10
+  10 ноября Google открыла Gemini 4 Carbon в платном API: $2 и $10 за миллион до 30 ноября, дальше $4 и $20. В чате модель у подписчиков Ultra.
+- [Кибератака на ActiveCloud 10 ноября 2026: не работают облако, почта и сервисы ilex](https://krivoshein.site/activecloud-cyberattack-2026/) — 2026-11-10
+  10 ноября 2026 ActiveCloud сообщил о кибератаке с 03:30. Недоступны облако, почта SmartMail и сервисы ilex. Ilex ждёт восстановление до 14:00 11 ноября.
+- [AlphaProof Code: 6,5 млн строк Lean по коду Signal](https://krivoshein.site/alphaproof-code-libsignal-lean/) — 2026-11-10
+  10 ноября DeepMind показала AlphaProof Code: агенты Gemini 4 Carbon собрали около 6,5 млн строк Lean по личному диалогу libsignal v0.105.4, до машинного кода.
+- [NGINX Ingress Controller 5.7.0: версия HTTP до пода без фрагмента в конфиге](https://krivoshein.site/nginx-ingress-5-7-0-proxy-http-version/) — 2026-11-10
+  NGINX Ingress Controller 5.7.0 берёт версию HTTP до пода из appProtocol, аннотации или поля VirtualServer. Дефолт по-прежнему 1.1.
+- [Confection, сбор данных: чужой может запустить код без входа. Патча нет, отключите](https://krivoshein.site/confection-chuzhoj-kod-bez-vhoda/) — 2026-11-10
+  9 ноября Confection 0.4.0-0.4.7 позволяет запустить чужой код без пароля, патча нет. EASY-JS-WPAPI и Grand Job без входа отдают админку.
+- [Вышла Celery 5.7: что проверить перед обновлением воркеров](https://krivoshein.site/celery-5-7/) — 2026-11-09
+  5 ноября вышла Celery 5.7. Нужен Python 3.10, воркер теперь умеет подбирать число процессов под лимит контейнера, а Beat стал устойчивее к ошибкам.
+- [MariaDB 13.0: хинты оптимизатору в запросе и внутри VIEW](https://krivoshein.site/mariadb-13-0-optimizer-hints/) — 2026-11-09
+  В MariaDB Server 13.0 хинты оптимизатору пишутся как в MySQL 8.0. Внутри VIEW можно любые, кроме лимита времени запроса. На ветке ниже 13.0 их нет.
+- [Хостер ESTT сообщил о кибератаке с шифровальщиком и завершает восстановление облака](https://krivoshein.site/estt-outage-november-2026/) — 2026-11-09
+  9 ноября 2026 ESTT назвал причиной сбоя кибератаку с шифровальщиком. Все клиентские виртуальные машины запущены, у небольшой части VPS ещё чинят сеть.
+- [В Python 3.14.10 режим FIPS для hashlib сработал наоборот. Отдельного обновления пока нет](https://krivoshein.site/python-3-14-10-fips-hashlib-cve-2026-119170/) — 2026-11-08
+  6 ноября в рассылке security-announce сообщили о CVE-2026-119170: в Python 3.14.10 при OpenSSL в режиме FIPS модуль hashlib неправильно применяет ограничения.
+- [domaintools.site и поискдомена.рф: два моих доменных сервиса и чем они отличаются](https://krivoshein.site/domaintools-i-poiskdomena-rf/) — 2026-11-08
+  Два сервиса для проверки доменов, два разных проекта: domaintools.site на Python и Flask для разбора живых доменов и поискдомена.рф на Laravel для поиска свободного имени.
+- [Форма Registration Form: при заказе можно стать администратором. Обновитесь до 1.1.5](https://krivoshein.site/registration-form-admin-pri-zakaze/) — 2026-11-08
+  Registration Form не новее 1.1.4 даёт стать администратором с оформления заказа. Обновитесь до 1.1.5. LatePoint по 5.7.6 и Naimur OTP по 2.1.0 тоже без пароля.
+- [В Python снова предлагают операторы ?. и ?? для работы с None](https://krivoshein.site/python-none-aware-operators-pep-823-824/) — 2026-11-07
+  1 ноября PEP 823 и PEP 824 снова вынесли на обсуждение: в Python 3.16 предлагают операторы ?. и ??, чтобы реже писать проверки на None.
+- [GPT-6 Astra набрала 66,7% на лабораторных задачах и всё ещё ошибается в простых вещах](https://krivoshein.site/gpt-6-astra-biobasicsbench/) — 2026-11-07
+  6 ноября OpenAI и Ligo опубликовали BioBasicsBench: сто задач по сырым данным из лаборатории. На режиме xhigh у GPT-6 Astra 66,7% балла, у GPT-5.6 Sol 43,8%.
+- [Проверьте nginx на AlmaLinux, если после обновления часть запросов отвечает ошибкой 500](https://krivoshein.site/almalinux-nginx-500-testing/) — 2026-11-07
+  4 ноября AlmaLinux выложила в testing сборки nginx. Заплатка CVE-2026-42533 на части конфигов даёт случайные ответы 500. В обычном репозитории пакетов ещё нет.
+- [В плагине форм WP Libre Form чужой без пароля может запустить код. Патча нет, отключите](https://krivoshein.site/wp-libre-form-chuzhoj-kod-bez-parolya/) — 2026-11-07
+  В WP Libre Form 1.5.0.1 через форму можно запустить чужой код, патча нет. В Security For WooCommerce и Wurdey можно стать администратором, патча тоже нет.
+- [Что нового в pip 26.3: установка пакетов и предупреждения при сборке](https://krivoshein.site/pip-26-3/) — 2026-11-06
+  2 ноября PyPA выпустил pip 26.3: жёстче установка wheel, extras и groups из pylock.toml, BuildBackendWarning на обычной verbosity.
+- [GPT-6 Cyber: Daybreak Red, API с Codex и класс Critical](https://krivoshein.site/gpt-6-cyber-daybreak-red-api-codex/) — 2026-11-06
+  5 ноября OpenAI открыла GPT-6 Cyber узкому кругу Daybreak Red: API и Codex, класс Critical, 48,5% на ExploitGym.
+- [Gemini Omni 1.2 Flash: 15 секунд видео и $0,07 за секунду](https://krivoshein.site/gemini-omni-1-2-flash-15s/) — 2026-11-06
+  5 ноября Google открыла Gemini Omni 1.2 Flash: видео до 15 секунд в API, около $0,07 за секунду 720p и правка следующим сообщением.
+- [SSHole: на musl без PAM аккаунт со звёздочкой в shadow принимает длинный пароль. Обновите OpenSSH до 10.6p2](https://krivoshein.site/sshole-openssh-10-6p2-musl/) — 2026-11-06
+  5 ноября OpenSSH 10.6p2 закрыл обход пароля на Linux с musl без PAM: аккаунты с * в shadow принимают пароль длиннее 256 символов. Обновите sshd или выключите PasswordAuthentication.
+- [Flock 1.0: локальный PHP и Laravel без Docker и виртуалок](https://krivoshein.site/flock-1-0/) — 2026-11-06
+  2 ноября вышел Flock 1.0: бесплатный open-source стек для локальной PHP/Laravel-разработки на Windows, macOS и Linux без Docker и ВМ.
 
 Больше статей: https://krivoshein.site/blog/ · https://krivoshein.site/wp-json/wp/v2/posts
 
