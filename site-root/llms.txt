@@ -7,6 +7,8 @@
 Полный дамп для агентов: [Полный дамп для агентов](https://krivoshein.site/llms-full.txt)
 Краткий индекс: [Краткий индекс](https://krivoshein.site/ai.txt)
 Инструкции агентам: [Инструкции агентам](https://krivoshein.site/agents.md)
+English brief: [English brief](https://krivoshein.site/en/llms.txt)
+English page: [English page](https://krivoshein.site/en/)
 API-каталог: [API-каталог](https://krivoshein.site/.well-known/api-catalog)
 OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
 
@@ -112,6 +114,8 @@ OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
   Ссылка: [Ссылка](https://krivoshein.site/sweb)
 
 ### Cloud
+- **Amvera** - Российское облако для ботов и сайтов: выкладка из git, без своего сервера. Здесь будет жить бот.
+  Ссылка: https://krivoshein.site/amvera
 - **Selectel** - Облачная платформа: VPC, ВМ (Linux/Windows Server) для продакшена. Mature cloud в РФ.
   Ссылка: https://selectel.ru/services/cloud/vpc/?ref_code=2c6445c777
 - **CLO** - Облачные VDS/VPS для сайтов, порталов и тестовых стендов. Гибкие конфигурации, когда нужен свой сервер без покупки железа.
