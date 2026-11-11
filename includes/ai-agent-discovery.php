@@ -136,7 +136,7 @@ function drslon_ai_agent_json_ld() {
 			'@id'         => home_url( '/#/schema/ProfessionalService' ),
 			'name'        => 'ИТ Решения, ИП Кривошеин Алексей Сергеевич',
 			'url'         => home_url( '/' ),
-			'description' => 'Разработка и поддержка сайтов на WordPress и Flask (Python), Linux/VPS, техническое SEO, Яндекс.Директ, боты MAX, AI-ready подготовка сайтов.',
+			'description' => 'Разработка и поддержка сайтов на WordPress, Linux/VPS, техническое SEO, Яндекс.Директ, боты MAX, AI-ready подготовка сайтов.',
 			'priceRange'  => '₽₽',
 			'areaServed'  => 'RU',
 			'availableLanguage' => array( 'Russian', 'English' ),
@@ -169,18 +169,6 @@ function drslon_ai_agent_json_ld() {
 							'priceCurrency' => 'RUB',
 							'minPrice'      => 20000,
 							'unitText'      => 'MONTH',
-						),
-					),
-					array(
-						'@type' => 'Offer',
-						'itemOffered' => array(
-							'@type' => 'Service',
-							'name'  => 'Сайт на Flask (Python)',
-						),
-						'priceSpecification' => array(
-							'@type'         => 'PriceSpecification',
-							'priceCurrency' => 'RUB',
-							'minPrice'      => 50000,
 						),
 					),
 					array(

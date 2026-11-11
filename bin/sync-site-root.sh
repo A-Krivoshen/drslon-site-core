@@ -20,14 +20,6 @@ cp "${SRC}/.well-known/security.txt" "${HTDOCS}/.well-known/security.txt"
 cp "${SRC}/.well-known/agent.json" "${HTDOCS}/.well-known/agent.json"
 cp "${SRC}/.well-known/oauth-authorization-server" "${HTDOCS}/.well-known/oauth-authorization-server"
 cp "${SRC}/.well-known/oauth-protected-resource" "${HTDOCS}/.well-known/oauth-protected-resource"
-cp "${SRC}/.well-known/agent-index.json" "${HTDOCS}/.well-known/agent-index.json"
-mkdir -p "${HTDOCS}/en"
-cp "${SRC}/en/ai.txt" "${HTDOCS}/en/ai.txt"
-cp "${SRC}/en/llms.txt" "${HTDOCS}/en/llms.txt"
-cp "${SRC}/en/llms-full.txt" "${HTDOCS}/en/llms-full.txt"
-cp "${SRC}/en/agents.md" "${HTDOCS}/en/agents.md"
-cp "${SRC}/en/agents.txt" "${HTDOCS}/en/agents.txt"
-cp "${SRC}/en/index.html" "${HTDOCS}/en/index.html"
 chown www-data:www-data \
   "${HTDOCS}/llms.txt" \
   "${HTDOCS}/ai.txt" \
@@ -42,13 +34,6 @@ chown www-data:www-data \
   "${HTDOCS}/.well-known/security.txt" \
   "${HTDOCS}/.well-known/agent.json" \
   "${HTDOCS}/.well-known/oauth-authorization-server" \
-  "${HTDOCS}/.well-known/oauth-protected-resource" \
-  "${HTDOCS}/.well-known/agent-index.json" \
-  "${HTDOCS}/en/ai.txt" \
-  "${HTDOCS}/en/llms.txt" \
-  "${HTDOCS}/en/llms-full.txt" \
-  "${HTDOCS}/en/agents.md" \
-  "${HTDOCS}/en/agents.txt" \
-  "${HTDOCS}/en/index.html"
+  "${HTDOCS}/.well-known/oauth-protected-resource"
 
 echo "Synced site-root -> ${HTDOCS}"

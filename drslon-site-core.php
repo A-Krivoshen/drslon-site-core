@@ -52,7 +52,6 @@ add_action( 'init', function () {
 require_once DRSLON_SITE_CORE_DIR . 'includes/ads-settings.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/acf-options-sync.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/max-shortlink-bridge.php';
-require_once DRSLON_SITE_CORE_DIR . 'includes/yandex-captcha-domain-bridge.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/service-page-registry.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/icons/max-messenger.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/helpers/shortcode-resolve.php';
@@ -68,6 +67,7 @@ require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/blog-shortcodes.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/services-landing.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/service-page-shell.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/content-widgets.php';
+require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/en-pages.php';
 
 /**
  * Temporary legacy bridge.

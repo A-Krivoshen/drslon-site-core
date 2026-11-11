@@ -125,6 +125,10 @@ html[data-theme="dark"] .krv-client-description {
   color: #a8b6d4;
 }
 
+html[data-theme="dark"] .krv-client-status {
+  color: #fdba74;
+}
+
 html[data-theme="dark"] .krv-client-logo-wrap {
   background: #0f172a;
 }

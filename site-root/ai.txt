@@ -3,11 +3,8 @@
 # Полное описание: https://krivoshein.site/llms.txt
 # Полный дамп: https://krivoshein.site/llms-full.txt
 # Инструкции: https://krivoshein.site/agents.md
-# English: https://krivoshein.site/en/ai.txt
-# English llms: https://krivoshein.site/en/llms.txt
-# English page: https://krivoshein.site/en/
 
-> ИП Кривошеин Алексей (Dr.Slon) — WordPress, Flask, DevOps, SEO, Яндекс.Директ, боты MAX, AI-ready
+> ИП Кривошеин Алексей (Dr.Slon) — WordPress, DevOps, SEO, Яндекс.Директ, боты MAX, AI-ready
 
 ## Быстрые ссылки
 
@@ -37,7 +34,7 @@
 - Диагностика сайта: от 5 000 ₽
 - Ремонт/доработка: от 10 000 ₽
 - Техподдержка WordPress: от 20 000 ₽/мес
-- Лендинг: от 25 000 ₽ (статика) / от 50 000 ₽ (WordPress) / от 50 000 ₽ (Flask, Python)
+- Лендинг: от 25 000 ₽ (статика) / от 50 000 ₽ (WordPress)
 - VPS под ключ: от 10 000 ₽
 - Яндекс.Директ: аудит от 10 000 ₽, настройка от 20 000 ₽, ведение от 25 000 ₽/мес
 - Боты MAX: от 40 000 ₽
