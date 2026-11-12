@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aleksey Krivoshein: WordPress, Flask, VPS and AI-ready</title>
+<title>Aleksey Krivoshein: websites, VPS, Yandex Direct and bots</title>
 <meta name="description" content="WordPress and Flask sites, VPS, Yandex Direct, MAX bots, and AI-ready preparation. Aleksey Krivoshein, sole trader.">
 <link rel="canonical" href="https://krivoshein.site/en/">
 <link rel="alternate" hreflang="ru" href="https://krivoshein.site/">
@@ -17,16 +17,35 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <style>
-body{margin:0;font:18px/1.55 Georgia, "Iowan Old Style", "Times New Roman", serif;color:#1c1915;background:#f6f3ee}
-main{max-width:42rem;margin:0 auto;padding:2.5rem 1.25rem 4rem}
-h1{font-size:2.1rem;line-height:1.15;font-weight:650;margin:0 0 .4rem}
-h2{font-size:1.25rem;margin:2rem 0 .6rem}
-p,li{margin:.4rem 0}
-a{color:#0b3d91}
-.lead{font-size:1.15rem}
-.note{color:#444}
-table{border-collapse:collapse;width:100%;font-size:1rem}
-th,td{text-align:left;padding:.35rem .4rem;border-bottom:1px solid #ddd;vertical-align:top}
+:root{--bg:#f7f6f3;--card:#fff;--ink:#16181d;--muted:#5b6170;--line:#e4e2dc;--accent:#0b5cd5}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Inter,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+header{border-bottom:1px solid var(--line);background:var(--card)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.9rem;padding-bottom:.9rem;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--ink)}
+nav a{margin-left:1.1rem;color:var(--muted);font-size:.95rem}
+.hero{padding:3.5rem 0 2.5rem}
+h1{font-size:clamp(2rem,4.5vw,3rem);line-height:1.12;margin:0 0 1rem;letter-spacing:-.02em}
+.lead{font-size:1.2rem;color:var(--muted);max-width:44rem;margin:0 0 1.6rem}
+.cta{display:flex;gap:.7rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.75rem 1.3rem;border-radius:.6rem;background:var(--accent);color:#fff;font-weight:600}
+.btn:hover{text-decoration:none;opacity:.92}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+section{padding:2.2rem 0}
+h2{font-size:1.6rem;margin:0 0 1.2rem;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.9rem;padding:1.3rem}
+.card h3{margin:0 0 .4rem;font-size:1.1rem}
+.card p{margin:0 0 .8rem;color:var(--muted);font-size:.97rem}
+.price{font-weight:700}
+ul.facts{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:.6rem 1.5rem}
+ul.facts li:before{content:"✓ ";color:var(--accent)}
+.contact{background:var(--card);border:1px solid var(--line);border-radius:.9rem;padding:1.6rem}
+.contact ul{list-style:none;padding:0;margin:0 0 1.2rem}
+.contact li{margin:.3rem 0}
+footer{border-top:1px solid var(--line);padding:1.4rem 0 2.2rem;color:var(--muted);font-size:.88rem}
 </style>
 <script type="application/ld+json">
 {
@@ -46,43 +65,56 @@ th,td{text-align:left;padding:.35rem .4rem;border-bottom:1px solid #ddd;vertical
 </script>
 </head>
 <body>
+<header><div class="wrap">
+<a class="brand" href="https://krivoshein.site/en/home/">Aleksey Krivoshein</a>
+<nav><a href="https://krivoshein.site/en/price/">Prices</a><a href="https://krivoshein.site/en/contacts/">Contacts</a><a href="https://krivoshein.site/" hreflang="ru">RU</a></nav>
+</div></header>
 <main>
-<p class="note"><a href="https://krivoshein.site/en/home/">English site</a> · <a href="https://krivoshein.site/">Russian site</a> · <a href="https://krivoshein.site/en/llms.txt">llms.txt</a> · <a href="https://krivoshein.site/en/agents.md">agents.md</a></p>
-<h1>Aleksey Krivoshein</h1>
-<p class="lead">WordPress and Flask sites, VPS, Yandex Direct, MAX bots, and AI-ready preparation. One specialist, sole trader ИП Кривошеин Алексей Сергеевич.</p>
-<p>This page is the short English brief. The site itself is at <a href="https://krivoshein.site/en/home/">/en/home/</a>. The blog stays in Russian. Starting prices are below. The final figure depends on scope.</p>
+<div class="wrap hero">
+<h1>Websites, servers, ads and bots for your business</h1>
+<p class="lead">WordPress and Flask sites, VPS setup, Yandex Direct, MAX bots and AI-ready preparation. One specialist from the first call to launch and support, with no account managers in between.</p>
+<div class="cta"><a class="btn" href="https://t.me/DrSlon">Message on Telegram</a><a class="btn ghost" href="https://krivoshein.site/max/">Message on MAX</a></div>
+</div>
 
-<h2>Services</h2>
-<table>
-<thead><tr><th>Work</th><th>From</th></tr></thead>
-<tbody>
-<tr><td>Site diagnostics</td><td>5 000 RUB</td></tr>
-<tr><td>Fixes on an existing site</td><td>10 000 RUB</td></tr>
-<tr><td>WordPress care</td><td>20 000 RUB / month</td></tr>
-<tr><td>Static landing page</td><td>25 000 RUB</td></tr>
-<tr><td>WordPress landing page</td><td>50 000 RUB</td></tr>
-<tr><td>Flask (Python) site</td><td>50 000 RUB</td></tr>
-<tr><td>VPS setup</td><td>10 000 RUB</td></tr>
-<tr><td>Yandex Direct setup</td><td>20 000 RUB</td></tr>
-<tr><td>MAX bot</td><td>40 000 RUB</td></tr>
-<tr><td>AI-ready Start / Pro / Bot-ready</td><td>10 000 / 20 000 / 30 000 RUB</td></tr>
-</tbody>
-</table>
-<p>Full price list: <a href="https://krivoshein.site/en/price/">/en/price/</a>. Base rate 2 000 RUB per hour. The first consultation is free.</p>
-<p>There is no promise of first place in search or in AI answers.</p>
+<section><div class="wrap">
+<h2>Services and starting prices</h2>
+<div class="grid">
+<div class="card"><h3>Site diagnostics</h3><p>WordPress and plugins, forms and leads, Yandex Metrica goals, speed, and a list of recommendations.</p><div class="price">from 5 000 RUB</div></div>
+<div class="card"><h3>Site repair and changes</h3><p>Bug fixes, page and block changes, mobile layout, speed, forms and analytics.</p><div class="price">from 10 000 RUB</div></div>
+<div class="card"><h3>WordPress care</h3><p>Updates, backups, small fixes and error checks, so the site keeps running.</p><div class="price">from 20 000 RUB / month</div></div>
+<div class="card"><h3>Landing pages</h3><p>A fast static one-page or a WordPress landing for a service, a product, B2B or ads.</p><div class="price">from 25 000 RUB (static) · from 50 000 RUB (WordPress)</div></div>
+<div class="card"><h3>Flask (Python) site</h3><p>Pages, a lead form and server logic in Python, with no CMS. An account area, payments and integrations are priced separately.</p><div class="price">from 50 000 RUB</div></div>
+<div class="card"><h3>VPS and servers</h3><p>Server choice, Linux, Nginx, Docker, SSL, firewall and backups. The VPS itself is paid to the provider.</p><div class="price">setup from 10 000 RUB</div></div>
+<div class="card"><h3>Yandex Direct</h3><p>Audit, campaign setup and ongoing management with clear reports.</p><div class="price">setup from 20 000 RUB · management from 25 000 RUB / month</div></div>
+<div class="card"><h3>MAX bots</h3><p>Lead bots with flows and notices, and bots linked to spreadsheets, a site or a CRM.</p><div class="price">from 40 000 RUB · with integrations from 70 000 RUB</div></div>
+<div class="card"><h3>AI-ready site</h3><p>Structure, Schema.org, FAQ and technical SEO, so search engines and AI assistants understand the site.</p><div class="price">Start / Pro / Bot-ready: from 10 000 / 20 000 / 30 000 RUB</div></div>
+</div>
+<p style="margin-top:1.2rem;color:var(--muted)">Base rate 2 000 RUB per hour. The final price depends on scope and urgency. Full price list: <a href="https://krivoshein.site/en/price/">krivoshein.site/en/price</a>.</p>
+</div></section>
 
-<h2>Contact</h2>
+<section><div class="wrap">
+<h2>How we work</h2>
+<ul class="facts">
+<li>A contract, a bank transfer and closing documents</li>
+<li>A reply usually within one working day</li>
+<li>A short question in Telegram or MAX is free</li>
+<li>Support after launch if you need it</li>
+</ul>
+</div></section>
+
+<section><div class="wrap">
+<div class="contact">
+<h2>Get in touch</h2>
 <ul>
 <li>Phone: <a href="tel:+79636641615">+7 (963) 664-16-15</a></li>
 <li>Email: <a href="mailto:aleksey@krivoshein.site">aleksey@krivoshein.site</a></li>
 <li>Telegram: <a href="https://t.me/DrSlon">@DrSlon</a></li>
 <li>MAX: <a href="https://krivoshein.site/max/">krivoshein.site/max</a></li>
-<li>Contacts: <a href="https://krivoshein.site/en/contacts/">/en/contacts/</a></li>
 </ul>
-<p>OGRN 321774600479249. INN 770603253213. Work is under a contract, by bank transfer, with closing documents.</p>
-
-<h2>For AI agents</h2>
-<p>Read <a href="https://krivoshein.site/en/llms.txt">/en/llms.txt</a>, then <a href="https://krivoshein.site/en/agents.md">/en/agents.md</a>. Russian originals: <a href="https://krivoshein.site/llms.txt">/llms.txt</a> and <a href="https://krivoshein.site/agents.md">/agents.md</a>. Fresh posts: <a href="https://krivoshein.site/feed/ai-pulse.md">/feed/ai-pulse.md</a>.</p>
+<div class="cta"><a class="btn" href="https://t.me/DrSlon">Discuss a task</a><a class="btn ghost" href="https://krivoshein.site/en/contacts/">All contacts</a></div>
+</div>
+</div></section>
 </main>
+<footer><div class="wrap">© Aleksey Krivoshein · Sole trader (ИП Кривошеин Алексей Сергеевич) · OGRN 321774600479249 · INN 770603253213 · <a href="https://krivoshein.site/en/home/">English site</a> · <a href="https://krivoshein.site/">Русская версия</a></div></footer>
 </body>
 </html>
