@@ -68,6 +68,7 @@ require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/blog-shortcodes.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/services-landing.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/service-page-shell.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/content-widgets.php';
+require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/en-pages.php';
 
 /**
  * Temporary legacy bridge.

@@ -233,6 +233,13 @@
 	overflow: hidden;
 }
 
+.krv-client-status {
+	margin: 0;
+	font-size: 0.72rem;
+	line-height: 1.3;
+	color: #9a3412;
+}
+
 .krv-client-description {
 	margin: 0;
 	font-size: 0.75rem;

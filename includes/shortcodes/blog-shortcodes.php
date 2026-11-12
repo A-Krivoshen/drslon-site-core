@@ -499,10 +499,42 @@ if ( ! function_exists( 'drslon_post_extras_shortcode' ) ) {
         ob_start();
         krv_render_post_extras();
 
-        return (string) ob_get_clean();
+        // The block template runs this HTML through wpautop(). A multiline
+        // opening tag makes wpautop emit stray </p> and the Telegram iframe
+        // paints as a black bar. One line is left untouched.
+        $html = (string) ob_get_clean();
+        $html = preg_replace( '/\s+/u', ' ', $html );
+
+        return trim( (string) $html );
     }
 }
 add_shortcode( 'drslon_post_extras', 'drslon_post_extras_shortcode' );
+
+/**
+ * Block templates expand this shortcode, then core/shortcode runs wpautop()
+ * on the HTML and inserts stray </p>. Returning the markup here skips that.
+ */
+add_filter(
+	'pre_render_block',
+	static function ( $pre_render, array $parsed_block ) {
+		if ( null !== $pre_render ) {
+			return $pre_render;
+		}
+
+		if ( ( $parsed_block['blockName'] ?? '' ) !== 'core/shortcode' ) {
+			return $pre_render;
+		}
+
+		$html = (string) ( $parsed_block['innerHTML'] ?? '' );
+		if ( ! str_contains( $html, 'krv-post-extras' ) && ! str_contains( $html, 'id="telegram-comments"' ) ) {
+			return $pre_render;
+		}
+
+		return $html;
+	},
+	10,
+	2
+);
 
 if ( ! function_exists( 'drslon_reading_time_shortcode' ) ) {
     function drslon_reading_time_shortcode(): string {

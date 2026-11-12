@@ -22,7 +22,6 @@ function krv_client_display_title( int $post_id, string $title ): string {
 		6671 => 'СКД',
 		6115 => 'Форновогаз KZ',
 		6113 => 'АГНКС',
-		6111 => 'НАКС ЦНИИТМАШ',
 		5702 => 'Fornovo Gas',
 		6151 => 'Метком-Калуга',
 		6147 => 'GroupST',
@@ -143,7 +142,6 @@ function krv_clients_showcase_order(): array {
 		8081  => 40,  // Технолидер
 		8423  => 50,  // Соловьи
 		9184  => 60,  // Softcomlan
-		6111  => 80,  // НАКС
 		6115  => 90,  // Форновогаз KZ
 		6147  => 100, // GroupST
 		7693  => 110, // Cambobiz
@@ -163,6 +161,8 @@ function krv_clients_showcase_order(): array {
 function krv_clients_grid_excluded_ids(): array {
 	return array(
 		6151, // Метком-Калуга
+		6111, // НАКС ЦНИИТМАШ, реестр больше не обслуживается
+		5701, // Аттестационный центр ЦНИИТМАШ
 	);
 }
 

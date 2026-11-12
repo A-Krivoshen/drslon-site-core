@@ -184,9 +184,16 @@ function krv_tg_comments_loader_script(): void {
 		var mounted = false;
 		var iframe = null;
 		var loaded = false;
+		var failTimer = 0;
 
 		function showEmbedError() {
 			if (wrap.querySelector('.krv-tg-embed-error')) return;
+			window.clearTimeout(failTimer);
+			if (iframe) {
+				iframe.remove();
+				iframe = null;
+			}
+			slot.style.minHeight = '0';
 			var el = document.createElement('div');
 			el.className = 'krv-tg-embed-error';
 			el.style.cssText = 'margin-top:8px;padding:12px 14px;border:1px solid #fde68a;border-radius:8px;background:#fffbeb;';
@@ -214,20 +221,14 @@ function krv_tg_comments_loader_script(): void {
 			iframe.height = '120';
 			iframe.setAttribute('frameborder', '0');
 			iframe.setAttribute('scrolling', 'no');
-			iframe.setAttribute('loading', 'lazy');
 			iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
 			iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');
 			iframe.setAttribute('title', 'Комментарии Telegram');
-			iframe.style.cssText = 'border:none;min-width:320px;width:100%;overflow:hidden;color-scheme:light dark;';
+			iframe.style.cssText = 'border:none;min-width:320px;width:100%;overflow:hidden;background:#fff;color-scheme:light;';
 
-			var failTimer = window.setTimeout(function () {
+			failTimer = window.setTimeout(function () {
 				if (!loaded) showEmbedError();
-			}, 20000);
-
-			iframe.addEventListener('load', function () {
-				loaded = true;
-				window.clearTimeout(failTimer);
-			});
+			}, 12000);
 
 			iframe.addEventListener('error', function () {
 				window.clearTimeout(failTimer);
@@ -243,6 +244,8 @@ function krv_tg_comments_loader_script(): void {
 			try {
 				var data = JSON.parse(event.data);
 				if (data.event === 'resize') {
+					loaded = true;
+					window.clearTimeout(failTimer);
 					var height = Number(data.height);
 					if (Number.isFinite(height)) {
 						iframe.style.height = Math.min(2400, Math.max(120, height)) + 'px';
@@ -251,11 +254,17 @@ function krv_tg_comments_loader_script(): void {
 			} catch (e) {}
 		});
 
+		function nearViewport() {
+			var rect = slot.getBoundingClientRect();
+			return rect.top < window.innerHeight + 400 && rect.bottom > -400;
+		}
+
 		function scheduleMount() {
-			var ioStarted = false;
+			function tryMount() {
+				if (!mounted && nearViewport()) mountIframe();
+			}
 
 			if ('IntersectionObserver' in window) {
-				ioStarted = true;
 				var observer = new IntersectionObserver(function (entries) {
 					entries.forEach(function (entry) {
 						if (!entry.isIntersecting) return;
@@ -266,11 +275,11 @@ function krv_tg_comments_loader_script(): void {
 				observer.observe(slot);
 			}
 
+			window.addEventListener('scroll', tryMount, { passive: true });
 			window.addEventListener('load', function () {
-				window.setTimeout(function () {
-					if (!mounted) mountIframe();
-				}, ioStarted ? 2500 : 600);
+				window.setTimeout(tryMount, 600);
 			});
+			tryMount();
 		}
 
 		if (document.readyState === 'loading') {

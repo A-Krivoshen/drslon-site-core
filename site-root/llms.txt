@@ -1,4 +1,4 @@
-# Алексей Кривошеин (Dr.Slon) — IT-услуги: WordPress, VPS, SEO, боты, AI
+# Алексей Кривошеин (Dr.Slon) — IT-услуги: WordPress, Flask, VPS, SEO, боты, AI
 
 Сайт: [https://krivoshein.site](https://krivoshein.site)
 
@@ -35,7 +35,7 @@ OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
 
 ## Чем занимается
 
-Разработка и поддержка сайтов на WordPress и на Flask (Python), настройка Linux/VPS, Nginx, Docker, техническое SEO, Яндекс.Директ, боты для MAX, подготовка сайтов к нейропоиску и AI-агентам, серверное администрирование, автоматизация.
+Разработка и поддержка сайтов (WordPress и Flask на Python), настройка Linux/VPS, Nginx, Docker, техническое SEO, Яндекс.Директ, боты для MAX, подготовка сайтов к нейропоиску и AI-агентам, серверное администрирование, автоматизация.
 
 На сайте публикуются практические материалы по WordPress, Linux, DevOps, Python, ботам, веб-инфраструктуре, AI-инструментам и личному техническому опыту.
 
@@ -55,6 +55,13 @@ OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
 - Лендинг на WordPress — от **50 000 ₽**
 - Сайт на Flask (Python) — от **50 000 ₽**. Страницы, форма и серверная логика без CMS. Кабинет, оплата и интеграции отдельно.
 - Подробнее: [Подробнее](https://flask.krivoshein.site/)
+
+
+### Сайты на Flask (Python)
+- Небольшой сайт на Flask — от **50 000 ₽** (страницы, форма заявок и серверная логика, без CMS)
+- Личный кабинет, оплата и интеграции — отдельно
+- Подробнее: [Подробнее](https://flask.krivoshein.site)
+
 
 ### WordPress
 - Доработки существующего сайта — от **5 000 ₽**
@@ -108,6 +115,8 @@ OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
   Ссылка: [Ссылка](https://krivoshein.site/sweb)
 
 ### Cloud
+- **Amvera** - Российское облако для ботов и сайтов: выкладка из git, без своего сервера. Здесь будет жить бот.
+  Ссылка: https://krivoshein.site/amvera
 - **Selectel** - Облачная платформа: VPC, ВМ (Linux/Windows Server) для продакшена. Mature cloud в РФ.
   Ссылка: https://selectel.ru/services/cloud/vpc/?ref_code=2c6445c777
 - **CLO** - Облачные VDS/VPS для сайтов, порталов и тестовых стендов. Гибкие конфигурации, когда нужен свой сервер без покупки железа.
@@ -193,6 +202,7 @@ OpenAPI: [OpenAPI](https://krivoshein.site/openapi.json)
 
 Каждый сайт ниже имеет `/llms.txt`, `/agents.md`, `/openapi.json`, `/.well-known/agent.json`.
 
+- [flask.krivoshein.site](https://flask.krivoshein.site) — сайт на Flask · [llms](https://flask.krivoshein.site/llms.txt)
 - [domaintools.site](https://domaintools.site) — проверка доменов и DNS · [llms](https://domaintools.site/llms.txt)
 - [cybertools.cc](https://cybertools.cc) — **300+** бесплатных онлайн-инструментов · [llms](https://cybertools.cc/llms.txt) · [full](https://cybertools.cc/llms-full.txt)
 - [wordpress.krivoshein.site](https://wordpress.krivoshein.site) — поддержка WordPress · [llms](https://wordpress.krivoshein.site/llms.txt)

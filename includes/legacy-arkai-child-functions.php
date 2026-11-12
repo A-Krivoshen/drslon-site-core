@@ -122,7 +122,7 @@ add_action( 'wp_head', function () {
 	}
 	$done = true;
 
-	// context.js is loaded by krv-cookie-consent only when ads consent is on (RF default: on).
+	// context.js is loaded by krv-cookie.js unless the visitor explicitly refused ads (krv_consent=n).
 	echo "<script>window.yaContextCb=window.yaContextCb||[];</script>\n";
 }, 30 );
 
@@ -598,8 +598,8 @@ add_action( 'wp_footer', function () {
 		var hideTimer = 0;
 
 		function adsAllowed() {
-			// The theme head sets window.krvConsent before paint. Ads stay off
-			// until that object says ads === true.
+			// The theme head sets window.krvConsent before paint. Ads are on
+			// by default and stay off only after an explicit refusal (ads === false).
 			if (window.krvConsent && window.krvConsent.ads === false) return false;
 			return true;
 		}

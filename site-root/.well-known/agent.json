@@ -1,6 +1,6 @@
 {
   "name": "krivoshein.site",
-  "description": "Personal site and IT services of Aleksey Krivoshein (Dr.Slon): WordPress, Flask (Python), Linux/DevOps, technical SEO, Yandex Direct, MAX bots, AI-ready websites. Practical blog and free web utilities.",
+  "description": "Personal site and IT services of Aleksey Krivoshein (Dr.Slon): WordPress, Linux/DevOps, technical SEO, Yandex Direct, MAX bots, AI-ready websites. Practical blog and free web utilities.",
   "url": "https://krivoshein.site/",
   "provider": {
     "organization": "ИП Кривошеин Алексей Сергеевич",
@@ -98,6 +98,7 @@
     "https://krivoshein.site",
     "https://cybertools.cc",
     "https://domaintools.site",
+    "https://flask.krivoshein.site",
     "https://wordpress.krivoshein.site",
     "https://vps.krivoshein.site",
     "https://bots.krivoshein.site",
