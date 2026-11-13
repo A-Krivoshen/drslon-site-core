@@ -61,7 +61,7 @@ function krv_services_landing_get_defaults(): array {
 			array( 'line' => 'ОГРН 321774600479249 · ИНН 770603253213', 'class' => 'is-legal' ),
 		),
 		'hero_cta_primary_text'    => 'Смотреть прайс',
-		'hero_cta_primary_url'     => 'https://krivoshein.site/prays-list/',
+		'hero_cta_primary_url'     => 'https://krivoshein.site/ceny/',
 		// Same-page jump; social icons under photo cover messengers.
 		'hero_cta_secondary_text'  => 'К услугам',
 		'hero_cta_secondary_url'   => '#uslugi',
@@ -168,7 +168,7 @@ function krv_services_landing_get_defaults(): array {
 				'icon_key'    => 'support',
 				'icon_svg'    => '',
 				// Same-site anchor on price list (honest: no fake landing).
-				'url'         => 'https://krivoshein.site/prays-list/#krv-package-support',
+				'url'         => 'https://krivoshein.site/ceny/#krv-package-support',
 				'price_label' => 'от 20 000 ₽/мес',
 			),
 		),
@@ -190,7 +190,7 @@ function krv_services_landing_get_defaults(): array {
 			),
 		),
 		'pricing_button_text' => 'Смотреть прайс',
-		'pricing_button_url'  => 'https://krivoshein.site/prays-list/',
+		'pricing_button_url'  => 'https://krivoshein.site/ceny/',
 		'pricing_secondary_text' => 'Обсудить проект',
 		'pricing_secondary_url'  => 'https://krivoshein.site/contacts/',
 	);
@@ -1389,7 +1389,7 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 						<span class="krv-landing-services-note-sep">·</span>
 						обычно внутри WordPress&nbsp;/&nbsp;VPS&#8209;проекта.<br>
 						Полный список цен в
-						<a href="<?php echo esc_url( home_url( '/prays-list/' ) ); ?>">прайс&#8209;листе</a>.
+						<a href="<?php echo esc_url( home_url( '/ceny/' ) ); ?>">прайс&#8209;листе</a>.
 					</p>
 					<p class="krv-landing-services-crosslink">
 						Нужен хостинг, VPS или платёжка?

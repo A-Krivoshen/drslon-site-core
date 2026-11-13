@@ -1,6 +1,6 @@
 <?php
 /**
- * Context banner on /contacts/ when ?topic= is set from prays-list funnel.
+ * Context banner on /contacts/ when ?topic= is set from ceny funnel.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

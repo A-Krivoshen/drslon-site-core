@@ -1,6 +1,6 @@
 <?php
 /**
- * ACF options and canonical content for the /prays-list/ shortcode.
+ * ACF options and canonical content for the /ceny/ shortcode.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

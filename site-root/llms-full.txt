@@ -38,7 +38,7 @@
 
 ## 2. Услуги и цены (ориентиры)
 
-Источник истины: https://krivoshein.site/prays-list/
+Источник истины: https://krivoshein.site/ceny/
 
 ### Популярные пакеты
 | Услуга | От | Суть |
@@ -107,7 +107,7 @@ Linux, Nginx, PHP, Docker, SSL, файрвол, бэкапы. Тариф VPS —
 
 - Главная: https://krivoshein.site/
 - Блог: https://krivoshein.site/blog/
-- Прайс: https://krivoshein.site/prays-list/
+- Прайс: https://krivoshein.site/ceny/
 - Консультации: https://krivoshein.site/konsultatsii/
 - Резюме: https://krivoshein.site/resume/
 - Партнёры: https://krivoshein.site/partnery/
@@ -235,7 +235,7 @@ Content-Signal (robots): search=yes, ai-input=yes, ai-train=yes. Автор: И�
 
 ## 8. Правила для агентов (кратко)
 
-1. Факты и цены — из llms* / prays-list / REST, не выдумывать.
+1. Факты и цены — из llms* / ceny / REST, не выдумывать.
 2. Цитировать URL исходной страницы.
 3. Заказы → /contacts/ или Telegram/MAX/email/телефон.
 4. Не обещать топ в поиске.

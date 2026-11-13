@@ -36,7 +36,7 @@ Skills: WordPress, PHP, Python, Linux, Nginx, Docker, VPS, DevOps, SEO, Yandex D
 
 ## 2. Services and starting prices
 
-Source of truth: https://krivoshein.site/prays-list/
+Source of truth: https://krivoshein.site/ceny/
 
 ### Common packages
 - Site diagnostics, from 5 000 RUB. WordPress, forms, Metrika, speed, written recommendations.

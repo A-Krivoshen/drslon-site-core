@@ -43,7 +43,7 @@ The blog publishes practical notes on WordPress, Linux, DevOps, Python, bots, we
 
 ## Prices (starting points)
 
-Current price list: https://krivoshein.site/prays-list/
+Current price list: https://krivoshein.site/ceny/
 Figures are "from". Integrations, rush work, and unusual logic are quoted separately.
 
 ### Common packages

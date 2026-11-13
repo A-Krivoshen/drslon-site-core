@@ -6,6 +6,7 @@ HTDOCS="${HTDOCS:-/var/www/krivoshein.site/htdocs}"
 SRC="${ROOT}/site-root"
 
 cp "${SRC}/llms.txt" "${HTDOCS}/llms.txt"
+cp "${SRC}/llms-full.txt" "${HTDOCS}/llms-full.txt"
 cp "${SRC}/ai.txt" "${HTDOCS}/ai.txt"
 cp "${SRC}/humans.txt" "${HTDOCS}/humans.txt"
 cp "${SRC}/robots.txt" "${HTDOCS}/robots.txt"
