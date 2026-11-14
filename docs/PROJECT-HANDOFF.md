@@ -52,7 +52,7 @@
 | Репозиторий | Домен | HEAD на 14 ноября 2026 после этого этапа |
 |---|---|---|
 | [drslon-blog-theme](https://github.com/A-Krivoshen/drslon-blog-theme) | krivoshein.site, тема | `602fd76b5517fd10dec8325f4522c2f32de5d116` |
-| [drslon-site-core](https://github.com/A-Krivoshen/drslon-site-core) | krivoshein.site, плагин | код `e976263`, схема `/ceny/` `7e2517b`; документ передачи коммитится следом |
+| [drslon-site-core](https://github.com/A-Krivoshen/drslon-site-core) | krivoshein.site, плагин | код `e976263`, схема `/ceny/` `7e2517b`, этот документ `233cb9f6f30abf336ee0a04aab4f9c5a8dd3bee7` |
 | [landing-krivoshein-site](https://github.com/A-Krivoshen/landing-krivoshein-site) | landing.krivoshein.site | `b878257d15547d75b282aeaaaf14195128e94e2e` |
 | [wordpress-krivoshein-site](https://github.com/A-Krivoshen/wordpress-krivoshein-site) | wordpress.krivoshein.site | `39cbfb6abd2f3897edfe7532eb74e2c764872941` |
 | [vps-krivoshein-site](https://github.com/A-Krivoshen/vps-krivoshein-site) | vps.krivoshein.site | `88880696a55688869aea09c00a7814d94f53f3ec` |
