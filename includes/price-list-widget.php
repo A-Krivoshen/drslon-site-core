@@ -314,7 +314,13 @@ function krv_price_list_render( ?array $settings = null ): string {
 	$contacts_general    = krv_price_list_contacts_url_for_topic( 'general' );
 	$contacts_diagnostic = krv_price_list_contacts_url_for_topic( 'diagnostic' );
 	$contacts_cta        = krv_price_list_contacts_url_for_topic( 'cta-bottom' );
-	$telegram_url        = krv_price_list_utm_url( 'https://t.me/DrSlon', 'telegram-chat' );
+	$telegram_text       = function_exists( 'krv_ui_locale' ) && 'en' === krv_ui_locale()
+		? 'Hello! I want to discuss a task. Service: price list on krivoshein.site'
+		: 'Здравствуйте! Хочу обсудить задачу. Услуга: прайс на krivoshein.site';
+	$telegram_url        = add_query_arg(
+		array( 'text' => $telegram_text ),
+		krv_price_list_utm_url( 'https://t.me/DrSlon', 'telegram-chat' )
+	);
 	$max_url             = home_url( '/max' );
 	$max_icon            = function_exists( 'krv_max_messenger_icon_svg' )
 		? krv_max_messenger_icon_svg( 'krv-max-icon' )

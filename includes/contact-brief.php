@@ -1,28 +1,35 @@
 <?php
-/** Browser-only contact composer. No endpoint or persistent personal data. */
+/** Direct Telegram and MAX contacts. No form, endpoint or stored message. */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function krv_contact_brief_markup( bool $en = false ): string {
+function krv_contact_talk_telegram_url( bool $en = false ): string {
+	// One line: WordPress esc_url() removes %0A from href values.
+	$text = $en
+		? 'Hello! I want to discuss a task. Service: Websites, ads and automation'
+		: 'Здравствуйте! Хочу обсудить задачу. Услуга: Сайты, реклама и автоматизация';
+	return 'https://t.me/DrSlon?text=' . rawurlencode( $text );
+}
+
+function krv_contact_talk_markup( bool $en = false ): string {
+	$title    = $en ? 'Have a task? Let\'s discuss it' : 'Есть задача? Давайте обсудим';
+	$lead     = $en ? 'Message me directly. No form.' : 'Напишите в личный диалог. Анкета не нужна.';
+	$telegram = $en ? 'Message on Telegram' : 'Написать в Telegram';
+	$max      = $en ? 'Message on MAX' : 'Написать в MAX';
+	$label    = $en ? 'Contact' : 'Связь';
 	ob_start();
 	?>
-	<section id="brief" class="krv-services-landing-section" aria-label="<?php echo $en ? 'Contact and brief' : 'Связь и короткий бриф'; ?>">
-		<div class="krv-qual" data-krv-brief data-service="site" data-counter="51907757">
-			<h2 data-krv-text="title"><?php echo $en ? 'Tell me about your task' : 'Коротко расскажите о задаче'; ?></h2>
-			<p data-krv-text="lead"><?php echo $en ? 'No technical terms needed. Contact me directly or prepare a message below.' : 'Можно без технических терминов. Напишите сразу или подготовьте текст ниже.'; ?></p>
-			<div class="krv-brief-channels">
-				<a class="krv-brief-channel" href="https://t.me/DrSlon" target="_blank" rel="noopener noreferrer">Telegram</a>
-				<a class="krv-brief-channel" href="https://krivoshein.site/max" target="_blank" rel="noopener noreferrer">MAX</a>
+	<section id="brief" class="krv-services-landing-section krv-qual-section" aria-label="<?php echo esc_attr( $label ); ?>">
+		<div class="krv-qual" data-krv-talk data-service="site" data-counter="51907757">
+			<h2><?php echo esc_html( $title ); ?></h2>
+			<p class="krv-qual__lead"><?php echo esc_html( $lead ); ?></p>
+			<div class="krv-talk__actions">
+				<a class="krv-talk__btn" data-krv-telegram href="<?php echo esc_url( krv_contact_talk_telegram_url( $en ) ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $telegram ); ?></a>
+				<a class="krv-talk__btn krv-talk__btn--max" href="<?php echo esc_url( home_url( '/max' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $max ); ?></a>
 			</div>
-			<p><a href="mailto:aleksey@krivoshein.site">aleksey@krivoshein.site</a> · <a href="tel:+79636641615">+7 (963) 664-16-15</a></p>
-			<label for="krv-main-need" data-krv-text="need"><?php echo $en ? 'What do you need?' : 'Что требуется?'; ?></label>
-			<select id="krv-main-need"><option><?php echo $en ? 'Discuss a task' : 'Обсудить задачу'; ?></option></select>
-			<label for="krv-main-note" data-krv-text="note"><?php echo $en ? 'Short description (optional)' : 'Краткое описание (необязательно)'; ?></label>
-			<textarea id="krv-main-note" class="ym-disable-keys" rows="3" maxlength="2000" autocomplete="off"></textarea>
-			<div class="krv-qual__actions"></div>
-			<noscript><p><?php echo $en ? 'Preparing a draft requires JavaScript. Use the direct contact links above.' : 'Подготовка текста требует JavaScript. Напишите напрямую удобным способом выше.'; ?></p></noscript>
-			<p class="krv-brief-privacy" data-krv-text="privacy"><?php echo $en ? 'The draft stays in your browser until copied. Nothing is sent automatically. Do not enter passwords or secrets.' : 'Текст остаётся в браузере до копирования. Ничего не отправляется автоматически. Не указывайте пароли и секреты.'; ?></p>
+			<p class="krv-talk__note" data-krv-talk-note hidden></p>
+			<p class="krv-talk__alt"><a href="mailto:aleksey@krivoshein.site">aleksey@krivoshein.site</a> · <a href="tel:+79636641615">+7 (963) 664-16-15</a></p>
 		</div>
 	</section>
 	<?php
@@ -40,24 +47,23 @@ add_action( 'wp_enqueue_scripts', static function (): void {
 		return;
 	}
 	$plugin = DRSLON_SITE_CORE_DIR . 'drslon-site-core.php';
-	wp_enqueue_style( 'krv-contact-brief', plugins_url( 'assets/css/contact-brief.css', $plugin ), array(), (string) filemtime( DRSLON_SITE_CORE_DIR . 'assets/css/contact-brief.css' ) );
-	wp_enqueue_script( 'krv-contact-brief', plugins_url( 'assets/js/contact-brief.js', $plugin ), array(), (string) filemtime( DRSLON_SITE_CORE_DIR . 'assets/js/contact-brief.js' ), true );
+	wp_enqueue_style( 'krv-contact-talk', plugins_url( 'assets/css/contact-talk.css', $plugin ), array(), (string) filemtime( DRSLON_SITE_CORE_DIR . 'assets/css/contact-talk.css' ) );
+	wp_enqueue_script( 'krv-contact-talk', plugins_url( 'assets/js/contact-talk.js', $plugin ), array(), (string) filemtime( DRSLON_SITE_CORE_DIR . 'assets/js/contact-talk.js' ), true );
 }, 30 );
 
 add_filter( 'krv_content_widget_html', static function ( string $html, string $name ): string {
-	if ( 'contacts' !== $name || false !== strpos( $html, 'data-krv-brief' ) ) {
+	if ( 'contacts' !== $name || false !== strpos( $html, 'data-krv-talk' ) ) {
 		return $html;
 	}
 	$en = function_exists( 'drslon_is_en_page' ) && drslon_is_en_page();
-	return $html . krv_contact_brief_markup( $en );
+	return $html . krv_contact_talk_markup( $en );
 }, 20, 2 );
 
 // Published contacts can contain legacy blocks rather than the widget shortcode.
-// Append at render time, preserving stored content and avoiding a second brief.
 add_filter( 'the_content', static function ( string $html ): string {
-	if ( is_admin() || ! is_page( 'contacts' ) || get_the_ID() !== get_queried_object_id() || false !== strpos( $html, 'data-krv-brief' ) ) {
+	if ( is_admin() || ! is_page( 'contacts' ) || get_the_ID() !== get_queried_object_id() || false !== strpos( $html, 'data-krv-talk' ) ) {
 		return $html;
 	}
 	$en = function_exists( 'drslon_is_en_page' ) && drslon_is_en_page();
-	return $html . krv_contact_brief_markup( $en );
+	return $html . krv_contact_talk_markup( $en );
 }, 20 );

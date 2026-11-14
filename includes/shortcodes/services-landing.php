@@ -1493,7 +1493,7 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 		</div>
 
 		<?php if ( 'en' === krv_ui_locale() ) : ?>
-		<?php echo krv_contact_brief_markup( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo krv_contact_talk_markup( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<nav class="krv-landing-next" aria-label="Next on the site">
 			<span class="krv-landing-next-label">Next:</span>
 			<a href="<?php echo esc_url( home_url( '/partnery/' ) ); ?>">Partners</a>
@@ -1505,7 +1505,7 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 			<a href="<?php echo esc_url( home_url( '/en/contacts/' ) ); ?>">Contacts</a>
 		</nav>
 		<?php else : ?>
-		<?php echo krv_contact_brief_markup(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo krv_contact_talk_markup(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<nav class="krv-landing-next" aria-label="Дальше по сайту">
 			<span class="krv-landing-next-label">Дальше:</span>
 			<a href="<?php echo esc_url( home_url( '/partnery/' ) ); ?>">Партнёры</a>
