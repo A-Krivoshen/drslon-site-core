@@ -53,6 +53,7 @@ function krv_services_landing_get_defaults(): array {
 	return array(
 		'profile_avatar'         => 0,
 		'profile_name'           => 'Алексей Кривошеин',
+		'hero_title'             => 'Разработка сайтов, реклама и автоматизация бизнеса',
 		// No em/en dash: people write a period or drop the second clause.
 		'profile_tagline'        => 'WordPress, Flask, VPS, боты MAX, Директ и AI-ready',
 		'profile_lead'           => 'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.',
@@ -405,6 +406,12 @@ function krv_services_landing_register_acf(): void {
 					'preview_size'  => 'thumbnail',
 					'library'       => 'all',
 					'instructions'  => 'Выберите фото из медиатеки или загрузите новое.',
+				),
+				array(
+					'key'   => 'field_krv_sl_hero_title',
+					'label' => 'Заголовок первого экрана',
+					'name'  => 'hero_title',
+					'type'  => 'text',
 				),
 				array(
 					'key'   => 'field_krv_sl_profile_name',
@@ -1026,7 +1033,8 @@ function krv_services_landing_render_pricing_icon( array $bullet ): string {
  */
 function krv_services_landing_apply_en( array $data ): array {
 	$data['profile_name']            = 'Aleksey Krivoshein';
-	$data['profile_tagline']         = 'WordPress, VPS, MAX bots, Direct and AI-ready';
+	$data['hero_title']              = 'Websites, advertising and business automation';
+	$data['profile_tagline']         = 'One specialist from task to launch';
 	$data['profile_lead']            = 'Sites, servers, ads and automation from one sole trader. A contract, a bank transfer, closing documents. No account managers.';
 	$data['profile_meta_lines']      = array(
 		array(
@@ -1034,8 +1042,8 @@ function krv_services_landing_apply_en( array $data ): array {
 			'class' => 'is-legal',
 		),
 	);
-	$data['hero_cta_primary_text']   = 'Price list';
-	$data['hero_cta_primary_url']    = home_url( '/en/price/' );
+	$data['hero_cta_primary_text']   = 'Discuss a task';
+	$data['hero_cta_primary_url']    = '#brief';
 	$data['hero_cta_secondary_text'] = 'Services';
 	$data['hero_cta_secondary_url']  = '#services';
 	$data['services_header_title']   = 'Services';
@@ -1051,7 +1059,7 @@ function krv_services_landing_apply_en( array $data ): array {
 	$bullet_copy = array(
 		'focus' => 'The clearer the task, the faster and cheaper the estimate.',
 		'scope' => 'The final figure depends on scope, integrations and timing.',
-		'chat'  => 'The first consultation is free.',
+		'chat'  => 'A short introductory discussion is free. Diagnostics, audits and technical consultations are paid services.',
 	);
 	if ( isset( $data['pricing_bullets'] ) && is_array( $data['pricing_bullets'] ) ) {
 		foreach ( $data['pricing_bullets'] as $index => $bullet ) {
@@ -1130,9 +1138,39 @@ function krv_services_landing_apply_en( array $data ): array {
  * @param string $locale en or ru. Anything else is ru.
  * @return string
  */
+function krv_services_landing_conversion_copy( array $data ): array {
+	// Adapt known legacy copy at render time. Do not overwrite custom ACF text
+	// or update options: reverting code restores the original presentation.
+	$legacy = array(
+		'profile_tagline' => array(
+			'WordPress, Flask, VPS, боты MAX, Директ и AI-ready' => 'Один специалист от задачи до запуска',
+		),
+		'profile_lead' => array(
+			'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.' => 'Создаю и дорабатываю сайты, настраиваю рекламу, серверы и ботов. Общаетесь напрямую со мной, без посредников.',
+		),
+	);
+	foreach ( $legacy as $key => $replacements ) {
+		$value = (string) ( $data[ $key ] ?? '' );
+		if ( isset( $replacements[ $value ] ) ) {
+			$data[ $key ] = $replacements[ $value ];
+		}
+	}
+	if ( 'Смотреть прайс' === ( $data['hero_cta_primary_text'] ?? '' ) && in_array( $data['hero_cta_primary_url'] ?? '', array( 'https://krivoshein.site/prays-list/', 'https://krivoshein.site/ceny/' ), true ) ) {
+		$data['hero_cta_primary_text'] = 'Обсудить задачу';
+		$data['hero_cta_primary_url']  = '#brief';
+	}
+	$bullets = $data['pricing_bullets'] ?? array();
+	foreach ( is_array( $bullets ) ? $bullets : array() as $index => $bullet ) {
+		if ( is_array( $bullet ) && 'Первичная консультация бесплатно.' === ( $bullet['text'] ?? '' ) ) {
+			$data['pricing_bullets'][ $index ]['text'] = 'Короткое знакомство с задачей бесплатно. Диагностика, аудит и техническая консультация оплачиваются по прайсу.';
+		}
+	}
+	return $data;
+}
+
 function krv_services_landing_render( string $locale = 'ru' ): string {
 	krv_ui_locale_set( $locale );
-	$data = krv_services_landing_get_data();
+	$data = krv_services_landing_conversion_copy( krv_services_landing_get_data() );
 	if ( 'en' === krv_ui_locale() ) {
 		$data = krv_services_landing_apply_en( $data );
 	}
@@ -1144,10 +1182,11 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 			<div class="krv-landing-hero-inner">
 				<div class="krv-landing-hero-grid">
 					<div class="krv-landing-hero-copy">
+						<p class="krv-landing-tagline"><?php echo esc_html( (string) $data['profile_name'] ); ?></p>
 						<?php if ( is_front_page() || 'en' === krv_ui_locale() ) : ?>
-							<h1 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h1>
+							<h1 class="krv-landing-title"><?php echo esc_html( (string) $data['hero_title'] ); ?></h1>
 						<?php else : ?>
-							<h2 class="krv-landing-title"><?php echo esc_html( (string) $data['profile_name'] ); ?></h2>
+							<h2 class="krv-landing-title"><?php echo esc_html( (string) $data['hero_title'] ); ?></h2>
 						<?php endif; ?>
 
 						<?php
@@ -1162,6 +1201,7 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 						<?php endif; ?>
 
 						<p class="krv-landing-lead"><?php echo esc_html( (string) $data['profile_lead'] ); ?></p>
+						<p class="krv-landing-lead"><?php echo 'en' === krv_ui_locale() ? 'Sole trader · Contract · Clear estimate · Direct contact' : 'ИП · Договор · Прозрачная смета · Без посредников'; ?></p>
 
 						<?php
 						$cta1_text = trim( (string) ( $data['hero_cta_primary_text'] ?? '' ) );
@@ -1184,6 +1224,7 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
+						<p><a href="<?php echo esc_url( home_url( 'en' === krv_ui_locale() ? '/en/price/' : '/ceny/' ) ); ?>"><?php echo 'en' === krv_ui_locale() ? 'Service prices' : 'Цены на услуги'; ?></a></p>
 					</div>
 
 					<div class="krv-landing-hero-aside">
@@ -1236,18 +1277,18 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 						}
 						$client_mod   = abs( $proof_clients ) % 100;
 						$client_mod1  = $client_mod % 10;
-						$client_label = 'клиентов в витрине';
+						$client_label = 'компаний в списке';
 						if ( ! ( $client_mod > 10 && $client_mod < 20 ) ) {
 							if ( 1 === $client_mod1 ) {
-								$client_label = 'клиент в витрине';
+								$client_label = 'компания в списке';
 							} elseif ( $client_mod1 >= 2 && $client_mod1 <= 4 ) {
-								$client_label = 'клиента в витрине';
+								$client_label = 'компании в списке';
 							}
 						}
 						$is_en = ( 'en' === krv_ui_locale() );
 						if ( $is_en ) {
 							$offer_label  = ( 1 === $offer_count ) ? 'offer' : 'offers';
-							$client_label = ( 1 === $proof_clients ) ? 'client' : 'clients';
+							$client_label = ( 1 === $proof_clients ) ? 'company listed' : 'companies listed';
 						}
 						?>
 						<ul class="krv-landing-proof" aria-label="<?php echo esc_attr( $is_en ? 'In short' : 'Коротко о работе' ); ?>">
@@ -1452,6 +1493,7 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 		</div>
 
 		<?php if ( 'en' === krv_ui_locale() ) : ?>
+		<?php echo krv_contact_brief_markup( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<nav class="krv-landing-next" aria-label="Next on the site">
 			<span class="krv-landing-next-label">Next:</span>
 			<a href="<?php echo esc_url( home_url( '/partnery/' ) ); ?>">Partners</a>
@@ -1463,6 +1505,7 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 			<a href="<?php echo esc_url( home_url( '/en/contacts/' ) ); ?>">Contacts</a>
 		</nav>
 		<?php else : ?>
+		<?php echo krv_contact_brief_markup(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<nav class="krv-landing-next" aria-label="Дальше по сайту">
 			<span class="krv-landing-next-label">Дальше:</span>
 			<a href="<?php echo esc_url( home_url( '/partnery/' ) ); ?>">Партнёры</a>

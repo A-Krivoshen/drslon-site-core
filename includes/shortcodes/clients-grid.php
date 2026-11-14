@@ -219,12 +219,12 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 	<section class="krv-clients-grid-wrap" id="klienty" aria-labelledby="krv-clients-heading">
 		<header class="krv-clients-grid-header">
 			<?php if ( $ui_en ) : ?>
-			<h2 id="krv-clients-heading">Clients</h2>
-			<p class="krv-clients-grid-lead">Real clients: industry, e&#8209;commerce, media and service businesses</p>
+			<h2 id="krv-clients-heading">Companies I have worked with</h2>
+			<p class="krv-clients-grid-lead">Work across different years and tasks. This list does not imply that I built each company's public website.</p>
 			<p class="krv-clients-grid-meta"><?php echo esc_html( (string) $post_count ); ?> <?php echo 1 === $post_count ? 'company.' : 'companies.'; ?></p>
 			<?php else : ?>
-			<h2 id="krv-clients-heading">Клиенты</h2>
-			<p class="krv-clients-grid-lead">Реальные заказчики: промышленность, e&#8209;commerce, медиа и сервисный бизнес</p>
+			<h2 id="krv-clients-heading">Компании, с которыми я работал</h2>
+			<p class="krv-clients-grid-lead">Опыт сотрудничества в разные годы и по разным задачам. Список не означает разработку публичного сайта каждой компании.</p>
 			<p class="krv-clients-grid-meta"><?php echo esc_html( (string) $post_count ); ?> компаний.</p>
 			<?php endif; ?>
 		</header>
