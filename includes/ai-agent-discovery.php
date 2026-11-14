@@ -129,7 +129,7 @@ function drslon_ai_agent_json_ld() {
 		),
 	);
 
-	$show_catalog = is_front_page() || is_page( 'prays-list' ) || is_singular( 'price' );
+	$show_catalog = is_front_page() || is_page( array( 'prays-list', 'ceny' ) ) || is_singular( 'price' );
 	if ( $show_catalog ) {
 		$graph[] = array(
 			'@type'       => 'ProfessionalService',
