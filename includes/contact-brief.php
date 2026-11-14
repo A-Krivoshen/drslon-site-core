@@ -51,3 +51,13 @@ add_filter( 'krv_content_widget_html', static function ( string $html, string $n
 	$en = function_exists( 'drslon_is_en_page' ) && drslon_is_en_page();
 	return $html . krv_contact_brief_markup( $en );
 }, 20, 2 );
+
+// Published contacts can contain legacy blocks rather than the widget shortcode.
+// Append at render time, preserving stored content and avoiding a second brief.
+add_filter( 'the_content', static function ( string $html ): string {
+	if ( is_admin() || ! is_page( 'contacts' ) || get_the_ID() !== get_queried_object_id() || false !== strpos( $html, 'data-krv-brief' ) ) {
+		return $html;
+	}
+	$en = function_exists( 'drslon_is_en_page' ) && drslon_is_en_page();
+	return $html . krv_contact_brief_markup( $en );
+}, 20 );
