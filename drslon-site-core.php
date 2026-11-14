@@ -63,6 +63,7 @@ require_once DRSLON_SITE_CORE_DIR . 'includes/telegram-comments-proxy.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/price-list-acf.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/price-list-widget.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/contacts-topic-banner.php';
+require_once DRSLON_SITE_CORE_DIR . 'includes/contact-brief.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/ai-agent-discovery.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/blog-shortcodes.php';
 require_once DRSLON_SITE_CORE_DIR . 'includes/shortcodes/services-landing.php';
