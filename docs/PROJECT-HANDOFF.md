@@ -91,7 +91,7 @@
 
 SSH-алиас: `beget`, пользователь `drslon`.
 Исходники на сервере: `/home/drslon/src/<repo>` на `main`.
-Flask-приложение: `/home/drslon/apps/flask-krivoshein`. Его этот этап не трогал.
+Flask-приложение: `/home/drslon/apps/flask-krivoshein`. Релиз диалогов обновил его `git pull --ff-only` и перезапустил `flask-krivoshein.service`. Статические файлы `htdocs/` скопированы в корень nginx.
 
 Корни отдачи, это копии, не git:
 
