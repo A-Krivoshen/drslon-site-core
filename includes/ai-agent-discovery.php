@@ -187,6 +187,19 @@ function drslon_ai_agent_json_ld() {
 						'@type' => 'Offer',
 						'itemOffered' => array(
 							'@type' => 'Service',
+							'name'  => 'Настройка VPS',
+							'url'   => 'https://vps.krivoshein.site/',
+						),
+						'priceSpecification' => array(
+							'@type'         => 'PriceSpecification',
+							'priceCurrency' => 'RUB',
+							'minPrice'      => 10000,
+						),
+					),
+					array(
+						'@type' => 'Offer',
+						'itemOffered' => array(
+							'@type' => 'Service',
 							'name'  => 'AI-ready подготовка сайта',
 						),
 						'priceSpecification' => array(

@@ -105,6 +105,26 @@
 			});
 		}
 
+		function activateFromHash() {
+			var hash = (window.location.hash || '').replace(/^#/, '');
+			if (!hash) return;
+			var tab = null;
+			if (hash.indexOf('krv-panel-') === 0) {
+				tab = tablist.querySelector('[aria-controls="' + hash + '"]');
+			} else if (hash.indexOf('krv-tab-') === 0) {
+				tab = document.getElementById(hash);
+			} else {
+				tab = document.getElementById('krv-tab-' + hash);
+			}
+			if (!tab || tabs.indexOf(tab) === -1) return;
+			activateTab(tab);
+			var section = document.getElementById('krv-prices');
+			if (section && section.scrollIntoView) section.scrollIntoView();
+		}
+
+		activateFromHash();
+		window.addEventListener('hashchange', activateFromHash);
+
 		tabs.forEach(function (tab, index) {
 			tab.addEventListener('click', function () {
 				activateTab(tab);

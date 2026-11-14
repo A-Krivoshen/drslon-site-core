@@ -306,7 +306,7 @@ function krv_price_list_get_defaults(): array {
 				'landing_label'         => 'Лендинг vps.krivoshein.site ↗',
 				'landing_url'           => 'https://vps.krivoshein.site/',
 				'items'                 => array(
-					array( 'style' => 'card', 'kicker' => 'Под ключ', 'title' => 'Настройка VPS', 'price' => 'от 15 000 ₽', 'price_note' => '', 'text' => 'Linux, Nginx, PHP, Docker, SSL, файрвол, бэкапы и запуск проекта.', 'cta_label' => '', 'cta_url' => '', 'cta_new_tab' => 0 ),
+					array( 'style' => 'card', 'kicker' => 'Под ключ', 'title' => 'Настройка VPS', 'price' => 'от 10 000 ₽', 'price_note' => '', 'text' => 'Linux, Nginx, PHP, Docker, SSL, файрвол, бэкапы и запуск проекта.', 'cta_label' => '', 'cta_url' => '', 'cta_new_tab' => 0 ),
 					array( 'style' => 'card', 'kicker' => 'Миграция', 'title' => 'Перенос сайта на VPS', 'price' => 'от 10 000 ₽', 'price_note' => '', 'text' => 'Переезд с хостинга или другого сервера без потери данных и с минимальным простоем.', 'cta_label' => '', 'cta_url' => '', 'cta_new_tab' => 0 ),
 					array( 'style' => 'card', 'kicker' => 'Разбор', 'title' => 'Аудит и спасение сервера', 'price' => 'от 12 000 ₽', 'price_note' => '', 'text' => 'Проверка настроек, поиск причин сбоев, восстановление после взлома и стабилизация.', 'cta_label' => '', 'cta_url' => '', 'cta_new_tab' => 0 ),
 				),
@@ -815,6 +815,73 @@ function krv_price_list_seed_defaults(): void {
 }
 
 add_action( 'acf/init', 'krv_price_list_seed_defaults', 25 );
+
+/**
+ * Owner decision 2026-11-14: base VPS setup is from 10 000 ₽.
+ * Updates only the stored card titled "Настройка VPS". ACF blocks and other
+ * 15 000 ₽ packages stay as they are. One option row, not the whole repeater.
+ */
+function krv_price_list_align_vps_base_price(): void {
+	if ( get_option( 'krv_price_vps_base_10000' ) ) {
+		return;
+	}
+
+	global $wpdb;
+
+	if ( ! isset( $wpdb ) || ! is_object( $wpdb ) ) {
+		return;
+	}
+
+	$like  = $wpdb->esc_like( krv_price_list_option_id() . '_price_tabs_' ) . '%' . $wpdb->esc_like( '_title' );
+	$titles = $wpdb->get_results(
+		$wpdb->prepare(
+			"SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name LIKE %s",
+			$like
+		)
+	);
+
+	if ( ! is_array( $titles ) || array() === $titles ) {
+		return;
+	}
+
+	$found    = false;
+	$changed  = false;
+	$previous = '';
+
+	foreach ( $titles as $row ) {
+		if ( ! isset( $row->option_name, $row->option_value ) || 'Настройка VPS' !== trim( (string) $row->option_value ) ) {
+			continue;
+		}
+
+		$found     = true;
+		$price_key = preg_replace( '/_title$/', '_price', (string) $row->option_name );
+		if ( ! is_string( $price_key ) || $price_key === $row->option_name ) {
+			continue;
+		}
+
+		$price      = (string) get_option( $price_key, '' );
+		$normalized = str_replace( "\xc2\xa0", ' ', $price );
+		if ( ! preg_match( '/(?<!\d)15[ \t]*000(?!\d)/u', $normalized ) ) {
+			continue;
+		}
+
+		update_option( $price_key, 'от 10 000 ₽', false );
+		$previous = $price;
+		$changed  = true;
+	}
+
+	if ( ! $found ) {
+		return;
+	}
+
+	if ( $changed ) {
+		update_option( 'krv_price_vps_base_10000_from', $previous, false );
+	}
+
+	update_option( 'krv_price_vps_base_10000', '1', false );
+}
+
+add_action( 'acf/init', 'krv_price_list_align_vps_base_price', 30 );
 
 /**
  * Render trust strip HTML from settings.
