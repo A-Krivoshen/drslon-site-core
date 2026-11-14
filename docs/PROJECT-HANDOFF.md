@@ -5,7 +5,7 @@
 После завершённого этапа обновлять этот же файл, не заводить вторую историю.
 
 Источник кода: GitHub, ветка `main`.
-Этот файл: зафиксированные решения и состояние на 14 ноября 2026, после выкладки.
+Этот файл: зафиксированные решения и состояние на 14 ноября 2026, после выкладки прямых диалогов.
 Секретов здесь нет. Пароли, токены и ключи сюда не писать.
 
 `docs/SITE-GUIDE.md` устарел (июль 2026, плагин 0.4.2, тема 0.6.0, деплой «коммитом внутри корня сайта»). Корни сайтов не являются git-репозиториями. Актуальный порядок деплоя в разделе 6.
@@ -39,7 +39,7 @@
 - Шесть лендингов: статические HTML, CSS, JavaScript.
 - flask.krivoshein.site: Flask, Gunicorn, systemd, Nginx. Код приложения на сервере отдельно от статических лендингов.
 - Прайс на главном сайте: ACF options, post id `krv-price-list`, поле `price_tabs`. Живые цены лежат в `wp_options`, а не в тексте страниц.
-- Брифы на лендингах и в формах главного сайта готовят текст в браузере. Заявку они не отправляют. Человек сам копирует текст в Telegram или MAX. Не называть подготовку текста отправкой заявки.
+- Обязательного брифа нет. Кнопки «Написать в Telegram» и «Написать в MAX» открывают личный диалог. Telegram: `https://t.me/DrSlon?text=...`, не канал и не `t.me/share`. MAX: существующий `/max` на личный профиль `max.ru/u/...`, не бот и не канал. Клик в мессенджер — это клик, не заявка. Форму, CRM и регистрацию не возвращать.
 - Рекомендации Яндекс РСЯ остаются под статьёй. Коммерческий блок их не заменяет.
 - Список компаний и юридические страницы этим этапом не менялись.
 
@@ -52,14 +52,14 @@
 | Репозиторий | Домен | HEAD на 14 ноября 2026 после этого этапа |
 |---|---|---|
 | [drslon-blog-theme](https://github.com/A-Krivoshen/drslon-blog-theme) | krivoshein.site, тема | `602fd76b5517fd10dec8325f4522c2f32de5d116` |
-| [drslon-site-core](https://github.com/A-Krivoshen/drslon-site-core) | krivoshein.site, плагин | код `e976263`, схема `/ceny/` `7e2517b`, этот документ `233cb9f6f30abf336ee0a04aab4f9c5a8dd3bee7` |
-| [landing-krivoshein-site](https://github.com/A-Krivoshen/landing-krivoshein-site) | landing.krivoshein.site | `b878257d15547d75b282aeaaaf14195128e94e2e` |
-| [wordpress-krivoshein-site](https://github.com/A-Krivoshen/wordpress-krivoshein-site) | wordpress.krivoshein.site | `39cbfb6abd2f3897edfe7532eb74e2c764872941` |
-| [vps-krivoshein-site](https://github.com/A-Krivoshen/vps-krivoshein-site) | vps.krivoshein.site | `88880696a55688869aea09c00a7814d94f53f3ec` |
-| [direct-krivoshein-site](https://github.com/A-Krivoshen/direct-krivoshein-site) | direct.krivoshein.site | `ab3c6e07dd07049cb80835e11eb3be0950c0e722` |
-| [bots-krivoshein-site](https://github.com/A-Krivoshen/bots-krivoshein-site) | bots.krivoshein.site | `221221551f4dd511f043587ecb4a0009daf6a27f` |
-| [ai-ready-krivoshein-site](https://github.com/A-Krivoshen/ai-ready-krivoshein-site) | ai-ready.krivoshein.site | `208b2c5ac3bcb2572c802561287a526b0bea61f8` |
-| [flask-krivoshein](https://github.com/A-Krivoshen/flask-krivoshein) | flask.krivoshein.site | `1f5a8ec43b2d8dc348aba9822245a96d7d35f457` |
+| [drslon-site-core](https://github.com/A-Krivoshen/drslon-site-core) | krivoshein.site, плагин | `1263fe059f3d8e32f8f2ef91d8c9bf3cc624e3a1`, затем этот документ |
+| [landing-krivoshein-site](https://github.com/A-Krivoshen/landing-krivoshein-site) | landing.krivoshein.site | `1adcee2f67be7a75d211e39251607eb6e424eab5` |
+| [wordpress-krivoshein-site](https://github.com/A-Krivoshen/wordpress-krivoshein-site) | wordpress.krivoshein.site | `94e4338398022b8b73829ac8ea5d22e3c2f9ba10` |
+| [vps-krivoshein-site](https://github.com/A-Krivoshen/vps-krivoshein-site) | vps.krivoshein.site | `fc26b3cfee4e49bf08202f782d1e19e2f6507a06` |
+| [direct-krivoshein-site](https://github.com/A-Krivoshen/direct-krivoshein-site) | direct.krivoshein.site | `a3021c4f87667b1fa5ec83c5bb5d6c49325e7fa0` |
+| [bots-krivoshein-site](https://github.com/A-Krivoshen/bots-krivoshein-site) | bots.krivoshein.site | `60e3571cca873f80dda7c0cdd3d80d4d8396d8bc` |
+| [ai-ready-krivoshein-site](https://github.com/A-Krivoshen/ai-ready-krivoshein-site) | ai-ready.krivoshein.site | `b83b5fe0b63dd0955c9b7fc837173a3a58f57447` |
+| [flask-krivoshein](https://github.com/A-Krivoshen/flask-krivoshein) | flask.krivoshein.site | `ff90628f0c1fe21c0281d7b22dcebd8f99873f7e` |
 
 Рабочее дерево Flask с origin: `flask-krivoshein-native`. Дерево `flask-krivoshein` без origin не использовать.
 
@@ -79,7 +79,7 @@
 
 ## 5. Стек
 
-- WordPress + PHP + Nginx. Тема 0.6.2, плагин 0.4.5.
+- WordPress + PHP + Nginx. Тема 0.6.2, плагин 0.4.6.
 - ACF Pro для прайса и части карточек. Посев `krv_price_list_seeded_v2` уже выполнен, поэтому правка PHP-дефолтов сама живые цены не меняет.
 - Лендинги: статический HTML, свой `sw.js` (cache-first: после правки HTML нужно новое имя кеша).
 - Flask: Gunicorn и systemd `flask-krivoshein.service`. Этот этап приложение не менял.
@@ -124,7 +124,7 @@ WP-CLI: `sudo -n -u www-data wp --path=/var/www/krivoshein.site/htdocs --skip-pl
 
 14 ноября 2026 OpenCode выложил CRO-релиз: 8 сайтов, 9 репозиториев, 20 коммитов, smoke-тесты.
 Сохранены URL, SEO, дизайн, клиентские данные и инфраструктура.
-На лендингах единые контакты, тематические брифы в браузере, Telegram и MAX как равные каналы, сохранение выбранной услуги и пакета, копирование текста брифа.
+На лендингах тогда появились единые контакты и браузерный бриф с копированием текста. В тот же день бриф убран: кнопки открывают личный диалог, см. раздел 18.
 Отчёты того этапа лежат в `optimization-2026-11-14/docs/` (`AUDIT.md`, `CHANGES.md`, `QA.md`). Часть разделов описывает состояние до выкладки. Факт после неё: восемь сайтов уже были опубликованы.
 
 ## 9. Что в работе сейчас
@@ -175,12 +175,12 @@ WP-CLI: `sudo -n -u www-data wp --path=/var/www/krivoshein.site/htdocs --skip-pl
 - Старые записи типа `price` со странными заголовками не переименовывать без решения владельца: `/price/sozdanie-i-vedenie-reklamnyh-kampaniy-v-yandeks-direkt/`, `/price/tehnicheskaya-podderzhka-sayta/`, `/price/devops/`, `/price/veb-razrabotka/`.
 - Запись в рубрике `business` про смету упоминает несколько услуг, но по рубрике и тегу блок не показывается. Так и задумано: текст статьи не сканируется. Нужную услугу можно поставить мета-полем.
 - Юридические тексты, модель cookie и серверное хранение заявок требуют отдельного согласия. «Понятно» не считать согласием на аналитику.
-- Лендинги direct, landing, bots, ai-ready и Flask визуально не переделывались: каналы и брифы там уже были.
+- Лендинги визуально не переделывались. Обязательный бриф с копированием снят 14 ноября 2026, на его месте прямой диалог.
 
 ## 12. Решения владельца
 
 - Базовая настройка VPS стоит от 10 000 ₽. Это окончательно. Меняется только эта услуга, не любой ценник 15 000 ₽.
-- Бриф не отправляет заявку. Telegram и MAX равны.
+- Бриф не возвращать. Telegram и MAX равны и открывают личный диалог. Текст услуги и выбранного пакета попадает в черновик Telegram. В MAX предварительного текста нет: открывается профиль.
 - Компании в списке не равны сделанным сайтам.
 - Обратимые правки кода можно выкладывать с backup и откатом. Force push нельзя. Юридические документы, конфиденциальные данные и платежи без отдельного согласия не менять.
 - Релиз 14 ноября 2026 сохраняется: URL, дизайн, клиентские данные, инфраструктура.
@@ -192,10 +192,11 @@ WP-CLI: `sudo -n -u www-data wp --path=/var/www/krivoshein.site/htdocs --skip-pl
 - Переписывание статей, реклама в каждой записи, случайная услуга, SEO-спам, сотни сгенерированных страниц.
 - Удаление URL, массовые редиректы, удаление виджета РСЯ.
 - Тяжёлый новый JS ради блока услуги.
-- Называть подготовку брифа отправкой заявки и обещать автоотправку.
+- Называть переход в мессенджер отправленной заявкой.
+- Возвращать анкету, копирование текста и выбор чата из списка.
 - Хранить персональные данные заявок на сервере без согласия.
 - Включать Метрику после отказа и слать в неё персональные данные.
-- Дублировать уже существующие цели `cta_telegram`, `cta_max`, `contact_open`, `contact_phone_click`, `contact_email_click`, `brief_start`, `brief_prepare`, `brief_copy`.
+- Считать один клик дважды. Цели перехода: `cta_telegram`, `cta_max`, `contact_phone_click`, `contact_email_click`. Не слать `brief_start`, `brief_prepare`, `brief_copy`, `contact_open`, `qual_submit`.
 - Выдумывать рост конверсии, кейсы, факты аудита и доступ к кабинету Метрики.
 - Менять юридические документы и модель согласия «заодно».
 - Проверять пачкой сайты компаний и снимать их с сайта из-за недоступности.
@@ -245,6 +246,29 @@ HTTP-проверка 14 ноября 2026 прошла. Клик в брауз�
 4. `wp fastest-cache clear all` той же командой WP-CLI, что в разделе 6.
 5. Исходники в `/home/drslon/src` откатывать отдельным `git revert` публичных коммитов, без force push. Пока исходник новее корня сайта, следующая выкладка снова принесёт этот релиз.
 
+## 18. Прямые диалоги, 14 ноября 2026
+
+Обязательный блок «Коротко расскажите о задаче» снят с главной, `/contacts/` и семи лендингов. На его месте: «Есть задача? Давайте обсудим», кнопки «Написать в Telegram» и «Написать в MAX», ниже email и телефон. `id="brief"` сохранён, чтобы старые ссылки «Обсудить задачу» прокручивали к этому блоку. Карточка с `data-krv-package` или `data-krv-need` подставляет пакет в черновик Telegram. Обычная ссылка `#brief` выбранный пакет не стирает.
+
+Серверной формы и CRM нет. Файл по-прежнему называется `includes/contact-brief.php`, чтобы не менять `require` плагина. Скрипт и стили: `contact-talk.js`, `contact-talk.css`. Старые `contact-brief.js` и `contact-brief.css` удалены. Поведение записано в `docs/CONTACT-BRIEF.md`.
+
+Проверка 14 ноября 2026: Chromium и Firefox, desktop и mobile, локально и на опубликованных страницах. В Telegram страница отдаёт `tg://resolve?domain=DrSlon` и текст услуги. Firefox открыл `/max` на `https://max.ru/u/f9LHodD0cOI6DGcD1_YA-bwnKmPrDxXinvbnoNMQdVhvBHwrJW8-euqdUyc`. В логах после выкладки не было `PHP Fatal`, `Parse error`, `Uncaught`.
+
+Backup только этого релиза: `/home/drslon/backups/talk-dialogs-20261114T132812Z`. Не откатывать им релиз цены VPS.
+
+| Репозиторий | Коммит |
+|---|---|
+| drslon-site-core | `1263fe059f3d8e32f8f2ef91d8c9bf3cc624e3a1` |
+| landing-krivoshein-site | `1adcee2f67be7a75d211e39251607eb6e424eab5` |
+| wordpress-krivoshein-site | `94e4338398022b8b73829ac8ea5d22e3c2f9ba10` |
+| vps-krivoshein-site | `fc26b3cfee4e49bf08202f782d1e19e2f6507a06` |
+| direct-krivoshein-site | `a3021c4f87667b1fa5ec83c5bb5d6c49325e7fa0` |
+| bots-krivoshein-site | `60e3571cca873f80dda7c0cdd3d80d4d8396d8bc` |
+| ai-ready-krivoshein-site | `b83b5fe0b63dd0955c9b7fc837173a3a58f57447` |
+| flask-krivoshein | `ff90628f0c1fe21c0281d7b22dcebd8f99873f7e` |
+
+Откат только диалогов: вернуть файлы из этого backup на те же пути, `git revert` перечисленных коммитов без force push, перезапустить `flask-krivoshein.service`, сбросить Fastest Cache. Цену VPS, блок услуги в статьях и юридические страницы не трогать.
+
 ## Следующий этап
 
-Подтвердить цель `blog_service_click` в кабинете Метрики и решить, какая цена AI-ready верная: 10 000 на лендинге или 15 000 в `llms` и README. До решения владельца эти два места не выравнивать.
+Подтвердить цель `blog_service_click` в кабинете Метрики и решить, какая цена AI-ready верная: 10 000 на лендинге или 15 000 в `llms` и README. До решения владельца эти два места не выравнивать. Бриф с копированием не восстанавливать.
