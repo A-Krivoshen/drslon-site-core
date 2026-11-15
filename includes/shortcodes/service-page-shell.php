@@ -609,7 +609,7 @@ add_action(
 		}
 		$done = true;
 
-		// context.js is loaded by krv-cookie.js unless the visitor explicitly refused ads (krv_consent=n).
+		// context.js is loaded by krv-cookie.js only after ads consent (krv_consent=a or d).
 		echo "<script>window.yaContextCb=window.yaContextCb||[];</script>\n";
 	},
 	30

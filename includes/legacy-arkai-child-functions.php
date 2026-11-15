@@ -122,7 +122,7 @@ add_action( 'wp_head', function () {
 	}
 	$done = true;
 
-	// context.js is loaded by krv-cookie.js unless the visitor explicitly refused ads (krv_consent=n).
+	// context.js is loaded by krv-cookie.js only after ads consent (krv_consent=a or d).
 	echo "<script>window.yaContextCb=window.yaContextCb||[];</script>\n";
 }, 30 );
 
@@ -255,7 +255,7 @@ if ( function_exists( 'tsf' ) ) {
 		$paged_suffix = '';
 
 		if ( is_front_page() ) {
-			return 'Алексей Кривошеин: WordPress, Flask, VPS и AI-ready' . $paged_suffix;
+			return 'Сайты, реклама и автоматизация для малого бизнеса' . $paged_suffix;
 		}
 
 		if ( is_home() ) {
@@ -348,7 +348,7 @@ if ( function_exists( 'tsf' ) ) {
 		$paged_suffix = $paged > 1 ? ' Страница ' . $paged . '.' : '';
 
 		if ( is_front_page() ) {
-			return trim( 'Сайты на WordPress и Flask, VPS и DevOps, Яндекс.Директ, боты MAX и подготовка AI-ready. ИП Кривошеин Алексей Сергеевич.' . $paged_suffix );
+			return trim( 'Делаю сайты на WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.' . $paged_suffix );
 		}
 
 		if ( is_home() ) {

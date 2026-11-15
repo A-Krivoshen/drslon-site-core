@@ -360,7 +360,7 @@ function krv_price_list_render( ?array $settings = null ): string {
 						<p class="krv-lead"><?php echo esc_html( (string) ( $settings['hero_lead'] ?? '' ) ); ?></p>
 
 						<div class="krv-actions">
-							<a class="krv-btn krv-btn-primary" href="<?php echo esc_url( $contacts_general ); ?>"><?php echo esc_html( $ui['discuss'] ); ?></a>
+							<a class="krv-btn krv-btn-primary" href="<?php echo esc_url( $max_url ); ?>"><?php echo esc_html( $ui['discuss'] ); ?></a>
 							<a class="krv-btn" href="<?php echo esc_url( $telegram_url ); ?>" target="_blank" rel="noopener noreferrer">Telegram</a>
 							<a class="krv-btn krv-btn-max" href="<?php echo esc_url( $max_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo $max_icon; ?><span>MAX</span></a>
 						</div>

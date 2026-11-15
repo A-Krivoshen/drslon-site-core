@@ -162,6 +162,7 @@ function krv_clients_grid_excluded_ids(): array {
 		6111, // НАКС ЦНИИТМАШ, реестр больше не обслуживается
 		5701, // Аттестационный центр ЦНИИТМАШ
 		8081, // Технолидер (tleader.ru), убран из карточек по просьбе владельца
+		6115, // Форновогаз KZ: та же компания, что Fornovo Gas (5702)
 	);
 }
 
@@ -235,20 +236,20 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 				$post_id       = (int) $post->ID;
 				$title_raw     = get_the_title( $post );
 				$title_display = krv_client_display_title( $post_id, $title_raw );
-				$url           = trim( (string) get_post_meta( $post_id, 'client_url', true ) );
-				$description   = trim( wp_strip_all_tags( (string) get_post_meta( $post_id, 'client_description', true ) ) );
-				$monogram      = krv_client_monogram( $title_display );
-				$show_logo     = krv_client_logo_is_usable( $post_id );
+				$url       = trim( (string) get_post_meta( $post_id, 'client_url', true ) );
+				$show_logo = krv_client_logo_is_usable( $post_id );
 
 				$thumb = $show_logo
 					? get_the_post_thumbnail(
 						$post_id,
 						'medium',
 						[
-							'class'    => 'krv-client-logo',
-							'loading'  => 'lazy',
-							'decoding' => 'async',
-							'alt'      => $title_display,
+							'class'          => 'krv-client-logo',
+							'loading'        => 'lazy',
+							'decoding'       => 'async',
+							'alt'            => $title_display,
+							'data-no-lazy'   => '1',
+							'data-skip-lazy' => '1',
 						]
 					)
 					: '';
@@ -277,15 +278,11 @@ add_shortcode( 'krv_clients_grid', function ( $atts = [] ) {
 							<?php if ( $thumb ) : ?>
 								<?php echo $thumb; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							<?php else : ?>
-								<div class="krv-client-no-logo" aria-hidden="true"><?php echo esc_html( $monogram ); ?></div>
+								<div class="krv-client-no-logo" aria-hidden="true"><?php echo esc_html( $title_display ); ?></div>
 							<?php endif; ?>
 						</div>
 
 						<h3 class="krv-client-title"><?php echo esc_html( $title_display ); ?></h3>
-
-						<?php if ( $description !== '' ) : ?>
-							<p class="krv-client-description"><?php echo esc_html( $description ); ?></p>
-						<?php endif; ?>
 					</div>
 				<?php
 				echo $is_link ? '</a>' : '</div>';

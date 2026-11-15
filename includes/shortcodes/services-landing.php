@@ -53,19 +53,16 @@ function krv_services_landing_get_defaults(): array {
 	return array(
 		'profile_avatar'         => 0,
 		'profile_name'           => 'Алексей Кривошеин',
-		'hero_title'             => 'Разработка сайтов, реклама и автоматизация бизнеса',
-		// No em/en dash: people write a period or drop the second clause.
-		'profile_tagline'        => 'WordPress, Flask, VPS, боты MAX, Директ и AI-ready',
-		'profile_lead'           => 'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.',
-		// Full legal name is in H1/lead/proof; keep only quiet OGRN/INN here.
-		'profile_meta_lines'       => array(
-			array( 'line' => 'ОГРН 321774600479249 · ИНН 770603253213', 'class' => 'is-legal' ),
-		),
-		'hero_cta_primary_text'    => 'Смотреть прайс',
-		'hero_cta_primary_url'     => 'https://krivoshein.site/ceny/',
-		// Same-page jump; social icons under photo cover messengers.
-		'hero_cta_secondary_text'  => 'К услугам',
-		'hero_cta_secondary_url'   => '#uslugi',
+		'hero_title'             => 'Сайты, реклама и автоматизация для малого бизнеса',
+		// Name sits above the H1. This line stays empty so the hero has one lead.
+		'profile_tagline'        => '',
+		'profile_lead'           => 'Делаю сайты на WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
+		// OGRN and INN stay in the footer, contacts and the privacy policy.
+		'profile_meta_lines'       => array(),
+		'hero_cta_primary_text'    => 'Написать в MAX',
+		'hero_cta_primary_url'     => 'https://krivoshein.site/max',
+		'hero_cta_secondary_text'  => '',
+		'hero_cta_secondary_url'   => '',
 		'social_links'           => array(
 			array(
 				'url'      => 'https://t.me/DrSlon',
@@ -1033,19 +1030,14 @@ function krv_services_landing_render_pricing_icon( array $bullet ): string {
  */
 function krv_services_landing_apply_en( array $data ): array {
 	$data['profile_name']            = 'Aleksey Krivoshein';
-	$data['hero_title']              = 'Websites, advertising and business automation';
-	$data['profile_tagline']         = 'One specialist from task to launch';
-	$data['profile_lead']            = 'Sites, servers, ads and automation from one sole trader. A contract, a bank transfer, closing documents. No account managers.';
-	$data['profile_meta_lines']      = array(
-		array(
-			'line'  => 'OGRN 321774600479249 · INN 770603253213',
-			'class' => 'is-legal',
-		),
-	);
-	$data['hero_cta_primary_text']   = 'Discuss a task';
-	$data['hero_cta_primary_url']    = '#brief';
-	$data['hero_cta_secondary_text'] = 'Services';
-	$data['hero_cta_secondary_url']  = '#services';
+	$data['hero_title']              = 'Websites, advertising and automation for small business';
+	$data['profile_tagline']         = '';
+	$data['profile_lead']            = 'I build WordPress sites, set up Yandex Direct and servers, and write bots. Message me on MAX — I reply myself and say what it will cost.';
+	$data['profile_meta_lines']      = array();
+	$data['hero_cta_primary_text']   = 'Message on MAX';
+	$data['hero_cta_primary_url']    = home_url( '/max' );
+	$data['hero_cta_secondary_text'] = '';
+	$data['hero_cta_secondary_url']  = '';
 	$data['services_header_title']   = 'Services';
 	$data['services_header_subtitle'] = 'WordPress, VPS and MAX bots. Plus Direct, landing pages, Flask, AI-ready and care. Starting prices are on the cards. The full list is on the price page.';
 	$data['pricing_title']           = 'What it costs';
@@ -1142,11 +1134,16 @@ function krv_services_landing_conversion_copy( array $data ): array {
 	// Adapt known legacy copy at render time. Do not overwrite custom ACF text
 	// or update options: reverting code restores the original presentation.
 	$legacy = array(
+		'hero_title' => array(
+			'Разработка сайтов, реклама и автоматизация бизнеса' => 'Сайты, реклама и автоматизация для малого бизнеса',
+		),
 		'profile_tagline' => array(
-			'WordPress, Flask, VPS, боты MAX, Директ и AI-ready' => 'Один специалист от задачи до запуска',
+			'WordPress, Flask, VPS, боты MAX, Директ и AI-ready' => '',
+			'Один специалист от задачи до запуска' => '',
 		),
 		'profile_lead' => array(
-			'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.' => 'Создаю и дорабатываю сайты, настраиваю рекламу, серверы и ботов. Общаетесь напрямую со мной, без посредников.',
+			'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.' => 'Делаю сайты на WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
+			'Создаю и дорабатываю сайты, настраиваю рекламу, серверы и ботов. Общаетесь напрямую со мной, без посредников.' => 'Делаю сайты на WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
 		),
 	);
 	foreach ( $legacy as $key => $replacements ) {
@@ -1155,9 +1152,41 @@ function krv_services_landing_conversion_copy( array $data ): array {
 			$data[ $key ] = $replacements[ $value ];
 		}
 	}
-	if ( 'Смотреть прайс' === ( $data['hero_cta_primary_text'] ?? '' ) && in_array( $data['hero_cta_primary_url'] ?? '', array( 'https://krivoshein.site/prays-list/', 'https://krivoshein.site/ceny/' ), true ) ) {
-		$data['hero_cta_primary_text'] = 'Обсудить задачу';
-		$data['hero_cta_primary_url']  = '#brief';
+	$primary_text = (string) ( $data['hero_cta_primary_text'] ?? '' );
+	$primary_url  = (string) ( $data['hero_cta_primary_url'] ?? '' );
+	$legacy_primary = ( 'Смотреть прайс' === $primary_text && in_array( $primary_url, array( 'https://krivoshein.site/prays-list/', 'https://krivoshein.site/ceny/' ), true ) )
+		|| ( 'Обсудить задачу' === $primary_text && in_array( $primary_url, array( '#brief', 'https://krivoshein.site/contacts/', 'https://krivoshein.site/contacts' ), true ) );
+	if ( $legacy_primary ) {
+		$data['hero_cta_primary_text'] = 'Написать в MAX';
+		$data['hero_cta_primary_url']  = 'https://krivoshein.site/max';
+	}
+	if ( in_array( (string) ( $data['hero_cta_secondary_text'] ?? '' ), array( 'К услугам', 'Services' ), true ) ) {
+		$data['hero_cta_secondary_text'] = '';
+		$data['hero_cta_secondary_url']  = '';
+	}
+	$meta_lines = $data['profile_meta_lines'] ?? array();
+	if ( is_array( $meta_lines ) ) {
+		$data['profile_meta_lines'] = array_values(
+			array_filter(
+				$meta_lines,
+				static function ( $meta_line ): bool {
+					$line = is_array( $meta_line ) ? (string) ( $meta_line['line'] ?? '' ) : (string) $meta_line;
+					return ! preg_match( '/ОГРН|ИНН|OGRN|INN/u', $line );
+				}
+			)
+		);
+	}
+	$service_rows = $data['services_items'] ?? array();
+	if ( is_array( $service_rows ) ) {
+		foreach ( $service_rows as $index => $item ) {
+			if ( ! is_array( $item ) ) {
+				continue;
+			}
+			$url = (string) ( $item['url'] ?? '' );
+			if ( false !== strpos( $url, '/prays-list/#krv-package-support' ) ) {
+				$data['services_items'][ $index ]['url'] = str_replace( '/prays-list/#krv-package-support', '/ceny/#krv-package-support', $url );
+			}
+		}
 	}
 	$bullets = $data['pricing_bullets'] ?? array();
 	foreach ( is_array( $bullets ) ? $bullets : array() as $index => $bullet ) {
@@ -1201,7 +1230,6 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 						<?php endif; ?>
 
 						<p class="krv-landing-lead"><?php echo esc_html( (string) $data['profile_lead'] ); ?></p>
-						<p class="krv-landing-lead"><?php echo 'en' === krv_ui_locale() ? 'Sole trader · Contract · Clear estimate · Direct contact' : 'ИП · Договор · Прозрачная смета · Без посредников'; ?></p>
 
 						<?php
 						$cta1_text = trim( (string) ( $data['hero_cta_primary_text'] ?? '' ) );
@@ -1224,7 +1252,7 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
-						<p><a href="<?php echo esc_url( home_url( 'en' === krv_ui_locale() ? '/en/price/' : '/ceny/' ) ); ?>"><?php echo 'en' === krv_ui_locale() ? 'Service prices' : 'Цены на услуги'; ?></a></p>
+						<p class="krv-landing-price-link"><a href="<?php echo esc_url( home_url( 'en' === krv_ui_locale() ? '/en/price/' : '/ceny/' ) ); ?>"><?php echo 'en' === krv_ui_locale() ? 'Prices' : 'Цены'; ?></a></p>
 					</div>
 
 					<div class="krv-landing-hero-aside">
@@ -1298,20 +1326,12 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 									<span class="krv-landing-proof-label"><?php echo esc_html( $client_label ); ?></span>
 								</li>
 							<?php endif; ?>
-							<li class="krv-landing-proof-item">
-								<strong class="krv-landing-proof-value"><?php echo esc_html( $is_en ? 'since 2021' : 'с 2021' ); ?></strong>
-								<span class="krv-landing-proof-label"><?php echo esc_html( $is_en ? 'sole trader' : 'ИП в реестре' ); ?></span>
-							</li>
 							<?php if ( $offer_count > 0 ) : ?>
 							<li class="krv-landing-proof-item">
 								<strong class="krv-landing-proof-value"><?php echo esc_html( (string) $offer_count ); ?></strong>
 								<span class="krv-landing-proof-label"><?php echo esc_html( $offer_label ); ?></span>
 							</li>
 							<?php endif; ?>
-							<li class="krv-landing-proof-item">
-								<strong class="krv-landing-proof-value"><?php echo esc_html( $is_en ? 'contract' : 'договор' ); ?></strong>
-								<span class="krv-landing-proof-label"><?php echo esc_html( $is_en ? 'and invoice' : 'и безнал' ); ?></span>
-							</li>
 						</ul>
 					</div>
 				</div>
@@ -1558,7 +1578,7 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 			$graph = array(
 				'@context' => 'https://schema.org',
 				'@type'    => 'ItemList',
-				'name'     => 'Услуги Dr.Slon',
+				'name'     => 'Услуги ИТ Решения, Алексей Кривошеин',
 				'itemListElement' => array(),
 			);
 			foreach ( $offers as $i => $offer ) {

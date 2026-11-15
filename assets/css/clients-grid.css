@@ -207,17 +207,19 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 52px;
-	height: 52px;
-	padding: 0 10px;
-	border-radius: 12px;
-	font-size: 1.05rem;
-	font-weight: 700;
-	letter-spacing: 0.04em;
-	line-height: 1;
-	color: #315fe8;
-	background: linear-gradient(145deg, rgba(49, 95, 232, 0.12), rgba(49, 95, 232, 0.04));
-	border: 1px solid rgba(49, 95, 232, 0.16);
+	width: 100%;
+	height: 100%;
+	padding: 0 8px;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	font-family: inherit;
+	font-size: 0.92rem;
+	font-weight: 500;
+	letter-spacing: 0;
+	line-height: 1.25;
+	text-align: center;
+	color: #172133;
 }
 
 .krv-client-title {
@@ -231,6 +233,7 @@
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+	min-height: 2.5em;
 }
 
 .krv-client-status {
@@ -418,9 +421,9 @@ html[data-theme="dark"] .krv-client-card--link:focus-visible .krv-client-logo {
 }
 
 html[data-theme="dark"] .krv-client-no-logo {
-	color: #9db7ff;
-	background: linear-gradient(145deg, rgba(120, 160, 255, 0.16), rgba(120, 160, 255, 0.05));
-	border-color: rgba(120, 160, 255, 0.2);
+	color: #e8eefc;
+	background: transparent;
+	border-color: transparent;
 }
 
 html[data-theme="dark"] .krv-client-ext {

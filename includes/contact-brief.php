@@ -25,8 +25,8 @@ function krv_contact_talk_markup( bool $en = false ): string {
 			<h2><?php echo esc_html( $title ); ?></h2>
 			<p class="krv-qual__lead"><?php echo esc_html( $lead ); ?></p>
 			<div class="krv-talk__actions">
-				<a class="krv-talk__btn" data-krv-telegram href="<?php echo esc_url( krv_contact_talk_telegram_url( $en ) ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $telegram ); ?></a>
-				<a class="krv-talk__btn krv-talk__btn--max" href="<?php echo esc_url( home_url( '/max' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $max ); ?></a>
+				<a class="krv-talk__btn krv-talk__btn--max" href="<?php echo esc_url( home_url( '/max' ) ); ?>"><?php echo esc_html( $max ); ?></a>
+				<a class="krv-talk__btn krv-talk__btn--secondary" data-krv-telegram href="<?php echo esc_url( krv_contact_talk_telegram_url( $en ) ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $telegram ); ?></a>
 			</div>
 			<p class="krv-talk__note" data-krv-talk-note hidden></p>
 			<p class="krv-talk__alt"><a href="mailto:aleksey@krivoshein.site">aleksey@krivoshein.site</a> · <a href="tel:+79636641615">+7 (963) 664-16-15</a></p>

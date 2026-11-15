@@ -51,10 +51,17 @@ html[data-theme="dark"] [data-krv-talk] {
   text-align: center;
   text-decoration: none;
 }
-[data-krv-talk] .krv-talk__btn--max { background: #172133; }
+[data-krv-talk] .krv-talk__btn--max { background: #315fe8; }
+[data-krv-talk] .krv-talk__btn--secondary {
+  background: transparent;
+  color: var(--talk-text);
+  border: 1px solid var(--talk-line);
+}
 [data-krv-talk] .krv-talk__btn:hover { background: #244ac2; color: #fff; }
-[data-krv-talk] .krv-talk__btn--max:hover { background: #243049; color: #fff; }
-html[data-theme="dark"] [data-krv-talk] .krv-talk__btn--max { background: #243049; }
+[data-krv-talk] .krv-talk__btn--max:hover { background: #244ac2; color: #fff; }
+[data-krv-talk] .krv-talk__btn--secondary:hover { background: #eef3fb; color: var(--talk-text); }
+html[data-theme="dark"] [data-krv-talk] .krv-talk__btn--max { background: #315fe8; }
+html[data-theme="dark"] [data-krv-talk] .krv-talk__btn--secondary:hover { background: #182338; color: var(--talk-text); }
 [data-krv-talk] .krv-talk__note { margin-top: .25rem; }
 [data-krv-talk] .krv-talk__alt { margin-top: .85rem; }
 [data-krv-talk] .krv-talk__alt a { color: var(--talk-link); }
