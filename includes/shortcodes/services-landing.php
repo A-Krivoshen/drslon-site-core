@@ -56,7 +56,7 @@ function krv_services_landing_get_defaults(): array {
 		'hero_title'             => 'Сайты, реклама и автоматизация для малого бизнеса',
 		// Name sits above the H1. This line stays empty so the hero has one lead.
 		'profile_tagline'        => '',
-		'profile_lead'           => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
+		'profile_lead'           => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX, отвечу сам и скажу, сколько это будет стоить.',
 		// OGRN and INN stay in the footer, contacts and the privacy policy.
 		'profile_meta_lines'       => array(),
 		'hero_cta_primary_text'    => 'Написать в MAX',
@@ -1032,7 +1032,7 @@ function krv_services_landing_apply_en( array $data ): array {
 	$data['profile_name']            = 'Aleksey Krivoshein';
 	$data['hero_title']              = 'Websites, advertising and automation for small business';
 	$data['profile_tagline']         = '';
-	$data['profile_lead']            = 'I build WordPress sites, set up Yandex Direct and servers, and write bots. Message me on MAX — I reply myself and say what it will cost.';
+	$data['profile_lead']            = 'I build WordPress sites, set up Yandex Direct and servers, and write bots. Message me on MAX, I reply myself and say what it will cost.';
 	$data['profile_meta_lines']      = array();
 	$data['hero_cta_primary_text']   = 'Message on MAX';
 	$data['hero_cta_primary_url']    = home_url( '/max' );
@@ -1142,9 +1142,10 @@ function krv_services_landing_conversion_copy( array $data ): array {
 			'Один специалист от задачи до запуска' => '',
 		),
 		'profile_lead' => array(
-			'Делаю сайты на WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.' => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
-			'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.' => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
-			'Создаю и дорабатываю сайты, настраиваю рекламу, серверы и ботов. Общаетесь напрямую со мной, без посредников.' => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
+			'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.' => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX, отвечу сам и скажу, сколько это будет стоить.',
+			'Делаю сайты на WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.' => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX, отвечу сам и скажу, сколько это будет стоить.',
+			'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.' => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX, отвечу сам и скажу, сколько это будет стоить.',
+			'Создаю и дорабатываю сайты, настраиваю рекламу, серверы и ботов. Общаетесь напрямую со мной, без посредников.' => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX, отвечу сам и скажу, сколько это будет стоить.',
 		),
 	);
 	foreach ( $legacy as $key => $replacements ) {

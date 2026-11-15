@@ -14,7 +14,7 @@ function krv_contact_talk_telegram_url( bool $en = false ): string {
 
 function krv_contact_talk_markup( bool $en = false ): string {
 	$title    = $en ? 'Have a task? Let\'s discuss it' : 'Есть задача? Давайте обсудим';
-	$lead     = $en ? 'Describe your task in a sentence or two. I will reply with timing and price.' : 'Опишите задачу в двух словах — отвечу и назову сроки и цену.';
+	$lead     = $en ? 'Describe your task in a sentence or two. I will reply with timing and price.' : 'Опишите задачу в двух словах, отвечу и назову сроки и цену.';
 	$telegram = $en ? 'Message on Telegram' : 'Написать в Telegram';
 	$max      = $en ? 'Message on MAX' : 'Написать в MAX';
 	$label    = $en ? 'Contact' : 'Связь';

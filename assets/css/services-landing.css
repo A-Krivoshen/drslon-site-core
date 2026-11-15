@@ -1330,3 +1330,75 @@ html[data-theme="dark"] .krv-landing-next a {
 		grid-column: 1 / -1;
 	}
 }
+
+/* Homepage polish: centred social row on phones, pricing ghost button, note wrap */
+@media (max-width: 768px) {
+	.krv-landing-hero-foot {
+		align-items: stretch;
+		text-align: center;
+	}
+
+	.krv-landing-hero-foot .krv-landing-contacts {
+		justify-content: center;
+		width: 100%;
+		flex-wrap: nowrap;
+		gap: 0.5rem;
+	}
+
+	.krv-landing-hero-foot .krv-landing-contacts a {
+		box-sizing: border-box;
+		width: 42px;
+		height: 42px;
+		flex: 0 0 42px;
+	}
+
+	.krv-landing-hero-foot .krv-landing-social-icon {
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.krv-landing-pricing .krv-landing-pricing-secondary {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	min-height: 48px;
+	padding: 0 1.5rem;
+	border-radius: 999px;
+	border: 1.5px solid #315fe8;
+	background: transparent;
+	color: #244ac2;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.2;
+	text-decoration: none;
+}
+
+.krv-landing-pricing .krv-landing-pricing-secondary:hover {
+	background: rgba(49, 95, 232, 0.08);
+	color: #244ac2;
+}
+
+html[data-theme="dark"] .krv-landing-pricing .krv-landing-pricing-secondary {
+	color: #a6c0ff;
+	border-color: #6f93ff;
+}
+
+html[data-theme="dark"] .krv-landing-pricing .krv-landing-pricing-secondary:hover {
+	background: rgba(120, 160, 255, 0.12);
+}
+
+@media (max-width: 640px) {
+	.krv-landing-pricing .krv-landing-pricing-actions .krv-landing-pricing-button,
+	.krv-landing-pricing .krv-landing-pricing-actions .krv-landing-pricing-secondary {
+		width: 100%;
+		min-width: 0;
+		max-width: none;
+	}
+
+	.krv-landing-services-note-sep {
+		display: none;
+	}
+}
+

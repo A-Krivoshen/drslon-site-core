@@ -441,3 +441,33 @@ html[data-theme="dark"] .krv-client-ext {
 		margin-right: 0;
 	}
 }
+
+/* Homepage polish: same card radius as services, no duplicated no-logo titles */
+.krv-clients-grid-wrap {
+	--krv-card-radius: 16px;
+}
+
+.krv-client-no-logo {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	font-weight: 650;
+}
+
+.krv-client-card-inner:has(.krv-client-no-logo) .krv-client-title {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.krv-client-card-inner {
+	position: relative;
+}
+

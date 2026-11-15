@@ -348,7 +348,7 @@ if ( function_exists( 'tsf' ) ) {
 		$paged_suffix = $paged > 1 ? ' Страница ' . $paged . '.' : '';
 
 		if ( is_front_page() ) {
-			return trim( 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.' . $paged_suffix );
+			return trim( 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX, отвечу сам и скажу, сколько это будет стоить.' . $paged_suffix );
 		}
 
 		if ( is_home() ) {
