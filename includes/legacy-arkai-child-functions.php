@@ -271,7 +271,7 @@ if ( function_exists( 'tsf' ) ) {
 				$t     = 'Цены: ' . get_the_title( $id );
 
 				if ( $price !== '' ) {
-					$t .= ' — ' . $price . ' ₽';
+					$t .= ': ' . $price . ' ₽';
 				}
 
 				return $t . $paged_suffix;
@@ -428,11 +428,11 @@ if ( function_exists( 'tsf' ) ) {
 			}
 
 			if ( is_category() ) {
-				return trim( 'Категория «' . $name . '» — статьи, инструкции, конфиги и разборы ошибок.' . $paged_suffix );
+				return trim( 'Категория «' . $name . '»: статьи, инструкции, конфиги и разборы ошибок.' . $paged_suffix );
 			}
 
 			if ( is_tag() ) {
-				return trim( 'Тег «' . $name . '» — подборка материалов по теме.' . $paged_suffix );
+				return trim( 'Тег «' . $name . '»: подборка материалов по теме.' . $paged_suffix );
 			}
 
 			$tax       = $term->taxonomy ?? '';
@@ -441,7 +441,7 @@ if ( function_exists( 'tsf' ) ) {
 				? $tax_obj->labels->singular_name
 				: 'Раздел';
 
-			return trim( $tax_label . ' «' . $name . '» — подборка материалов и заметок.' . $paged_suffix );
+			return trim( $tax_label . ' «' . $name . '»: подборка материалов и заметок.' . $paged_suffix );
 		}
 
 		if ( is_post_type_archive() ) {

@@ -104,7 +104,7 @@ function krv_en_resume_shortcode(): string {
 						<h2>Work</h2>
 						<div class="krv-resume-list">
 							<div class="krv-resume-item">
-								<div class="krv-resume-period">2021 — now</div>
+								<div class="krv-resume-period">2021-now</div>
 								<h3>Sole trader</h3>
 								<div class="krv-resume-company">ИП Кривошеин А.С.</div>
 								<ul class="krv-resume-ul">
@@ -115,7 +115,7 @@ function krv_en_resume_shortcode(): string {
 								</ul>
 							</div>
 							<div class="krv-resume-item">
-								<div class="krv-resume-period">2017 — 2021</div>
+								<div class="krv-resume-period">2017-2021</div>
 								<h3>Independent practice</h3>
 								<div class="krv-resume-company">WordPress, launch and care of web projects</div>
 								<ul class="krv-resume-ul">
@@ -124,7 +124,7 @@ function krv_en_resume_shortcode(): string {
 								</ul>
 							</div>
 							<div class="krv-resume-item">
-								<div class="krv-resume-period">2010 — 2012</div>
+								<div class="krv-resume-period">2010-2012</div>
 								<h3>Microsoft engineer</h3>
 								<div class="krv-resume-company">I-Teco (Ай-Теко)</div>
 								<ul class="krv-resume-ul">
@@ -133,13 +133,13 @@ function krv_en_resume_shortcode(): string {
 								</ul>
 							</div>
 							<div class="krv-resume-item">
-								<div class="krv-resume-period">2009 — 2010</div>
+								<div class="krv-resume-period">2009-2010</div>
 								<h3>Engineer, technical directorate</h3>
 								<div class="krv-resume-company">INLINE Technologies</div>
 								<p>The systems catalogue, monitoring, and infrastructure tasks.</p>
 							</div>
 							<div class="krv-resume-item">
-								<div class="krv-resume-period">2001 — 2009</div>
+								<div class="krv-resume-period">2001-2009</div>
 								<h3>System administrator / engineer</h3>
 								<div class="krv-resume-company">Nezavisimost Group, Transenercom, TPG TERNA, Seventh Continent</div>
 								<p>System administration, IT infrastructure support, centralised support, engineering tasks.</p>
