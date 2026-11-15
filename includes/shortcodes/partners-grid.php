@@ -181,7 +181,7 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 		$intro_heading = 'Сервисы, с которыми работаю';
 	}
 	if ( $intro_text === '' ) {
-		$intro_text = 'Хостинг, облака, платежи, банки, реклама, обучение и AI-инструменты. Часть ссылок партнёрские: я ими пользуюсь сам или проверял на проектах.';
+		$intro_text = 'Хостинг, облака, платежи, банки, реклама, обучение и AI-инструменты. Я ими пользуюсь сам или проверял на проектах.';
 	}
 
 	$page_h1 = 'Партнёры и рекомендованные сервисы';
@@ -302,16 +302,12 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 			<h2 id="partners-faq-heading">Частые вопросы</h2>
 			<div class="krv-partners-faq-list">
 				<details class="krv-partners-faq-item">
-					<summary>Это реклама или личные рекомендации?</summary>
-					<p>И то и другое честно: часть ссылок партнёрские. В список попадают сервисы, которыми я пользуюсь сам или проверял на проектах. Полный каталог - на этой странице.</p>
-				</details>
-				<details class="krv-partners-faq-item">
 					<summary>Поможете с настройкой хостинга, VPS или Директа?</summary>
-					<p>Да. Сами сервисы - у партнёров, а настройку WordPress, Linux/VPS, Nginx, SSL, Директ и ботов можно заказать у меня. Ориентиры по ценам - в <a href="https://krivoshein.site/prays-list/">прайс-листе</a>, связь - через <a href="https://krivoshein.site/contacts/">контакты</a>.</p>
+					<p>Да. Сами сервисы работают у провайдеров, а настройку WordPress, Linux/VPS, Nginx, SSL, Директ и ботов можно заказать у меня. Ориентиры по ценам есть в <a href="https://krivoshein.site/prays-list/">прайс-листе</a>, связь через <a href="https://krivoshein.site/contacts/">контакты</a>.</p>
 				</details>
 				<details class="krv-partners-faq-item">
 					<summary>Какой хостинг или VPS выбрать для WordPress?</summary>
-					<p>Для типичного WP-сайта обычно хватает Beget, SpaceWeb или Reg.ru. Если нужен свой сервер под Docker/Nginx - CLO, UltraVDS или FirstVDS (в том числе с GPU). Если сомневаетесь - напишите задачу, подскажу связку.</p>
+					<p>Для типичного WP-сайта обычно хватает Beget, SpaceWeb или Reg.ru. Если нужен свой сервер под Docker/Nginx подойдут CLO, UltraVDS или FirstVDS (в том числе с GPU). Если сомневаетесь, напишите задачу, подскажу связку.</p>
 				</details>
 			</div>
 		</section>
@@ -344,18 +340,10 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 				'mainEntity' => [
 					[
 						'@type' => 'Question',
-						'name'  => 'Это реклама или личные рекомендации?',
-						'acceptedAnswer' => [
-							'@type' => 'Answer',
-							'text'  => 'Часть ссылок партнёрские. В список попадают сервисы, которыми Алексей пользуется сам или проверял на проектах.',
-						],
-					],
-					[
-						'@type' => 'Question',
 						'name'  => 'Поможете с настройкой хостинга, VPS или Директа?',
 						'acceptedAnswer' => [
 							'@type' => 'Answer',
-							'text'  => 'Да. Сервисы - у партнёров, настройку WordPress, Linux/VPS, Nginx, SSL, Директ и ботов можно заказать у ИП Кривошеин. Прайс: https://krivoshein.site/prays-list/',
+							'text'  => 'Да. Сервисы работают у провайдеров, настройку WordPress, Linux/VPS, Nginx, SSL, Директ и ботов можно заказать у ИП Кривошеин. Прайс: https://krivoshein.site/prays-list/',
 						],
 					],
 					[
@@ -363,7 +351,7 @@ add_shortcode( 'krv_partners_grid', function ( $atts = [] ) {
 						'name'  => 'Какой хостинг или VPS выбрать для WordPress?',
 						'acceptedAnswer' => [
 							'@type' => 'Answer',
-							'text'  => 'Для типичного WordPress обычно хватает Beget, SpaceWeb или Reg.ru. Для своего сервера под Docker/Nginx - CLO, UltraVDS или FirstVDS.',
+							'text'  => 'Для типичного WordPress обычно хватает Beget, SpaceWeb или Reg.ru. Для своего сервера под Docker/Nginx подойдут CLO, UltraVDS или FirstVDS.',
 						],
 					],
 				],

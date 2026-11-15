@@ -51,19 +51,5 @@ add_action( 'wp_enqueue_scripts', static function (): void {
 	wp_enqueue_script( 'krv-contact-talk', plugins_url( 'assets/js/contact-talk.js', $plugin ), array(), (string) filemtime( DRSLON_SITE_CORE_DIR . 'assets/js/contact-talk.js' ), true );
 }, 30 );
 
-add_filter( 'krv_content_widget_html', static function ( string $html, string $name ): string {
-	if ( 'contacts' !== $name || false !== strpos( $html, 'data-krv-talk' ) ) {
-		return $html;
-	}
-	$en = function_exists( 'drslon_is_en_page' ) && drslon_is_en_page();
-	return $html . krv_contact_talk_markup( $en );
-}, 20, 2 );
+// The contacts page already has its own contact card, so the brief block is not appended there.
 
-// Published contacts can contain legacy blocks rather than the widget shortcode.
-add_filter( 'the_content', static function ( string $html ): string {
-	if ( is_admin() || ! is_page( 'contacts' ) || get_the_ID() !== get_queried_object_id() || false !== strpos( $html, 'data-krv-talk' ) ) {
-		return $html;
-	}
-	$en = function_exists( 'drslon_is_en_page' ) && drslon_is_en_page();
-	return $html . krv_contact_talk_markup( $en );
-}, 20 );
