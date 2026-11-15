@@ -56,7 +56,7 @@ function krv_services_landing_get_defaults(): array {
 		'hero_title'             => 'Сайты, реклама и автоматизация для малого бизнеса',
 		// Name sits above the H1. This line stays empty so the hero has one lead.
 		'profile_tagline'        => '',
-		'profile_lead'           => 'Делаю сайты на WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
+		'profile_lead'           => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
 		// OGRN and INN stay in the footer, contacts and the privacy policy.
 		'profile_meta_lines'       => array(),
 		'hero_cta_primary_text'    => 'Написать в MAX',
@@ -1142,8 +1142,9 @@ function krv_services_landing_conversion_copy( array $data ): array {
 			'Один специалист от задачи до запуска' => '',
 		),
 		'profile_lead' => array(
-			'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.' => 'Делаю сайты на WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
-			'Создаю и дорабатываю сайты, настраиваю рекламу, серверы и ботов. Общаетесь напрямую со мной, без посредников.' => 'Делаю сайты на WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
+			'Делаю сайты на WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.' => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
+			'Личный бренд и ИП: сайты, серверы, реклама и автоматизация без менеджеров и агентской наценки. Договор, безнал, закрывающие.' => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
+			'Создаю и дорабатываю сайты, настраиваю рекламу, серверы и ботов. Общаетесь напрямую со мной, без посредников.' => 'Делаю сайты на Python, Flask и WordPress, настраиваю Яндекс Директ и серверы, пишу ботов. Пишите в MAX — отвечу сам и скажу, сколько это будет стоить.',
 		),
 	);
 	foreach ( $legacy as $key => $replacements ) {
@@ -1232,11 +1233,13 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 						<p class="krv-landing-lead"><?php echo esc_html( (string) $data['profile_lead'] ); ?></p>
 
 						<?php
+						$price_url  = home_url( 'en' === krv_ui_locale() ? '/en/price/' : '/ceny/' );
+						$price_text = 'en' === krv_ui_locale() ? 'Prices' : 'Цены';
 						$cta1_text = trim( (string) ( $data['hero_cta_primary_text'] ?? '' ) );
 						$cta1_url  = trim( (string) ( $data['hero_cta_primary_url'] ?? '' ) );
 						$cta2_text = trim( (string) ( $data['hero_cta_secondary_text'] ?? '' ) );
 						$cta2_url  = trim( (string) ( $data['hero_cta_secondary_url'] ?? '' ) );
-						if ( ( $cta1_text !== '' && $cta1_url !== '' ) || ( $cta2_text !== '' && $cta2_url !== '' ) ) :
+						if ( true ) :
 							?>
 							<div class="krv-landing-hero-cta">
 								<?php if ( $cta1_text !== '' && $cta1_url !== '' ) : ?>
@@ -1250,9 +1253,9 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 									?>
 									<a class="krv-landing-hero-cta-secondary" href="<?php echo esc_url( $cta2_url ); ?>"<?php echo $sec_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $cta2_text ); ?></a>
 								<?php endif; ?>
+								<a class="krv-landing-pricing-button krv-landing-pricing-button--ghost" href="<?php echo esc_url( $price_url ); ?>"><?php echo esc_html( $price_text ); ?></a>
 							</div>
 						<?php endif; ?>
-						<p class="krv-landing-price-link"><a href="<?php echo esc_url( home_url( 'en' === krv_ui_locale() ? '/en/price/' : '/ceny/' ) ); ?>"><?php echo 'en' === krv_ui_locale() ? 'Prices' : 'Цены'; ?></a></p>
 					</div>
 
 					<div class="krv-landing-hero-aside">
@@ -1517,11 +1520,8 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 		<nav class="krv-landing-next" aria-label="Next on the site">
 			<span class="krv-landing-next-label">Next:</span>
 			<a href="<?php echo esc_url( home_url( '/partnery/' ) ); ?>">Partners</a>
-			<span class="krv-landing-next-sep" aria-hidden="true">·</span>
 			<a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a>
-			<span class="krv-landing-next-sep" aria-hidden="true">·</span>
 			<a href="<?php echo esc_url( home_url( '/en/services/' ) ); ?>">Tools</a>
-			<span class="krv-landing-next-sep" aria-hidden="true">·</span>
 			<a href="<?php echo esc_url( home_url( '/en/contacts/' ) ); ?>">Contacts</a>
 		</nav>
 		<?php else : ?>
@@ -1529,11 +1529,8 @@ function krv_services_landing_render( string $locale = 'ru' ): string {
 		<nav class="krv-landing-next" aria-label="Дальше по сайту">
 			<span class="krv-landing-next-label">Дальше:</span>
 			<a href="<?php echo esc_url( home_url( '/partnery/' ) ); ?>">Партнёры</a>
-			<span class="krv-landing-next-sep" aria-hidden="true">·</span>
 			<a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Блог</a>
-			<span class="krv-landing-next-sep" aria-hidden="true">·</span>
 			<a href="<?php echo esc_url( home_url( '/servisy/' ) ); ?>">Сервисы</a>
-			<span class="krv-landing-next-sep" aria-hidden="true">·</span>
 			<a href="<?php echo esc_url( home_url( '/contacts/' ) ); ?>">Контакты</a>
 		</nav>
 		<?php endif; ?>

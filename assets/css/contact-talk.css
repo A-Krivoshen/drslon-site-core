@@ -74,3 +74,42 @@ html[data-theme="dark"] [data-krv-talk] .krv-talk__btn--secondary:hover { backgr
 @media (max-width: 640px) {
   [data-krv-talk] .krv-talk__btn { flex-basis: 100%; }
 }
+
+/* Brief block: centred, equal buttons, tidy contacts */
+[data-krv-talk] { text-align: center; }
+[data-krv-talk] .krv-qual__lead { max-width: 30rem; margin-inline: auto; }
+[data-krv-talk] .krv-talk__actions {
+  flex-wrap: nowrap;
+  margin: 1.25rem 0 1rem;
+}
+[data-krv-talk] .krv-talk__btn {
+  flex: 1 1 0;
+  box-sizing: border-box;
+  min-height: 52px;
+  padding: 0 1rem;
+  border: 1.5px solid #315fe8;
+  border-radius: .9rem;
+  white-space: nowrap;
+}
+[data-krv-talk] .krv-talk__btn--secondary {
+  background: transparent;
+  color: var(--talk-link);
+  border-color: #315fe8;
+}
+html[data-theme="dark"] [data-krv-talk] .krv-talk__btn--secondary { border-color: #6f93ff; }
+[data-krv-talk] .krv-talk__btn--secondary:hover { background: rgba(49, 95, 232, .08); color: var(--talk-link); }
+[data-krv-talk] .krv-talk__alt {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .35rem 1.5rem;
+  margin-top: 1rem;
+}
+@media (max-width: 640px) {
+  [data-krv-talk] .krv-talk__actions { flex-direction: column; }
+  [data-krv-talk] .krv-talk__btn { flex: 0 0 auto; width: 100%; }
+  [data-krv-talk] .krv-talk__alt { flex-direction: column; align-items: center; gap: .5rem; }
+}
+/* Keep the block clear of any floating chat button on phones */
+@media (max-width: 640px) { #brief { padding-bottom: 3rem; } }
+[data-krv-talk] .krv-qual__lead { max-width: 34rem; text-wrap: balance; }

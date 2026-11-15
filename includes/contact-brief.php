@@ -14,7 +14,7 @@ function krv_contact_talk_telegram_url( bool $en = false ): string {
 
 function krv_contact_talk_markup( bool $en = false ): string {
 	$title    = $en ? 'Have a task? Let\'s discuss it' : 'Есть задача? Давайте обсудим';
-	$lead     = $en ? 'Message me directly. No form.' : 'Напишите в личный диалог. Анкета не нужна.';
+	$lead     = $en ? 'Describe your task in a sentence or two. I will reply with timing and price.' : 'Опишите задачу в двух словах — отвечу и назову сроки и цену.';
 	$telegram = $en ? 'Message on Telegram' : 'Написать в Telegram';
 	$max      = $en ? 'Message on MAX' : 'Написать в MAX';
 	$label    = $en ? 'Contact' : 'Связь';
@@ -29,7 +29,7 @@ function krv_contact_talk_markup( bool $en = false ): string {
 				<a class="krv-talk__btn krv-talk__btn--secondary" data-krv-telegram href="<?php echo esc_url( krv_contact_talk_telegram_url( $en ) ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $telegram ); ?></a>
 			</div>
 			<p class="krv-talk__note" data-krv-talk-note hidden></p>
-			<p class="krv-talk__alt"><a href="mailto:aleksey@krivoshein.site">aleksey@krivoshein.site</a> · <a href="tel:+79636641615">+7 (963) 664-16-15</a></p>
+			<p class="krv-talk__alt"><a href="mailto:aleksey@krivoshein.site">aleksey@krivoshein.site</a><a href="tel:+79636641615">+7 (963) 664-16-15</a></p>
 		</div>
 	</section>
 	<?php

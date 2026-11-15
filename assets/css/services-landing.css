@@ -1238,3 +1238,95 @@ html[data-theme="dark"] .krv-landing-service-item--compact.krv-landing-service-i
 		grid-column: auto;
 	}
 }
+
+/* Hero buttons: primary and secondary side by side, same size */
+.krv-landing-hero-cta {
+	gap: 0.75rem;
+	margin-bottom: 0.25rem;
+}
+.krv-landing-hero-cta .krv-landing-pricing-button {
+	box-sizing: border-box;
+	min-height: 48px;
+	padding: 0 1.5rem;
+	border-radius: 999px;
+	border: 1.5px solid #315fe8;
+	font-size: 1rem;
+	line-height: 1.2;
+	white-space: nowrap;
+}
+.krv-landing-hero-cta .krv-landing-pricing-button--ghost {
+	background: transparent;
+	color: #244ac2;
+	border-color: #315fe8;
+}
+.krv-landing-hero-cta .krv-landing-pricing-button--ghost:hover {
+	background: rgba(49, 95, 232, 0.08);
+	color: #244ac2;
+	box-shadow: none;
+}
+html[data-theme="dark"] .krv-landing-hero-cta .krv-landing-pricing-button--ghost {
+	background: transparent;
+	color: #a6c0ff;
+	border-color: #6f93ff;
+}
+html[data-theme="dark"] .krv-landing-hero-cta .krv-landing-pricing-button--ghost:hover {
+	background: rgba(120, 160, 255, 0.12);
+}
+@media (max-width: 640px) {
+	.krv-landing-hero-cta {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.75rem;
+	}
+	.krv-landing-hero-cta .krv-landing-pricing-button {
+		width: 100%;
+		min-width: 0;
+		max-width: none;
+		padding: 0 1rem;
+		font-size: 1rem;
+	}
+}
+
+/* "Next" links as chips */
+.krv-landing-next {
+	background: none;
+	border: 0;
+	padding: 0;
+	gap: 0.5rem;
+	margin: 1.25rem auto 0.25rem;
+}
+.krv-landing-next-label {
+	flex: 0 0 100%;
+	text-align: center;
+	font-size: 0.9rem;
+	opacity: 0.75;
+}
+.krv-landing-next a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 40px;
+	padding: 0 1rem;
+	border-radius: 999px;
+	border: 1px solid rgba(49, 95, 232, 0.28);
+	background: rgba(49, 95, 232, 0.06);
+	text-decoration: none;
+	font-size: 0.95rem;
+}
+.krv-landing-next a:hover {
+	background: rgba(49, 95, 232, 0.14);
+}
+html[data-theme="dark"] .krv-landing-next a {
+	border-color: rgba(120, 160, 255, 0.3);
+	background: rgba(120, 160, 255, 0.08);
+}
+@media (max-width: 640px) {
+	.krv-landing-next {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		max-width: 22rem;
+	}
+	.krv-landing-next-label {
+		grid-column: 1 / -1;
+	}
+}
