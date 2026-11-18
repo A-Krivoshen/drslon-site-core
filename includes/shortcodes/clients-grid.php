@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function krv_client_display_title( int $post_id, string $title ): string {
 	$map = array(
+		16049 => 'Совет ветеранов ПВО №4',
 		9168 => 'Стоматолог Мурашова',
 		8450 => 'Храм в Рогово',
 		8423 => 'Соловьи.Ай.Ти',
@@ -142,7 +143,7 @@ function krv_clients_showcase_order(): array {
 		9184  => 60,  // Softcomlan
 		6147  => 100, // GroupST
 		7693  => 110, // Cambobiz
-		9168  => 120, // Мурашова
+		16049 => 120, // Совет ветеранов ПВО №4
 		8450  => 130, // Храм
 		6671  => 140, // СКД
 		6112  => 150, // Designers from Russia
@@ -162,6 +163,7 @@ function krv_clients_grid_excluded_ids(): array {
 		5701, // Аттестационный центр ЦНИИТМАШ
 		8081, // Технолидер (tleader.ru), убран из карточек по просьбе владельца
 		5702, // Fornovo Gas S.p.A. (форновогаз.рф), на главной вместо него fornovogas.kz (6115)
+		9168, // Стоматолог Мурашова, на главной вместо неё Совет ветеранов ПВО №4 (16049)
 	);
 }
 
