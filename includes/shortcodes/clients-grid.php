@@ -19,7 +19,7 @@ function krv_client_display_title( int $post_id, string $title ): string {
 		8450 => 'Храм в Рогово',
 		8423 => 'Соловьи.Ай.Ти',
 		6671 => 'СКД',
-		6115 => 'Форновогаз KZ',
+		6115 => 'Fornovo Gas',
 		6113 => 'АГНКС',
 		5702 => 'Fornovo Gas',
 		6151 => 'Метком-Калуга',
@@ -137,10 +137,9 @@ function krv_clients_showcase_order(): array {
 		11467 => 18,  // АСП
 		9244  => 25,  // LUMISTEK
 		6113  => 20,  // АГНКС
-		5702  => 30,  // Fornovo Gas
+		6115  => 30,  // Fornovo Gas (fornovogas.kz)
 		8423  => 50,  // Соловьи
 		9184  => 60,  // Softcomlan
-		6115  => 90,  // Форновогаз KZ
 		6147  => 100, // GroupST
 		7693  => 110, // Cambobiz
 		9168  => 120, // Мурашова
@@ -162,7 +161,7 @@ function krv_clients_grid_excluded_ids(): array {
 		6111, // НАКС ЦНИИТМАШ, реестр больше не обслуживается
 		5701, // Аттестационный центр ЦНИИТМАШ
 		8081, // Технолидер (tleader.ru), убран из карточек по просьбе владельца
-		6115, // Форновогаз KZ: та же компания, что Fornovo Gas (5702)
+		5702, // Fornovo Gas S.p.A. (форновогаз.рф), на главной вместо него fornovogas.kz (6115)
 	);
 }
 
