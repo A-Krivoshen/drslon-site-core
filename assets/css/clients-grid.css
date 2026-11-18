@@ -195,6 +195,21 @@
 	opacity: 1;
 }
 
+/* WebP/picture wrappers move .krv-client-logo off the img; size the image itself. */
+.krv-client-logo-wrap img {
+	display: block !important;
+	width: auto !important;
+	height: auto !important;
+	max-width: 100% !important;
+	max-height: 52px !important;
+	margin: 0 auto !important;
+	object-fit: contain;
+	object-position: center;
+	border: 0 !important;
+	box-shadow: none !important;
+	background: transparent !important;
+}
+
 /* Phones / no-hover: full color (no hover state to reveal) */
 @media (hover: none) {
 	.krv-client-logo {
@@ -306,6 +321,10 @@
 		max-height: 52px !important;
 	}
 
+	.krv-client-logo-wrap img {
+		max-height: 52px !important;
+	}
+
 	.krv-client-title {
 		font-size: 0.9rem;
 		min-height: 2.5em;
@@ -351,6 +370,10 @@
 	}
 
 	.krv-client-logo {
+		max-height: 44px !important;
+	}
+
+	.krv-client-logo-wrap img {
 		max-height: 44px !important;
 	}
 
