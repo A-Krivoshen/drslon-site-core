@@ -90,9 +90,8 @@ function krv_en_resume_shortcode(): string {
 					</div>
 				</div>
 				<div class="krv-resume-contacts">
-					<a href="tel:+79636641615">+7 (963) 664-16-15</a>
-					<a href="mailto:aleksey@krivoshein.site">aleksey@krivoshein.site</a>
-					<a href="https://t.me/DrSlon" target="_blank" rel="noopener">@DrSlon</a>
+					<div class="krv-talk__actions"><a class="krv-talk__btn krv-talk__btn--max" href="<?php echo esc_url( home_url( '/max' ) ); ?>">Message on MAX</a><a class="krv-talk__btn krv-talk__btn--secondary" data-krv-telegram href="<?php echo esc_url( krv_contact_talk_telegram_url( true ) ); ?>" target="_blank" rel="noopener noreferrer">Message on Telegram</a></div>
+					<p class="krv-talk__alt"><a href="mailto:aleksey@krivoshein.site">aleksey@krivoshein.site</a><a href="tel:+79636641615">+7 (963) 664-16-15</a></p>
 				</div>
 				<div class="krv-resume-tags">
 					<span>WordPress</span><span>Linux</span><span>Docker</span><span>Nginx</span><span>PHP</span><span>Python</span><span>SEO</span><span>Yandex Direct</span><span>DevOps</span><span>VPS</span>

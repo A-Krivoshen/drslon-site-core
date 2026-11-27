@@ -10,7 +10,7 @@
     .krv-resume-role { margin: 0 0 14px; font-size: 18px; line-height: 1.5; color: #244ac2; font-weight: 700; }
     .krv-resume-summary { margin: 0; max-width: 850px; font-size: 16px; line-height: 1.72; color: var(--muted); }
     .krv-resume-contacts, .krv-resume-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-    .krv-resume-contacts { margin-bottom: 14px; }
+    .krv-resume-contacts { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
     .krv-resume-contacts a, .krv-resume-contacts span { display: inline-flex; align-items: center; min-height: 38px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--soft); color: #172133; font-size: 14px; line-height: 1.3; text-decoration: none; transition: color 200ms ease, border-color 200ms ease, background 200ms ease; }
     .krv-resume-contacts a:hover { color: var(--accent-dark); border-color: var(--accent); background: var(--tag-bg); }
     .krv-resume-tags span { display: inline-flex; align-items: center; min-height: 34px; padding: 7px 12px; border-radius: 999px; background: var(--tag-bg); color: #172133; font-size: 13px; font-weight: 600; line-height: 1.2; }
@@ -51,3 +51,26 @@
     @media (max-width: 960px) { .krv-resume-grid { grid-template-columns: 1fr; } }
     @media (max-width: 768px) { .krv-resume-widget { padding: 0 0 28px; } .krv-resume-hero, .krv-resume-card { padding: 18px; border-radius: 16px; } .krv-resume-name { font-size: clamp(2rem, 4vw, 2.6rem); } .krv-resume-role { font-size: 16px; } .krv-resume-summary { font-size: 15px; } .krv-resume-card h2 { font-size: 20px; } }
     @media (max-width: 480px) { .krv-resume-name { font-size: clamp(2rem, 4vw, 2.6rem); } .krv-resume-role { font-size: 15px; } .krv-resume-summary, .krv-resume-ul li, .krv-resume-card p { font-size: 14px; } .krv-resume-contacts a, .krv-resume-contacts span { font-size: 13px; } }
+
+/* Same messenger actions as the homepage brief, fitted into the resume hero. */
+.krv-resume-contacts .krv-talk__actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; width: min(100%, 36rem); }
+.krv-resume-contacts a.krv-talk__btn { flex: 1 1 14rem; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: 48px; padding: 0 1rem; border-radius: .9rem; border: 1.5px solid #315fe8; background: #315fe8; color: #fff; font-size: 15px; font-weight: 600; line-height: 1.3; text-align: center; text-decoration: none; white-space: nowrap; }
+.krv-resume-contacts a.krv-talk__btn--max { background: #315fe8; color: #fff; border-color: #315fe8; }
+.krv-resume-contacts a.krv-talk__btn--secondary { background: transparent; color: var(--accent, #244ac2); border-color: #315fe8; }
+.krv-resume-contacts a.krv-talk__btn:hover, .krv-resume-contacts a.krv-talk__btn--max:hover { background: #244ac2; border-color: #244ac2; color: #fff; }
+.krv-resume-contacts a.krv-talk__btn--secondary:hover { background: rgba(49, 95, 232, .08); border-color: #315fe8; color: var(--accent, #244ac2); }
+.krv-resume-contacts .krv-talk__alt { display: flex; flex-wrap: wrap; gap: .35rem 1.25rem; margin: 0; }
+.krv-resume-contacts .krv-talk__alt a { display: inline; min-height: 0; padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--accent, #244ac2); font-size: 15px; font-weight: 600; line-height: 1.4; text-decoration: none; }
+.krv-resume-contacts .krv-talk__alt a:hover { background: transparent; border-color: transparent; color: var(--accent-dark, #244ac2); }
+.krv-resume-contacts a.krv-talk__btn:focus-visible, .krv-resume-contacts .krv-talk__alt a:focus-visible { outline: 2px solid #315fe8; outline-offset: 3px; }
+@media (max-width: 640px) {
+  .krv-resume-contacts .krv-talk__actions { width: 100%; flex-direction: column; }
+  .krv-resume-contacts a.krv-talk__btn { flex: 0 0 auto; width: 100%; }
+  .krv-resume-contacts .krv-talk__alt { flex-direction: column; align-items: flex-start; gap: .45rem; }
+}
+html[data-theme="dark"] .krv-resume-contacts a.krv-talk__btn--max { background: #315fe8 !important; border-color: #315fe8 !important; color: #fff !important; }
+html[data-theme="dark"] .krv-resume-contacts a.krv-talk__btn--max:hover { background: #244ac2 !important; border-color: #244ac2 !important; color: #fff !important; }
+html[data-theme="dark"] .krv-resume-contacts a.krv-talk__btn--secondary { background: transparent !important; border-color: #6f93ff !important; color: #a6c0ff !important; }
+html[data-theme="dark"] .krv-resume-contacts a.krv-talk__btn--secondary:hover { background: rgba(49, 95, 232, .16) !important; border-color: #6f93ff !important; color: #a6c0ff !important; }
+html[data-theme="dark"] .krv-resume-contacts p.krv-talk__alt a { background: transparent !important; border-color: transparent !important; color: #a6c0ff !important; }
+html[data-theme="dark"] .krv-resume-contacts p.krv-talk__alt a:hover { background: transparent !important; border-color: transparent !important; color: #d5e2ff !important; }
