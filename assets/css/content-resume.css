@@ -68,6 +68,14 @@
   .krv-resume-contacts a.krv-talk__btn { flex: 0 0 auto; width: 100%; }
   .krv-resume-contacts .krv-talk__alt { flex-direction: column; align-items: flex-start; gap: .45rem; }
 }
+@media (max-width: 600px) {
+  .krv-resume-hero { padding: 14px 14px 12px; }
+  .krv-resume-hero-top { margin-bottom: 8px; }
+  .krv-resume-badge { margin-bottom: 8px; padding: 4px 10px; line-height: 1.25; }
+  .krv-resume-name { margin-bottom: 6px; font-size: 1.65rem; line-height: 1.05; }
+  .krv-resume-role { margin-bottom: 6px; font-size: 14px; line-height: 1.3; }
+  .krv-resume-summary { font-size: 13px; line-height: 1.35; }
+}
 html[data-theme="dark"] .krv-resume-contacts a.krv-talk__btn--max { background: #315fe8 !important; border-color: #315fe8 !important; color: #fff !important; }
 html[data-theme="dark"] .krv-resume-contacts a.krv-talk__btn--max:hover { background: #244ac2 !important; border-color: #244ac2 !important; color: #fff !important; }
 html[data-theme="dark"] .krv-resume-contacts a.krv-talk__btn--secondary { background: transparent !important; border-color: #6f93ff !important; color: #a6c0ff !important; }
