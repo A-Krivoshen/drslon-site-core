@@ -219,8 +219,16 @@ add_action(
 		}
 
 		if ( is_front_page() ) {
-			$file = trailingslashit( ABSPATH ) . 'llms.txt';
-			$body = is_readable( $file ) ? (string) file_get_contents( $file ) : '';
+			$body     = '';
+			$settings = get_option( 'dstk_settings' );
+			if ( is_array( $settings ) && ! empty( $settings['modules']['ai_agents'] ) && class_exists( \DrSlon\Toolkit\Modules\AiAgents\DocumentBuilder::class ) ) {
+				$config = isset( $settings['ai_agents'] ) && is_array( $settings['ai_agents'] ) ? $settings['ai_agents'] : array();
+				$body   = ( new \DrSlon\Toolkit\Modules\AiAgents\DocumentBuilder( $config ) )->build( 'llms' );
+			}
+			if ( $body === '' ) {
+				$file = trailingslashit( ABSPATH ) . 'llms.txt';
+				$body = is_readable( $file ) ? (string) file_get_contents( $file ) : '';
+			}
 			$md   = "---\n";
 			$md  .= 'title: ' . krv_ai_yaml( 'Алексей Кривошеин: WordPress, Flask, VPS и AI-ready' ) . "\n";
 			$md  .= "url: https://krivoshein.site/\n";

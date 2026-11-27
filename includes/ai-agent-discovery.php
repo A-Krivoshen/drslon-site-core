@@ -10,6 +10,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Dr.Slon Toolkit serves /ai.txt, /llms.txt, /llms-full.txt and /agents.md.
+ *
+ * @return bool
+ */
+function drslon_ai_toolkit_owns_documents() {
+	$settings = get_option( 'dstk_settings' );
+
+	return is_array( $settings ) && ! empty( $settings['modules']['ai_agents'] );
+}
+
+/**
  * Emit discovery <link> tags for AI agents and crawlers.
  */
 function drslon_ai_agent_head_links() {
@@ -77,6 +88,24 @@ function drslon_ai_agent_head_links() {
 			'title'=> 'Dr.Slon Pulse Feed',
 		),
 	);
+
+	if ( drslon_ai_toolkit_owns_documents() ) {
+		$base_url = untrailingslashit( home_url( '/' ) );
+		$owned    = array(
+			$base_url . '/llms.txt',
+			$base_url . '/llms-full.txt',
+			$base_url . '/agents.md',
+			$base_url . '/ai.txt',
+		);
+		$links    = array_values(
+			array_filter(
+				$links,
+				static function ( $link ) use ( $owned ) {
+					return ! in_array( $link['href'] ?? '', $owned, true );
+				}
+			)
+		);
+	}
 
 	foreach ( $links as $link ) {
 		$attrs = array();
@@ -308,6 +337,10 @@ function drslon_ai_build_recent_posts_markdown( $limit = 25 ) {
  * @return bool True if file written.
  */
 function drslon_ai_refresh_llms_full_posts() {
+	if ( drslon_ai_toolkit_owns_documents() ) {
+		return false;
+	}
+
 	$path = drslon_ai_llms_full_path();
 	if ( ! file_exists( $path ) || ! is_readable( $path ) ) {
 		return false;
@@ -370,6 +403,9 @@ function drslon_ai_refresh_llms_full_posts() {
  * @param int $post_id Post ID.
  */
 function drslon_ai_maybe_schedule_llms_full_refresh( $post_id ) {
+	if ( drslon_ai_toolkit_owns_documents() ) {
+		return;
+	}
 	if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
 		return;
 	}
